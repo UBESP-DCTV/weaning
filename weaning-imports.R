@@ -52,6 +52,17 @@ import_trd_folder <- function(.dir_path) {
 
 
 
+import_trd_folders <- function(.dir_path) {
+  assert_directory_exists(.dir_path)
+
+  list.dirs(.dir_path, recursive = FALSE) |>
+    {\(.x) purrr::set_names(.x, basename(.x))}() |>
+    purrr::map_dfr(import_trd_folder, .id = "folder")
+}
+
+
+
+
 
 
 
@@ -125,6 +136,28 @@ with_reporter(
 
       expect_equal(names(res)[[1]], "file")
       expect_equal(res[["file"]][[1]], "AB123_8_TRD.SI")
+
+
+    })
+
+    test_that("import_trd_folders works", {
+      # setup
+      sample_folder <- here::here("data-raw")
+
+      # evaluation
+      res <- import_trd_folders(sample_folder)
+
+      # tests
+      res |>
+        expect_tibble(
+          min.cols = 25,
+          types = c(rep("character", 2), "hms", rep("numeric", 20)),
+          min.rows = 1e3,
+          all.missing = FALSE
+        )
+
+      expect_equal(names(res)[[1]], "folder")
+      expect_equal(res[["folder"]][[1]], "AB")
 
 
     })
