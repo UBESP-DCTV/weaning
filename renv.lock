@@ -728,6 +728,26 @@
       "Hash": "7ab57a6de7f48a8dc84910d1eca42883",
       "Requirements": []
     },
+    "janitor": {
+      "Package": "janitor",
+      "Version": "2.1.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "6de84a8c67fb247e721166049c84695f",
+      "Requirements": [
+        "dplyr",
+        "lifecycle",
+        "lubridate",
+        "magrittr",
+        "purrr",
+        "rlang",
+        "snakecase",
+        "stringi",
+        "stringr",
+        "tidyr",
+        "tidyselect"
+      ]
+    },
     "jquerylib": {
       "Package": "jquerylib",
       "Version": "0.1.4",
@@ -899,6 +919,16 @@
         "rlang",
         "utf8",
         "vctrs"
+      ]
+    },
+    "piton": {
+      "Package": "piton",
+      "Version": "1.0.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "e3e637a1b4deb944a58e9ab22662fc4e",
+      "Requirements": [
+        "Rcpp"
       ]
     },
     "pkgbuild": {
@@ -1259,6 +1289,17 @@
         "cli"
       ]
     },
+    "snakecase": {
+      "Package": "snakecase",
+      "Version": "0.11.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "4079070fc210c7901c0832a3aeab894f",
+      "Requirements": [
+        "stringi",
+        "stringr"
+      ]
+    },
     "stringi": {
       "Package": "stringi",
       "Version": "1.7.6",
@@ -1404,6 +1445,17 @@
         "xml2"
       ]
     },
+    "tidyxl": {
+      "Package": "tidyxl",
+      "Version": "1.0.7",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "284994639932d61c0dc765c9aa401d1b",
+      "Requirements": [
+        "Rcpp",
+        "piton"
+      ]
+    },
     "tinytex": {
       "Package": "tinytex",
       "Version": "0.37",
@@ -1422,6 +1474,24 @@
       "Hash": "5e069fb033daf2317bd628d3100b75c5",
       "Requirements": [
         "cpp11"
+      ]
+    },
+    "unheadr": {
+      "Package": "unheadr",
+      "Version": "0.3.2",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "bda28b7fd2350352aa36880e58797f3a",
+      "Requirements": [
+        "dplyr",
+        "forcats",
+        "magrittr",
+        "readxl",
+        "rlang",
+        "stringr",
+        "tibble",
+        "tidyr",
+        "tidyxl"
       ]
     },
     "usethis": {

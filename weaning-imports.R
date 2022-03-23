@@ -5,6 +5,9 @@ library(tidyverse)
 library(lubridate)
 library(here)
 
+library(furrr)
+plan(multisession(workers = availableCores() - 1L))
+
 
 # Functions -------------------------------------------------------
 
@@ -63,7 +66,7 @@ import_trd_folder <- function(.dir_path, verbose = FALSE) {
     }()
 
   res <- trd_files |>
-    purrr::map_dfr(import_trd, .id = "file", verbose = verbose)
+    furrr::future_map_dfr(import_trd, .id = "file", verbose = verbose)
 
   if (verbose) usethis::ui_done(.dir_path)
   res
@@ -104,12 +107,9 @@ c <- here::here("data-raw") |>
 # This workaround avoids to run it unexpectedly
 if (FALSE) {
   weaning <- file.path("~/../Desktop/Driving p e Weaning/file_nava") |>
-    import_trd_folders(verbose = TRUE)
+    import_trd_folders(verbose = FALSE)
 }
 
-
-file.path("~/../Desktop/Driving p e Weaning/file_nava/BS/") |>
-  import_trd_folder(verbose = TRUE)
 
 
 # tests -----------------------------------------------------------
