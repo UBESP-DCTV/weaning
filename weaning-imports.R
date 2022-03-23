@@ -19,7 +19,11 @@ import_trd <- function(.file_path) {
     str_subset("Riassunto", negate = TRUE)
 
   I(content) |>
-    readr::read_tsv(col_names = FALSE, col_types = "c") |>
+    readr::read_tsv(
+      col_names = FALSE,
+      col_types = "c",
+      na = c("", "NA", "_")
+    ) |>
     unheadr::mash_colnames(
       n_name_rows = 2,
       keep_names = FALSE,
@@ -38,13 +42,18 @@ import_trd <- function(.file_path) {
 import_trd_folder <- function(.dir_path) {
   assert_directory_exists(.dir_path)
 
-  trd_files <- .dir_path |>
+  trd_files <- normalizePath(.dir_path) |>
     list.files(
       pattern = "TRD",
       full.names = TRUE,
       ignore.case = TRUE
     ) |>
-    {\(.x) purrr::set_names(.x, basename(.x))}()
+    {
+      \(.x) .x |>
+        purrr::set_names(
+          basename(.x) |> stringr::str_remove("_TRD\\.SI$")
+        )
+    }()
 
   trd_files |>
     purrr::map_dfr(import_trd, .id = "file")
@@ -55,7 +64,8 @@ import_trd_folder <- function(.dir_path) {
 import_trd_folders <- function(.dir_path) {
   assert_directory_exists(.dir_path)
 
-  list.dirs(.dir_path, recursive = FALSE) |>
+  normalizePath(.dir_path) |>
+  list.dirs(recursive = FALSE, full.names = TRUE) |>
     {\(.x) purrr::set_names(.x, basename(.x))}() |>
     purrr::map_dfr(import_trd_folder, .id = "folder")
 }
@@ -68,16 +78,25 @@ import_trd_folders <- function(.dir_path) {
 
 # Executions/Experiments ------------------------------------------
 
-here::here("data-raw/AB/AB123_8_TRD.SI") |>
+a <- here::here("data-raw/AB/AB123_8_TRD.SI") |>
   import_trd() |>
   dplyr::glimpse()
 
 
-here::here("data-raw/AB") |>
+b <- here::here("data-raw/AB") |>
   import_trd_folder()
 
+c <- here::here("data-raw") |>
+  import_trd_folders()
 
 
+
+file.path("~/../Desktop/Driving p e Weaning/file_nava") |>
+  normalizePath() |>
+  list.files(full.names = TRUE)
+
+weaning <- file.path("~/../Desktop/Driving p e Weaning/file_nava") |>
+  import_trd_folders()
 
 
 # tests -----------------------------------------------------------
@@ -135,10 +154,9 @@ with_reporter(
         )
 
       expect_equal(names(res)[[1]], "file")
-      expect_equal(res[["file"]][[1]], "AB123_8_TRD.SI")
-
-
+      expect_equal(res[["file"]][[1]], "AB123_8")
     })
+
 
     test_that("import_trd_folders works", {
       # setup
@@ -158,7 +176,26 @@ with_reporter(
 
       expect_equal(names(res)[[1]], "folder")
       expect_equal(res[["folder"]][[1]], "AB")
+    })
 
+
+    test_that("problematic entries are managed by import_trd", {
+      # setup
+      # ISSUE: this has a character in a numeric column
+      # SOLUTION: it is an NA; added to the list inside read_tsv(...)
+      sample_path <- here::here("data-raw/BG/BG004_1451_TRD.SI")
+
+      # evaluation
+      res <- import_trd(sample_path)
+
+      # tests
+      res |>
+        expect_tibble(
+          min.cols = 21,
+          types = c("hms", rep("numeric", 20)),
+          min.rows = 1,
+          all.missing = FALSE
+        )
 
     })
 
