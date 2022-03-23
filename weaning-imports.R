@@ -108,6 +108,9 @@ c <- here::here("data-raw") |>
 if (FALSE) {
   weaning <- file.path("~/../Desktop/Driving p e Weaning/file_nava") |>
     import_trd_folders(verbose = FALSE)
+
+  weaning |>
+    qs::qsave(here::here("data", "weaning.qs"))
 }
 
 
