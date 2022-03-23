@@ -8,9 +8,11 @@ library(here)
 
 # Functions -------------------------------------------------------
 
-import_trd <- function(.file_path) {
+import_trd <- function(.file_path, verbose = FALSE) {
   stopifnot(stringr::str_detect(.file_path, "TRD"))
   assert_file_exists(.file_path)
+
+  if (verbose) usethis::ui_todo(.file_path)
 
   # for future development
   headr <- readr::read_lines(.file_path, n_max = 20)
@@ -18,7 +20,7 @@ import_trd <- function(.file_path) {
   content <- read_lines(.file_path, skip = 20) |>
     str_subset("Riassunto", negate = TRUE)
 
-  I(content) |>
+  res <- I(content) |>
     readr::read_tsv(
       col_names = FALSE,
       col_types = "c",
@@ -29,18 +31,23 @@ import_trd <- function(.file_path) {
       keep_names = FALSE,
       sliding_headers = TRUE
     ) |>
-    janitor::remove_empty("cols") |>
     janitor::clean_names() |>
     dplyr::filter(if_any(-.data[["ora"]], ~!is.na(.x))) |>
+    janitor::remove_empty("cols") |>
     dplyr::mutate(
       dplyr::across(dplyr::everything(), readr::parse_guess)
     )
+
+  if (verbose) usethis::ui_done(.file_path)
+  res
 }
 
 
 
-import_trd_folder <- function(.dir_path) {
+import_trd_folder <- function(.dir_path, verbose = FALSE) {
   assert_directory_exists(.dir_path)
+
+  if (verbose) usethis::ui_todo(.dir_path)
 
   trd_files <- normalizePath(.dir_path) |>
     list.files(
@@ -55,19 +62,22 @@ import_trd_folder <- function(.dir_path) {
         )
     }()
 
-  trd_files |>
-    purrr::map_dfr(import_trd, .id = "file")
+  res <- trd_files |>
+    purrr::map_dfr(import_trd, .id = "file", verbose = verbose)
+
+  if (verbose) usethis::ui_done(.dir_path)
+  res
 }
 
 
 
-import_trd_folders <- function(.dir_path) {
+import_trd_folders <- function(.dir_path, verbose = FALSE) {
   assert_directory_exists(.dir_path)
 
   normalizePath(.dir_path) |>
   list.dirs(recursive = FALSE, full.names = TRUE) |>
     {\(.x) purrr::set_names(.x, basename(.x))}() |>
-    purrr::map_dfr(import_trd_folder, .id = "folder")
+    purrr::map_dfr(import_trd_folder, verbose = verbose, .id = "folder")
 }
 
 
@@ -90,13 +100,16 @@ c <- here::here("data-raw") |>
   import_trd_folders()
 
 
+# This is the final computation, it's soo sloooow!
+# This workaround avoids to run it unexpectedly
+if (FALSE) {
+  weaning <- file.path("~/../Desktop/Driving p e Weaning/file_nava") |>
+    import_trd_folders(verbose = TRUE)
+}
 
-file.path("~/../Desktop/Driving p e Weaning/file_nava") |>
-  normalizePath() |>
-  list.files(full.names = TRUE)
 
-weaning <- file.path("~/../Desktop/Driving p e Weaning/file_nava") |>
-  import_trd_folders()
+file.path("~/../Desktop/Driving p e Weaning/file_nava/BS/") |>
+  import_trd_folder(verbose = TRUE)
 
 
 # tests -----------------------------------------------------------
@@ -179,7 +192,7 @@ with_reporter(
     })
 
 
-    test_that("problematic entries are managed by import_trd", {
+    test_that("problematic characters are managed by import_trd", {
       # setup
       # ISSUE: this has a character in a numeric column
       # SOLUTION: it is an NA; added to the list inside read_tsv(...)
@@ -195,6 +208,28 @@ with_reporter(
           types = c("hms", rep("numeric", 20)),
           min.rows = 1,
           all.missing = FALSE
+        )
+
+    })
+
+    test_that("import_trd admit empty content file", {
+      # setup
+      # ISSUE: removing empty columns remove everything
+      # SOLUTION: filter before cleaning
+      sample_path <- here::here(
+        "data-raw/BS/BS012_775_TRD_2014-01-13_15-42-54.SI"
+      )
+
+      # evaluation
+      res <- import_trd(sample_path)
+
+      # tests
+      res |>
+        expect_tibble(
+          min.cols = 0,
+          types = c("hms", rep("numeric", 20)),
+          min.rows = 0,
+          all.missing = TRUE
         )
 
     })
