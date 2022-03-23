@@ -8,14 +8,14 @@ library(here)
 
 # Functions -------------------------------------------------------
 
-import_trd <- function(path) {
-  stopifnot(stringr::str_detect(path, "TRD"))
-  assert_file_exists(path)
+import_trd <- function(.file_path) {
+  stopifnot(stringr::str_detect(.file_path, "TRD"))
+  assert_file_exists(.file_path)
 
   # for future development
-  headr <- readr::read_lines(path, n_max = 20)
+  headr <- readr::read_lines(.file_path, n_max = 20)
 
-  content <- read_lines(path, skip = 20) |>
+  content <- read_lines(.file_path, skip = 20) |>
     str_subset("Riassunto", negate = TRUE)
 
   I(content) |>
@@ -35,6 +35,23 @@ import_trd <- function(path) {
 
 
 
+import_trd_folder <- function(.dir_path) {
+  assert_directory_exists(.dir_path)
+
+  trd_files <- .dir_path |>
+    list.files(
+      pattern = "TRD",
+      full.names = TRUE,
+      ignore.case = TRUE
+    ) |>
+    {\(.x) purrr::set_names(.x, basename(.x))}()
+
+  trd_files |>
+    purrr::map_dfr(import_trd, .id = "file")
+}
+
+
+
 
 
 
@@ -45,6 +62,8 @@ here::here("data-raw/AB/AB123_8_TRD.SI") |>
   dplyr::glimpse()
 
 
+here::here("data-raw/AB") |>
+  import_trd_folder()
 
 
 
@@ -57,7 +76,7 @@ with_reporter(
   check_reporter(), {
 
 
-    context(" ")
+    context("TRD")
 
     test_that("import_trd works", {
       # setup
@@ -71,17 +90,42 @@ with_reporter(
       # tests
       res |>
         expect_tibble(
-          ncols = 21,
+          min.cols = 21,
           types = c("hms", rep("numeric", 20)),
           min.rows = 1,
           all.missing = FALSE
         )
+
+
 
       import_trd(fake_trd_path) |>
         expect_error("File does not exist")
 
       import_trd(fake_path) |>
         expect_error("TRD")
+
+    })
+
+
+    test_that("import_trd_folder works", {
+      # setup
+      sample_folder <- here::here("data-raw/AB")
+
+      # evaluation
+      res <- import_trd_folder(sample_folder)
+
+      # tests
+      res |>
+        expect_tibble(
+          min.cols = 24,
+          types = c("character", "hms", rep("numeric", 20)),
+          min.rows = 6,
+          all.missing = FALSE
+        )
+
+      expect_equal(names(res)[[1]], "file")
+      expect_equal(res[["file"]][[1]], "AB123_8_TRD.SI")
+
 
     })
 
