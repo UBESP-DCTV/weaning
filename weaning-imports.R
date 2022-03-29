@@ -1,6 +1,3 @@
-library(testthat)
-library(checkmate)
-
 library(tidyverse)
 library(lubridate)
 library(here)
@@ -11,6 +8,10 @@ plan(multisession(workers = availableCores() - 1L))
 
 # Functions -------------------------------------------------------
 
+
+
+
+
 import_trd <- function(.file_path, verbose = FALSE) {
   stopifnot(stringr::str_detect(.file_path, "TRD"))
   assert_file_exists(.file_path)
@@ -19,6 +20,11 @@ import_trd <- function(.file_path, verbose = FALSE) {
 
   # for future development
   headr <- readr::read_lines(.file_path, n_max = 20)
+  date <- stringr::str_subset(headr, "^Data creazione") |>
+    stringr::str_extract("\\d+/\\d+/\\d+") |>
+    lubridate::dmy()
+  id_pat <- stringr::str_subset(headr, "^Nome del Paziente:") |>
+    readr::parse_number()
 
   content <- read_lines(.file_path, skip = 20) |>
     str_subset("Riassunto", negate = TRUE)
@@ -38,8 +44,13 @@ import_trd <- function(.file_path, verbose = FALSE) {
     dplyr::filter(if_any(-.data[["ora"]], ~!is.na(.x))) |>
     janitor::remove_empty("cols") |>
     dplyr::mutate(
-      dplyr::across(dplyr::everything(), readr::parse_guess)
-    )
+      dplyr::across(dplyr::everything(), readr::parse_guess),
+      id_pat = .env[["id_pat"]],
+      date = .env[["date"]]
+    ) |>
+    dplyr::relocate(id_pat, .before = .data[["ora"]]) |>
+    dplyr::relocate(date, .before = .data[["ora"]])
+
 
   if (verbose) usethis::ui_done(.file_path)
   res
@@ -116,127 +127,135 @@ if (FALSE) {
 
 
 # tests -----------------------------------------------------------
+{
+  library(testthat)
+  library(checkmate)
 
-with_reporter(
-  # default_reporter(), {
-  check_reporter(), {
+  with_reporter(
+    # default_reporter(), {
+    check_reporter(), {
 
 
-    context("TRD")
+      context("TRD")
 
-    test_that("import_trd works", {
-      # setup
-      sample_path <- here::here("data-raw/AB/AB123_8_TRD.SI")
-      fake_trd_path <- fs::file_temp(pattern = "TRD", ext = "SI")
-      fake_path <- fs::file_temp(ext = "SI")
+      test_that("import_trd works", {
+        # setup
+        sample_path <- here::here("data-raw/AB/AB123_8_TRD.SI")
+        fake_trd_path <- fs::file_temp(pattern = "TRD", ext = "SI")
+        fake_path <- fs::file_temp(ext = "SI")
 
-      # evaluation
-      res <- import_trd(sample_path)
+        # evaluation
+        res <- import_trd(sample_path)
 
-      # tests
-      res |>
-        expect_tibble(
-          min.cols = 21,
-          types = c("hms", rep("numeric", 20)),
-          min.rows = 1,
-          all.missing = FALSE
+        # tests
+        res |>
+          expect_tibble(
+            min.cols = 23,
+            types = c("numeric", "Date", "hms", rep("numeric", 20)),
+            min.rows = 1,
+            all.missing = FALSE
+          )
+        unique(res[["date"]]) |>
+          expect_equal(lubridate::ymd("2013/07/09"))
+        unique(res[["id_pat"]]) |>
+          expect_equal(8217)
+
+
+
+        import_trd(fake_trd_path) |>
+          expect_error("File does not exist")
+
+        import_trd(fake_path) |>
+          expect_error("TRD")
+
+      })
+
+
+      test_that("import_trd_folder works", {
+        # setup
+        sample_folder <- here::here("data-raw/AB")
+
+        # evaluation
+        res <- import_trd_folder(sample_folder)
+
+        # tests
+        res |>
+          expect_tibble(
+            min.cols = 24,
+            types = c("character", "hms", rep("numeric", 20)),
+            min.rows = 6,
+            all.missing = FALSE
+          )
+
+        expect_equal(names(res)[[1]], "file")
+        expect_equal(res[["file"]][[1]], "AB123_8")
+      })
+
+
+      test_that("import_trd_folders works", {
+        # setup
+        sample_folder <- here::here("data-raw")
+
+        # evaluation
+        res <- import_trd_folders(sample_folder)
+
+        # tests
+        res |>
+          expect_tibble(
+            min.cols = 25,
+            types = c(rep("character", 2), "hms", rep("numeric", 20)),
+            min.rows = 1e3,
+            all.missing = FALSE
+          )
+
+        expect_equal(names(res)[[1]], "folder")
+        expect_equal(res[["folder"]][[1]], "AB")
+      })
+
+
+      test_that("problematic characters are managed by import_trd", {
+        # setup
+        # ISSUE: this has a character in a numeric column
+        # SOLUTION: it is an NA; added to the list inside read_tsv(...)
+        sample_path <- here::here("data-raw/BG/BG004_1451_TRD.SI")
+
+        # evaluation
+        res <- import_trd(sample_path)
+
+        # tests
+        res |>
+          expect_tibble(
+            min.cols = 21,
+            types = c("hms", rep("numeric", 20)),
+            min.rows = 1,
+            all.missing = FALSE
+          )
+
+      })
+
+      test_that("import_trd admit empty content file", {
+        # setup
+        # ISSUE: removing empty columns remove everything
+        # SOLUTION: filter before cleaning
+        sample_path <- here::here(
+          "data-raw/BS/BS012_775_TRD_2014-01-13_15-42-54.SI"
         )
 
+        # evaluation
+        res <- import_trd(sample_path)
+
+        # tests
+        res |>
+          expect_tibble(
+            min.cols = 0,
+            types = c("hms", rep("numeric", 20)),
+            min.rows = 0,
+            all.missing = TRUE
+          )
+
+      })
 
 
-      import_trd(fake_trd_path) |>
-        expect_error("File does not exist")
-
-      import_trd(fake_path) |>
-        expect_error("TRD")
-
-    })
-
-
-    test_that("import_trd_folder works", {
-      # setup
-      sample_folder <- here::here("data-raw/AB")
-
-      # evaluation
-      res <- import_trd_folder(sample_folder)
-
-      # tests
-      res |>
-        expect_tibble(
-          min.cols = 24,
-          types = c("character", "hms", rep("numeric", 20)),
-          min.rows = 6,
-          all.missing = FALSE
-        )
-
-      expect_equal(names(res)[[1]], "file")
-      expect_equal(res[["file"]][[1]], "AB123_8")
-    })
-
-
-    test_that("import_trd_folders works", {
-      # setup
-      sample_folder <- here::here("data-raw")
-
-      # evaluation
-      res <- import_trd_folders(sample_folder)
-
-      # tests
-      res |>
-        expect_tibble(
-          min.cols = 25,
-          types = c(rep("character", 2), "hms", rep("numeric", 20)),
-          min.rows = 1e3,
-          all.missing = FALSE
-        )
-
-      expect_equal(names(res)[[1]], "folder")
-      expect_equal(res[["folder"]][[1]], "AB")
-    })
-
-
-    test_that("problematic characters are managed by import_trd", {
-      # setup
-      # ISSUE: this has a character in a numeric column
-      # SOLUTION: it is an NA; added to the list inside read_tsv(...)
-      sample_path <- here::here("data-raw/BG/BG004_1451_TRD.SI")
-
-      # evaluation
-      res <- import_trd(sample_path)
-
-      # tests
-      res |>
-        expect_tibble(
-          min.cols = 21,
-          types = c("hms", rep("numeric", 20)),
-          min.rows = 1,
-          all.missing = FALSE
-        )
-
-    })
-
-    test_that("import_trd admit empty content file", {
-      # setup
-      # ISSUE: removing empty columns remove everything
-      # SOLUTION: filter before cleaning
-      sample_path <- here::here(
-        "data-raw/BS/BS012_775_TRD_2014-01-13_15-42-54.SI"
-      )
-
-      # evaluation
-      res <- import_trd(sample_path)
-
-      # tests
-      res |>
-        expect_tibble(
-          min.cols = 0,
-          types = c("hms", rep("numeric", 20)),
-          min.rows = 0,
-          all.missing = TRUE
-        )
-
-    })
-
-
-  }
-)
+    }
+  )
+}
