@@ -41,4 +41,5 @@
 #'   \item{eliminazione_co2_minuto_ml_min}{}
 #' }
 #' @source ...
-"weanings"
+#' @name weanings
+NULL
