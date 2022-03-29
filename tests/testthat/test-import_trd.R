@@ -38,8 +38,9 @@ test_that("import_trd_folder works", {
   # tests
   res |>
     expect_tibble(
-      min.cols = 24,
-      types = c("character", "numeric", "Date", "hms", rep("numeric", 20)),
+      types = c(
+        "character", "numeric", "Date", "hms", rep("numeric", 20)
+      ),
       min.rows = 6
     )
 
@@ -107,7 +108,6 @@ test_that("import_trd admit empty content file", {
   # tests
   res |>
     expect_tibble(
-      min.cols = 0,
       types = c("numeric", "Date", "hms", rep("numeric", 20)),
       min.rows = 0
     )

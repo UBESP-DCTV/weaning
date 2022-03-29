@@ -4,8 +4,9 @@ plan(multisession(workers = availableCores() - 1L))
 
 devtools::load_all()
 
-weanings <- get_data_path() |>
-  import_trd_folders(verbose = TRUE)
+weanings_trd <- get_data_path() |>
+  import_trd_folders(verbose = FALSE)
 
-# weanings |>
-#   qs::qsave(here::here("inst/extdata", "weanings.qs"))
+
+weanings_trd |>
+  qs::qsave(here::here("inst/extdata", "weanings_trd.qs"))
