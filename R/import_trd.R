@@ -1,3 +1,25 @@
+#' Import TRD file
+#'
+#' Read and import in a table the signals reported in a TRD file from
+#' weanings study. Among the signals, add a column reporting the
+#' patient' ID as `id_pat` and the date of the recording as `date`.
+#'
+#' @param .file_path (chr) path to the TRD file to import
+#' @param verbose (lgl, FALSE) would you like to have additional
+#'   messages to be signaled?
+#'
+#' @return a [tibble][tibble::tibble-package] with the imported signals
+#'   (i.e. the tabular content plus the date and the patient id) from
+#'    the `.file_path` TRD file.
+#' @export
+#'
+#' \dontrun{
+#'   library(weaning)
+#'
+#'   file.path(get_data_path(), "AB/AN001_356_TRD.SI") |>
+#'   import_trd()
+#' }
+#'
 import_trd <- function(.file_path, verbose = FALSE) {
   stopifnot(stringr::str_detect(.file_path, "TRD"))
   checkmate::assert_file_exists(.file_path)
@@ -51,6 +73,32 @@ extract_id_from_header <- function(headr) {
 }
 
 
+#' Import TRDs in a folder
+#'
+#' Read and import all the infromation in the TRDs fils in a provided
+#' folder. It merge all the corresponding tables in a single one. It
+#' adds to the merged table a column reporting the folder name imported
+#'
+#' @note the function import TRD only, i.e., they do not need to be
+#' the only ones inside the folder.
+#'
+#' @param .dir_path (chr) path to the folder containing the TRDs files
+#'   to import.
+#' @param verbose (lgl, FALSE) would you like to have additional
+#'   messages to be signaled?
+#'
+#' @returna [tibble][tibble::tibble-package] with the imported signals
+#'   (i.e. the tabular content plus the date and the patient id) from
+#'    all the TRDs files inside the `.dir_path` folder.
+#' @export
+#'
+#' \dontrun{
+#'   library(weaning)
+#'
+#'   file.path(get_data_path(), "AB") |>
+#'   import_trd_folder()
+#' }
+#'
 import_trd_folder <- function(.dir_path, verbose = FALSE) {
   checkmate::assert_directory_exists(.dir_path)
 
@@ -83,6 +131,17 @@ import_trd_folder <- function(.dir_path, verbose = FALSE) {
 
 
 
+#' Import folders of TRDs folders
+#'
+#'
+#'
+#' @param .dir_path
+#' @param verbose
+#'
+#' @return
+#' @export
+#'
+#' @examples
 import_trd_folders <- function(.dir_path, verbose = FALSE) {
   checkmate::assert_directory_exists(.dir_path)
 

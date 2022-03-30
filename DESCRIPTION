@@ -30,6 +30,7 @@ Imports:
     readr,
     rlang (>= 0.4.11),
     stringr,
+    tibble,
     unheadr,
     usethis,
     withr

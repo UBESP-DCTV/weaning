@@ -113,3 +113,27 @@ test_that("import_trd admit empty content file", {
     )
 
 })
+
+
+test_that("Controllare casini sui dupplicati", {
+  # skip("Da verificare i dupplicati dell'ora sullo stesso file")
+
+  # setup
+  weanings_trd <- system.file(
+      "extdata/weanings_trd.qs",
+      package = "weaning"
+    ) |>
+    qs::qread()
+
+  # evaluate
+  ## problem <- weanings_trd |>
+  ##   janitor::get_dupes(file, id_pat, date, ora)
+  # expect_true(nrow(problem) == 0)
+  #
+  # equivalent to (but faster)
+  not_problem <- weanings_trd |>
+    dplyr::distinct(file, id_pat, date, ora)
+
+  # test
+  expect_equal(nrow(weanings_trd), nrow(not_problem))
+})
