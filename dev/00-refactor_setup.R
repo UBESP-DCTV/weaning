@@ -41,3 +41,8 @@ fs::file_move(
   here::here("weaning-imports.R"),
   here::here("dev/old/weaning-imports.R")
 )
+
+
+
+usethis::use_test("import_log")
+usethis::use_r("import_log")
