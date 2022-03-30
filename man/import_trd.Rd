@@ -2,7 +2,7 @@
 % Please edit documentation in R/import_trd.R
 \name{import_trd}
 \alias{import_trd}
-\title{Title}
+\title{Import TRD file}
 \usage{
 import_trd(.file_path, verbose = FALSE)
 }
@@ -18,5 +18,7 @@ a \link[tibble:tibble-package]{tibble} with the imported signals
 the \code{.file_path} TRD file.
 }
 \description{
-descrizione
+Read and import in a table the signals reported in a TRD file from
+weanings study. Among the signals, add a column reporting the
+patient' ID as \code{id_pat} and the date of the recording as \code{date}.
 }
