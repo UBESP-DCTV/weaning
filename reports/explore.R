@@ -1,4 +1,5 @@
 library(tidyverse)
+library(targets)
 
 weanings <- qs::qread(here::here("data/weaning.qs"))
 
@@ -8,3 +9,6 @@ weanings |>
   ) |>
   distinct(file)
   glimpse()
+
+wt <- tar_read(weaningsTRD)
+wt

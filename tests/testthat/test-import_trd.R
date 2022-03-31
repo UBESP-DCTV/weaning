@@ -116,7 +116,7 @@ test_that("import_trd admit empty content file", {
 
 
 test_that("Controllare casini sui dupplicati", {
-  # skip("Da verificare i dupplicati dell'ora sullo stesso file")
+  skip("Da verificare i dupplicati dell'ora sullo stesso file")
 
   # setup
   weanings_trd <- system.file(
