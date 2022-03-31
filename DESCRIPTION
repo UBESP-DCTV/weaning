@@ -39,6 +39,7 @@ Suggests:
     devtools,
     distill,
     fs,
+    qs,
     roxygen2,
     spelling,
     tarchetypes (>= 0.5.0.9000),

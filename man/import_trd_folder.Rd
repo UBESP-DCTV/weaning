@@ -13,12 +13,26 @@ to import.}
 \item{verbose}{(lgl, FALSE) would you like to have additional
 messages to be signaled?}
 }
+\value{
+a \link[tibble:tibble-package]{tibble} with the imported signals
+(i.e. the tabular content plus the date and the patient id) from
+all the TRDs files inside the \code{.dir_path} folder.
+}
 \description{
-Read and import all the infromation in the TRDs fils in a provided
-folder. It merge all the corresponding tables in a single one. It
+Read and import all the information in the TRDs files in a provided
+folder. It merges all the corresponding tables in a single one. It
 adds to the merged table a column reporting the folder name imported
 }
 \note{
 the function import TRD only, i.e., they do not need to be
 the only ones inside the folder.
+}
+\examples{
+\dontrun{
+  library(weaning)
+
+  file.path(get_data_path(), "AB") |>
+  import_trd_folder()
+}
+
 }

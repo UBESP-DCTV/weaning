@@ -15,7 +15,7 @@ usethis::edit_file(here::here("tests/testthat/setup.R"))
 
 dev_pkg <- c(
   "testthat", "devtools", "fs", "spelling", "distill", "visNetwork",
-  "webshot"
+  "webshot", "qs"
 )
 renv::install(dev_pkg)
 purrr::walk(dev_pkg, usethis::use_package, type = "Suggests")
