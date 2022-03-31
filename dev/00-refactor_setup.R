@@ -22,20 +22,20 @@ purrr::walk(dev_pkg, usethis::use_package, type = "Suggests")
 
 prj_pkg <- c(
   "stringr", "readr", "lubridate", "checkmate", "usethis",
-  "unheadr", "janitor", "dplyr", "purrr", "furrr", "here"
+  "unheadr", "janitor", "dplyr", "purrr", "furrr", "here", "DT"
 )
 renv::install(prj_pkg)
 purrr::walk(prj_pkg, usethis::use_package)
 
 
-gh_dev_pkgs <- c(
+gh_pkgs <- c(
   "ropensci/targets",
   "ropensci/tarchetypes"
 )
-renv::install(gh_dev_pkgs)
-purrr::walk(gh_dev_pkgs, ~{
+renv::install(gh_pkgs)
+purrr::walk(gh_pkgs, ~{
   package_name <- stringr::str_extract(.x, "[\\w\\.]+$")
-  usethis::use_dev_package(package_name, type = "Suggests", remote = .x)
+  usethis::use_dev_package(package_name, remote = .x)
 })
 
 
@@ -59,3 +59,7 @@ fs::file_move(
 
 targets::tar_script()
 targets::tar_renv(extras = character(0))
+
+
+usethis::use_r("get_problematic_dupes")
+

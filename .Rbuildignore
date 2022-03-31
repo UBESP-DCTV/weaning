@@ -11,4 +11,6 @@
 ^_targets.R$
 ^_targets_packages.R$
 ^run.R$
+^biblio.bib$
+^packages.bib$
 

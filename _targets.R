@@ -37,6 +37,8 @@ list(
     format = "qs"
   ),
 
+  tar_target(problematicDupes, get_problematic_dupes(weaningsTRD)),
+
   # compile the report
   tar_render(report, here("reports/report.Rmd"))
 )

@@ -24,7 +24,7 @@
       withr::with_envvar(
         list(RSTUDIO_VERSION = "2021.09.0"), {
           # devtools::test(stop_on_failure = TRUE)
-          targets::tar_make_future()
+          targets::tar_make()
         }
       )
       targets::tar_visnetwork(targets_only = TRUE) |>
@@ -32,4 +32,5 @@
     }
   }
 }()
+
 

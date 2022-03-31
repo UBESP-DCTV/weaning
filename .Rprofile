@@ -15,4 +15,4 @@ options(
   warnPartialMatchAttr   = TRUE
 )
 
-options(tidyverse.quiet = true)
+options(tidyverse.quiet = TRUE)

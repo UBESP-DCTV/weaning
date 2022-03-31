@@ -16,5 +16,5 @@ spelling::spell_check_package()
 # CTRL + SHIFT + D
 # spelling::update_wordlist()
 
-# Check full
+# Check full CRAN tests
 # CTRL + SHIFT + E
