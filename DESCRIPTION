@@ -37,12 +37,15 @@ Imports:
     withr
 Suggests: 
     devtools,
+    distill,
     fs,
     roxygen2,
     spelling,
     tarchetypes (>= 0.5.0.9000),
     targets (>= 0.11.0.9000),
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    visNetwork,
+    webshot
 Remotes: 
     ropensci/tarchetypes,
     ropensci/targets
