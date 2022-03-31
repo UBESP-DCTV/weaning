@@ -7,3 +7,8 @@
 ^dev$
 ^reports$
 ^inst/extdata
+^_targets$
+^_targets.R$
+^_targets_packages.R$
+^run.R$
+

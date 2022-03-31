@@ -13,13 +13,13 @@
 #'    the `.file_path` TRD file.
 #' @export
 #'
+#' @examples
 #' \dontrun{
 #'   library(weaning)
 #'
 #'   file.path(get_data_path(), "AB/AN001_356_TRD.SI") |>
 #'   import_trd()
 #' }
-#'
 import_trd <- function(.file_path, verbose = FALSE) {
   stopifnot(stringr::str_detect(.file_path, "TRD"))
   checkmate::assert_file_exists(.file_path)
@@ -50,7 +50,11 @@ import_trd <- function(.file_path, verbose = FALSE) {
       date = extract_date_from_header(headr),
       ora = readr::parse_time(.data[["ora"]])
     ) |>
-    dplyr::relocate(id_pat, date, .before = .data[["ora"]])
+    dplyr::relocate(
+      .data[["id_pat"]],
+      .data[["date"]],
+      .before = .data[["ora"]]
+    )
 
 
   if (verbose) usethis::ui_done(.file_path)
@@ -75,8 +79,8 @@ extract_id_from_header <- function(headr) {
 
 #' Import TRDs in a folder
 #'
-#' Read and import all the infromation in the TRDs fils in a provided
-#' folder. It merge all the corresponding tables in a single one. It
+#' Read and import all the information in the TRDs files in a provided
+#' folder. It merges all the corresponding tables in a single one. It
 #' adds to the merged table a column reporting the folder name imported
 #'
 #' @note the function import TRD only, i.e., they do not need to be
@@ -87,11 +91,13 @@ extract_id_from_header <- function(headr) {
 #' @param verbose (lgl, FALSE) would you like to have additional
 #'   messages to be signaled?
 #'
-#' @returna [tibble][tibble::tibble-package] with the imported signals
+#' @return a [tibble][tibble::tibble-package] with the imported signals
 #'   (i.e. the tabular content plus the date and the patient id) from
 #'    all the TRDs files inside the `.dir_path` folder.
+#'
 #' @export
 #'
+#' @examples
 #' \dontrun{
 #'   library(weaning)
 #'
@@ -133,15 +139,29 @@ import_trd_folder <- function(.dir_path, verbose = FALSE) {
 
 #' Import folders of TRDs folders
 #'
+#' Given a folder collecting TRDs files grouped inside distinct folders,
+#' it reads and imports all the information in the TRDs files and it
+#' merges all the corresponding tables in a single one. It
+#' adds to the merged table a column reporting the main folder name.
 #'
+#' @param .dir_path (chr) path to the folder containing the folders
+#'   which contain TRDs files
+#'   to import.
+#' @param verbose (lgl, FALSE) would you like to have additional
+#'   messages to be signaled?
 #'
-#' @param .dir_path
-#' @param verbose
+#' @return a [tibble][tibble::tibble-package] with the imported signals
+#'   (i.e. the tabular content plus the date and the patient id) from
+#'    all the TRDs files inside the `.dir_path` folder.
 #'
-#' @return
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#'   library(weaning)
+#'
+#'   import_trd_folder(get_data_path())
+#' }
 import_trd_folders <- function(.dir_path, verbose = FALSE) {
   checkmate::assert_directory_exists(.dir_path)
 

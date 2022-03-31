@@ -14,7 +14,8 @@ Authors@R: c(
            comment = c(ORCID = "0000-0001-7906-0580")),
     person("UBEP", role = "cph")
   )
-Description: Collect data, functionalities and analyses for the weanings project at UBEP.
+Description: Collect data, functionalities and analyses for the weanings
+    project at UBEP.
 License: MIT + file LICENSE
 Imports: 
     checkmate,
@@ -36,10 +37,19 @@ Imports:
     withr
 Suggests: 
     devtools,
+    distill,
     fs,
+    qs,
     roxygen2,
     spelling,
-    testthat (>= 3.0.0)
+    tarchetypes (>= 0.5.0.9000),
+    targets (>= 0.11.0.9000),
+    testthat (>= 3.0.0),
+    visNetwork,
+    webshot
+Remotes: 
+    ropensci/tarchetypes,
+    ropensci/targets
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

@@ -90,13 +90,13 @@ Footnotes use standard Pandoc markdown notation, for example ^[This will become 
 You can show your current state analyses' pipeline, e.g., by
 
 ```{r}
-targets::tar_visnetwork(
-  # targets_only = TRUE,
-  exclude = c(
-    "report",
-    all_of(extract_fct_names(here::here("R/utils.R")))
-  )
-)
+# targets::tar_visnetwork(
+#   # targets_only = TRUE,
+#   exclude = c(
+#     "report",
+#     all_of(extract_fct_names(here::here("R/utils.R")))
+#   )
+# )
 ```
 
 
@@ -106,7 +106,8 @@ targets::tar_visnetwork(
 You can get the results of your analyses by 
 
 ```{r}
-tar_read(result)
+# tar_read(result)
+tar_read(d)
 ```
 
 
