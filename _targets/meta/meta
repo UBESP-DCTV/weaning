@@ -12,5 +12,7 @@ get_data_path|function|7e20f9505e9679bf|||||||||||||||
 import_trd|function|b31d20ad47617556|||||||||||||||
 import_trd_folder|function|fb2b03df7b57f250|||||||||||||||
 import_trd_folders|function|076464938f806e9f|||||||||||||||
-report|stem|c0f58f24a6a9ce45|9b9f4a7ca7f220b5|b85b3419f19920cf|-237041703|reports/report.html*reports/report.Rmd|t19082.3189062458s|9609216882694166|465249|file|local|vector|||9.61||
+report|stem|b44e249cf825f00f|9b9f4a7ca7f220b5|a13f151737249558|-237041703|reports/report.html*reports/report.Rmd|t19082.3488537455s|b82dc8e8ba669b3b|465489|file|local|vector|||8.86||
 view_in_excel|function|81b6eab6e945fca7|||||||||||||||
+weaningFolder|stem|1a3d5a62c1c37632|9339572d5205b536|c4b9ed772d727c98|2026351226|~/../Desktop/Driving p e Weaning/file_nava|t17511.4076157407s|727398b0c7d8ecc7|518496145|file|local|vector|||0.42||
+weaningsTRD|stem|427fceda28994b1b|2dd4d19956d7defb|2c5defe6d0feaca8|1254944723||t19082.3833083021s|caf8bdd088f23fdf|149464892|qs|local|vector|||599.63|One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details|
