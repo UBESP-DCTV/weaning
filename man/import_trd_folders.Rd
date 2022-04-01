@@ -7,11 +7,28 @@
 import_trd_folders(.dir_path, verbose = FALSE)
 }
 \arguments{
-\item{verbose}{}
+\item{.dir_path}{(chr) path to the folder containing the folders
+which contain TRDs files
+to import.}
+
+\item{verbose}{(lgl, FALSE) would you like to have additional
+messages to be signaled?}
 }
 \value{
-
+a \link[tibble:tibble-package]{tibble} with the imported signals
+(i.e. the tabular content plus the date and the patient id) from
+all the TRDs files inside the \code{.dir_path} folder.
 }
 \description{
-Import folders of TRDs folders
+Given a folder collecting TRDs files grouped inside distinct folders,
+it reads and imports all the information in the TRDs files and it
+merges all the corresponding tables in a single one. It
+adds to the merged table a column reporting the main folder name.
+}
+\examples{
+\dontrun{
+  library(weaning)
+
+  import_trd_folder(get_data_path())
+}
 }

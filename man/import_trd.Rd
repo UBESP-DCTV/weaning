@@ -22,3 +22,11 @@ Read and import in a table the signals reported in a TRD file from
 weanings study. Among the signals, add a column reporting the
 patient' ID as \code{id_pat} and the date of the recording as \code{date}.
 }
+\examples{
+\dontrun{
+  library(weaning)
+
+  file.path(get_data_path(), "AB/AN001_356_TRD.SI") |>
+  import_trd()
+}
+}

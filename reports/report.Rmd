@@ -1,0 +1,178 @@
+---
+title: "`r Sys.getenv('PROJ_TITLE')`"
+subtitle: 0.0.0.9000
+description: "First-exploration report"
+author:
+  - name: Corrado Lanera
+    url: https://CorradoLanera.it
+    orcid_id: "0000-0002-0520-7428"
+    affiliation: Unit of Biostatistics, Epidemiology, and Public Health
+    affiliation_url: https://www.unipd-ubep.it/
+  - name: Silvano Salaris
+    orcid_id: "0000-0002-8389-7460"
+    affiliation: Unit of Biostatistics, Epidemiology, and Public Health
+    affiliation_url: https://www.unipd-ubep.it/
+  - name: Giulia Lorenzoni
+    orcid_id: "0000-0003-1771-4686"
+    affiliation: Unit of Biostatistics, Epidemiology, and Public Health
+    affiliation_url: https://www.unipd-ubep.it/
+  - name: Danila Azzolina
+    orcid_id: "0000-0002-8185-5742"
+    affiliation: Unit of Biostatistics, Epidemiology, and Public Health
+    affiliation_url: https://www.unipd-ubep.it/
+  - name: Dario Gregori
+    orcid_id: "0000-0001-7906-0580"
+    affiliation: Unit of Biostatistics, Epidemiology, and Public Health
+    affiliation_url: https://www.unipd-ubep.it/
+citation_url: "`r Sys.getenv('PROJ_URL')`"
+date: "`r Sys.Date()`"
+bibliography: packages.bib
+link-citations: true
+preview: man/img/LAIMS.png
+output:
+  distill::distill_article:
+    toc: true
+    toc_depth: 2
+---
+
+<!-- DON'T RENDER THE REPORT BY HAND DIRECTLY! -->
+<!-- use `targets::tar_make()` instead -->
+
+
+```{r setup, include=FALSE}
+options(
+  width = 90,
+  tidyverse.quiet = TRUE
+)
+
+knitr::opts_chunk$set(
+  echo = FALSE,
+  collapse = TRUE,
+  comment = ""
+)
+
+library(glue)
+library(here)
+library(targets)
+library(tidyverse)
+
+list.files(here("R"), pattern = "\\.R$", full.names = TRUE) |>
+  lapply(source) |> invisible()
+```
+
+
+```{r}
+htmltools::img(
+ src = knitr::image_uri(here("man", "img", "LAIMS.png")),
+ alt = 'logo',
+ style = 'position:absolute; top:0; right:0; padding:10px;'
+ )
+```
+
+
+```{r packages, include=FALSE}
+library(DT)
+```
+
+## Introduction
+
+Weanings data are stored in two main types of files: 
+
+- TRD, reporting ventilators signals averaged every minute.
+- LOG, reporting alarms and additional information from the ventilators
+
+TRD and LOG Files are collected in pairs, reporting data from
+approximately 24 hours each pair. So, every patient have multiple pairs
+of TRD and LOG files. Pairs from all the patient of a center involved 
+in the study are colelcted in a folder named with the center code. An
+additional __mother__ folder contains all the center's folders.
+
+## Methods
+
+
+For Weaning project, we have setup an automated environment
+tracking changes and updates within the defined pipeline (from import,
+preprocess, analyses, and reporting) [@R-targets].
+
+Data are imported using functions from the `{tidyverse}` suite
+of R packages mainly [@R-tidyverse].
+
+
+## Analyses
+
+
+
+The pipeline developed is currently in the following state
+
+<aside>
+The pipeline itself, derived objects, and the report are automatically
+updated at any change in the code or data.
+</aside>
+
+```{r}
+tar_visnetwork(
+  # targets_only = TRUE,
+  exclude = c(
+    "report",
+    all_of(extract_fct_names(here::here("R/utils.R")))
+  )
+)
+```
+
+
+## Results
+
+
+Data imported and merged
+
+```{r, echo=TRUE, code_folding = TRUE}
+weanings_trd <- tar_read(weaningsTRD)
+problematic_dupes <- tar_read(problematicDupes)
+```
+
+
+### Issues to discuss
+
+There are some issues in the data, i.e., some lines of signals have
+wrong time and they results in duplicated records. This issue involves
+the following records
+
+```{r}
+datatable(problematic_dupes, filter = "top")
+```
+
+
+
+## Discussion
+
+
+
+
+## Acknowledgments {.appendix}
+
+This is a place to recognize people and institutions. It may also be a good place
+to acknowledge and cite software that makes your work possible.
+
+## Author Contributions {.appendix}
+
+We strongly encourage you to include an author contributions statement briefly 
+describing what each author did.
+
+
+
+
+
+## Environment {.appendix}
+
+<details>
+  <summary>Session info</summary>
+```{r, results='markup'}
+devtools::session_info()
+```
+</details>
+
+```{r}
+c("tidyverse", "targets") |> 
+  knitr::write_bib(here("reports/packages.bib"))
+```
+
