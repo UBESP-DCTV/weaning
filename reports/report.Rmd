@@ -134,6 +134,12 @@ weanings_log <- tar_read(weaningsLOG)
 ```
 
 
+
+```{r}
+dplyr::slice_sample(weanings_trd, n = 50)
+```
+
+
 ### Issues to discuss
 
 There are some issues in the data, i.e., some lines of signals have
