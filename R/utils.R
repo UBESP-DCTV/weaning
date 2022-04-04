@@ -1,5 +1,6 @@
 get_data_path <- function() Sys.getenv("WEANING_FOLDER")
 
+
 data_test_path <- function() {
   ifelse(
     dir.exists("../testthat"),
@@ -7,6 +8,7 @@ data_test_path <- function() {
     here::here("tests/data-test/")
   )
 }
+
 
 view_in_excel <- function(.data) {
   if (interactive()) {
@@ -18,15 +20,36 @@ view_in_excel <- function(.data) {
 }
 
 
-`%||%` <- function(x, y) {
-  if (is.null(x)) y else x
-}
-
-
 extract_fct_names <- function(path) {
   readr::read_lines(path) |>
     stringr::str_extract_all("^.*(?=`? ?<- ?function)") |>
     unlist() |>
     purrr::compact() |>
     stringr::str_remove_all("[\\s`]+")
+}
+
+
+get_date_format <- function(str_date) {
+  is_iso <- stringr::str_detect(str_date, "\\d{4}[-/]\\d{2}[-/]\\d{2}")
+  is_ita <- stringr::str_detect(str_date, "\\d{2}[-/]\\d{2}[-/]\\d{4}")
+
+  if (is_iso) return("iso")
+  if (is_ita) return("ita")
+
+  usethis::ui_stop(
+    "Date you have passed is {usethis::ui_value(str_date)} which is in an unknown date format for us."
+  )
+}
+
+
+parse_weanings_dates <- function(str_date) {
+  first_full <- unique(str_date)[[1]]
+  date_format <- get_date_format(first_full)
+
+  parser_date <- switch(date_format,
+    "iso" = lubridate::ymd,
+    "ita" = lubridate::dmy
+  )
+
+  parser_date(str_date)
 }
