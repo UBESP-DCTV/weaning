@@ -26,9 +26,10 @@ import_trd <- function(.file_path, verbose = FALSE) {
 
   if (verbose) usethis::ui_todo(.file_path)
 
-  headr <- readr::read_lines(.file_path, n_max = 20)
-  content <- readr::read_lines(.file_path, skip = 20) |>
-    stringr::str_subset("Riassunto", negate = TRUE)
+  headr <- readr::read_lines(.file_path, n_max = 10)
+  content <- readr::read_lines(.file_path, skip = 10) |>
+    stringr::str_subset("Riassunto", negate = TRUE) |>
+    stringr::str_subset("^$", negate = TRUE)
 
 
   res <- I(content) |>
@@ -59,115 +60,4 @@ import_trd <- function(.file_path, verbose = FALSE) {
 
   if (verbose) usethis::ui_done(.file_path)
   res
-}
-
-
-extract_date_from_header <- function(headr) {
-  headr |>
-    stringr::str_subset("^Data creazione") |>
-    stringr::str_extract("\\d+/\\d+/\\d+") |>
-    lubridate::dmy()
-}
-
-extract_id_from_header <- function(headr) {
-  headr |>
-    stringr::str_subset("^Nome del Paziente:") |>
-    stringr::str_extract("\\d+") |>
-    as.numeric()
-}
-
-
-#' Import TRDs in a folder
-#'
-#' Read and import all the information in the TRDs files in a provided
-#' folder. It merges all the corresponding tables in a single one. It
-#' adds to the merged table a column reporting the folder name imported
-#'
-#' @note the function import TRD only, i.e., they do not need to be
-#' the only ones inside the folder.
-#'
-#' @param .dir_path (chr) path to the folder containing the TRDs files
-#'   to import.
-#' @param verbose (lgl, FALSE) would you like to have additional
-#'   messages to be signaled?
-#'
-#' @return a [tibble][tibble::tibble-package] with the imported signals
-#'   (i.e. the tabular content plus the date and the patient id) from
-#'    all the TRDs files inside the `.dir_path` folder.
-#'
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#'   library(weaning)
-#'
-#'   file.path(get_data_path(), "AB") |>
-#'   import_trd_folder()
-#' }
-#'
-import_trd_folder <- function(.dir_path, verbose = FALSE) {
-  checkmate::assert_directory_exists(.dir_path)
-
-  if (!verbose) usethis::ui_todo(.dir_path)
-
-  trd_files <- normalizePath(.dir_path) |>
-    list.files(
-      pattern = "TRD",
-      full.names = TRUE,
-      ignore.case = TRUE
-    ) |>
-    {
-      \(.x) .x |>
-        purrr::set_names(
-          basename(.x) |> stringr::str_remove("_TRD\\.SI$")
-        )
-    }()
-
-  res <- trd_files |>
-    furrr::future_map_dfr(
-      import_trd,
-      .id = "file",
-      verbose = verbose,
-      .progress = verbose
-      )
-
-  if (!verbose) usethis::ui_done(.dir_path)
-  res
-}
-
-
-
-#' Import folders of TRDs folders
-#'
-#' Given a folder collecting TRDs files grouped inside distinct folders,
-#' it reads and imports all the information in the TRDs files and it
-#' merges all the corresponding tables in a single one. It
-#' adds to the merged table a column reporting the main folder name.
-#'
-#' @param .dir_path (chr) path to the folder containing the folders
-#'   which contain TRDs files
-#'   to import.
-#' @param verbose (lgl, FALSE) would you like to have additional
-#'   messages to be signaled?
-#'
-#' @return a [tibble][tibble::tibble-package] with the imported signals
-#'   (i.e. the tabular content plus the date and the patient id) from
-#'    all the TRDs files inside the `.dir_path` folder.
-#'
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#'   library(weaning)
-#'
-#'   import_trd_folder(get_data_path())
-#' }
-import_trd_folders <- function(.dir_path, verbose = FALSE) {
-  checkmate::assert_directory_exists(.dir_path)
-
-  .dir_path |>
-    list.dirs(recursive = FALSE, full.names = TRUE) |>
-    normalizePath() |>
-    {\(.x) purrr::set_names(.x, basename(.x))}() |>
-    purrr::map_dfr(import_trd_folder, verbose = verbose, .id = "folder")
 }

@@ -6,6 +6,7 @@ if (interactive()) {#
     library(usethis)
     library(testthat)
     library(checkmate)
+    library(targets)
   }))
 }
 

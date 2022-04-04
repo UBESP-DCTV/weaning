@@ -5,7 +5,7 @@ test_that("import_trd works", {
   fake_path <- fs::file_temp(ext = "SI")
 
   # evaluation
-  res <- import_trd(sample_path)
+  res <- suppressMessages(import_trd(sample_path))
 
   # tests
   res |>
@@ -28,12 +28,12 @@ test_that("import_trd works", {
 })
 
 
-test_that("import_trd_folder works", {
+test_that("import_folder works for TRD files", {
   # setup
   sample_folder <- file.path(data_test_path(), "AB")
 
   # evaluation
-  res <- import_trd_folder(sample_folder)
+  res <- suppressMessages(import_folder(sample_folder))
 
   # tests
   res |>
@@ -49,12 +49,12 @@ test_that("import_trd_folder works", {
 })
 
 
-test_that("import_trd_folders works", {
+test_that("import_folders works for TRD files", {
   # setup
   sample_folder <- data_test_path()
 
   # evaluation
-  res <- import_trd_folders(sample_folder)
+  res <- suppressMessages(import_folders(sample_folder))
 
   # tests
   res |>
@@ -82,7 +82,7 @@ test_that("problematic characters are managed by import_trd", {
   sample_path <- file.path(data_test_path(), "BG/BG004_1451_TRD.SI")
 
   # evaluation
-  res <- import_trd(sample_path)
+  res <- suppressMessages(import_trd(sample_path))
 
   # tests
   res |>
@@ -103,7 +103,7 @@ test_that("import_trd admit empty content file", {
   )
 
   # evaluation
-  res <- import_trd(sample_path)
+  res <- suppressMessages(import_trd(sample_path))
 
   # tests
   res |>
@@ -115,8 +115,8 @@ test_that("import_trd admit empty content file", {
 })
 
 
-test_that("Controllare casini sui dupplicati", {
-  skip("Da verificare i dupplicati dell'ora sullo stesso file")
+test_that("Controllare casini sui duplicati", {
+  skip("Da verificare i duplicati dell'ora sullo stesso file")
 
   # setup
   weanings_trd <- system.file(
