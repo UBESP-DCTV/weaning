@@ -125,9 +125,12 @@ tar_visnetwork(
 
 Data imported and merged
 
-```{r, echo=TRUE, code_folding = TRUE}
+```{r, echo=FALSE, code_folding = TRUE}
 weanings_trd <- tar_read(weaningsTRD)
 problematic_dupes <- tar_read(problematicDupes)
+
+weanings_log <- tar_read(weaningsLOG)
+
 ```
 
 
@@ -137,11 +140,14 @@ There are some issues in the data, i.e., some lines of signals have
 wrong time and they results in duplicated records. This issue involves
 the following records
 
-```{r}
-datatable(problematic_dupes, filter = "top")
+```{r, layout="l-body-outset"}
+problematic_dupes |> 
+  datatable(filter = "top", options = list(scrollX = TRUE))
 ```
 
 
+File in the `VC/` folder are the only one using ISO format for dates.
+We have managed that correctly to consistently merge them with the other files.
 
 ## Discussion
 

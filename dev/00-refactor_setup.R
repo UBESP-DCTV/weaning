@@ -60,6 +60,7 @@ fs::file_move(
 targets::tar_script()
 targets::tar_renv(extras = character(0))
 
-
 usethis::use_r("get_problematic_dupes")
 
+usethis::use_test("import_log")
+usethis::use_r("import_log")
