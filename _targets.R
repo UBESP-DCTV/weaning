@@ -32,12 +32,23 @@ list(
   ),
   tar_target(
     weaningsTRD,
-    import_trd_folders(weaningFolder),
+    import_folders(weaningFolder, "TRD"),
     packages = "furrr",
-    format = "qs"
+    format = "qs",
+    cue = tar_cue(repository = FALSE)
   ),
 
   tar_target(problematicDupes, get_problematic_dupes(weaningsTRD)),
+
+
+  tar_target(
+    weaningsLOG,
+    import_folders(weaningFolder, "LOG"),
+    packages = "furrr",
+    format = "qs",
+    cue = tar_cue(repository = FALSE)
+  ),
+
 
   # compile the report
   tar_render(report, here("reports/report.Rmd"))

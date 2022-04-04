@@ -12,3 +12,7 @@ weanings |>
 
 wt <- tar_read(weaningsTRD)
 wt
+
+
+"~/../Desktop/Driving p e Weaning/file_nava/VC"
+import_folder("LOG")

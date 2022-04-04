@@ -5,12 +5,18 @@ extract_date_from_header|function|d4a3520bc97d5d75|||||||||||||||
 extract_fct_names|function|21e7b84f05cf92b8|||||||||||||||
 extract_id_from_header|function|49ca022e07abdb45|||||||||||||||
 get_data_path|function|7e20f9505e9679bf|||||||||||||||
+get_date_format|function|e615ba2e6080e18c|||||||||||||||
 get_problematic_dupes|function|703c7b37445f4e4a|||||||||||||||
-import_trd|function|1dd56cad2b6ff841|||||||||||||||
+import_folder|function|1e43a76dd32306c5|||||||||||||||
+import_folders|function|eb9e538d59cd2eec|||||||||||||||
+import_log|function|7864b222b2b4ef16|||||||||||||||
+import_trd|function|028e79e33bdf6084|||||||||||||||
 import_trd_folder|function|c466a989e2519ca7|||||||||||||||
 import_trd_folders|function|4af03b43210f3476|||||||||||||||
-problematicDupes|stem|b0bb95cdbb6e1d5e|b262a0d7e9fa0c40|113436de72e94d2b|868930801||t19082.4974678195s|a5119e2dbe3dd8f9|1629|rds|local|vector|||60.33||
-report|stem|52fa0a3d750cad72|e1f8f6e0a834d9cc|ecb1362c3c8d3725|-237041703|reports/report.html*reports/report.Rmd|t19082.5364803076s|d602aae9906781ed|1631827|file|local|vector|||52.09|no date field in DESCRIPTION file of package targets. could not determine year for targets from package DESCRIPTION file|
+parse_weanings_dates|function|632ce1ec8066877f|||||||||||||||
+problematicDupes|stem|601a9ac18328a8da|b262a0d7e9fa0c40|70285e8b31264fc0|868930801||t19086.3880177214s|11eb6592a84c5051|1621|rds|local|vector|||102.08||
+report|stem|43b2531cf6f06093|ea52ebeed37e88a3|8c2f084e9f8d7b2a|-237041703|reports/report.html*reports/report.Rmd|t19086.5283415855s|ea207b9f3117f5ae|1631907|file|local|vector|||68.37|no date field in DESCRIPTION file of package targets. could not determine year for targets from package DESCRIPTION file|
 view_in_excel|function|81b6eab6e945fca7|||||||||||||||
 weaningFolder|stem|1a3d5a62c1c37632|9339572d5205b536|c4b9ed772d727c98|2026351226|~/../Desktop/Driving p e Weaning/file_nava|t19073.9075479403s|908ec9ea9f0a90f4|0|file|local|vector|||0.42||
-weaningsTRD|stem|427fceda28994b1b|2dd4d19956d7defb|4f4c21a2c5e1eca5|1254944723||t19082.4966915634s|caf8bdd088f23fdf|149464892|qs|local|vector|||636.74|One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details|
+weaningsLOG|stem|d45fc01086632e96|76864b61216d7aee|fd88554e3103c392|442450570||t19086.521357899s|b4563c70ae8dbfa7|2145346|qs|local|vector|||219.36||
+weaningsTRD|stem|3366d91dfffb8069|afb05296b47c6612|fd88554e3103c392|1254944723||t19086.5275574072s|0a090dedc3c7ebc9|149477243|qs|local|vector|||530.61|One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details. One or more parsing issues, see problems for details|
