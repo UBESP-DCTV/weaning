@@ -1,0 +1,26 @@
+File trend ventilatore	VTD
+Nome del Paziente:	8217
+ID Paziente:	BG001
+N° di serie Ventilatore:	 2997
+Versione Software del Ventilatore:	Systema:	v7.00	Pannello: 	v24.08.03	Pannello Condiviso: 	v24.08.00	Respirazione: 	v24.08.00	Respiraz. Condivisa: 	v24.08.00	Monitor: 	v24.08.00	Monitor Condiviso: 	v24.08.00	Flusso Esp.: 	v24.08.00	Flusso Esp. Condiviso: 	v24.08.00
+Data creazione del file:	09/07/2013
+
+Controllo Pre-uso:	03/07/2013	13:39:14	Passato	Test circuito paziente:	03/07/2013	13:39:14	Passato
+Dettagli controllo Pre-uso:	Test interni: Passato, Test barometro: Passato, Test erogazione gas: Passato, Test perdita interna: Passato, Test trasduttore di pressione: Passato, Test valvola di sicurezza: Passato, Test cella/sensore O₂: Passato, Test trasduttore di flusso: Passato, Test switch batteria: Passato, Test circuito paziente: Passato, Test dello stato di allarme: Passato
+Simbolo decimale:	.
+
+
+
+
+
+
+
+
+
+
+Ora						Caratteristiche Dinamiche	Elastanza	Flusso di fine Esp.	Pressione di fine Esp. 	Resistenza Esp.	Vol. Minuto espirato	Vol. Corrente Espirato	Concentraz. O₂			Resistenza Inspiratoria	Vol. Minuto inspirato	Vol. Corrente Inspirato	Press. Media Vie Aeree	Frequenza Respiraz. misurata	Freq. spontanea	Picco Edi	Edi min	Press. di Pausa Vie Aeree	Press. di Picco delle Vie Aeree	Passa a backup	Backup	Compliance Statica			P 0.1	Lavoro Respiratorio del ventilatore	Lavoro Respiratorio del paziente	SBI	Volume minuto espirato spontaneo	Perdita percentuale
+						ml/cmH₂O	cmH₂O/l	l/min	cmH₂O	cmH₂O/l/s	l/min	ml	%			cmH₂O/l/s	l/min	ml	cmH₂O	resp/min	resp/min	µV	µV	cmH₂O	cmH₂O	/min	%/min	ml/cmH₂O			cmH₂O	Joule/l	Joule/l		l/min	%
+
+09:28						62.30		0.8400	7.57	12.14	7.1694	569.0000	40.6				6.8477	469.8000	10.16	15.90	15.90				16.66	0	0.00				0.76	0.72	0.00	32	7.1694
+
+Riassunto:	226

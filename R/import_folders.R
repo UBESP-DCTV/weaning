@@ -67,19 +67,25 @@ import_folder <- function(
         )
     }()
 
+
+  if (length(trd_files)  == 0L) return(NULL)
+
   import_fct <- what |>
     switch(
       "TRD" = import_trd,
       "LOG" = import_log
     )
 
-  res <- trd_files |>
+  aux <- trd_files |>
     furrr::future_map_dfr(
       import_fct,
       .id = "file",
       verbose = verbose,
       .progress = verbose
     )
+
+  res <- aux |>
+    dplyr::distinct(dplyr::across(-.data[["file"]]), .keep_all = TRUE)
 
   if (!verbose) usethis::ui_done(.dir_path)
   res

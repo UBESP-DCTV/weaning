@@ -7,3 +7,7 @@ log <- tar_read(weaningsLOG)
 
 trd
 log
+
+
+trd |>
+  janitor::get_dupes(-file)
