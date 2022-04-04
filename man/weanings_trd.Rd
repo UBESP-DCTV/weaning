@@ -2,15 +2,18 @@
 % Please edit documentation in R/data.R
 \name{weanings_trd}
 \alias{weanings_trd}
-\title{Weanings data}
+\title{Weanings data TRD}
 \format{
-A data frame with 2.483.787 rows and 33 variables:
+A data frame with 2.483.787 rows and 37 variables:
 \describe{
 \item{folder}{(chr) main folder for the imported file, i.e., the
 center code} \item{file}{ (chr) imported file name, pattern:
 CCDDD_XXXX where CC is the center code, DDD is the patient id and
 XXXX is the sequence-code of the weaning file.} \item{id_pat}{(num)
 patient id as a number} \item{date}{date of transmission}
+\item{file}{(chr) }
+\item{id_pat}{(num) }
+\item{date}{(Date) }
 \item{ora}{time of signals (granularity: 1 minute)}
 \item{et_co2_percent}{(num) }
 \item{eliminazione_co2_corrente_ml}{(num) }
