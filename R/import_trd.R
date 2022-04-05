@@ -47,7 +47,7 @@ import_trd <- function(.file_path, verbose = FALSE) {
     dplyr::filter(dplyr::if_any(-.data[["ora"]], ~!is.na(.x))) |>
     dplyr::mutate(
       dplyr::across(-.data[["ora"]], readr::parse_double),
-      id_pat = extract_id_from_header(headr),
+      id_pat = extract_id_from_filepath(.file_path),
       date = extract_date_from_header(headr),
       ora = readr::parse_time(.data[["ora"]])
     ) |>

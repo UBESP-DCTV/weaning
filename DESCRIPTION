@@ -39,11 +39,18 @@ Imports:
     usethis,
     withr
 Suggests: 
+    bs4Dash,
     devtools,
     distill,
     fs,
+    gt,
+    markdown,
+    pingr,
     qs,
     roxygen2,
+    shiny,
+    shinybusy,
+    shinyWidgets,
     spelling,
     testthat (>= 3.0.0),
     visNetwork,

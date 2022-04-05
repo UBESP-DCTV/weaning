@@ -1,18 +1,13 @@
 library(tidyverse)
 library(targets)
 
-weanings <- qs::qread(here::here("data/weaning.qs"))
-
-weanings |>
-  dplyr::mutate(
-    file = str_replace_all(file, "_.*$", "")
-  ) |>
-  distinct(file)
-  glimpse()
-
-wt <- tar_read(weaningsTRD)
-wt
+trd <- tar_read(weaningsTRD)
+log <- tar_read(weaningsLOG)
 
 
-"~/../Desktop/Driving p e Weaning/file_nava/VC"
-import_folder("LOG")
+
+
+log |> filter(is.na(id_pat))
+
+trd |>
+  janitor::get_dupes(-file)

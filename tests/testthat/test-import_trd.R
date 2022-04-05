@@ -16,7 +16,7 @@ test_that("import_trd works", {
   unique(res[["date"]]) |>
     expect_equal(lubridate::ymd("2013/07/09"))
   unique(res[["id_pat"]]) |>
-    expect_equal(8217)
+    expect_equal(123)
 
 
   import_trd(fake_trd_path) |>
@@ -49,12 +49,25 @@ test_that("import_folder works for TRD files", {
 })
 
 
+test_that("import_folder works for TRD files", {
+  # setup
+  sample_folder <- file.path(data_test_path(), "VC")
+
+  # evaluation
+  res <- suppressMessages(import_folder(sample_folder))
+
+  # tests
+  res |>
+    expect_null()
+})
+
+
 test_that("import_folders works for TRD files", {
   # setup
   sample_folder <- data_test_path()
 
   # evaluation
-  res <- suppressMessages(import_folders(sample_folder))
+  res <- suppressMessages(import_folders(sample_folder, verbose = TRUE))
 
   # tests
   res |>

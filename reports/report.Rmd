@@ -61,7 +61,7 @@ list.files(here("R"), pattern = "\\.R$", full.names = TRUE) |>
 ```
 
 
-```{r}
+```{r, message=FALSE}
 htmltools::img(
  src = knitr::image_uri(here("man", "img", "LAIMS.png")),
  alt = 'logo',
@@ -76,56 +76,56 @@ library(DT)
 
 ## Introduction
 
-Weanings data are stored in two main types of files: 
+Weanings data are stored in two main types of files:
+
+<aside>
+Data types are three: there are REG files also.
+See section **Discussion** for more details.
+</aside>
 
 - TRD, reporting ventilators signals averaged every minute.
 - LOG, reporting alarms and additional information from the ventilators
 
-TRD and LOG Files are collected in pairs, reporting data from
+TRD and LOG files are collected in pairs, reporting data from
 approximately 24 hours each pair. So, every patient have multiple pairs
 of TRD and LOG files. Pairs from all the patient of a center involved 
-in the study are colelcted in a folder named with the center code. An
+in the study are collected in a folder named with the center code. An
 additional __mother__ folder contains all the center's folders.
 
+
 ## Methods
-
-
-For Weaning project, we have setup an automated environment
-tracking changes and updates within the defined pipeline (from import,
-preprocess, analyses, and reporting) [@R-targets].
-
-Data are imported using functions from the `{tidyverse}` suite
-of R packages mainly [@R-tidyverse].
-
-
-## Analyses
-
 
 
 The pipeline developed is currently in the following state
 
 <aside>
 The pipeline itself, derived objects, and the report are automatically
-updated at any change in the code or data.
+monitored for outdated nodes, and updated at any change in the code or
+data.
 </aside>
 
 ```{r}
-tar_visnetwork(
+out <- capture.output({
+  net <- tar_visnetwork(
   # targets_only = TRUE,
   exclude = c(
     "report",
     all_of(extract_fct_names(here::here("R/utils.R")))
   )
-)
+)  
+})
+
+net
+
 ```
+
 
 
 ## Results
 
 
-Data imported and merged
 
-```{r, echo=FALSE, code_folding = TRUE}
+```{r, echo=FALSE}
 weanings_trd <- tar_read(weaningsTRD)
 problematic_dupes <- tar_read(problematicDupes)
 
@@ -134,11 +134,74 @@ weanings_log <- tar_read(weaningsLOG)
 ```
 
 
-### Issues to discuss
+### TRD
 
-There are some issues in the data, i.e., some lines of signals have
-wrong time and they results in duplicated records. This issue involves
-the following records
+- The merged TRD dataset has `r nrow(weanings_trd)` rows, and
+`r ncol(weanings_trd)` columns.
+
+Here below a sample of 50 (random) records.
+
+```{r, layout="l-body-outset"}
+dplyr::slice_sample(weanings_trd, n = 50) |> 
+  datatable(filter = "top", options = list(scrollX = TRUE))
+```
+
+
+
+### LOG
+
+
+- The merged LOG dataset has `r nrow(weanings_log)` rows, and
+`r ncol(weanings_log)` columns.
+
+Here below a sample of 50 (random) records.
+
+```{r, layout="l-body-outset"}
+dplyr::slice_sample(weanings_log, n = 50) |> 
+  datatable(filter = "top", options = list(scrollX = TRUE))
+```
+
+
+## Preliminar analyses
+
+### Descriptives
+
+```{r}
+paz <- weanings_trd |> 
+  select(folder, id_pat) |> 
+  distinct() |> 
+  group_by(folder) |> 
+  summarise(`Numero pazienti` = n()) |> 
+  arrange(desc(`Numero pazienti`)) |> 
+  rename(Centro = folder)
+
+paz |> 
+  datatable(filter = "top", options = list(scrollX = TRUE))
+```
+
+<aside>
+All'interno dei dati importati sono presenti `r sum(paz[["Numero
+pazienti"]])` pazienti totali.
+</aside>
+
+
+```{r, layout="l-body-outset"}
+tar_read(ggPatPerCentro)
+```
+
+
+```{r, layout="l-body-outset"}
+tar_read(ggDistAllarmi)
+```
+
+
+
+## Discussion
+
+### Issues
+
+- some lines of signals have wrong time and they results in duplicated
+records. This issue involves the following records
 
 ```{r, layout="l-body-outset"}
 problematic_dupes |> 
@@ -146,25 +209,43 @@ problematic_dupes |>
 ```
 
 
-File in the `VC/` folder are the only one using ISO format for dates.
+- File in the `VC/` folder are the only one using ISO format for dates.
 We have managed that correctly to consistently merge them with the other files.
 
-## Discussion
 
+- In alcuni file LOG (es: `AN004_869`) il nome del paziente non è
+riportato come codifica ma esplicitamente. Gli id dei pazienti sono
+stata importanti sempre recuperandoli dal nome del file.
+
+<aside>
+Nell'intestazione dei file compare sia "nome paziente" che "id
+paziente", il primo ogni tanto ha il nome esplicito ogni tanto l'id. A
+volte uno dei due manca.
+</aside>
+
+### Questions
+
+- There are **REG** files inside the folders which are not reported as
+used in the thesis or in the Python importing script. Do they need to be
+used? (How?) They seams to have live data (without explicit time) of
+the following form:
+
+```
+Fase respiro	Pressione	Flusso	Volume			Trigger
+Fase	cmH₂O	l/min	ml			
+```
 
 
 
 ## Acknowledgments {.appendix}
 
-This is a place to recognize people and institutions. It may also be a good place
-to acknowledge and cite software that makes your work possible.
-
-## Author Contributions {.appendix}
-
-We strongly encourage you to include an author contributions statement briefly 
-describing what each author did.
+For the Weaning project, we have setup an automated environment
+tracking changes and updates within the defined pipeline (from import,
+preprocess, analyses, and reporting) [@R-targets].
 
 
+Data are imported using functions from the `{tidyverse}` suite
+of R packages mainly [@R-tidyverse].
 
 
 
