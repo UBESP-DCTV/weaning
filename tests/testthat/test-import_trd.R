@@ -16,7 +16,7 @@ test_that("import_trd works", {
   unique(res[["date"]]) |>
     expect_equal(lubridate::ymd("2013/07/09"))
   unique(res[["id_pat"]]) |>
-    expect_equal(8217)
+    expect_equal(123)
 
 
   import_trd(fake_trd_path) |>

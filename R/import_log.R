@@ -39,7 +39,7 @@ import_log <- function(.file_path, verbose = FALSE) {
     ) |>
     janitor::clean_names() |>
     dplyr::mutate(
-      id_pat = extract_id_from_header(headr),
+      id_pat = extract_id_from_filepath(.file_path),
       data = parse_weanings_dates(.data[["data"]])
     ) |>
     dplyr::rename(id_info = id) |>

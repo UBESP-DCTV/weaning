@@ -4,7 +4,7 @@
 \alias{weanings_trd}
 \title{Weanings data TRD}
 \format{
-A data frame with 2.483.787 rows and 37 variables:
+A data frame with 2.144.725 rows and 37 variables:
 \describe{
 \item{folder}{(chr) main folder for the imported file, i.e., the
 center code} \item{file}{ (chr) imported file name, pattern:

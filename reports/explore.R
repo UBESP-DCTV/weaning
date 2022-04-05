@@ -5,9 +5,9 @@ trd <- tar_read(weaningsTRD)
 log <- tar_read(weaningsLOG)
 
 
-trd
-log
 
+
+log |> filter(is.na(id_pat))
 
 trd |>
   janitor::get_dupes(-file)

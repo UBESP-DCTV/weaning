@@ -118,8 +118,8 @@ import_folder <- function(
 #' \dontrun{
 #'   library(weaning)
 #'
-#'   import_folder(get_data_path(), "TRD")
-#'   import_folder(get_data_path(), "LOG")
+#'   import_folders(get_data_path(), "TRD")
+#'   import_folders(get_data_path(), "LOG")
 #' }
 import_folders <- function(
     .dir_path,

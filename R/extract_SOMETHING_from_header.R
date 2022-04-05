@@ -5,9 +5,9 @@ extract_date_from_header <- function(headr) {
     lubridate::dmy()
 }
 
-extract_id_from_header <- function(headr) {
-  headr |>
-    stringr::str_subset("^Nome del Paziente:") |>
-    stringr::str_extract("\\d+") |>
-    as.numeric()
+extract_id_from_filepath <- function(filepath) {
+  filepath |>
+    basename() |>
+    stringr::str_extract("(?<=^[A-Z]{2})\\d+") |>
+    readr::parse_number()
 }
