@@ -85,6 +85,32 @@ list(
   }),
 
 
+  tar_target(ggMissingTRD, {
+    weaningsTRD |>
+      purrr::map_dbl(~mean(is.na(.x))) |>
+      as.list() |>
+      as_tibble() |>
+      pivot_longer(cols = everything()) |>
+      mutate(
+        name = name |>
+          stringr::str_replace_all("_", " ") |>
+          stringr::str_to_sentence(),
+        value = round(100 * value, 2)
+      ) |>
+      ggplot(aes(x = reorder(name, desc(value)), value, fill = name)) +
+      geom_bar(stat = "identity") +
+      geom_text(aes(label = value), size = 2) +
+      coord_flip() +
+      theme_bw() +
+      labs(
+        x = "Variabile",
+        y = "Percentuale dati mancanti (%)",
+        fill = "Variabili"
+      ) +
+      theme(legend.position = "none")
+  }),
+
+
   # compile the report
   tar_render(report, here("reports/report.Rmd"))
 )

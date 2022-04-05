@@ -195,6 +195,10 @@ tar_read(ggPatPerCentro)
 tar_read(ggDistAllarmi)
 ```
 
+```{r, layout="l-body-outset"}
+tar_read(ggMissingTRD)
+```
+
 
 
 ## Discussion
