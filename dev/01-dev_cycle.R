@@ -1,4 +1,6 @@
 # Update documentation and namespaces -----------------------------
+
+usethis::use_tidy_description()
 # CTRL + SHIFT + D
 
 

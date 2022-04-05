@@ -32,7 +32,7 @@ to the merged table a column reporting the main folder name.
 \dontrun{
   library(weaning)
 
-  import_folder(get_data_path(), "TRD")
-  import_folder(get_data_path(), "LOG")
+  import_folders(get_data_path(), "TRD")
+  import_folders(get_data_path(), "LOG")
 }
 }

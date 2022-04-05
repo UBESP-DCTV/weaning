@@ -83,7 +83,7 @@ test_that("import_folders works for LOG filed", {
 
 test_that("manage problematic foders with files without dates", {
   # setup
-  problematic_folder <- "~/../Desktop/Driving p e Weaning/file_nava/VC"
+  problematic_folder <- file.path(get_data_path(), "VC")
 
   # eval
   res <- suppressMessages(import_folder(problematic_folder, "LOG"))

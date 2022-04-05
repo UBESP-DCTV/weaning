@@ -153,6 +153,14 @@
         "bit"
       ]
     },
+    "bitops": {
+      "Package": "bitops",
+      "Version": "1.0-7",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "b7d8d8ee39869c18d8846a184dd8a1af",
+      "Requirements": []
+    },
     "blob": {
       "Package": "blob",
       "Version": "1.2.2",
@@ -214,6 +222,24 @@
         "stringr",
         "tibble",
         "tidyr"
+      ]
+    },
+    "bs4Dash": {
+      "Package": "bs4Dash",
+      "Version": "2.0.3",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "79acf9184702de996bda53cef9dbf059",
+      "Requirements": [
+        "bslib",
+        "fresh",
+        "htmltools",
+        "httpuv",
+        "httr",
+        "jsonlite",
+        "lifecycle",
+        "shiny",
+        "waiter"
       ]
     },
     "bslib": {
@@ -583,6 +609,17 @@
       "Hash": "77bd60a6157420d4ffa93b27cf6a58b8",
       "Requirements": []
     },
+    "fontawesome": {
+      "Package": "fontawesome",
+      "Version": "0.2.2",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "55624ed409e46c5f358b2c060be87f67",
+      "Requirements": [
+        "htmltools",
+        "rlang"
+      ]
+    },
     "forcats": {
       "Package": "forcats",
       "Version": "0.5.1",
@@ -594,6 +631,19 @@
         "magrittr",
         "rlang",
         "tibble"
+      ]
+    },
+    "fresh": {
+      "Package": "fresh",
+      "Version": "0.2.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "fa54367040deb4537da49b7ac0ee5770",
+      "Requirements": [
+        "htmltools",
+        "rstudioapi",
+        "sass",
+        "shiny"
       ]
     },
     "fs": {
@@ -779,6 +829,31 @@
         "vctrs"
       ]
     },
+    "gt": {
+      "Package": "gt",
+      "Version": "0.4.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "4905765870343c66704c9e495e4e3bc0",
+      "Requirements": [
+        "base64enc",
+        "bitops",
+        "checkmate",
+        "commonmark",
+        "dplyr",
+        "fs",
+        "ggplot2",
+        "glue",
+        "htmltools",
+        "magrittr",
+        "rlang",
+        "sass",
+        "scales",
+        "stringr",
+        "tibble",
+        "tidyselect"
+      ]
+    },
     "gtable": {
       "Package": "gtable",
       "Version": "0.3.0",
@@ -861,6 +936,19 @@
         "htmltools",
         "jsonlite",
         "yaml"
+      ]
+    },
+    "httpuv": {
+      "Package": "httpuv",
+      "Version": "1.6.5",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "97fe71f0a4a1c9890e6c2128afa04bc0",
+      "Requirements": [
+        "R6",
+        "Rcpp",
+        "later",
+        "promises"
       ]
     },
     "httr": {
@@ -1052,6 +1140,17 @@
       "Hash": "cdc87ecd81934679d1557633d8e1fe51",
       "Requirements": []
     },
+    "markdown": {
+      "Package": "markdown",
+      "Version": "1.1",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "61e4a10781dd00d7d81dd06ca9b94e95",
+      "Requirements": [
+        "mime",
+        "xfun"
+      ]
+    },
     "memoise": {
       "Package": "memoise",
       "Version": "2.0.1",
@@ -1153,6 +1252,16 @@
         "rlang",
         "utf8",
         "vctrs"
+      ]
+    },
+    "pingr": {
+      "Package": "pingr",
+      "Version": "2.0.1",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "e293e79be42ffd336d938937fd3017fb",
+      "Requirements": [
+        "processx"
       ]
     },
     "piton": {
@@ -1557,6 +1666,62 @@
         "cli"
       ]
     },
+    "shiny": {
+      "Package": "shiny",
+      "Version": "1.7.1",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "00344c227c7bd0ab5d78052c5d736c44",
+      "Requirements": [
+        "R6",
+        "bslib",
+        "cachem",
+        "commonmark",
+        "crayon",
+        "ellipsis",
+        "fastmap",
+        "fontawesome",
+        "glue",
+        "htmltools",
+        "httpuv",
+        "jsonlite",
+        "later",
+        "lifecycle",
+        "mime",
+        "promises",
+        "rlang",
+        "sourcetools",
+        "withr",
+        "xtable"
+      ]
+    },
+    "shinyWidgets": {
+      "Package": "shinyWidgets",
+      "Version": "0.6.4",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "02fba70d7c5c1ab0754d9c0108c029eb",
+      "Requirements": [
+        "bslib",
+        "htmltools",
+        "jsonlite",
+        "sass",
+        "shiny"
+      ]
+    },
+    "shinybusy": {
+      "Package": "shinybusy",
+      "Version": "0.3.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "f64f08367358906d34a0ff490838d71c",
+      "Requirements": [
+        "htmltools",
+        "htmlwidgets",
+        "jsonlite",
+        "shiny"
+      ]
+    },
     "snakecase": {
       "Package": "snakecase",
       "Version": "0.11.0",
@@ -1567,6 +1732,14 @@
         "stringi",
         "stringr"
       ]
+    },
+    "sourcetools": {
+      "Package": "sourcetools",
+      "Version": "0.1.7",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "947e4e02a79effa5d512473e10f41797",
+      "Requirements": []
     },
     "spelling": {
       "Package": "spelling",
@@ -1938,6 +2111,18 @@
         "withr"
       ]
     },
+    "waiter": {
+      "Package": "waiter",
+      "Version": "0.2.5",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "93e6b6c8ae3f81d4be77a0dc74e5cf5e",
+      "Requirements": [
+        "R6",
+        "htmltools",
+        "shiny"
+      ]
+    },
     "waldo": {
       "Package": "waldo",
       "Version": "0.4.0",
@@ -2007,6 +2192,14 @@
       "Requirements": [
         "processx"
       ]
+    },
+    "xtable": {
+      "Package": "xtable",
+      "Version": "1.8-4",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "b8acdf8af494d9ec19ccb2481a9b11c2",
+      "Requirements": []
     },
     "yaml": {
       "Package": "yaml",
