@@ -13,4 +13,5 @@
 ^run.R$
 ^biblio.bib$
 ^packages.bib$
+^run_monitor.R$
 

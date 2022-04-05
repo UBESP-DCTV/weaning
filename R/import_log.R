@@ -42,7 +42,7 @@ import_log <- function(.file_path, verbose = FALSE) {
       id_pat = extract_id_from_filepath(.file_path),
       data = parse_weanings_dates(.data[["data"]])
     ) |>
-    dplyr::rename(id_info = id) |>
+    dplyr::rename(id_info = .data[["id"]]) |>
     dplyr::relocate(
       .data[["id_pat"]],
       .before = .data[["data"]]

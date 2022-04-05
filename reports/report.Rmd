@@ -142,7 +142,8 @@ weanings_log <- tar_read(weaningsLOG)
 Here below a sample of 50 (random) records.
 
 ```{r, layout="l-body-outset"}
-dplyr::slice_sample(weanings_trd, n = 50) |> 
+weanings_trd |>
+  dplyr::slice_sample(n = 50) |> 
   datatable(filter = "top", options = list(scrollX = TRUE))
 ```
 
