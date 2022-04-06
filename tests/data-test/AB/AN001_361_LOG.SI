@@ -1,0 +1,377 @@
+Archivio eventi ventilatore	VEL
+Nome del Paziente:	AN001
+ID Paziente:	AN001
+N° di serie Ventilatore:	 24222
+Versione Software del Ventilatore:	Systema:	v7.00	Pannello: 	v24.08.03	Pannello Condiviso: 	v24.08.00	Respirazione: 	v24.08.00	Respiraz. Condivisa: 	v24.08.00	Monitor: 	v24.08.00	Monitor Condiviso: 	v24.08.00	Flusso Esp.: 	v24.08.00	Flusso Esp. Condiviso: 	v24.08.00
+Data creazione del file:	23/10/2013
+
+Controllo Pre-uso:	22/10/2013	11:52:48	Passato	Test circuito paziente:	22/10/2013	11:52:48	Passato
+Dettagli controllo Pre-uso:	Test interni: Passato, Test barometro: Passato, Test erogazione gas: Passato, Test perdita interna: Passato, Test trasduttore di pressione: Passato, Test valvola di sicurezza: Passato, Test cella/sensore O₂: Passato, Test trasduttore di flusso: Passato, Test switch batteria: Passato, Test circuito paziente: Passato, Test dello stato di allarme: Passato
+Simbolo decimale:	.
+
+
+
+
+
+
+
+
+
+
+Data	Ora	ID	Tipo	Informazioni
+23/10/2013	13:13:50	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	11:27:31	18	Allarme	Allarme: Vol. Min. Esp. basso
+23/10/2013	11:27:14	18	Allarme	Allarme: Vol. Min. Esp. basso
+23/10/2013	11:25:19	18	Allarme	Allarme: Vol. Min. Esp. basso
+23/10/2013	11:24:47	65535	Funzioni	Cambio modo da NAVA (PS) a NAVA (Edi) da parte dell'operatore
+23/10/2013	11:24:19	13	Allarme	Allarme: Sincronia pneumatica-Edi persa
+23/10/2013	11:22:48	0	Funzioni	Silenziamento attivato
+23/10/2013	11:22:37	18	Allarme	Allarme: Vol. Min. Esp. basso
+23/10/2013	11:22:31	125	Allarme	Allarme: PEEP bassa
+23/10/2013	11:22:27	110	Allarme	Allarme: Flusso Insp. fuori range
+23/10/2013	11:22:27	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+23/10/2013	11:22:25	0	Funzioni	Silenziamento attivato
+23/10/2013	11:22:25	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	11:21:45	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	11:21:25	12	Allarme	Allarme: Press. vie aeree elevata
+23/10/2013	11:21:21	12	Allarme	Allarme: Press. vie aeree elevata
+23/10/2013	11:21:13	12	Allarme	Allarme: Press. vie aeree elevata
+23/10/2013	11:21:09	157	Allarme	Allarme: PEEP alta
+23/10/2013	11:21:08	12	Allarme	Allarme: Press. vie aeree elevata
+23/10/2013	11:21:05	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	11:20:56	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	11:20:42	12	Allarme	Allarme: Press. vie aeree elevata
+23/10/2013	11:20:38	12	Allarme	Allarme: Press. vie aeree elevata
+23/10/2013	11:20:33	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	11:20:31	12	Allarme	Allarme: Press. vie aeree elevata
+23/10/2013	11:20:10	12	Allarme	Allarme: Press. vie aeree elevata
+23/10/2013	11:20:04	12	Allarme	Allarme: Press. vie aeree elevata
+23/10/2013	11:19:42	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	11:19:41	157	Allarme	Allarme: PEEP alta
+23/10/2013	11:19:35	12	Allarme	Allarme: Press. vie aeree elevata
+23/10/2013	11:19:19	0	Funzioni	Silenziamento attivato
+23/10/2013	11:19:05	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	11:18:58	12	Allarme	Allarme: Press. vie aeree elevata
+23/10/2013	11:18:55	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	11:18:50	12	Allarme	Allarme: Press. vie aeree elevata
+23/10/2013	11:18:41	157	Allarme	Allarme: PEEP alta
+23/10/2013	11:16:52	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	11:16:50	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	11:16:43	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	11:16:41	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	10:44:35	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	10:14:32	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	10:14:13	157	Allarme	Allarme: PEEP alta
+23/10/2013	10:02:26	321	Variaz. parametro	Livello NAVA impostato su 2.5 cmH₂O/µV
+23/10/2013	10:02:25	321	Variaz. parametro	Livello NAVA impostato su 2.7 cmH₂O/µV
+23/10/2013	10:02:24	321	Variaz. parametro	Livello NAVA impostato su 2.9 cmH₂O/µV
+23/10/2013	09:25:23	110	Allarme	Allarme: Flusso Insp. fuori range
+23/10/2013	09:25:23	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+23/10/2013	09:25:18	125	Allarme	Allarme: PEEP bassa
+23/10/2013	09:25:17	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+23/10/2013	09:25:16	110	Allarme	Allarme: Flusso Insp. fuori range
+23/10/2013	08:58:28	65535	Funzioni	Ritornare a NAVA
+23/10/2013	08:58:02	13	Allarme	Allarme: Sincronia pneumatica-Edi persa
+23/10/2013	08:56:02	35	Allarme	Allarme: Bassa attività Edi
+23/10/2013	08:44:55	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	08:44:52	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	08:39:27	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	08:34:28	18	Allarme	Allarme: Vol. Min. Esp. basso
+23/10/2013	08:32:53	65535	Funzioni	Ritorno alla ventilazione assistita avviato dal paziente
+23/10/2013	08:32:53	147	Allarme	Allarme: Nessuno sforzo del paziente
+23/10/2013	08:32:50	26	Allarme	Allarme: Concentrazione O₂ bassa 
+23/10/2013	08:32:48	62	Allarme	Allarme: Frequenza respiratoria bassa
+23/10/2013	08:32:35	35	Allarme	Allarme: Bassa attività Edi
+23/10/2013	08:30:42	35	Allarme	Allarme: Bassa attività Edi
+23/10/2013	08:30:07	13	Allarme	Allarme: Sincronia pneumatica-Edi persa
+23/10/2013	08:28:24	18	Allarme	Allarme: Vol. Min. Esp. basso
+23/10/2013	08:28:13	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+23/10/2013	08:28:09	125	Allarme	Allarme: PEEP bassa
+23/10/2013	08:28:06	110	Allarme	Allarme: Flusso Insp. fuori range
+23/10/2013	08:28:06	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+23/10/2013	08:26:51	65535	Funzioni	Ritorno alla ventilazione assistita avviato dal paziente
+23/10/2013	08:26:25	26	Allarme	Allarme: Concentrazione O₂ bassa 
+23/10/2013	08:26:22	147	Allarme	Allarme: Nessuno sforzo del paziente
+23/10/2013	08:26:04	65535	Funzioni	Ritorno alla ventilazione assistita avviato dal paziente
+23/10/2013	08:25:19	147	Allarme	Allarme: Nessuno sforzo del paziente
+23/10/2013	08:25:19	18	Allarme	Allarme: Vol. Min. Esp. basso
+23/10/2013	08:25:16	26	Allarme	Allarme: Concentrazione O₂ bassa 
+23/10/2013	08:25:14	62	Allarme	Allarme: Frequenza respiratoria bassa
+23/10/2013	08:24:15	13	Allarme	Allarme: Sincronia pneumatica-Edi persa
+23/10/2013	08:15:13	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	07:48:13	18	Allarme	Allarme: Vol. Min. Esp. basso
+23/10/2013	07:48:06	18	Allarme	Allarme: Vol. Min. Esp. basso
+23/10/2013	07:46:05	35	Allarme	Allarme: Bassa attività Edi
+23/10/2013	07:44:14	18	Allarme	Allarme: Vol. Min. Esp. basso
+23/10/2013	07:44:10	18	Allarme	Allarme: Vol. Min. Esp. basso
+23/10/2013	07:40:10	35	Allarme	Allarme: Bassa attività Edi
+23/10/2013	06:17:15	12	Allarme	Allarme: Press. vie aeree elevata
+23/10/2013	05:19:22	12	Allarme	Allarme: Press. vie aeree elevata
+23/10/2013	04:54:42	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	04:54:40	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	04:54:33	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	04:54:31	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	04:54:29	157	Allarme	Allarme: PEEP alta
+23/10/2013	04:24:17	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	04:23:05	18	Allarme	Allarme: Vol. Min. Esp. basso
+23/10/2013	04:23:05	110	Allarme	Allarme: Flusso Insp. fuori range
+23/10/2013	04:23:02	110	Allarme	Allarme: Flusso Insp. fuori range
+23/10/2013	04:22:56	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+23/10/2013	04:22:50	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+23/10/2013	04:22:48	125	Allarme	Allarme: PEEP bassa
+23/10/2013	04:22:46	110	Allarme	Allarme: Flusso Insp. fuori range
+23/10/2013	04:22:46	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+23/10/2013	04:12:16	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	04:12:14	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	04:12:09	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	04:00:51	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	04:00:49	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	03:41:10	18	Allarme	Allarme: Vol. Min. Esp. basso
+23/10/2013	03:40:20	12	Allarme	Allarme: Press. vie aeree elevata
+23/10/2013	03:39:39	12	Allarme	Allarme: Press. vie aeree elevata
+23/10/2013	02:45:39	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	02:45:37	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	02:45:33	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	02:23:38	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	02:23:30	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	02:23:29	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	02:23:07	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	02:11:23	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	02:11:20	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	01:00:45	12	Allarme	Allarme: Press. vie aeree elevata
+23/10/2013	00:09:27	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	00:09:15	18	Allarme	Allarme: Vol. Min. Esp. basso
+23/10/2013	00:09:13	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+23/10/2013	00:09:12	110	Allarme	Allarme: Flusso Insp. fuori range
+23/10/2013	00:09:08	110	Allarme	Allarme: Flusso Insp. fuori range
+23/10/2013	00:09:06	110	Allarme	Allarme: Flusso Insp. fuori range
+23/10/2013	00:09:05	61	Allarme	Allarme: Frequenza respiratoria elevata 
+23/10/2013	00:09:03	110	Allarme	Allarme: Flusso Insp. fuori range
+23/10/2013	00:09:00	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+23/10/2013	00:08:58	110	Allarme	Allarme: Flusso Insp. fuori range
+23/10/2013	00:08:57	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+23/10/2013	00:08:55	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+23/10/2013	00:08:53	125	Allarme	Allarme: PEEP bassa
+23/10/2013	00:08:52	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+23/10/2013	00:08:51	110	Allarme	Allarme: Flusso Insp. fuori range
+22/10/2013	22:48:09	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	22:48:04	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	22:33:00	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	22:15:12	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	22:15:11	18	Allarme	Allarme: Vol. Min. Esp. basso
+22/10/2013	22:15:07	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+22/10/2013	22:15:04	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+22/10/2013	22:15:02	110	Allarme	Allarme: Flusso Insp. fuori range
+22/10/2013	22:15:01	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+22/10/2013	22:14:59	110	Allarme	Allarme: Flusso Insp. fuori range
+22/10/2013	22:14:52	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+22/10/2013	22:14:50	110	Allarme	Allarme: Flusso Insp. fuori range
+22/10/2013	22:14:49	125	Allarme	Allarme: PEEP bassa
+22/10/2013	22:14:48	110	Allarme	Allarme: Flusso Insp. fuori range
+22/10/2013	22:14:48	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+22/10/2013	22:14:22	12	Allarme	Allarme: Press. vie aeree elevata
+22/10/2013	20:06:55	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	20:06:43	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	20:06:41	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	20:06:41	125	Allarme	Allarme: PEEP bassa
+22/10/2013	20:06:40	110	Allarme	Allarme: Flusso Insp. fuori range
+22/10/2013	20:06:40	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+22/10/2013	20:06:38	110	Allarme	Allarme: Flusso Insp. fuori range
+22/10/2013	20:06:35	110	Allarme	Allarme: Flusso Insp. fuori range
+22/10/2013	20:06:35	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+22/10/2013	20:06:31	110	Allarme	Allarme: Flusso Insp. fuori range
+22/10/2013	20:06:31	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+22/10/2013	20:06:26	125	Allarme	Allarme: PEEP bassa
+22/10/2013	20:06:25	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+22/10/2013	20:06:22	110	Allarme	Allarme: Flusso Insp. fuori range
+22/10/2013	19:43:03	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	19:43:01	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	19:30:02	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	19:29:56	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	19:29:54	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	19:13:38	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	18:37:22	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	18:24:29	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+22/10/2013	18:23:58	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+22/10/2013	18:23:57	110	Allarme	Allarme: Flusso Insp. fuori range
+22/10/2013	18:23:54	125	Allarme	Allarme: PEEP bassa
+22/10/2013	18:23:53	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+22/10/2013	18:23:51	110	Allarme	Allarme: Flusso Insp. fuori range
+22/10/2013	18:23:51	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+22/10/2013	18:04:18	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	16:37:58	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+22/10/2013	16:37:53	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+22/10/2013	16:37:51	125	Allarme	Allarme: PEEP bassa
+22/10/2013	16:37:50	110	Allarme	Allarme: Flusso Insp. fuori range
+22/10/2013	16:10:18	12	Allarme	Allarme: Press. vie aeree elevata
+22/10/2013	15:48:05	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	15:48:02	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	14:42:30	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	14:36:25	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	14:36:10	110	Allarme	Allarme: Flusso Insp. fuori range
+22/10/2013	14:36:10	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+22/10/2013	14:36:07	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+22/10/2013	14:36:04	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+22/10/2013	14:36:04	125	Allarme	Allarme: PEEP bassa
+22/10/2013	14:36:02	110	Allarme	Allarme: Flusso Insp. fuori range
+22/10/2013	13:58:25	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	13:58:23	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	13:58:20	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	13:58:08	35	Allarme	Allarme: Bassa attività Edi
+22/10/2013	13:58:04	18	Allarme	Allarme: Vol. Min. Esp. basso
+22/10/2013	13:57:32	12	Allarme	Allarme: Press. vie aeree elevata
+22/10/2013	13:57:15	157	Allarme	Allarme: PEEP alta
+22/10/2013	13:57:15	12	Allarme	Allarme: Press. vie aeree elevata
+22/10/2013	13:56:51	157	Allarme	Allarme: PEEP alta
+22/10/2013	13:56:50	12	Allarme	Allarme: Press. vie aeree elevata
+22/10/2013	13:56:29	12	Allarme	Allarme: Press. vie aeree elevata
+22/10/2013	13:56:18	12	Allarme	Allarme: Press. vie aeree elevata
+22/10/2013	13:56:12	12	Allarme	Allarme: Press. vie aeree elevata
+22/10/2013	13:56:00	157	Allarme	Allarme: PEEP alta
+22/10/2013	13:55:59	12	Allarme	Allarme: Press. vie aeree elevata
+22/10/2013	13:55:54	12	Allarme	Allarme: Press. vie aeree elevata
+22/10/2013	13:55:45	12	Allarme	Allarme: Press. vie aeree elevata
+22/10/2013	13:55:40	157	Allarme	Allarme: PEEP alta
+22/10/2013	13:55:39	12	Allarme	Allarme: Press. vie aeree elevata
+22/10/2013	13:55:31	12	Allarme	Allarme: Press. vie aeree elevata
+22/10/2013	13:48:06	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	13:48:01	0	Funzioni	Silenziamento attivato
+22/10/2013	13:47:58	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	13:47:18	12	Allarme	Allarme: Press. vie aeree elevata
+22/10/2013	13:47:05	12	Allarme	Allarme: Press. vie aeree elevata
+22/10/2013	13:47:00	61	Variaz. limite allarme	Allarme limite superiore freq. respiratoria impostato a 38 resp/min
+22/10/2013	13:46:57	12	Allarme	Allarme: Press. vie aeree elevata
+22/10/2013	13:46:44	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	13:46:38	12	Allarme	Allarme: Press. vie aeree elevata
+22/10/2013	13:46:30	12	Allarme	Allarme: Press. vie aeree elevata
+22/10/2013	13:46:01	12	Allarme	Allarme: Press. vie aeree elevata
+22/10/2013	13:45:51	12	Allarme	Allarme: Press. vie aeree elevata
+22/10/2013	13:45:40	12	Allarme	Allarme: Press. vie aeree elevata
+22/10/2013	13:45:31	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	13:45:13	157	Allarme	Allarme: PEEP alta
+22/10/2013	13:45:13	12	Allarme	Allarme: Press. vie aeree elevata
+22/10/2013	13:45:02	12	Allarme	Allarme: Press. vie aeree elevata
+22/10/2013	13:44:51	0	Funzioni	Silenziamento attivato
+22/10/2013	13:44:50	12	Allarme	Allarme: Press. vie aeree elevata
+22/10/2013	13:44:30	110	Allarme	Allarme: Flusso Insp. fuori range
+22/10/2013	13:44:27	110	Allarme	Allarme: Flusso Insp. fuori range
+22/10/2013	13:44:24	110	Allarme	Allarme: Flusso Insp. fuori range
+22/10/2013	13:44:24	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+22/10/2013	13:44:19	125	Allarme	Allarme: PEEP bassa
+22/10/2013	13:44:16	110	Allarme	Allarme: Flusso Insp. fuori range
+22/10/2013	13:44:06	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	13:43:48	157	Allarme	Allarme: PEEP alta
+22/10/2013	13:43:44	12	Allarme	Allarme: Press. vie aeree elevata
+22/10/2013	13:43:42	0	Funzioni	Silenziamento attivato
+22/10/2013	13:43:39	157	Allarme	Allarme: PEEP alta
+22/10/2013	13:43:38	12	Allarme	Allarme: Press. vie aeree elevata
+22/10/2013	13:43:03	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	13:42:52	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	13:42:45	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	13:42:41	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	13:42:27	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	13:42:11	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	13:42:08	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	13:42:07	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	13:42:03	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	13:40:55	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	13:40:51	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	13:40:33	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	13:40:22	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	13:40:17	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	13:36:12	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	13:36:04	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	13:30:46	18	Allarme	Allarme: Vol. Min. Esp. basso
+22/10/2013	13:30:30	321	Variaz. parametro	Livello NAVA impostato su 3.0 cmH₂O/µV
+22/10/2013	13:30:28	321	Variaz. parametro	Livello NAVA impostato su 2.9 cmH₂O/µV
+22/10/2013	13:28:42	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	13:28:35	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	12:47:42	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	12:37:52	321	Variaz. parametro	Livello NAVA impostato su 2.8 cmH₂O/µV
+22/10/2013	12:37:50	321	Variaz. parametro	Livello NAVA impostato su 2.7 cmH₂O/µV
+22/10/2013	12:37:49	321	Variaz. parametro	Livello NAVA impostato su 2.6 cmH₂O/µV
+22/10/2013	12:36:37	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	12:36:21	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	12:34:28	12	Variaz. limite allarme	Limite di allarme pressione vie aeree impostato a 45 cmH₂O
+22/10/2013	12:33:14	264	Variaz. parametro	Trig. Flusso impostata a 5
+22/10/2013	12:11:27	65535	Funzioni	Cambio modo da NAVA (PS) a NAVA (Edi) da parte dell'operatore
+22/10/2013	12:10:14	13	Allarme	Allarme: Sincronia pneumatica-Edi persa
+22/10/2013	12:08:07	0	Funzioni	Silenziamento attivato
+22/10/2013	12:08:06	0	Funzioni	Silenziamento attivato
+22/10/2013	12:07:59	321	Variaz. parametro	Livello NAVA impostato su 2.5 cmH₂O/µV
+22/10/2013	12:07:58	321	Variaz. parametro	Livello NAVA impostato su 2.3 cmH₂O/µV
+22/10/2013	12:07:58	321	Variaz. parametro	Livello NAVA impostato su 2.2 cmH₂O/µV
+22/10/2013	12:07:22	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	12:07:01	322	Variaz. parametro	Trigg. Edi impostato su 0.5 µV
+22/10/2013	12:07:01	321	Variaz. parametro	Livello NAVA impostato su 2.0 cmH₂O/µV
+22/10/2013	12:07:01	315	Variaz. parametro	PC backup sopra PEEP impostato a 20 cmH₂O
+22/10/2013	12:07:01	277	Variaz. parametro	I:E di backup impostato a 1:2.0
+22/10/2013	12:07:01	274	Variaz. parametro	Frequenza resp. di backup impostato a 15 resp/min
+22/10/2013	12:07:01	310	Variaz. parametro	Modo di ventilazione impostato a NAVA
+22/10/2013	12:07:01	16	Variaz. limite allarme	Tempo di apnea impostato a 20 s
+22/10/2013	12:07:01	6	Funzioni	Bassa attività Edi: audio attivo
+22/10/2013	12:07:01	0	Funzioni	Pre-silenziamento attivato
+22/10/2013	12:04:33	65535	Funzioni	Catetere Edi collegato
+22/10/2013	12:04:04	65535	Funzioni	Modulo Edi collegato
+22/10/2013	12:00:07	267	Variaz. parametro	Pressione sopra PEEP impostata a 13 cmH₂O
+22/10/2013	12:00:04	268	Variaz. parametro	Pressione assistita sopra PEEP impostata a 13 cmH₂O
+22/10/2013	11:59:52	264	Variaz. parametro	Trig. Flusso impostata a 2
+22/10/2013	11:56:44	65535	Funzioni	Nuovo paziente accettato
+22/10/2013	11:54:35	291	Variaz. parametro	Concentrazione O₂ impostata a 50 %
+22/10/2013	11:54:33	291	Variaz. parametro	Concentrazione O₂ impostata a 48 %
+22/10/2013	11:54:33	291	Variaz. parametro	Concentrazione O₂ impostata a 46 %
+22/10/2013	11:54:31	269	Variaz. parametro	PEEP impostata a 8 cmH₂O
+22/10/2013	11:54:29	269	Variaz. parametro	PEEP impostata a 9 cmH₂O
+22/10/2013	11:54:29	267	Variaz. parametro	Pressione sopra PEEP impostata a 15 cmH₂O
+22/10/2013	11:54:25	268	Variaz. parametro	Pressione assistita sopra PEEP impostata a 15 cmH₂O
+22/10/2013	11:54:14	61	Allarme	Allarme: Frequenza respiratoria elevata 
+22/10/2013	11:54:11	274	Variaz. parametro	Frequenza resp. impostata a 10 resp/min
+22/10/2013	11:54:09	274	Variaz. parametro	Frequenza resp. impostata a 11 resp/min
+22/10/2013	11:54:07	18	Variaz. limite allarme	Allarme limite inferiore volume minuto impostato a 2.5 l/min
+22/10/2013	11:54:07	12	Variaz. limite allarme	Limite di allarme pressione vie aeree impostato a 50 cmH₂O
+22/10/2013	11:53:56	269	Variaz. parametro	PEEP impostata a 10 cmH₂O
+22/10/2013	11:53:54	269	Variaz. parametro	PEEP impostata a 9 cmH₂O
+22/10/2013	11:53:54	269	Variaz. parametro	PEEP impostata a 8 cmH₂O
+22/10/2013	11:53:47	110	Allarme	Allarme: Flusso Insp. fuori range
+22/10/2013	11:53:46	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+22/10/2013	11:53:44	293	Variaz. parametro	Trigger timeout dell'Automode impostato a 7 s
+22/10/2013	11:53:44	272	Variaz. parametro	Ciclo off insp. Impostato a 30 %
+22/10/2013	11:53:44	268	Variaz. parametro	Pressione assistita sopra PEEP impostata a 20 cmH₂O
+22/10/2013	11:53:44	267	Variaz. parametro	Pressione sopra PEEP impostata a 20 cmH₂O
+22/10/2013	11:53:44	259	Variaz. parametro	Automode Acceso
+22/10/2013	11:53:44	310	Variaz. parametro	Modo di ventilazione impostato a Pressione Controllata
+22/10/2013	11:53:34	125	Allarme	Allarme: PEEP bassa
+22/10/2013	11:53:29	18	Allarme	Allarme: Vol. Min. Esp. basso
+22/10/2013	11:53:29	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+22/10/2013	11:53:25	65535	Variaz. limite allarme	Livello sonoro allarme impostato a 100 %
+22/10/2013	11:53:25	279	Variaz. parametro	Tempo di pausa impostato a 10 %
+22/10/2013	11:53:25	265	Variaz. parametro	Volume corrente impostato a 500 ml
+22/10/2013	11:53:25	291	Variaz. parametro	Concentrazione O₂ impostata a 40 %
+22/10/2013	11:53:25	280	Variaz. parametro	Tempo di salita insp. impostato a 5 %
+22/10/2013	11:53:25	277	Variaz. parametro	I:E impostato a 1:2.0
+22/10/2013	11:53:25	274	Variaz. parametro	Frequenza resp. impostata a 15 resp/min
+22/10/2013	11:53:25	269	Variaz. parametro	PEEP impostata a 5 cmH₂O
+22/10/2013	11:53:25	264	Variaz. parametro	Trig. Flusso impostata a 5
+22/10/2013	11:53:25	259	Variaz. parametro	Automode Spento
+22/10/2013	11:53:25	310	Variaz. parametro	Modo di ventilazione impostato a Volume Controllato
+22/10/2013	11:53:25	311	Variaz. parametro	Calcolata Compliance circuito 1.61 ml/cmH₂O
+22/10/2013	11:53:25	339	Variaz. parametro	Possibilità di impostare profili di flusso alternativi in VC Disabilitata
+22/10/2013	11:53:25	335	Variaz. parametro	Funzionalità deconnessione impostata su Flusso basso
+22/10/2013	11:53:25	260	Variaz. parametro	Compensazione Compliance circuito Acceso
+22/10/2013	11:53:25	305	Variaz. parametro	Altezza paziente impostata a 160 cm
+22/10/2013	11:53:25	258	Variaz. parametro	Peso paziente impostato a 50 kg
+22/10/2013	11:53:25	263	Variaz. parametro	Tipo di ventilazione base impostato a V. Invasiva
+22/10/2013	11:53:25	257	Variaz. parametro	Categoria paziente impostata a Adulti
+22/10/2013	11:53:25	62	Variaz. limite allarme	Allarme limite inferiore freq. respiratoria impostato a 5 resp/min
+22/10/2013	11:53:25	61	Variaz. limite allarme	Allarme limite superiore freq. respiratoria impostato a 30 resp/min
+22/10/2013	11:53:25	26	Variaz. limite allarme	Allarme limite inferiore conc.O₂ impostato a 35 %
+22/10/2013	11:53:25	25	Variaz. limite allarme	Allarme limite superiore conc.O₂ impostato a 45 %
+22/10/2013	11:53:25	125	Variaz. limite allarme	Allarme limite inferiore PEEP impostato a 2 cmH₂O
+22/10/2013	11:53:25	157	Variaz. limite allarme	Limite allarme PEEP alto impostato su 10 cmH₂O
+22/10/2013	11:53:25	18	Variaz. limite allarme	Allarme limite inferiore volume minuto impostato a 5.0 l/min
+22/10/2013	11:53:25	17	Variaz. limite allarme	Allarme limite superiore volume minuto impostato a 40.0 l/min
+22/10/2013	11:53:25	12	Variaz. limite allarme	Limite di allarme pressione vie aeree impostato a 40 cmH₂O
+22/10/2013	11:53:25	0	Funzioni	Pre-silenziamento attivato
+22/10/2013	11:53:25	0	Funzioni	Inizio ventilazione
+
+Riassunto:	143

@@ -6,6 +6,7 @@ if (interactive()) {#
     library(usethis)
     library(testthat)
     library(checkmate)
+    library(targets)
   }))
 }
 
@@ -15,3 +16,4 @@ options(
   warnPartialMatchAttr   = TRUE
 )
 
+options(tidyverse.quiet = TRUE)
