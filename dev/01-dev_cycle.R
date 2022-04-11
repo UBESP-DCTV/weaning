@@ -21,5 +21,5 @@ spelling::spell_check_package()
 # Check full CRAN tests
 # CTRL + SHIFT + E
 
-# Run teh pipeline
+# Run the pipeline
 source(here::here("run.R"))

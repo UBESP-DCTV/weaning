@@ -121,7 +121,7 @@ list(
       ggDistAllarmi = ggDistAllarmi,
       ggMissingTRD = ggMissingTRD,
       weaningsTRD = weaningsTRD,
-      weaningsLOG = weaningsLOG20
+      weaningsLOG = weaningsLOG
     )
   ),
 
