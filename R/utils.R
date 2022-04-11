@@ -1,6 +1,6 @@
 get_input_data_path <- function() {
   file.path(
-    Sys.getenv("WEANING_FOLDER"),
+    Sys.getenv("PRJ_SHARED_PATH"),
     Sys.getenv("INPUT_DATA_FOLDER")
   )
 }

@@ -109,10 +109,11 @@ out <- capture.output({
   net <- tar_visnetwork(
   # targets_only = TRUE,
   exclude = c(
-    "report",
-    all_of(extract_fct_names(here::here("R/utils.R")))
-  )
-)  
+      "report",
+      all_of(extract_fct_names(here::here("R/utils.R"))),
+      matches("^\\..*$")
+    )
+  )  
 })
 
 net

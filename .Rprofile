@@ -8,6 +8,13 @@ options(
 
 options(tidyverse.quiet = TRUE)
 
+stopifnot(
+  `env var "PROJ_TITLE" must be set` = Sys.getenv("PROJ_TITLE") != "",
+  `env var "PROJ_URL" must be set` = Sys.getenv("PROJ_URL") != ""
+)
+
+
+
 if (interactive()) {#
   suppressPackageStartupMessages(suppressWarnings({
     library(devtools)
@@ -47,9 +54,15 @@ tar_config_set(
 )
 
 tar_config_set(
-  script = "../../targets.R",
+  script = here::here("_targets.R"),
   store = file.path(.get_prj_shared_path(), "_targets"),
   config = "tests/testthat/_targets.yaml"
+)
+
+tar_config_set(
+  script = here::here("_targets.R"),
+  store = file.path(.get_prj_shared_path(), "_targets"),
+  config = "reports/_targets.yaml"
 )
 
 
