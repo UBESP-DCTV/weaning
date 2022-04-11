@@ -1,4 +1,0 @@
-main:
-  script: ../../targets.R
-  store: C:/Users/corrado.lanera/Unit of Biostatistics Epidemiology and Public Health/LEMBS
-    - Weaning Study/_targets
