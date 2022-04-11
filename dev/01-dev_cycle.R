@@ -15,8 +15,11 @@ renv::status()
 
 # Check spelling --------------------------------------------------
 spelling::spell_check_package()
-# CTRL + SHIFT + D
 # spelling::update_wordlist()
+# CTRL + SHIFT + D
 
 # Check full CRAN tests
 # CTRL + SHIFT + E
+
+# Run the pipeline
+source(here::here("run.R"))

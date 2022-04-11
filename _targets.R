@@ -28,7 +28,7 @@ list(
 
   tar_target(
     weaningFolder,
-    get_data_path(),
+    get_input_data_path(),
     format = "file"
   ),
   tar_target(
@@ -112,5 +112,23 @@ list(
 
 
   # compile the report
-  tar_render(report, here("reports/report.Rmd"))
+  tar_render(report, here("reports/report.Rmd")),
+
+  tar_target(
+    objectToShare,
+    list(
+      ggPatPerCentro = ggPatPerCentro,
+      ggDistAllarmi = ggDistAllarmi,
+      ggMissingTRD = ggMissingTRD,
+      weaningsTRD = weaningsTRD,
+      weaningsLOG = weaningsLOG
+    )
+  ),
+
+  tar_target(
+    shareOutput,
+    share_objects(objectToShare),
+    format = "file",
+    pattern = map(objectToShare)
+  )
 )
