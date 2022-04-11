@@ -112,5 +112,23 @@ list(
 
 
   # compile the report
-  tar_render(report, here("reports/report.Rmd"))
+  tar_render(report, here("reports/report.Rmd")),
+
+  tar_target(
+    objectToShare,
+    list(
+      ggPatPerCentro = ggPatPerCentro,
+      ggDistAllarmi = ggDistAllarmi,
+      ggMissingTRD = ggMissingTRD,
+      weaningsTRD = weaningsTRD,
+      weaningsLOG = weaningsLOG20
+    )
+  ),
+
+  tar_target(
+    shareOutput,
+    share_objects(objectToShare),
+    format = "file",
+    pattern = map(objectToShare)
+  )
 )
