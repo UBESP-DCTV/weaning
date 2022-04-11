@@ -1,4 +1,9 @@
-get_data_path <- function() Sys.getenv("WEANING_FOLDER")
+get_input_data_path <- function() {
+  file.path(
+    Sys.getenv("WEANING_FOLDER"),
+    Sys.getenv("INPUT_DATA_FOLDER")
+  )
+}
 
 
 data_test_path <- function() {

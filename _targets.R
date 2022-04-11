@@ -28,7 +28,7 @@ list(
 
   tar_target(
     weaningFolder,
-    get_data_path(),
+    get_input_data_path(),
     format = "file"
   ),
   tar_target(
