@@ -33,7 +33,8 @@ list(
   ),
   tar_target(
     weaningsTRD,
-    import_folders(weaningFolder, "TRD"),
+    import_folders(weaningFolder, "TRD") |>
+      fix_wrong_hours(),
     packages = "furrr",
     format = "qs"
   ),
