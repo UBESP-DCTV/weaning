@@ -1,5 +1,5 @@
 fix_wrong_hours <- function(db) {
-  correction <- tibble::tribble(
+  corrections <- tibble::tribble(
     ~file, ~date, ~ora, ~pressione_di_fine_esp_cm_h2o, ~caratteristiche_dinamiche_ml_cm_h2o, ~ora_giusta,
     "CM021_1644", "2014-09-21", "07:35", 5.12, NA,  "21:02",
     "FE008_164", "2013-08-27", "13:57", NA,  6.36, "05:25",
@@ -13,29 +13,24 @@ fix_wrong_hours <- function(db) {
       ora_giusta = readr::parse_time(.data[["ora_giusta"]])
     )
 
-  for (i in seq_len(nrow(correction))) {
-    to_change <- db[["file"]] == correction[[i, "file"]] &
-      db[["date"]] == correction[[i, "date"]] &
-      db[["ora"]] == correction[[i, "ora"]] &
-      (
-        is.na(correction[[i, "pressione_di_fine_esp_cm_h2o"]]) |
-          db[["pressione_di_fine_esp_cm_h2o"]] ==
-          correction[[i, "pressione_di_fine_esp_cm_h2o"]]
-      ) &
-      (
-        is.na(correction[[i, "caratteristiche_dinamiche_ml_cm_h2o"]]) |
-          db[["caratteristiche_dinamiche_ml_cm_h2o"]] ==
-          correction[[i, "caratteristiche_dinamiche_ml_cm_h2o"]]
-      )
+  for (i in seq_len(nrow(corrections))) {
+    correction <- corrections[i, , drop = FALSE]
+    are_to_change <- check_row_to_change(db, correction)
 
-    if (sum(to_change, na.rm = TRUE) == 1) {
-      db[[which(to_change), "ora"]] <- correction[[i, "ora_giusta"]]
-      usethis::ui_done("row for file {correction[i, 'file']} fixed")
+    if (sum(are_to_change) == 1) {
+      db[[which(are_to_change), "ora"]] <- correction[["ora_giusta"]]
+      usethis::ui_done("row for file {correction[['file']]} fixed")
     } else {
       usethis::ui_info(
-        "row for file {correction[i, 'file']} doesn't found and skipped."
+        "row for file {correction[['file']]} doesn't found and skipped."
       )
     }
   }
   db
+}
+
+check_row_to_change <- function(db, correction) {
+  common_vars <- intersect(names(db), names(correction))
+  purrr::map(common_vars, ~ db[[.x]] %in% correction[[.x]]) |>
+    purrr::reduce(`&`)
 }
