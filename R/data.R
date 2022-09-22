@@ -107,6 +107,3 @@ NULL
 #' @source ...
 #' @name weanings_log
 NULL
-
-
-

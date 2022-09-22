@@ -1,5 +1,5 @@
 get_problematic_dupes <- function(db) {
-  problem <- db |>
+  db |>
     janitor::get_dupes(
       .data[["file"]],
       .data[["id_pat"]],

@@ -2,7 +2,8 @@
 .Rhistory
 .RData
 .Ruserdata
-.Renviron
 inst/extdata
 
 _targets.yaml
+
+.Renviron

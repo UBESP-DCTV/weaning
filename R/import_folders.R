@@ -57,8 +57,7 @@ import_folder <- function(
       full.names = TRUE,
       ignore.case = TRUE
     ) |>
-    {
-      \(.x) .x |>
+    {\(.x) .x |>
         purrr::set_names(
           basename(.x) |>
             stringr::str_remove(
