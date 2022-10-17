@@ -7,6 +7,12 @@ editor: visual
 
 ## Introduzione
 
+```{r}
+library(tidyverse)
+library(readxl)
+library(lubridate)
+```
+
 I file principali utilizzati nello studio sono 4
 
 -   il file excel "pt_names dati inclusione", che contiene una riga per paziente, con il successo o l'insuccesso del tentativo di svezzamento
@@ -36,12 +42,11 @@ Rilevanti come variabili che non cambiano durante il ricovero, potenzialmente ut
 Mentre le altre colonne contengono variabili ridondanti, derivate oppure disponibili solo alla fine del ricovero del paziente.
 
 ```{r}
-library(tidyverse)
-library(readxl)
 path_inclusione <- "C:/Users/andre/Unit of Biostatistics Epidemiology and Public Health/LEMBS - Weaning Study/Driving p e Weaning/pt_names dati inclusione.xlsx"
 
-pt_names <- read_excel( path = path_inclusione,
-                        sheet = "pt_names") |>
+pt_names <- read_xlsx( path = path_inclusione,
+                       sheet = "pt_names",
+                       guess_max = 5) |>
   select("id_pt",
          "id_univoco",
          "ospedale",
@@ -62,7 +67,36 @@ pt_names <- read_excel( path = path_inclusione,
          vm_fine = `data_fine ventilazione meccanica`,
          icu_out = data_out_ti,
          osp_out = data_dimissione,
-         esito = `esito_osp 0 non impostato 1 dimesso 2 deceduto icu 3 deceduto osp`)
+         esito = `esito_osp 0 non impostato 1 dimesso 2 deceduto icu 3 deceduto osp`) |> 
+  mutate(type = as_factor(type),
+         sesso = as_factor(sesso),
+         bmi = as.double(bmi),
+         ibw = as.double(ibw),
+         reason = as_factor(reason),
+         esito = as_factor(esito))  |>
+  mutate(osp_in = as_date(osp_in),
+         icu_in = as_date(icu_in),
+         vm_inizio = as_date(vm_inizio),
+         vm_fine = as_date(vm_fine),
+         osp_out = as_date(osp_out),
+         icu_out = as_date(icu_out))
+```
+
+```{r}
+glimpse(pt_names)
+```
+
+A titolo esplorativo, si mostra la distribuzione dei giorni di ricovero, di terapia intensiva e di ventilazione meccanica
+
+```{r}
+ggplot(pt_names) +
+  geom_histogram(aes(osp_out - osp_in),
+                 fill = "red", alpha = 0.3) +
+  geom_histogram(aes(icu_out - icu_in),
+                 fill = "blue", alpha = 0.3) +
+  geom_histogram(aes(vm_fine - vm_inizio),
+                 fill = "green", alpha = 0.3) +
+  facet_wrap(~esito)
 ```
 
 ## Registro giornaliero dei pazienti
@@ -81,4 +115,18 @@ Le variabili d'interesse sono:
 
 -   "data_lettura" identifica la data alla quale il tentativo si riferisce
 
--   le colonne che hanno come descrizione "weaning" e "SBT criteri di interruzione" contengono i parametri delle tabelle 1 (pre-SBT) e 2 (post-SBT). Si noti come
+-   le variabili che iniziano con "ega" contengono dati sull'emogasanalisi (ma non si riesce a determinare se prima o dopo l'SBT)
+
+-   le colonne che hanno come descrizione "weaning" e "SBT criteri di interruzione" contengono i parametri delle tabelle 1 (pre-SBT) e 2 (post-SBT)
+
+-   la variabile di esito "estubato" contiene informazioni sullo stato d'estubazione (non sull'azione), mentre la variabile "reintubato" contiene informazioni sull'azione di reintubazione (non sullo stato)
+
+```{r}
+pt_registry <- read_xlsx("C:/Users/andre/Unit of Biostatistics Epidemiology and Public Health/LEMBS - Weaning Study/Driving p e Weaning/pt_registry dati giornalieri.xls.xlsx",
+                         sheet = "pt_registry",
+                         skip = 1) |> 
+  transmute(type = Type,
+            id_registry,
+            )
+  
+```
