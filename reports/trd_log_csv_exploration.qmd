@@ -36,5 +36,49 @@ Rilevanti come variabili che non cambiano durante il ricovero, potenzialmente ut
 Mentre le altre colonne contengono variabili ridondanti, derivate oppure disponibili solo alla fine del ricovero del paziente.
 
 ```{r}
+library(tidyverse)
+library(readxl)
+path_inclusione <- "C:/Users/andre/Unit of Biostatistics Epidemiology and Public Health/LEMBS - Weaning Study/Driving p e Weaning/pt_names dati inclusione.xlsx"
 
+pt_names <- read_excel( path = path_inclusione,
+                        sheet = "pt_names") |>
+  select("id_pt",
+         "id_univoco",
+         "ospedale",
+         "type",
+         "sesso",
+         "anni_eta",
+         "kg_peso",
+         "cm_altezza",
+         "bmi", "ibw",
+         "name reason_mv",
+         starts_with("data"),
+         starts_with("esito")) |> 
+  select(-"data_reclutamento") |> 
+  rename(reason = `name reason_mv` ,
+         osp_in = `data_ricovero ospedaliero`,
+         icu_in = `data_ricovero_terapia intensiva`,
+         vm_inizio = `data_inizio ventilazione meccanica`,
+         vm_fine = `data_fine ventilazione meccanica`,
+         icu_out = data_out_ti,
+         osp_out = data_dimissione,
+         esito = `esito_osp 0 non impostato 1 dimesso 2 deceduto icu 3 deceduto osp`)
 ```
+
+## Registro giornaliero dei pazienti
+
+Tenendo a mente che in una giornata si svolge al più un SBT, l'obiettivo è quello di costruire per ogni paziente che rispetta i criteri della tabella 1 (che rispondono alla domanda "sospetto che il paziente possa essere pronto per un SBT?"), una riga che contenga tutti i dati delle 24 precedenti e il risultato.
+
+Si noti come in questo caso la probabilità sia condizionata sulla risposta positiva alla valutazione clinica, visto che l'SBT non viene eseguito se non dietro decisione del medico.
+
+Le variabili d'interesse sono:
+
+-   "id_registry"
+
+-   "id_univoco", che è chiave in comune con il file excel dei pz inclusi
+
+-   "deleted", che permette di individuare le righe che contengono dati errati o incompleti
+
+-   "data_lettura" identifica la data alla quale il tentativo si riferisce
+
+-   le colonne che hanno come descrizione "weaning" e "SBT criteri di interruzione" contengono i parametri delle tabelle 1 (pre-SBT) e 2 (post-SBT). Si noti come
