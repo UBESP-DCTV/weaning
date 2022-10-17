@@ -1,0 +1,40 @@
+---
+title: "trd_log_csv_exploration"
+author: "Andrea Pedot"
+format: html
+editor: visual
+---
+
+## Introduzione
+
+I file principali utilizzati nello studio sono 4
+
+-   il file excel "pt_names dati inclusione", che contiene una riga per paziente, con il successo o l'insuccesso del tentativo di svezzamento
+
+-   il file excel "pt_registry dati giornalieri", che contiene una riga al giorno per paziente, che contiene i dati raccolti clinicamente oppure quelli da analisi di laboratorio (es. prelievo di sangue arterioso) e la storia clinica limitatamente a data di ricovero ospedaliero, in ICU, svezzamento, reintubazione, comparsa di complicanze e fine del ricovero
+
+-   il file "TRD", aggegato in uno per paziente, che contiene una riga per minuto per paziente, contiene i dati registrati dal ventilatore, limitatamente allo stato del paziente
+
+-   il file "LOG" aggegato in uno per paziente, che contiene una riga per minuto per paziente, contiene i dati registrati dal ventilatore, limitatamente ai segnali, gli allarmi e ai parametri che vengono impostati
+
+Da questi dati è possibile ricostruire la storia di ogni tentativo di SBT o Trial di Respiro Spontaneo (potenzialmente anche molti per paziente, uno al giorno fino a quello di successo che porta allo svezzamento dal ventilatore).
+
+L'ipotesi sperimentale che si vuole testare è se un modello sia in grado di offrire una performance soddisfacente nel predire l'esito del SBT dai dati raccolti nelle 24h che lo precedono.
+
+## Pazienti inclusi
+
+Dei 180 pazienti inclusi nello studio sono registrate le colonne che lo descrivono, in cui "id_univoco" contiene la chiave di associazione presente anche negli altri file.
+
+Rilevanti come variabili che non cambiano durante il ricovero, potenzialmente utili per un'analisi successiva:
+
+-   variabili demografiche come "sesso", "anni_eta", "kg_peso", "cm_altezza", "bmi" e "ibw"
+
+-   le ragioni d'inizio della ventilazione meccanica in "name reason_mv"
+
+-   date rilevanti come "data_ricovero ospedaliero", "data_ricovero_terapia intensiva", "data_inizio ventilazione meccanica", "data_fine ventilazione meccanica", "data_out_ti", "data_dimissione"
+
+Mentre le altre colonne contengono variabili ridondanti, derivate oppure disponibili solo alla fine del ricovero del paziente.
+
+```{r}
+
+```
