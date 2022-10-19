@@ -121,7 +121,7 @@ Le variabili d'interesse sono:
 
 -   la variabile di esito "estubato" contiene informazioni sullo stato d'estubazione (non sull'azione), mentre la variabile "reintubato" contiene informazioni sull'azione di reintubazione (non sullo stato)
 
-```{r}
+```{r, echo=FALSE}
 pt_registry <- read_xlsx("C:/Users/andre/Unit of Biostatistics Epidemiology and Public Health/LEMBS - Weaning Study/Driving p e Weaning/pt_registry dati giornalieri.xls.xlsx",
         sheet = "pt_registry",
         skip = 1, 
@@ -149,7 +149,7 @@ pt_registry <- read_xlsx("C:/Users/andre/Unit of Biostatistics Epidemiology and 
                      "estubato", "reintubato", "morto",
                      "susp_aspir", "susp_tosse", "susp_gcs", "susp_fcpas", "susp_drugs",
                      "susp_pafi", "susp_peep", "susp_vt", "susp_rr", "susp_distress", "susp_ph",
-                     "stop_rass", "stop_fr", "stop_distress", "stop_spo2",
+                     "susp_rass", "stop_fr", "stop_distress", "stop_spo2",
                      "stop_pas", "stop_fc", "stop_rass",
                      "fail_agit", "fail_coma", "fail_muscoli",
                      "fail_dispnea", "fail_rrvt", "fail_pao2",
@@ -159,29 +159,66 @@ pt_registry <- read_xlsx("C:/Users/andre/Unit of Biostatistics Epidemiology and 
          data_lettura = as_date(data_lettura)
          # TO FIX: "EGA variables as numeric, problema è la virgola, per ora sono chr
          )
-  
+```
+
+```{r}
+glimpse(pt_registry)
+```
+
+```{r}
+pt_registry <- pt_registry |>
+  group_by(id_univoco) |>
+  mutate(giorno_studio = data_lettura-first(data_lettura)) |>
+  ungroup()
+
+pt_registry <- pt_registry %>%
+  select(starts_with("susp_")) %>%
+  transmute(susp_tot = rowSums(across(everything()))) %>%
+  bind_cols(pt_registry, .)
+
+pt_registry |>
+  select(id_univoco, susp_tot, giorno_studio) |>
+  ggplot(aes(x = giorno_studio,
+             y = susp_tot)) +
+  geom_density_2d(color = "gray") +
+  geom_smooth()
 ```
 
 ## File TRD
 
-Ogni ventilatore mentre è attaccato al paziente, registra dei dati ogni minuto, somma o media (dipende dalla variabile).
+Ogni ventilatore mentre è attaccato al paziente, registra dei dati ogni minuto, somma o media (dipende dalla variabile), mentre i dati LOG registrano parametri e allarmi associandoli al momento in cui avvengono.
 
-\[..i dati LOG..\]
+Si seleziona, nel paziente BS_008, un giorno di svezzamento. Per trovarlo, si filtra il registro giornaliero dei pazienti.
 
-Si seleziona, nel paziente BS_008, un giorno di svezzamento.
+```{r}
+pt_registry |>
+  filter(id_univoco == "BS008",
+         # susp_tot == 12
+         ) |>
+  select(data_lettura, estubato, reintubato)
+```
+
+A questo punto è possibile procedere all'importazione dei log e a selezionarle unicamente 24h in cui è avvenuto lo svezzamento.
 
 ```{r}
 trd <- readRDS("C:\\Users\\andre\\Unit of Biostatistics Epidemiology and Public Health\\LEMBS - Weaning Study\\output\\202204111455-weaningsTRD.rds") |> 
   filter( folder == "BS",
-          id_pat == 8,
-          file == "BS008_575") # giorno di svezzamento
+          id_pat == 8) # giorno di svezzamento
 
 `%ni%` <- Negate(`%in%`)
 log <- readRDS("C:\\Users\\andre\\Unit of Biostatistics Epidemiology and Public Health\\LEMBS - Weaning Study\\output\\202204111455-weaningsLOG.rds") |> 
   filter( folder == "BS",
           id_pat == 8,
-          file == "BS008_575",
+          data == "2013-12-12",
           id_info %ni% c(0, 18, 61, 157, 291) ) # giorno di svezzamento
 ```
 
 A questo punto è possibile aprire i dati e verificare cosa contengono
+
+```{r}
+ggplot(trd) +
+  geom_line(aes(ora, lavoro_respiratorio_del_ventilatore_joule_l)) +
+  geom_line(aes(ora, lavoro_respiratorio_del_paziente_joule_l),
+            color = "blue") +
+  facet_wrap(~date)
+```
