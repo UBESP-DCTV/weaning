@@ -42,9 +42,13 @@ Rilevanti come variabili che non cambiano durante il ricovero, potenzialmente ut
 Mentre le altre colonne contengono variabili ridondanti, derivate oppure disponibili solo alla fine del ricovero del paziente.
 
 ```{r}
-path_inclusione <- "C:/Users/andre/Unit of Biostatistics Epidemiology and Public Health/LEMBS - Weaning Study/Driving p e Weaning/pt_names dati inclusione.xlsx"
+path_input <- paste(Sys.getenv('PRJ_SHARED_PATH'),
+                    Sys.getenv('INPUT_DATA_FOLDER'),
+                    sep = "\\")
 
-pt_names <- read_xlsx( path = path_inclusione,
+pt_names <- read_xlsx( path = paste(path_input,
+                                    "pt_names dati inclusione.xlsx",
+                                    sep = "\\"),
                        sheet = "pt_names",
                        guess_max = 5) |>
   select("id_pt",
@@ -122,7 +126,9 @@ Le variabili d'interesse sono:
 -   la variabile di esito "estubato" contiene informazioni sullo stato d'estubazione (non sull'azione), mentre la variabile "reintubato" contiene informazioni sull'azione di reintubazione (non sullo stato)
 
 ```{r, echo=FALSE}
-pt_registry <- read_xlsx("C:/Users/andre/Unit of Biostatistics Epidemiology and Public Health/LEMBS - Weaning Study/Driving p e Weaning/pt_registry dati giornalieri.xls.xlsx",
+pt_registry <- read_xlsx(paste(path_input,
+                               "pt_registry dati giornalieri.xls.xlsx",
+                               sep = "\\"),
         sheet = "pt_registry",
         skip = 1, 
         col_types =  c("text", "numeric", "numeric", 
@@ -193,7 +199,7 @@ Si seleziona, nel paziente BS_008, un giorno di svezzamento. Per trovarlo, si fi
 ```{r}
 pt_registry |>
   filter(id_univoco == "BS008",
-         # susp_tot == 12
+         susp_tot == 12
          ) |>
   select(data_lettura, estubato, reintubato)
 ```
@@ -201,23 +207,23 @@ pt_registry |>
 A questo punto è possibile procedere all'importazione dei log e a selezionarle unicamente 24h in cui è avvenuto lo svezzamento.
 
 ```{r}
-trd <- readRDS("C:\\Users\\andre\\Unit of Biostatistics Epidemiology and Public Health\\LEMBS - Weaning Study\\output\\202204111455-weaningsTRD.rds") |> 
+trd <- tar_read(weaningsTRD) |> 
   filter( folder == "BS",
           id_pat == 8) # giorno di svezzamento
 
 `%ni%` <- Negate(`%in%`)
-log <- readRDS("C:\\Users\\andre\\Unit of Biostatistics Epidemiology and Public Health\\LEMBS - Weaning Study\\output\\202204111455-weaningsLOG.rds") |> 
+log <- tar_read(weaningsLOG) |> 
   filter( folder == "BS",
           id_pat == 8,
-          data == "2013-12-12",
-          id_info %ni% c(0, 18, 61, 157, 291) ) # giorno di svezzamento
+          data == "2013-12-08" ) # giorno di svezzamento
 ```
 
 A questo punto è possibile aprire i dati e verificare cosa contengono
 
 ```{r}
-ggplot(trd) +
-  geom_line(aes(ora, lavoro_respiratorio_del_ventilatore_joule_l)) +
+trd |>
+ggplot() +
+  geom_line(aes(ora, pressione_di_fine_esp_cm_h2o)) +
   geom_line(aes(ora, lavoro_respiratorio_del_paziente_joule_l),
             color = "blue") +
   facet_wrap(~date)
