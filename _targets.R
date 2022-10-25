@@ -114,6 +114,8 @@ list(
 
   # compile the report
   tar_render(report, here("reports/report.Rmd")),
+  tar_render(trd_log_csv_exploration, here("reports/trd_log_csv_exploration.qmd")),
+
 
   tar_target(
     objectToShare,
