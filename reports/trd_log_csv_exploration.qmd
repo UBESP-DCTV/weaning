@@ -204,21 +204,42 @@ pt_registry |>
   select(data_lettura, estubato, reintubato)
 ```
 
-A questo punto è possibile procedere all'importazione dei log e a selezionarle unicamente 24h in cui è avvenuto lo svezzamento.
+A questo punto è possibile procedere all'importazione dei file e a selezionarle unicamente 24h in cui è avvenuto lo svezzamento.
 
 ```{r}
-trd <- tar_read(weaningsTRD) |> 
-  filter( folder == "BS",
-          id_pat == 8) # giorno di svezzamento
+paz <- c( ospedale = "BS",
+          paziente = 8)
 
-`%ni%` <- Negate(`%in%`)
-log <- tar_read(weaningsLOG) |> 
-  filter( folder == "BS",
-          id_pat == 8,
-          data == "2013-12-08" ) # giorno di svezzamento
+trd <- tar_read(weaningsTRD) |> 
+  filter( folder == paz["ospedale"],
+          id_pat == paz["paziente"]) # giorno di svezzamento
+
 ```
 
-A questo punto è possibile aprire i dati e verificare cosa contengono
+A questo punto è possibile aprire i dati e verificare cosa contengono.
+
+Innanzitutto si plottano tutte le variabili vs l'ora, così da identificare quelle che mostrano un cambiamento durante uno SBT.
+
+```{r}
+trd %>%
+  filter(date == "2013-11-27") %>%
+  select_if( function(x) {!all(is.na(x))} ) %>%
+  gather(-ora, key = "var", value = "value") %>% 
+  ggplot(aes(x = ora,
+             y = value)) +
+    geom_point(size = 0.5) +
+    facet_wrap(~ var, scales = "free")
+```
+
+Da cui si ricava che quelle più interessanti sono:
+
+-   lavoro respiratorio del ventilatore (del pz è meno rilevante)
+
+-   pressione di picco delle vie aeree
+
+-   pressione media delle vie aeree
+
+-   pressione di fine espirazione
 
 ```{r}
 trd |>
@@ -228,3 +249,21 @@ ggplot() +
             color = "blue") +
   facet_wrap(~date)
 ```
+
+I tentativi di SBT si sospetta che siano quei momenti in cui per circa 30m i parametri si modificano in modo significativo.
+
+## File Log
+
+```{r}
+`%ni%` <- Negate(`%in%`)
+log <- tar_read(weaningsLOG) |> 
+  filter( folder == paz["ospedale"],
+          id_pat == paz["paziente"],
+          data   == "2013-12-08") # giorno di svezzamento
+```
+
+Del quale sono interessanti alcune "informazioni" particolari:
+
+-   con codice 0 : "standby" che identifica il momento in cui si spegne il ventilatore (e "inizio ventilazione" che ne è la ripresa)
+
+-   con codice 267: "pressione sopra PEEP" sembra identificare una delle azioni che avvengono immediatamente prima oppure durante un SBT (ma non solo)
