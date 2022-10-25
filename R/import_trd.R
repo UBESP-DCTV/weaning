@@ -50,7 +50,20 @@ import_trd <- function(.file_path, verbose = FALSE) {
       id_pat = extract_id_from_filepath(.file_path),
       date = extract_date_from_header(headr),
       ora = readr::parse_time(.data[["ora"]])
-    ) |>
+    )
+
+  ora_x <- which(res[["ora"]] == lubridate::hm("23:59"))
+
+  res_oggi <- res |>
+    slice(- 1:ora_x)
+
+  res_ieri <- res |>
+    dplyr::slice(1:ora_x) |>
+    dplyr::mutate(
+      date = date - 1
+    )
+
+  res <- bind_rows(res_ieri, res_oggi)  |>
     dplyr::relocate(
       .data[["id_pat"]],
       .data[["date"]],
