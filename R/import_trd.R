@@ -17,7 +17,8 @@
 #' \dontrun{
 #'   library(weaning)
 #'
-#'   file.path(get_data_path(), "AB/AN001_356_TRD.SI") |>
+#'   file.path(get_input_data_path(), "AN/AN001_356_TRD.SI") |>
+#'   normalizePath() |>
 #'   import_trd()
 #' }
 import_trd <- function(.file_path, verbose = FALSE) {
@@ -54,16 +55,20 @@ import_trd <- function(.file_path, verbose = FALSE) {
 
   ora_x <- which(res[["ora"]] == lubridate::hm("23:59"))
 
-  res_oggi <- res |>
-    slice(- 1:ora_x)
+  if(length(ora_x) > 0) {
+    res_oggi <- res |>
+      dplyr::slice(- (1:ora_x))
 
-  res_ieri <- res |>
-    dplyr::slice(1:ora_x) |>
-    dplyr::mutate(
-      date = date - 1
-    )
+    res_ieri <- res |>
+      dplyr::slice(1:ora_x) |>
+      dplyr::mutate(
+        date = date - 1
+      )
 
-  res <- bind_rows(res_ieri, res_oggi)  |>
+    res <- dplyr::bind_rows(res_ieri, res_oggi)
+  }
+
+  res <- res |>
     dplyr::relocate(
       .data[["id_pat"]],
       .data[["date"]],
