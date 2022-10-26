@@ -198,10 +198,11 @@ Si seleziona, nel paziente BS_008, un giorno di svezzamento. Per trovarlo, si fi
 
 ```{r}
 pt_registry |>
-  filter(id_univoco == "BS008",
-         susp_tot == 12
-         ) |>
-  select(data_lettura, estubato, reintubato)
+  dplyr::filter(
+    id_univoco == "BS008",
+    susp_tot == 12
+  ) |>
+  dplyr::select(data_lettura, estubato, reintubato)
 ```
 
 A questo punto è possibile procedere all'importazione dei file e a selezionarle unicamente 24h in cui è avvenuto lo svezzamento.
@@ -267,3 +268,35 @@ Del quale sono interessanti alcune "informazioni" particolari:
 -   con codice 0 : "standby" che identifica il momento in cui si spegne il ventilatore (e "inizio ventilazione" che ne è la ripresa)
 
 -   con codice 267: "pressione sopra PEEP" sembra identificare una delle azioni che avvengono immediatamente prima oppure durante un SBT (ma non solo)
+
+## Un esempio: il paziente TS015
+
+Come esempio, iniziamo da uno slice di dati relativi unicamente a questo paziente.
+
+```{r}
+ts15_names <- pt_names |>
+  filter(id_univoco == "TS015")
+glimpse(ts15_names)
+```
+
+```{r}
+ts15_registry <- pt_registry |>
+  filter(id_univoco == "TS015")
+ts15_registry |>
+  select(data_lettura, estubato, susp_tot)
+```
+
+Il pz viene estubato dopo 3 giorni nello studio (attenzione: si parte da 0 al ricovero), non appena raggiung un valore complessivo di readiness di 12/12. Si deduce dal fatto che viene estubato lo stesso giorno, che l'SBT ha avuto successo.
+
+```{r}
+paz <- c( ospedale = "TS",
+          paziente = 15)
+
+ts15_trd <- tar_read(weaningsTRD) |> 
+  filter( folder == paz["ospedale"],
+          id_pat == paz["paziente"])
+
+ts15_log <- tar_read(weaningsLOG) |> 
+  filter( folder == paz["ospedale"],
+          id_pat == paz["paziente"])
+```
