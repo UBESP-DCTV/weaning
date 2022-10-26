@@ -42,51 +42,8 @@ Rilevanti come variabili che non cambiano durante il ricovero, potenzialmente ut
 Mentre le altre colonne contengono variabili ridondanti, derivate oppure disponibili solo alla fine del ricovero del paziente.
 
 ```{r}
-path_input <- paste(Sys.getenv('PRJ_SHARED_PATH'),
-                    Sys.getenv('INPUT_DATA_FOLDER'),
-                    sep = "\\")
+pt_names <- tar_read(pt_names)
 
-pt_names <- read_xlsx( path = paste(path_input,
-                                    "pt_names dati inclusione.xlsx",
-                                    sep = "\\"),
-                       sheet = "pt_names",
-                       guess_max = 5) |>
-  select("id_pt",
-         "id_univoco",
-         "ospedale",
-         "type",
-         "sesso",
-         "anni_eta",
-         "kg_peso",
-         "cm_altezza",
-         "bmi", "ibw",
-         "name reason_mv",
-         starts_with("data"),
-         starts_with("esito")) |> 
-  select(-"data_reclutamento") |> 
-  rename(reason = `name reason_mv` ,
-         osp_in = `data_ricovero ospedaliero`,
-         icu_in = `data_ricovero_terapia intensiva`,
-         vm_inizio = `data_inizio ventilazione meccanica`,
-         vm_fine = `data_fine ventilazione meccanica`,
-         icu_out = data_out_ti,
-         osp_out = data_dimissione,
-         esito = `esito_osp 0 non impostato 1 dimesso 2 deceduto icu 3 deceduto osp`) |> 
-  mutate(type = as_factor(type),
-         sesso = as_factor(sesso),
-         bmi = as.double(bmi),
-         ibw = as.double(ibw),
-         reason = as_factor(reason),
-         esito = as_factor(esito))  |>
-  mutate(osp_in = as_date(osp_in),
-         icu_in = as_date(icu_in),
-         vm_inizio = as_date(vm_inizio),
-         vm_fine = as_date(vm_fine),
-         osp_out = as_date(osp_out),
-         icu_out = as_date(icu_out))
-```
-
-```{r}
 glimpse(pt_names)
 ```
 
@@ -126,48 +83,8 @@ Le variabili d'interesse sono:
 -   la variabile di esito "estubato" contiene informazioni sullo stato d'estubazione (non sull'azione), mentre la variabile "reintubato" contiene informazioni sull'azione di reintubazione (non sullo stato)
 
 ```{r, echo=FALSE}
-pt_registry <- read_xlsx(paste(path_input,
-                               "pt_registry dati giornalieri.xls.xlsx",
-                               sep = "\\"),
-        sheet = "pt_registry",
-        skip = 1, 
-        col_types =  c("text", "numeric", "numeric", 
-                       "skip", "skip", "skip", "text", "numeric", 
-                       "skip", "skip", "date", "text", 
-                       "text", "text", "numeric", 
-                       "numeric", "skip", "skip", "skip", 
-                       "skip", "skip", "skip", "logical", 
-                       "skip", "logical", "logical", "skip", 
-                       "skip", "skip", "skip", "logical", "logical", 
-                       "logical", "logical", "logical", "logical", "logical", 
-                       "logical", "logical", "logical", "logical", #fine suspect criteria
-                       "logical", "logical", "logical",
-                       "logical", "logical", "logical", #fine stop criteria
-                       "logical", "logical", "logical",
-                       "logical", "logical", "logical", "logical", "skip",
-                       "logical", "logical", "logical", #fine fail criteria
-                       "skip", "skip", "skip", "skip", 
-                       "skip", "skip", "skip", "skip", "skip", 
-                       "skip", "skip", "skip", "skip", "skip", 
-                       "skip", "skip", "skip", "skip"),
-        col_names = c("type", "id_registry", "filter_deleted", "id_univoco", "id_medico",
-                     "data_lettura", "ega_ph","egA_pao2", "ega_paco2", "sofa", "cpis",
-                     "estubato", "reintubato", "morto",
-                     "susp_aspir", "susp_tosse", "susp_gcs", "susp_fcpas", "susp_drugs",
-                     "susp_pafi", "susp_peep", "susp_vt", "susp_rr", "susp_distress", "susp_ph",
-                     "susp_rass", "stop_fr", "stop_distress", "stop_spo2",
-                     "stop_pas", "stop_fc", "stop_rass",
-                     "fail_agit", "fail_coma", "fail_muscoli",
-                     "fail_dispnea", "fail_rrvt", "fail_pao2",
-                     "fail_ph", "fail_paco2", "fail_sbp")) |>
-  filter(filter_deleted == 0) |>
-  mutate(type = as_factor(type),
-         data_lettura = as_date(data_lettura)
-         # TO FIX: "EGA variables as numeric, problema è la virgola, per ora sono chr
-         )
-```
+pt_registry <- tar_read(pt_registry)
 
-```{r}
 glimpse(pt_registry)
 ```
 
