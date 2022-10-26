@@ -1,12 +1,13 @@
 library(targets)
 library(tarchetypes)
 library(here)
-library(future)
-if(availableCores("multicore") > 2L) {
-  plan(multicore(workers = availableCores("multicore") - 1L))
-} else {
-  plan(multisession(workers = availableCores() - 1L))
-}
+# library(future)
+# if(availableCores("multicore") > 2L) {
+#   plan(multicore(workers = availableCores("multicore") - 1L))
+# } else {
+#   plan(multisession(workers = availableCores() - 1L))
+# }
+
 # This is an example _targets.R file. Every
 # {targets} pipeline needs one.
 # Use tar_script() to create _targets.R and tar_edit()
@@ -48,7 +49,17 @@ list(
     format = "qs"
   ),
 
+  tar_target(
+    pt_names,
+    import_patients(),
+    format = "qs"
+  ),
 
+  tar_target(
+    pt_registry,
+    import_registry(),
+    format = "qs"
+  ),
 
   tar_target(ggPatPerCentro, {
     weaningsTRD |>
@@ -124,7 +135,7 @@ list(
       ggDistAllarmi = ggDistAllarmi,
       ggMissingTRD = ggMissingTRD,
       weaningsTRD = weaningsTRD,
-      weaningsLOG = weaningsLOG
+      weaningsLOG = weaningsLOG,
     )
   ),
 
