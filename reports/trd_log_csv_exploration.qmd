@@ -285,29 +285,13 @@ ts15_history |>
                color = "dark red",
                linetype = "dashed",
                size = 0.5)
-
-<<<<<<< HEAD
-
-=======
-filter(ts15_history, type == "names") |> 
-  summarise(min(value)) %>%
-  pull()
-
-ts15_history %>%
-  filter(subtype == "icu_in") %>%
-  pull(value)
->>>>>>> cf25b2f6795691bfe1c00d14e0be98bfb93fb7f4
 ```
 
 In secondo luogo, si verifica che la progressione delle righe corrisponda a una progressione degli orari di registrazione.
 
 ```{r}
 ts15_log |>
-<<<<<<< HEAD
   rowid_to_column(var = "id_row") |>
-=======
-  rownames_to_column(var = "id_row") |>
->>>>>>> cf25b2f6795691bfe1c00d14e0be98bfb93fb7f4
   ggplot() +
   geom_point(aes(x = id_row,
                  y = ora,
@@ -320,11 +304,7 @@ ts15_log |>
 
 ```{r}
 ts15_trd |>
-<<<<<<< HEAD
   rowid_to_column(var = "id_row") |>
-=======
-  rownames_to_column(var = "id_row") |>
->>>>>>> cf25b2f6795691bfe1c00d14e0be98bfb93fb7f4
   ggplot() +
   geom_point(aes(x = id_row,
                  y = ora,
