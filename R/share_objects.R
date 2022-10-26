@@ -28,6 +28,7 @@ share_objects <- function(obj_list, use_date_version = TRUE) {
 
   obj_paths <- file.path(
     Sys.getenv("PRJ_SHARED_PATH"),
+    "/../",
     Sys.getenv("OUTPUT_DATA_FOLDER"),
     file_name
   ) |>
