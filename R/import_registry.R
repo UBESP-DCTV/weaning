@@ -71,6 +71,16 @@ import_registry <- function(verbose = FALSE) {
            # TO FIX: "EGA variables as numeric, problema è la virgola, per ora sono chr
     )
 
+  res <- res |>
+    group_by(id_univoco) |>
+    mutate(giorno_studio = data_lettura-first(data_lettura)) |>
+    ungroup()
+
+  res <- res %>%
+    select(starts_with("susp_")) %>%
+    transmute(susp_tot = rowSums(across(everything()))) %>%
+    bind_cols(res, .)
+
   if (verbose) usethis::ui_done(path_input)
   res
 }
