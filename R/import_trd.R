@@ -45,7 +45,6 @@ import_trd <- function(.file_path, verbose = FALSE) {
       keep_names = FALSE
     ) |>
     janitor::clean_names() |>
-    dplyr::filter(dplyr::if_any(-.data[["ora"]], ~!is.na(.x))) |>
     dplyr::mutate(
       dplyr::across(-.data[["ora"]], readr::parse_double),
       id_pat = extract_id_from_filepath(.file_path),
@@ -69,6 +68,9 @@ import_trd <- function(.file_path, verbose = FALSE) {
   }
 
   res <- res |>
+    dplyr::filter(dplyr::if_any(-c(.data[["ora"]],
+                                   .data[["id_pat"]],
+                                   .data[["date"]]), ~!is.na(.x))) |>
     dplyr::relocate(
       .data[["id_pat"]],
       .data[["date"]],
