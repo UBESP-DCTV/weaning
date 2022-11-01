@@ -381,7 +381,7 @@ ggplot() +
                 color = "dark grey",
                 size = 4) +
   geom_text( data = ts15_names,
-             aes( x = as.POSIXct(icu_out),
+             aes( x = as.POSIXct(icu_out -1),
                   y = "ICU", 
                   label = "in ICU"),
              nudge_y = -0.3,
@@ -404,7 +404,7 @@ ggplot() +
                 color = "black",
                 size = 2) +
   geom_text( data = ts15_names,
-             aes( x = as.POSIXct(vm_inizio),
+             aes( x = as.POSIXct(vm_inizio +2),
                   y = "ICU", 
                   label = "in Ventilazione Meccanica"),
              nudge_y = 0.3,
