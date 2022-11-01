@@ -24,7 +24,8 @@ test_that("import_log works", {
     ora = "hms",
     id_info = "integer",
     tipo = "factor",
-    informazioni = "character"
+    informazioni = "character",
+    time = "POSIXct"
   )
 
   expect_tibble(res)
@@ -49,7 +50,8 @@ test_that("import_folder works for LOG files", {
     expect_tibble(
       types = c(
         "character",  # Added
-        "numeric", "Date", "hms", " integer", "factor", "character"
+        "numeric", "Date", "hms", " integer", "factor", "character",
+        "POSIXct", "POSIXt"
       ),
       min.rows = 6
     )
@@ -71,9 +73,10 @@ test_that("import_folders works for LOG filed", {
     expect_tibble(
       types = c(
         rep("character", 2),  # Added
-        "numeric", "Date", "hms", " integer", "factor", "character"
+        "numeric", "Date", "hms", " integer", "factor", "character",
+        "POSIXct", "POSIXt"
       ),
-      ncols = 8,
+      ncols = 9,
       nrows = 1696
     )
 
@@ -101,7 +104,8 @@ test_that("manage problematic foders with files without dates", {
         ora = "hms",
         id_info = "integer",
         tipo = "factor",
-        informazioni = "character"
+        informazioni = "character",
+        time = "POSIXct"
       )
     )
 
