@@ -89,16 +89,6 @@ glimpse(pt_registry)
 ```
 
 ```{r}
-pt_registry <- pt_registry |>
-  group_by(id_univoco) |>
-  mutate(giorno_studio = data_lettura-first(data_lettura)) |>
-  ungroup()
-
-pt_registry <- pt_registry %>%
-  select(starts_with("susp_")) %>%
-  transmute(susp_tot = rowSums(across(everything()))) %>%
-  bind_cols(pt_registry, .)
-
 pt_registry |>
   select(id_univoco, susp_tot, giorno_studio) |>
   ggplot(aes(x = giorno_studio,
@@ -313,4 +303,118 @@ ts15_trd |>
         subtitle = "Patient TS015",
         y = "ora",
         x = "row number")
+```
+
+```{r}
+ggplot() +
+  # TRD file
+  geom_violin( data = ts15_trd,
+                aes( x = as_datetime(paste(date,ora)),
+                     y = "TRD"),
+               scale="count",
+               alpha = 0.2,
+               fill = "blue") +
+  geom_segment( data = ts15_trd,
+                aes( y = "TRD", yend = "TRD",
+                     x = min(as_datetime(paste(date,ora))),
+                     xend = max(as_datetime(paste(date,ora)))),
+                color = "dark blue",
+                size = 1) +
+  geom_point( data = ts15_trd,
+                aes( y = "TRD",
+                     x = min(as_datetime(paste(date,ora)))),
+                color = "dark blue",
+                size = 2) +
+  geom_point( data = ts15_trd,
+                aes( y = "TRD",
+                     x = max(as_datetime(paste(date,ora)))),
+                color = "dark blue",
+                size = 2) +
+  # LOG file
+  geom_violin( data = ts15_log,
+                aes( x = time,
+                     y = "LOG"),
+               scale="count",
+               alpha = 0.2,
+               fill = "violet") +
+  geom_segment( data = ts15_log,
+                aes( y = "LOG", yend = "LOG",
+                     x = min(time),
+                     xend = max(time)),
+                color = "purple",
+                size = 1) +
+  geom_point( data = ts15_log,
+                aes( y = "LOG",
+                     x = min(time)),
+                color = "purple",
+                size = 2) +
+  geom_point( data = ts15_log,
+                aes( y = "LOG",
+                     x = max(time)),
+                color = "purple",
+                size = 2) +
+  # Registry file
+  geom_point( data = ts15_registry,
+              aes( x = as.POSIXct(data_lettura),
+                   y = "Registry",
+                   size = susp_tot,
+                   color = (susp_tot == 12)),
+              show.legend = c(size = FALSE,
+                              color = TRUE)) +
+  scale_radius(range = c(2,4)) +
+  # Names file
+  ## ICU
+  geom_segment( data = ts15_names,
+                aes( y = "ICU", yend = "ICU",
+                     x = as.POSIXct(icu_in),
+                     xend = as.POSIXct(icu_out)),
+                color = "dark grey",
+                size = 2) + 
+  geom_point( data = ts15_names,
+                aes( y = "ICU",
+                     x = as.POSIXct(icu_in)),
+                color = "dark grey",
+                size = 4) +
+  geom_point( data = ts15_names,
+                aes( y = "ICU",
+                     x = as.POSIXct(icu_out)),
+                color = "dark grey",
+                size = 4) +
+  geom_text( data = ts15_names,
+             aes( x = as.POSIXct(icu_out),
+                  y = "ICU", 
+                  label = "in ICU"),
+             nudge_y = -0.3,
+             color = "dark grey") +
+  ## MV
+  geom_segment( data = ts15_names,
+                aes( y = "ICU", yend = "ICU",
+                     x = as.POSIXct(vm_inizio),
+                     xend = as.POSIXct(vm_fine)),
+                color = "black",
+                size = 1) + 
+  geom_point( data = ts15_names,
+                aes( y = "ICU",
+                     x = as.POSIXct(vm_inizio)),
+                color = "black",
+                size = 2) +
+  geom_point( data = ts15_names,
+                aes( y = "ICU",
+                     x = as.POSIXct(vm_fine)),
+                color = "black",
+                size = 2) +
+  geom_text( data = ts15_names,
+             aes( x = as.POSIXct(vm_inizio),
+                  y = "ICU", 
+                  label = "in Ventilazione Meccanica"),
+             nudge_y = 0.3,
+             color = "black") +
+  # Title and Labels
+  labs( title = "Plot of patient history",
+        subtitle = "Patient TS015",
+        x = "",
+        y = "",
+        color = "Ready for SBT") +
+  scale_y_discrete(limits = c("LOG", "TRD", "Registry", "ICU")) 
+
 ```
