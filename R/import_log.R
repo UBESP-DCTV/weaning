@@ -46,7 +46,11 @@ import_log <- function(.file_path, verbose = FALSE) {
     dplyr::relocate(
       .data[["id_pat"]],
       .before = .data[["data"]]
-    )
+    ) |>
+    dplyr::mutate(
+      time = lubridate::as_datetime(paste(data,ora))
+    ) |>
+    dplyr::arrange(time)
 
   if (verbose) usethis::ui_done(.file_path)
   res
