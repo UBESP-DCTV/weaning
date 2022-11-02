@@ -243,9 +243,7 @@ ts15_trd |>
 In secondo luogo, si verifica che i giorni di ricovero elencati nel registro clinico, quelli in cui c'è un registro del log e quelli nel trd siano credibili.
 
 ```{r, fig.height = 3, fig.width = 9}
-
-patient_history_plot( id_ospedale = paz[["ospedale"]],
-                      id_paziente = paz[["paziente"]])
+tar_read(patientHistoryPlotTS015)
 ```
 
 Per come è strutturato lo studio, è normale che registry arrivi fino a +2 giorni rispetto alla data di fine della ventilazione meccanica (infatti è quello il lasso di tempo per valutare la riuscita o meno dello svezzamento dal ventilatore).
@@ -262,23 +260,20 @@ In ogni caso, altri pazienti non mostrano in modo sistematico questo tipo di err
 
 Si vedano ad esempio
 
-```{r}
-patient_history_plot( id_ospedale = "TS",
-                      id_paziente = 12)
+```{r, fig.height = 3, fig.width = 9}
+tar_read(patientHistoryPlotTS012)
 ```
 
 Oppure
 
-```{r}
-patient_history_plot( id_ospedale = "BS",
-                      id_paziente = 2)
+```{r, fig.height = 3, fig.width = 9}
+tar_read(patientHistoryPlotBS002)
 ```
 
 o ancora
 
-```{r}
-patient_history_plot( id_ospedale = "NO",
-                      id_paziente = 4)
+```{r, fig.height = 3, fig.width = 9}
+tar_read(patientHistoryPlotNO004)
 ```
 
 ## Identificare gli SBT
@@ -293,7 +288,7 @@ Un SBT di successo è definito come la presenza contemporanea di due condizioni:
 
 -   il paziente è al momento intubato (o perché intubato post-ingresso in ICU o perché ha necessitato una reintubazione per peggioramento delle condizioni cliniche)
 
-```{r}
+```{r,eval = FALSE}
 weaning_succ <- pt_registry %>%
   group_by( id_univoco) %>%
   filter( susp_tot == 12, # criterio 1
@@ -302,6 +297,10 @@ weaning_succ <- pt_registry %>%
   mutate( esito = factor( x = "Successo", 
                           levels = c("Fallito", "Successo")))
 
+```
+
+```{r}
+weaning_succ <- tar_read(weaning_succ) 
 weaning_succ %>%
   select(id_univoco, reintubato) %>%
   group_by(id_univoco) %>%
@@ -318,7 +317,7 @@ Un SBT fallito invece è definito dalla presenza contemporanea di altre due cond
 
 -   la variabile estubazione in quel giorno rimane con valore FALSE
 
-```{r}
+```{r, eval = FALSE}
 weaning_fail <- pt_registry %>%
   group_by( id_univoco) %>%
   filter( susp_tot == 12,
@@ -326,6 +325,10 @@ weaning_fail <- pt_registry %>%
   mutate( esito = factor( x = "Fallito", 
                           levels = c("Fallito", "Successo")))
 
+```
+
+```{r}
+weaning_fail <- tar_read(weaning_fail)
 weaning_fail %>%
   select(id_univoco, reintubato) %>%
   group_by(id_univoco) %>%
@@ -337,24 +340,8 @@ weaning_fail %>%
 In tutto si hanno quindi un totale di 342 tentativi.
 
 ```{r}
-weaning_days <- weaning_succ %>%
-  bind_rows(weaning_fail) %>%
-  arrange(id_univoco)
-
-weaning_days %>%
-  select(id_univoco, esito) %>%
-  mutate(i = 1) %>%
-  pivot_wider( names_from = esito,
-               values_from = i,
-               values_fn = sum,
-               values_fill = 0) %>%
-  ggplot() +
-  geom_count( aes( x = Fallito,
-                   y = Successo,
-                   colour = ..n..)) +
-  labs( title = "Numero di tentativi per paziente")
-  
-
+weaning_days <- tar_read(weaning_days)
+tar_read(ggTentativiPerPaziente)
 ```
 
 ### Identificare un SBT in quella giornata

@@ -61,6 +61,34 @@ list(
     format = "qs"
   ),
 
+  tar_target(
+    weaning_succ, {
+    pt_registry %>%
+      group_by( id_univoco) %>%
+      filter( susp_tot == 12, # criterio 1
+              estubato == 1, # criterio 2
+              lag(estubato, default = 0) == 0) %>%
+      mutate( esito = factor( x = "Successo",
+                              levels = c("Fallito", "Successo")))
+  }),
+
+  tar_target(
+    weaning_fail, {
+    weaning_fail <- pt_registry %>%
+      group_by( id_univoco) %>%
+      filter( susp_tot == 12,
+              estubato == 0)  %>%
+      mutate( esito = factor( x = "Fallito",
+                              levels = c("Fallito", "Successo")))
+    }),
+
+  tar_target(
+    weaning_days, {
+    weaning_succ %>%
+      bind_rows(weaning_fail) %>%
+      arrange(id_univoco)
+  }),
+
   tar_target(ggPatPerCentro, {
     weaningsTRD |>
       distinct(folder, id_pat) |>
@@ -152,6 +180,34 @@ list(
             subtitle = "Paziente BS008")
   }),
 
+  tar_target(patientHistoryPlotTS015, {
+    patient_history_plot("TS", 15)
+  }),
+  tar_target(patientHistoryPlotTS012, {
+    patient_history_plot("TS", 12)
+  }),
+  tar_target(patientHistoryPlotBS002, {
+    patient_history_plot("BS", 2)
+  }),
+  tar_target(patientHistoryPlotNO004, {
+    patient_history_plot("NO", 04)
+  }),
+
+  tar_target(ggTentativiPerPaziente, {
+  weaning_days %>%
+    select(id_univoco, esito) %>%
+    mutate(i = 1) %>%
+    pivot_wider( names_from = esito,
+                 values_from = i,
+                 values_fn = sum,
+                 values_fill = 0) %>%
+    ggplot() +
+    geom_count( aes( x = Fallito,
+                     y = Successo,
+                     colour = ..n..)) +
+    labs( title = "Numero di tentativi per paziente")
+  }),
+
   # compile the report
   tar_render(report, here("reports/report.Rmd")),
   tar_render(trd_log_csv_exploration, here("reports/trd_log_csv_exploration.qmd")),
@@ -165,6 +221,12 @@ list(
       ggMissingTRD = ggMissingTRD,
       weaningsTRD = weaningsTRD,
       weaningsLOG = weaningsLOG,
+      ggWeanVariablesAll = ggWeanVariablesAll,
+      ggWeanVariablesSel = ggWeanVariablesSel,
+      patientHistoryPlotTS015 = patientHistoryPlotTS015,
+      patientHistoryPlotTS012 = patientHistoryPlotTS012,
+      patientHistoryPlotBS002 = patientHistoryPlotBS002,
+      patientHistoryPlotNO004 = patientHistoryPlotNO004
     )
   ),
 
