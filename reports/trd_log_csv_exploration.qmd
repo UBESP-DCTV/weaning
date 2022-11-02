@@ -342,6 +342,20 @@ In tutto si hanno quindi un totale di 342 tentativi.
 weaning_days <- weaning_succ %>%
   bind_rows(weaning_fail) %>%
   arrange(id_univoco)
+
+weaning_days %>%
+  select(id_univoco, esito) %>%
+  mutate(i = 1) %>%
+  pivot_wider( names_from = esito,
+               values_from = i,
+               values_fn = sum,
+               values_fill = 0) %>%
+  ggplot() +
+  geom_count( aes( x = Fallito,
+                   y = Successo,
+                   colour = ..n..)) +
+  labs( title = "Numero di tentativi per paziente")
+  
 ```
 
 ### Identificare un SBT in quella giornata
