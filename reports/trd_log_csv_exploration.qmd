@@ -153,12 +153,18 @@ Da cui si ricava che quelle più interessanti sono:
 
 ```{r}
 trd |>
-ggplot() +
-  geom_line(aes(ora, pressione_di_fine_esp_cm_h2o)) +
-  geom_line(aes(ora, lavoro_respiratorio_del_paziente_joule_l),
-            color = "blue") +
+ggplot(aes( x = ora)) +
+  geom_line(aes(y = lavoro_respiratorio_del_ventilatore_joule_l)) +
+  geom_line(aes(y = lavoro_respiratorio_del_paziente_joule_l),
+            color = "dark blue") +
+  geom_line(aes( y = pressione_di_fine_esp_cm_h2o),
+            color = "dark green") +
+  geom_line(aes( y = press_media_vie_aeree_cm_h2o),
+            color = "dark orange") +
   facet_wrap(~date)
 ```
+
+Si noti come le unità di misura non siano consistenti nella scala (sono visualizzati sia pressione in cm_h20 che lavoro in joule_L), ma ai fini di capire il comportamento del LOG questo non è rilevante.
 
 I tentativi di SBT si sospetta che siano quei momenti in cui per circa 30m i parametri si modificano in modo significativo.
 
@@ -273,7 +279,7 @@ Oppure
 
 ```{r}
 patient_history_plot( id_ospedale = "BS",
-                      id_paziente = 3)
+                      id_paziente = 2)
 ```
 
 o ancora
@@ -356,8 +362,54 @@ weaning_days %>%
                    colour = ..n..)) +
   labs( title = "Numero di tentativi per paziente")
   
+
 ```
 
 ### Identificare un SBT in quella giornata
 
-Si prendano come esempio i tre pazienti analizzati precedentemente: TS012, BS003 e NO004, dei quali abbiamo registrati come SBT i seguenti
+Si prendano come esempio i tre pazienti analizzati precedentemente: TS012, BS002 e NO004, dei quali abbiamo registrati come SBT i seguenti
+
+```{r}
+patient_subset <- c("TS012", "BS002", "NO004")
+
+weaning_subset <- weaning_days %>%
+  select(id_univoco, data_lettura, esito, type) %>%
+  filter( id_univoco %in% patient_subset) %>%
+  group_by(id_univoco) %>%
+  arrange(data_lettura)
+
+weaning_subset
+```
+
+Si provede quindi al plot del file TRD in quello specifico giorno, usando le variabili precedentemente individuate.
+
+```{r}
+trd_subset <- tar_read(weaningsTRD) %>%
+  mutate( id_univoco = ifelse( 
+    test = id_pat <10, 
+    yes = paste0(folder, "00", id_pat), 
+    no = paste0(folder, "0", id_pat) ) ) %>% 
+  filter( id_univoco %in% weaning_subset[["id_univoco"]], 
+          date %in% weaning_subset[["data_lettura"]])
+
+ggplot( trd_subset,
+        aes( x = ora)) +
+  geom_step(aes(
+    y = lavoro_respiratorio_del_ventilatore_joule_l *10) ) +
+  geom_step(aes(
+    y = lavoro_respiratorio_del_paziente_joule_l *10),
+            color = "dark blue") +
+  geom_step(aes( y = pressione_di_fine_esp_cm_h2o),
+            color = "dark green") +
+  geom_step(aes( y = press_media_vie_aeree_cm_h2o),
+            color = "dark orange") +
+  labs(title = "Weanings TRD", 
+       x = "", y = "") +
+  facet_wrap(vars(id_univoco, date))
+```
+
+A questo punto è possibile replicarlo per tutti i pazienti.
+
+```{r}
+
+```
