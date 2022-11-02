@@ -11,6 +11,7 @@ editor: visual
 library(tidyverse)
 library(readxl)
 library(lubridate)
+# library(tidyquant) # non caricare tutto il pacchetto che maschera il mondo
 
 devtools::load_all(".")
 ```
@@ -428,6 +429,45 @@ trd_plot +
   geom_rug(data = weaning_log_filtered,
            aes(x = ora,
                color = file))
+```
+
+Per poi passare a una visualizzazione con media mobile con varie finestre (15 e 30 minuti, 30 viene poi mantenuto dopo alcune prove) per vedere se i punti di weaning sono facilmente identificabili.
+
+```{r}
+trd_subset <- tar_read(weaningsTRD) %>%
+  mutate( id_univoco = ifelse(
+    test = id_pat <10,
+    yes = paste0(folder, "00", id_pat),
+    no = paste0(folder, "0", id_pat) ) ) %>%
+  filter( id_univoco %in% weaning_subset[["id_univoco"]],
+          date %in% weaning_subset[["data_lettura"]])
+
+
+ggplot(trd_subset,
+       aes( x = ora)) +
+  tidyquant::geom_ma(aes(
+    y = lavoro_respiratorio_del_ventilatore_joule_l *10),
+    n = 30,
+       linetype = 1) +
+  tidyquant::geom_ma(aes(
+    y = lavoro_respiratorio_del_paziente_joule_l *10),
+    n = 30,
+    color = "dark blue",
+       linetype = 1) +
+  tidyquant::geom_ma(aes(
+    y = pressione_di_fine_esp_cm_h2o),
+    n = 30,
+    color = "dark green",
+       linetype = 1) +
+  tidyquant::geom_ma(aes(
+    y = press_media_vie_aeree_cm_h2o),
+    n = 30,
+    color = "dark orange",
+       linetype = 1) +
+  labs(title = "Moving averages on weanings TRD",
+                x = "", y = "") +
+  facet_wrap(vars(id_univoco, date))
+
 ```
 
 A questo punto è possibile replicarlo per tutti i pazienti.
