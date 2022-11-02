@@ -289,7 +289,7 @@ patient_history_plot( id_ospedale = "NO",
 
 Da protocollo dello studio, un SBT viene tentato quando sussistono alternativamente due condizioni: un SBT di successo oppure un SBT fallito.
 
-Un SBT di successo è definito come la presenza contemporanea di due condizioni
+Un SBT di successo è definito come la presenza contemporanea di due condizioni:
 
 -   il paziente è considerato pronto (ready) nei 12 elementi clinici che vengono indagati
 
@@ -336,7 +336,7 @@ weaning_fail %>%
   summarise( tot_pazienti = n())
 ```
 
-In tutto si hanno quindi un totale di
+In tutto si hanno quindi un totale di 342 tentativi.
 
 ```{r}
 weaning_days <- weaning_succ %>%
