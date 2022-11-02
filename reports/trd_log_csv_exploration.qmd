@@ -392,24 +392,25 @@ trd_subset <- tar_read(weaningsTRD) %>%
   filter( id_univoco %in% weaning_subset[["id_univoco"]], 
           date %in% weaning_subset[["data_lettura"]])
 
-ggplot( trd_subset,
-        aes( x = ora)) +
-  geom_step(aes(
-    y = lavoro_respiratorio_del_ventilatore_joule_l *10) ) +
-  geom_step(aes(
-    y = lavoro_respiratorio_del_paziente_joule_l *10),
-            color = "dark blue") +
-  geom_step(aes( y = pressione_di_fine_esp_cm_h2o),
-            color = "dark green") +
-  geom_step(aes( y = press_media_vie_aeree_cm_h2o),
-            color = "dark orange") +
-  labs(title = "Weanings TRD", 
-       x = "", y = "") +
-  facet_wrap(vars(id_univoco, date))
+plot_trd(trd_subset)
 ```
 
 A questo punto è possibile replicarlo per tutti i pazienti.
 
 ```{r}
+weaning_subset <- weaning_days %>%
+  select(id_univoco, data_lettura, esito, type) %>%
+  filter( id_univoco %in% weaning_days[["id_univoco"]]) %>%
+  group_by(id_univoco) %>%
+  arrange(data_lettura)
 
+trd_subset <- tar_read(weaningsTRD) %>%
+  mutate( id_univoco = ifelse( 
+    test = id_pat <10, 
+    yes = paste0(folder, "00", id_pat), 
+    no = paste0(folder, "0", id_pat) ) ) %>% 
+  filter( id_univoco %in% weaning_subset[["id_univoco"]], 
+          date %in% weaning_subset[["data_lettura"]])
+
+plot_trd(trd_subset)
 ```
