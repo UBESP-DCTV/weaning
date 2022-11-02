@@ -412,5 +412,5 @@ trd_subset <- tar_read(weaningsTRD) %>%
   filter( id_univoco %in% weaning_subset[["id_univoco"]], 
           date %in% weaning_subset[["data_lettura"]])
 
-plot_trd(trd_subset)
+#plot_trd(trd_subset)
 ```
