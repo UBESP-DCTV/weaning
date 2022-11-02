@@ -3,7 +3,11 @@
 #' Show on a single plot all relevant variables about a single day
 #'  for each patient to spot a weaning attempt:
 #'
-#' @param trd_subset (tibble) a tibble originted from a TRD target
+#' @param weaning_subset (tibble) a tibble containing a list of SBT
+#' with a "id_univoco", "data_lettura" and "esito" variable
+#' @param color_files (logical) if TRUE, color the lines according to
+#' the TRD file from which they originate. If FALSE, lines are colored
+#' according to TRD variables
 #'
 #' @return a [ggplot][ggplot2::ggplot2-package] showing the plot of
 #'  mechanical ventilation variables
@@ -17,28 +21,46 @@
 #'
 #'   patient_subset <- c("TS012", "BS002", "NO004")
 #'
+#'   weaning_days <- tar_read(pt_registry) %>%
+#'     group_by( id_univoco) %>%
+#'     filter( susp_tot == 12,
+#'             estubato == 0)  %>%
+#'     mutate( esito = factor( x = "Fallito",
+#'                             levels = c("Fallito", "Successo")))
+#'
 #'   weaning_subset <- weaning_days %>%
 #'     select(id_univoco, data_lettura, esito, type) %>%
 #'     filter( id_univoco %in% patient_subset) %>%
 #'     group_by(id_univoco) %>%
 #'     arrange(data_lettura)
 #'
-#'   trd_subset <- tar_read(weaningsTRD) %>%
-#'     mutate( id_univoco = ifelse(
-#'       test = id_pat <10,
-#'       yes = paste0(folder, "00", id_pat),
-#'       no = paste0(folder, "0", id_pat) ) ) %>%
-#'     filter( id_univoco %in% weaning_subset[[ "id_univoco"]],
-#'             date %in% weaning_subset[["data_lettura"]])
-#'
-#'   plot_trd( trd_subset)
+#'   plot_trd( weaning_subset)
 #'
 #' }
 #'
-plot_trd <- function(trd_subset = NA) {
+plot_trd <- function(weaning_subset = NA, color_files = FALSE) {
 
-  checkmate::assert_tibble(trd_subset,
+  checkmate::assert_logical(color_files)
+
+  if (color_files == FALSE) {
+    return(plot_trd_vars(weaning_subset))
+  } else {
+    return(plot_trd_files(weaning_subset))
+  }
+}
+
+plot_trd_vars <- function(weaning_subset = NA) {
+
+  checkmate::assert_tibble(weaning_subset,
                            min.rows = 1)
+
+  trd_subset <- tar_read(weaningsTRD) %>%
+    mutate( id_univoco = ifelse(
+      test = id_pat <10,
+      yes = paste0(folder, "00", id_pat),
+      no = paste0(folder, "0", id_pat) ) ) %>%
+    filter( id_univoco %in% weaning_subset[["id_univoco"]],
+            date %in% weaning_subset[["data_lettura"]])
 
   plot <- ggplot2::ggplot(trd_subset,
                           aes( x = ora)) +
@@ -49,13 +71,45 @@ plot_trd <- function(trd_subset = NA) {
       color = "dark blue") +
     ggplot2::geom_step(aes(
       y = pressione_di_fine_esp_cm_h2o),
-              color = "dark green") +
+      color = "dark green") +
     ggplot2::geom_step(aes(
       y = press_media_vie_aeree_cm_h2o),
-              color = "dark orange") +
+      color = "dark orange") +
     ggplot2::labs(title = "Weanings TRD",
-         x = "", y = "") +
+                  x = "", y = "") +
     ggplot2::facet_wrap(vars(id_univoco, date))
+
+  return(plot)
+}
+
+plot_trd_files <- function(weaning_subset = NA) {
+
+  checkmate::assert_tibble(weaning_subset,
+                           min.rows = 1)
+
+  trd_subset <- tar_read(weaningsTRD) %>%
+    mutate( id_univoco = ifelse(
+      test = id_pat <10,
+      yes = paste0(folder, "00", id_pat),
+      no = paste0(folder, "0", id_pat) ) ) %>%
+    filter( id_univoco %in% weaning_subset[["id_univoco"]],
+            date %in% weaning_subset[["data_lettura"]])
+
+  plot <- ggplot2::ggplot(trd_subset,
+                          aes( x = ora,
+                               color = file)) +
+    ggplot2::geom_step(aes(
+      y = lavoro_respiratorio_del_ventilatore_joule_l *10) ) +
+    ggplot2::geom_step(aes(
+      y = lavoro_respiratorio_del_paziente_joule_l *10)) +
+    ggplot2::geom_step(aes(
+      y = pressione_di_fine_esp_cm_h2o)) +
+    ggplot2::geom_step(aes(
+      y = press_media_vie_aeree_cm_h2o)) +
+    ggplot2::labs(title = "Weanings TRD",
+                  x = "", y = "") +
+    ggplot2::facet_wrap(vars(id_univoco, date)) +
+    ggplot2::theme(legend.position="none")
 
   return(plot)
 }

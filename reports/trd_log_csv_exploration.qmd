@@ -168,7 +168,7 @@ Si noti come le unità di misura non siano consistenti nella scala (sono visuali
 
 I tentativi di SBT si sospetta che siano quei momenti in cui per circa 30m i parametri si modificano in modo significativo.
 
-## File Log
+## File LOG
 
 ```{r}
 `%ni%` <- Negate(`%in%`)
@@ -384,15 +384,50 @@ weaning_subset
 Si provede quindi al plot del file TRD in quello specifico giorno, usando le variabili precedentemente individuate.
 
 ```{r}
-trd_subset <- tar_read(weaningsTRD) %>%
-  mutate( id_univoco = ifelse( 
-    test = id_pat <10, 
-    yes = paste0(folder, "00", id_pat), 
-    no = paste0(folder, "0", id_pat) ) ) %>% 
-  filter( id_univoco %in% weaning_subset[["id_univoco"]], 
-          date %in% weaning_subset[["data_lettura"]])
+plot_trd(weaning_subset)
+```
 
-plot_trd(trd_subset)
+Dai plot si vede come gli SBT potrebbero essere identificati da quei momenti in cui il ventilatore è spento. Per verificare che non sia un artefatto dovuto a dei buchi nel file (si ricorda infatti che il ventilatore ha un buffer di 24h). si procede a una colorazione per file di origine.
+
+```{r}
+(trd_plot <- plot_trd(weaning_subset, color_files = TRUE) )
+```
+
+Alcuni delle "valli" che potevano essere SBT avvengono in corrispondenza di un cambio di file, deponendo a favore di una perdita di dati piuttosto che a un vero spegnimento del ventilatore.
+
+Si procede a sovrapporre i file di LOG
+
+```{r}
+weaning_log <- tar_read(weaningsLOG) %>%
+    mutate( id_univoco = ifelse(
+              test = id_pat <10,
+              yes = paste0(folder, "00", id_pat),
+              no = paste0(folder, "0", id_pat) ),
+            date = data
+    ) %>%
+  filter( id_univoco %in% weaning_subset[["id_univoco"]],
+          data %in% weaning_subset[["data_lettura"]])
+
+trd_plot +
+  geom_rug(data = weaning_log,
+           aes(x = ora,
+               color = file))
+```
+
+Il file mostra una corrispondenza credibile tra i due file.
+
+Si procede quindi a scremare i log, selezionando solo le categorie utili precedentemente identificate
+
+```{r}
+weaning_log_filtered <- weaning_log %>%
+  filter( id_info %in% c(0, 267, 291, 321, 322),
+          !str_detect(informazioni, 'Silenziamento'),
+          !str_detect(informazioni, 'Pre-silenziamento') )
+  
+trd_plot +
+  geom_rug(data = weaning_log_filtered,
+           aes(x = ora,
+               color = file))
 ```
 
 A questo punto è possibile replicarlo per tutti i pazienti.
@@ -404,13 +439,5 @@ weaning_subset <- weaning_days %>%
   group_by(id_univoco) %>%
   arrange(data_lettura)
 
-trd_subset <- tar_read(weaningsTRD) %>%
-  mutate( id_univoco = ifelse( 
-    test = id_pat <10, 
-    yes = paste0(folder, "00", id_pat), 
-    no = paste0(folder, "0", id_pat) ) ) %>% 
-  filter( id_univoco %in% weaning_subset[["id_univoco"]], 
-          date %in% weaning_subset[["data_lettura"]])
 
-#plot_trd(trd_subset)
 ```
