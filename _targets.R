@@ -122,6 +122,35 @@ list(
       theme(legend.position = "none")
   }),
 
+  tar_target(ggWeanVariablesAll, {
+    weaningsTRD |>
+      filter( folder == "BS",
+              id_pat == 8) %>%
+      filter(date == "2013-11-27") %>%
+      select_if( function(x) {!all(is.na(x))} ) %>%
+      gather(-ora, key = "var", value = "value") %>%
+      ggplot(aes(x = ora,
+                 y = value)) +
+      geom_point(size = 0.5) +
+      facet_wrap(~ var, scales = "free")
+  }),
+
+  tar_target(ggWeanVariablesSel, {
+    weaningsTRD |>
+      filter( folder == "BS",
+              id_pat == 8) |>
+      ggplot(aes( x = ora)) +
+      geom_line(aes(y = lavoro_respiratorio_del_ventilatore_joule_l)) +
+      geom_line(aes(y = lavoro_respiratorio_del_paziente_joule_l),
+                color = "dark blue") +
+      geom_line(aes( y = pressione_di_fine_esp_cm_h2o),
+                color = "dark green") +
+      geom_line(aes( y = press_media_vie_aeree_cm_h2o),
+                color = "dark orange") +
+      facet_wrap(~date) +
+      labs( title = "Weaning TRD plot",
+            subtitle = "Paziente BS008")
+  }),
 
   # compile the report
   tar_render(report, here("reports/report.Rmd")),

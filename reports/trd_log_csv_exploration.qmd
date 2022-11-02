@@ -60,7 +60,11 @@ ggplot(pt_names) +
                  fill = "blue", alpha = 0.3) +
   geom_histogram(aes(vm_fine - vm_inizio),
                  fill = "green", alpha = 0.3) +
-  facet_wrap(~esito)
+  facet_wrap(~esito) +
+  labs( title = "Distribuzione per esito",
+        subtitle = "in ospedale (rosso), in ICU (blu), in ventilazione meccanica (verde)",
+        x = "giorni di ricovero",
+        y = "numero di pazienti")
 ```
 
 ## Registro giornaliero dei pazienti
@@ -97,7 +101,9 @@ pt_registry |>
   ggplot(aes(x = giorno_studio,
              y = susp_tot)) +
   geom_density_2d(color = "gray") +
-  geom_smooth()
+  geom_smooth() +
+  labs( title = "Trend di readiness allo SBT",
+        subtitle = "all'aumentare dei giorni di ventilazione")
 ```
 
 ## File TRD
@@ -121,9 +127,10 @@ A questo punto è possibile procedere all'importazione dei file e a selezionarle
 paz <- c( ospedale = "BS",
           paziente = 8)
 
-trd <- tar_read(weaningsTRD) |> 
-  filter( folder == paz["ospedale"],
-          id_pat == paz["paziente"]) # giorno di svezzamento
+# moved to targets
+# trd <- tar_read(weaningsTRD) |> 
+#   filter( folder == paz["ospedale"],
+#           id_pat == paz["paziente"]) # giorno di svezzamento
 
 ```
 
@@ -132,14 +139,7 @@ A questo punto è possibile aprire i dati e verificare cosa contengono.
 Innanzitutto si plottano tutte le variabili vs l'ora, così da identificare quelle che mostrano un cambiamento durante uno SBT.
 
 ```{r}
-trd %>%
-  filter(date == "2013-11-27") %>%
-  select_if( function(x) {!all(is.na(x))} ) %>%
-  gather(-ora, key = "var", value = "value") %>% 
-  ggplot(aes(x = ora,
-             y = value)) +
-    geom_point(size = 0.5) +
-    facet_wrap(~ var, scales = "free")
+tar_read(ggWeanVariablesAll)
 ```
 
 Da cui si ricava che quelle più interessanti sono:
@@ -153,16 +153,7 @@ Da cui si ricava che quelle più interessanti sono:
 -   pressione di fine espirazione
 
 ```{r}
-trd |>
-ggplot(aes( x = ora)) +
-  geom_line(aes(y = lavoro_respiratorio_del_ventilatore_joule_l)) +
-  geom_line(aes(y = lavoro_respiratorio_del_paziente_joule_l),
-            color = "dark blue") +
-  geom_line(aes( y = pressione_di_fine_esp_cm_h2o),
-            color = "dark green") +
-  geom_line(aes( y = press_media_vie_aeree_cm_h2o),
-            color = "dark orange") +
-  facet_wrap(~date)
+tar_read(ggWeanVariablesSel)
 ```
 
 Si noti come le unità di misura non siano consistenti nella scala (sono visualizzati sia pressione in cm_h20 che lavoro in joule_L), ma ai fini di capire il comportamento del LOG questo non è rilevante.
