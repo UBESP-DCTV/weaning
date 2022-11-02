@@ -198,8 +198,8 @@ Il pz viene estubato dopo 3 giorni nello studio (attenzione: si parte da 0 al ri
 Si deduce dal fatto che viene estubato lo stesso giorno, che l'SBT ha avuto successo.
 
 ```{r}
-paz <- c( ospedale = "TS",
-          paziente = 15)
+paz <- list( ospedale = "TS",
+             paziente = 15)
 
 ts15_trd <- tar_read(weaningsTRD) |> 
   filter( folder == paz["ospedale"],
@@ -215,8 +215,8 @@ A questo punto si può procedere ad alcune visualizzazioni per valutare la salut
 Ad esempio, si verifica che i giorni di ricovero elencati nel registro clinico, quelli in cui c'è un registro del log e quelli nel trd siano identici.
 
 ```{r, fig.height = 3, fig.width = 9}
-patient_history_plot( id_ospedale = paz["ospedale"],
-                      id_paziente = paz["paziente"])
+patient_history_plot( id_ospedale = paz[["ospedale"]],
+                      id_paziente = paz[["paziente"]])
 ```
 
 In secondo luogo, si verifica che la progressione delle righe corrisponda a una progressione degli orari di registrazione.
