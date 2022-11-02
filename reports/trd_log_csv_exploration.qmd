@@ -11,6 +11,8 @@ editor: visual
 library(tidyverse)
 library(readxl)
 library(lubridate)
+
+devtools::load_all(".")
 ```
 
 I file principali utilizzati nello studio sono 4
@@ -212,14 +214,7 @@ ts15_log <- tar_read(weaningsLOG) |>
 
 A questo punto si può procedere ad alcune visualizzazioni per valutare la salute dei dati.
 
-Ad esempio, si verifica che i giorni di ricovero elencati nel registro clinico, quelli in cui c'è un registro del log e quelli nel trd siano identici.
-
-```{r, fig.height = 3, fig.width = 9}
-patient_history_plot( id_ospedale = paz[["ospedale"]],
-                      id_paziente = paz[["paziente"]])
-```
-
-In secondo luogo, si verifica che la progressione delle righe corrisponda a una progressione degli orari di registrazione.
+Ad esempio, si verifica che la progressione delle righe corrisponda a una progressione degli orari di registrazione.
 
 ```{r}
 ts15_log |>
@@ -246,3 +241,75 @@ ts15_trd |>
         y = "ora",
         x = "row number")
 ```
+
+In secondo luogo, si verifica che i giorni di ricovero elencati nel registro clinico, quelli in cui c'è un registro del log e quelli nel trd siano credibili.
+
+```{r, fig.height = 3, fig.width = 9}
+
+patient_history_plot( id_ospedale = paz[["ospedale"]],
+                      id_paziente = paz[["paziente"]])
+```
+
+Per come è strutturato lo studio, è normale che registry arrivi fino a +2 giorni rispetto alla data di fine della ventilazione meccanica (infatti è quello il lasso di tempo per valutare la riuscita o meno dello svezzamento dal ventilatore).
+
+Altrettanto normale è che LOG e TRD finiscano nello stesso momento e che questi siano compresi dentro il periodo in cui il paziente era in ventilazione meccanica (segmento nero).
+
+Non è chiaro perché LOG inizi prima dell'inizio di TRD, probailmente per errori nello scaricamento dei dati. In ogni caso, quello che è importante è l'associazione tra le informazioni cliniche (rappresentate dai punti rosa e blu, per indicare la readiness al tentativo di svezzamento) e la registrazione dei TRD, che rimane conservata.
+
+Un SBT fallito è rappresentato da un punto azzurro (che indica una giornata in cui il paziente era considerato "ready" considerati i suoi parametri clinici), senza altri elementi. Invece, un SBT riuscito porta a un'estubazione, rappresentata da una X sovrapposta a quel punto.
+
+Ci si aspetterebbe che il momento in cui viene spento il ventilatore (2014-10-02 17:15) sia nello stesso giorno in cui l'SBT ha successo (e quindi si abbia poi un'estubazione). Ma mentre dal registro dei pazienti sappiamo che il primo SBT (in data 2014-10-03 ha successo e porta a un'estubazione), i dati raccolti arrivano unicamente fino al 2014-10-02, con un sospetto di SBT tra le 16:38 e le 17:14 un cui il ventilatore rimane spento. Non si può escludere un errore nella raccolta dei dati o nella scrittura delle date nel registro clinico (una dimenticanza di scaricare i dati?), mentre si può ragionevolmente escludere un errore di importazione dal ventilatore.
+
+In ogni caso, altri pazienti non mostrano in modo sistematico questo tipo di errore.
+
+Si vedano ad esempio
+
+```{r}
+patient_history_plot( id_ospedale = "TS",
+                      id_paziente = 12)
+```
+
+Oppure
+
+```{r}
+patient_history_plot( id_ospedale = "BS",
+                      id_paziente = 3)
+```
+
+o ancora
+
+```{r}
+patient_history_plot( id_ospedale = "NO",
+                      id_paziente = 4)
+```
+
+## Identificare gli SBT
+
+### Identificare i giorni in cui avviene un SBT
+
+Da protocollo dello studio, un SBT viene tentato quando sussistono contemporaneamente due condizioni:
+
+-   il paziente è considerato pronto (ready) nei 12 elementi clinici che vengono indagati
+
+-   il paziente è al momento intubato (o perché intubato post-ingresso in ICU o perché ha necessitato una reintubazione per peggioramento delle condizioni cliniche)
+
+```{r}
+weaning_days <- pt_registry %>%
+  group_by( id_univoco) %>%
+  filter( susp_tot == 12, # criterio 1
+          estubato == 1, # criterio 2
+          lag(estubato, default = 0) == 0)
+
+weaning_days %>%
+  select(id_univoco, reintubato) %>%
+  group_by(id_univoco) %>%
+  summarise( SBT_per_paziente = n()) %>%
+  group_by(SBT_per_paziente) %>%
+  summarise( tot_pazienti = n())
+```
+
+Si noti che con la formula usata non è possibile riconoscere pazienti reintubati e successivamente estubati in un intervallo di 24h, comunque clinicamente improbabile e il cui impatto sul modello è minimo.
+
+### Identificare un SBT in quella giornata
+
+Si prendano come esempio i tre pazienti analizzati precedentemente: TS012, BS003 e NO004, dei quali abbiamo registrati come SBT i seguenti
