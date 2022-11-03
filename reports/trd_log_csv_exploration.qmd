@@ -131,19 +131,19 @@ A questo punto è possibile aprire i dati e verificare cosa contengono.
 
 Innanzitutto si plottano tutte le variabili vs l'ora, così da identificare quelle che mostrano un cambiamento durante uno SBT.
 
-```{r}
+```{r, fig.height = 12}
 tar_read(ggWeanVariablesAll)
 ```
 
 Da cui si ricava che quelle più interessanti sono:
 
--   lavoro respiratorio del ventilatore (del pz è meno rilevante)
+-   lavoro respiratorio del ventilatore \[BLU\] (del pz è meno rilevante) \[NERO\]
 
 -   pressione di picco delle vie aeree
 
--   pressione media delle vie aeree
+-   pressione media delle vie aeree \[ARANCIO\]
 
--   pressione di fine espirazione
+-   pressione di fine espirazione \[VERDE\]
 
 ```{r}
 tar_read(ggWeanVariablesSel)
@@ -382,6 +382,28 @@ Per poi passare a una visualizzazione con media mobile con varie finestre (15 e 
 ```{r}
 tar_read(ggMediaMobileSubset)
 ```
+
+Dalla letteratura, lo Spontaneus Breathing Trial può essere svolto con tre diverse strategie:
+
+1.  Solo con Ossigeno supplementare fornito attraverso un pezzo a T collegato al tubo endotracheale
+
+2.  CPAP con lo stesso livello di PEEP precedente
+
+3.  Ventilazione invasiva con Pressure Support rdotto (5-8 cmH2O) o unicamente con la compensazione automatica della resistenza dei tubi
+
+Non è possibile sapere a priori quale tipo di strategia SBT è stata scelta per ogni paziente, in quanto nessuna è sempre superiore alle altre (e quindi non ci sono linee guida forti in merito).
+
+Nel caso di paziente ventilato con PSV, si settano i parametri FiO2 , PEEP e  Pressione di Supporto sopra PEEP (oltre ai trigger inspiratori ed espiratori, così come i limiti di sicurezza). La ventilazione NAVA è simile, con la differenza che i trigger sono segnali provenienti dal diaframma.
+
+Si rivedono ora le tre strategie, evidenziando le modifiche che ci si attende dai tracciati o dai log:
+
+1.  T-piece:
+
+2.  CPAP
+
+3.  IMV
+
+...
 
 A questo punto è possibile replicarlo per tutti i pazienti.
 
