@@ -33,9 +33,14 @@ list(
     format = "file"
   ),
   tar_target(
-    weaningsTRD,
+    weaningsTRD,{
     import_folders(weaningFolder, "TRD") |>
-      fix_wrong_hours(),
+      fix_wrong_hours() |>
+      dplyr::mutate( id_univoco = ifelse(
+        test = id_pat <10,
+        yes = paste0(folder, "00", id_pat),
+        no = paste0(folder, "0", id_pat) ))
+    },
     packages = "furrr",
     format = "qs"
   ),
@@ -43,8 +48,14 @@ list(
   tar_target(problematicDupes, get_problematic_dupes(weaningsTRD)),
 
   tar_target(
-    weaningsLOG,
-    import_folders(weaningFolder, "LOG"),
+    weaningsLOG,{
+    import_folders(weaningFolder, "LOG") |>
+      dplyr::mutate( id_univoco = ifelse(
+        test = id_pat <10,
+        yes = paste0(folder, "00", id_pat),
+        no = paste0(folder, "0", id_pat) ),
+        date = data )
+    },
     packages = "furrr",
     format = "qs"
   ),
@@ -88,6 +99,38 @@ list(
       bind_rows(weaning_fail) %>%
       arrange(id_univoco)
   }),
+
+  tar_target(
+    weaning_subset, {
+    patient_subset <- c("TS012", "BS002", "NO004")
+    weaning_subset <- weaning_days %>%
+      select(id_univoco, data_lettura, esito, type) %>%
+      filter( id_univoco %in% patient_subset) %>%
+      group_by(id_univoco) %>%
+      arrange(data_lettura)
+  }),
+
+  tar_target(
+    weaning_log_subset,{
+    weaningsLOG %>%
+      filter( id_univoco %in% weaning_subset[["id_univoco"]],
+              date %in% weaning_subset[["data_lettura"]])
+  }),
+
+  tar_target(
+    weaning_log_filtered,{
+    weaning_log_subset %>%
+      filter( id_info %in% c(0, 267, 291, 321, 322),
+              !str_detect(informazioni, 'Silenziamento'),
+              !str_detect(informazioni, 'Pre-silenziamento') )
+  }),
+
+  tar_target(
+    weaning_trd_subset,{
+      weaningsTRD %>%
+        filter( id_univoco %in% weaning_subset[["id_univoco"]],
+                date %in% weaning_subset[["data_lettura"]])
+    }),
 
   tar_target(ggPatPerCentro, {
     weaningsTRD |>
@@ -150,6 +193,17 @@ list(
       theme(legend.position = "none")
   }),
 
+  tar_target(ggSmoothReadinessSBT, {
+    pt_registry |>
+      select(id_univoco, susp_tot, giorno_studio) |>
+      ggplot(aes(x = giorno_studio,
+                 y = susp_tot)) +
+      geom_density_2d(color = "gray") +
+      geom_smooth() +
+      labs( title = "Trend di readiness allo SBT",
+            subtitle = "all'aumentare dei giorni di ventilazione")
+  }),
+
   tar_target(ggWeanVariablesAll, {
     weaningsTRD |>
       filter( folder == "BS",
@@ -208,6 +262,55 @@ list(
     labs( title = "Numero di tentativi per paziente")
   }),
 
+  tar_target(ggWeaningSubsetDay, {
+    plot_trd(weaning_subset, color_files = FALSE)
+  }),
+
+  tar_target(ggWeaningSubsetFile, {
+    plot_trd(weaning_subset, color_files = TRUE)
+  }),
+
+  tar_target(ggWeaningLogSubsetRaw,{
+    ggWeaningSubsetFile +
+      geom_rug(data = weaning_log_subset,
+               aes(x = ora,
+                   color = file))
+  }),
+
+  tar_target(ggWeaningLogSubsetFiltered,{
+    ggWeaningSubsetFile +
+      geom_rug(data = weaning_log_filtered,
+               aes(x = ora,
+                   color = file))
+  }),
+
+  tar_target(ggMediaMobileSubset, {
+    ggplot(weaning_trd_subset,
+           aes( x = ora)) +
+      tidyquant::geom_ma(aes(
+        y = lavoro_respiratorio_del_ventilatore_joule_l *10),
+        n = 30,
+        linetype = 1) +
+      tidyquant::geom_ma(aes(
+        y = lavoro_respiratorio_del_paziente_joule_l *10),
+        n = 30,
+        color = "dark blue",
+        linetype = 1) +
+      tidyquant::geom_ma(aes(
+        y = pressione_di_fine_esp_cm_h2o),
+        n = 30,
+        color = "dark green",
+        linetype = 1) +
+      tidyquant::geom_ma(aes(
+        y = press_media_vie_aeree_cm_h2o),
+        n = 30,
+        color = "dark orange",
+        linetype = 1) +
+      labs(title = "Moving averages on weanings TRD",
+           x = "", y = "") +
+      facet_wrap(vars(id_univoco, date))
+  }),
+
   # compile the report
   tar_render(report, here("reports/report.Rmd")),
   tar_render(trd_log_csv_exploration, here("reports/trd_log_csv_exploration.qmd")),
@@ -226,7 +329,10 @@ list(
       patientHistoryPlotTS015 = patientHistoryPlotTS015,
       patientHistoryPlotTS012 = patientHistoryPlotTS012,
       patientHistoryPlotBS002 = patientHistoryPlotBS002,
-      patientHistoryPlotNO004 = patientHistoryPlotNO004
+      patientHistoryPlotNO004 = patientHistoryPlotNO004,
+      ggTentativiPerPaziente = ggTentativiPerPaziente,
+      ggWeaningLogSubsetFiltered = ggWeaningLogSubsetFiltered,
+      ggMediaMobileSubset = ggMediaMobileSubset
     )
   ),
 
