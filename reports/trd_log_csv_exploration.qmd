@@ -1,8 +1,11 @@
 ---
 title: "trd_log_csv_exploration"
 author: "Andrea Pedot"
-format: html
 editor: visual
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
 ---
 
 ## Introduzione
@@ -131,7 +134,7 @@ A questo punto è possibile aprire i dati e verificare cosa contengono.
 
 Innanzitutto si plottano tutte le variabili vs l'ora, così da identificare quelle che mostrano un cambiamento durante uno SBT.
 
-```{r, fig.height = 12}
+```{r}
 tar_read(ggWeanVariablesAll)
 ```
 
