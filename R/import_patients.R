@@ -17,11 +17,15 @@
 #'
 #'   import_patients()
 #' }
-import_patients <- function(verbose = FALSE) {
+import_patients <- function(verbose = FALSE,
+                            testing_time = FALSE, test_path = "") {
   path_input <- file.path( get_input_data_path(),
                            "/../",
                            "pt_names dati inclusione.xlsx") |>
     normalizePath()
+
+  # Testing time override
+  if (testing_time == TRUE) path_input <- test_path
 
   stopifnot(stringr::str_detect(path_input, "inclusione"))
   checkmate::assert_file_exists(path_input)
@@ -59,13 +63,19 @@ import_patients <- function(verbose = FALSE) {
                    bmi = as.double(bmi),
                    ibw = as.double(ibw),
                    reason = forcats::as_factor(reason),
-                   esito = forcats::as_factor(esito))  |>
+                   esito = forcats::as_factor(esito) %>%
+                     forcats::fct_recode("dimesso" = "1",
+                                         "deceduto icu" = "2",
+                                         "deceduto osp" = "3"))  |>
     dplyr::mutate( osp_in = lubridate::as_date(osp_in),
                  icu_in = lubridate::as_date(icu_in),
                  vm_inizio = lubridate::as_date(vm_inizio),
                  vm_fine = lubridate::as_date(vm_fine),
                  osp_out = lubridate::as_date(osp_out),
                  icu_out = lubridate::as_date(icu_out))
+
+  # checkmate::assert_factor(res[["esito"]],
+  #                          levels = c("dimesso", "deceduto icu", "deceduto osp"))
 
   if (verbose) usethis::ui_done(path_input)
   res
