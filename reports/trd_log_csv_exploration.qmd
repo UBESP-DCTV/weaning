@@ -2,10 +2,11 @@
 title: "trd_log_csv_exploration"
 author: "Andrea Pedot"
 editor: visual
+warning: false
 format:
   html:
+    toc: true
     code-fold: true
-    code-summary: "Show the code"
 ---
 
 ## Introduzione
@@ -13,7 +14,9 @@ format:
 ```{r}
 library(tidyverse)
 library(readxl)
+library(plotly)
 library(lubridate)
+library(targets)
 # library(tidyquant) # non caricare tutto il pacchetto che maschera il mondo
 
 devtools::load_all(".")
@@ -48,6 +51,7 @@ Rilevanti come variabili che non cambiano durante il ricovero, potenzialmente ut
 Mentre le altre colonne contengono variabili ridondanti, derivate oppure disponibili solo alla fine del ricovero del paziente.
 
 ```{r}
+#| echo: true
 pt_names <- tar_read(pt_names)
 
 glimpse(pt_names)
@@ -56,7 +60,7 @@ glimpse(pt_names)
 A titolo esplorativo, si mostra la distribuzione dei giorni di ricovero, di terapia intensiva e di ventilazione meccanica
 
 ```{r}
-ggplot(pt_names) +
+p <- ggplot(pt_names) +
   geom_histogram(aes(osp_out - osp_in),
                  fill = "red", alpha = 0.3) +
   geom_histogram(aes(icu_out - icu_in),
@@ -68,7 +72,33 @@ ggplot(pt_names) +
         subtitle = "in ospedale (rosso), in ICU (blu), in ventilazione meccanica (verde)",
         x = "giorni di ricovero",
         y = "numero di pazienti")
+
+ggplotly(p)
 ```
+
+Nel grafico precedente si vedono alcuni outlier, che si procede a indagare
+
+```{r}
+pt_names %>%
+  filter(osp_out - osp_in > 100) %>%
+  mutate( id_univoco = id_univoco,
+          osp_tot = osp_out - osp_in,
+          icu_tot = icu_out - icu_in,
+          vm_tot = vm_fine - vm_inizio) %>%
+  select(id_univoco,
+         starts_with("osp"),
+         starts_with("icu"),
+         starts_with("vm"),
+         esito)
+```
+
+Da cui si evince che
+
+-   il paziente MI006 ha un errore di registrazione di "osp_out" (dovrebbe essere "2014-03-17" invece di "2015-03-17")
+
+-   il paziente NO021 ha registrate delle estubazioni senza essere mai stato "ready"
+
+-   mentre gli altri dati sono plausibili per quanto improbabili
 
 ## Registro giornaliero dei pazienti
 
@@ -92,7 +122,7 @@ Le variabili d'interesse sono:
 
 -   la variabile di esito "estubato" contiene informazioni sullo stato d'estubazione (non sull'azione), mentre la variabile "reintubato" contiene informazioni sull'azione di reintubazione (non sullo stato)
 
-```{r, echo=FALSE}
+```{r}
 pt_registry <- tar_read(pt_registry)
 
 glimpse(pt_registry)
@@ -411,7 +441,8 @@ Si rivedono ora le tre strategie, evidenziando le modifiche che ci si attende da
 A questo punto è possibile replicarlo per tutti i pazienti.
 
 ```{r}
-weaning_subset <- tar_read(weaning_days) %>%
+weaning_days <- tar_read(weaning_days)
+weaning_subset <- weaning_days %>%
   select(id_univoco, data_lettura, esito, type) %>%
   filter( id_univoco %in% weaning_days[["id_univoco"]]) %>%
   group_by(id_univoco) %>%
