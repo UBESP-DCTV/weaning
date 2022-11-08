@@ -17,14 +17,21 @@
 #'
 #'   import_registry()
 #' }
-import_registry <- function(verbose = FALSE) {
+import_registry <- function(verbose = FALSE,
+                            testing_time = FALSE, test_path = "") {
   path_input <- file.path( get_input_data_path(),
                            "/../",
                            "pt_registry dati giornalieri.xls.xlsx") |>
     normalizePath()
 
+  # Testing time override
+  if (testing_time == TRUE) path_input <- test_path
+
+
   stopifnot(stringr::str_detect(path_input, "giornalieri"))
   checkmate::assert_file_exists(path_input)
+
+
 
   if (verbose) usethis::ui_todo(path_input)
 
@@ -54,7 +61,7 @@ import_registry <- function(verbose = FALSE) {
                     "skip", "skip", "skip", "skip", "skip",
                     "skip", "skip", "skip", "skip"),
      col_names = c( "type", "id_registry", "filter_deleted", "id_univoco",
-                    "id_medico", "data_lettura", "ega_ph","egA_pao2",
+                    "id_medico", "data_lettura", "ega_ph","ega_pao2",
                     "ega_paco2", "sofa", "cpis",
                     "estubato", "reintubato", "morto",
                     "susp_aspir", "susp_tosse", "susp_gcs", "susp_fcpas",
@@ -72,14 +79,14 @@ import_registry <- function(verbose = FALSE) {
     )
 
   res <- res |>
-    group_by(id_univoco) |>
-    mutate(giorno_studio = data_lettura-first(data_lettura)) |>
-    ungroup()
+    dplyr::group_by(id_univoco) |>
+    dplyr::mutate(giorno_studio = data_lettura - dplyr::first(data_lettura)) |>
+    dplyr::ungroup()
 
   res <- res %>%
-    select(starts_with("susp_")) %>%
-    transmute(susp_tot = rowSums(across(everything()))) %>%
-    bind_cols(res, .)
+    dplyr::select(starts_with("susp_")) %>%
+    dplyr::transmute(susp_tot = rowSums(dplyr::across(dplyr::everything()))) %>%
+    dplyr::bind_cols(res, .)
 
   if (verbose) usethis::ui_done(path_input)
   res
