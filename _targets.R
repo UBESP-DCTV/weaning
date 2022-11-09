@@ -194,7 +194,7 @@ list(
   }),
 
   tar_target(ggSmoothReadinessSBT, {
-    pt_registry |>
+    p <- pt_registry |>
       select(id_univoco, susp_tot, giorno_studio) |>
       ggplot(aes(x = giorno_studio,
                  y = susp_tot)) +
@@ -202,6 +202,7 @@ list(
       geom_smooth() +
       labs( title = "Trend di readiness allo SBT",
             subtitle = "all'aumentare dei giorni di ventilazione")
+    ggMarginal(p, fill = "light blue")
   }),
 
   tar_target(ggWeanVariablesAll, {
