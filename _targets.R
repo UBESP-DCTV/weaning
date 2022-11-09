@@ -198,7 +198,7 @@ list(
       select(id_univoco, susp_tot, giorno_studio) |>
       ggplot(aes(x = giorno_studio,
                  y = susp_tot)) +
-      geom_density_2d(color = "gray") +
+      geom_point(alpha = 0) +
       geom_smooth() +
       labs( title = "Trend di readiness allo SBT",
             subtitle = "all'aumentare dei giorni di ventilazione")
@@ -218,7 +218,7 @@ list(
   }),
 
   tar_target(ggWeanVariablesSel, {
-    weaningsTRD |>
+    tar_read(weaningsTRD) |>
       filter( folder == "BS",
               id_pat == 8) |>
       ggplot(aes( x = ora)) +
@@ -231,7 +231,17 @@ list(
                 color = "dark orange") +
       facet_wrap(~date) +
       labs( title = "Weaning TRD plot",
-            subtitle = "Paziente BS008")
+            subtitle = "Paziente BS008",
+            y = "") +
+      scale_color_manual(values =
+        c("lavoro_respiratorio_del_ventilatore_joule_l" = "black",
+          "lavoro_respiratorio_del_paziente_joule_l" = "dark blue",
+          "pressione_di_fine_esp_cm_h2o" = "dark green",
+          "press_media_vie_aeree_cm_h2o" = "dark orange"),
+        labels = c("lavoro resp. ventilatore",
+                   "lavoro resp. paziente",
+                   "PEEP",
+                   "pressione media vie aeree"))
   }),
 
   tar_target(patientHistoryPlotTS015, {

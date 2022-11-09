@@ -17,6 +17,7 @@ library(readxl)
 library(plotly)
 library(lubridate)
 library(targets)
+library(ggExtra)
 # library(tidyquant) # non caricare tutto il pacchetto che maschera il mondo
 
 devtools::load_all(".")
@@ -94,11 +95,19 @@ pt_names %>%
 
 Da cui si evince che
 
+-   il paziente AN004, pur rimandendo ricoverato 472 giorni, ha 5 giorni di ventilazione meccanica nello studio e 10 di ICU (non è necessario modificare il dato)
+
 -   il paziente MI006 ha un errore di registrazione di "osp_out" (dovrebbe essere "2014-03-17" invece di "2015-03-17")
 
--   il paziente NO021 ha registrate delle estubazioni senza essere mai stato "ready"
+-   il paziente VM008 trascorre 66 giorni in ICU, dove decede. Il che fa pensare alla data di dimissione dall'ospedale esattamente un anno più tardi, come a un errore di inserimento dei dati (non è necessario modificare il dato)
 
--   mentre gli altri dati sono plausibili per quanto improbabili
+-   Il paziente LG029, TS012 ha un tempo di permanenza in ICU e in VM credibile (non è necessario modificare il dato)
+
+-   il paziente NO021 ha registrate delle estubazioni senza essere mai stato "ready". I dati relativi sono così confusi (solo 3 giorni nel registro giornaliero, si veda sotto) che se ne suggerisce l'esclusione
+
+::: callout-caution
+## decidere cosa fare con i pz MI006, VM008 e NO021
+:::
 
 ## Registro giornaliero dei pazienti
 
@@ -128,7 +137,13 @@ pt_registry <- tar_read(pt_registry)
 glimpse(pt_registry)
 ```
 
+::: callout-warning
+## le variabili ega vengono importante come \<chr\> e non come \<dbl\>, nell'excel sono con virgola e non con il punto decimale. Se dovessero servire (ma non si sa l'orario a cui sono prese), correggere l'import
+:::
+
 ```{r}
+#| label: fig-ggSmoothReadinessSBT
+#| fig-cap: "Double density shows most of data concentrate around 0/12 or 12/12 readiness. Smoothing line shows how readiness increase on average in the first week of mechanical ventilation. After 15 days, dta are very sparse"
 tar_read(ggSmoothReadinessSBT)
 ```
 
