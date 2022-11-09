@@ -202,7 +202,7 @@ list(
       geom_smooth() +
       labs( title = "Trend di readiness allo SBT",
             subtitle = "all'aumentare dei giorni di ventilazione")
-    ggMarginal(p, fill = "light blue")
+    ggExtra::ggMarginal(p, fill = "light blue")
   }),
 
   tar_target(ggWeanVariablesAll, {
@@ -219,30 +219,24 @@ list(
   }),
 
   tar_target(ggWeanVariablesSel, {
-    tar_read(weaningsTRD) |>
+    weaningsTRD %>%
       filter( folder == "BS",
-              id_pat == 8) |>
-      ggplot(aes( x = ora)) +
-      geom_line(aes(y = lavoro_respiratorio_del_ventilatore_joule_l)) +
-      geom_line(aes(y = lavoro_respiratorio_del_paziente_joule_l),
-                color = "dark blue") +
-      geom_line(aes( y = pressione_di_fine_esp_cm_h2o),
-                color = "dark green") +
-      geom_line(aes( y = press_media_vie_aeree_cm_h2o),
-                color = "dark orange") +
+              id_pat == 8) %>%
+      select(date,
+             ora,
+             lavoro_respiratorio_del_ventilatore_joule_l,
+             lavoro_respiratorio_del_paziente_joule_l,
+             pressione_di_fine_esp_cm_h2o,
+             press_media_vie_aeree_cm_h2o) %>%
+      pivot_longer(cols = 3:6) %>%
+      ggplot(aes(x = ora,
+                 y = value,
+                 color = name)) +
+      geom_line() +
       facet_wrap(~date) +
       labs( title = "Weaning TRD plot",
             subtitle = "Paziente BS008",
-            y = "") +
-      scale_color_manual(values =
-        c("lavoro_respiratorio_del_ventilatore_joule_l" = "black",
-          "lavoro_respiratorio_del_paziente_joule_l" = "dark blue",
-          "pressione_di_fine_esp_cm_h2o" = "dark green",
-          "press_media_vie_aeree_cm_h2o" = "dark orange"),
-        labels = c("lavoro resp. ventilatore",
-                   "lavoro resp. paziente",
-                   "PEEP",
-                   "pressione media vie aeree"))
+            y = "")
   }),
 
   tar_target(patientHistoryPlotTS015, {

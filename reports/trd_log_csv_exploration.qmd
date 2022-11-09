@@ -180,20 +180,22 @@ A questo punto è possibile aprire i dati e verificare cosa contengono.
 Innanzitutto si plottano tutte le variabili vs l'ora, così da identificare quelle che mostrano un cambiamento durante uno SBT.
 
 ```{r}
+#| column: page
 tar_read(ggWeanVariablesAll)
 ```
 
 Da cui si ricava che quelle più interessanti sono:
 
--   lavoro respiratorio del ventilatore \[BLU\] (del pz è meno rilevante) \[NERO\]
+-   lavoro respiratorio del ventilatore (del pz è meno rilevante) \[NERO\]
 
 -   pressione di picco delle vie aeree
 
--   pressione media delle vie aeree \[ARANCIO\]
+-   pressione media delle vie aeree
 
--   pressione di fine espirazione \[VERDE\]
+-   pressione di fine espirazione
 
 ```{r}
+#| column: page
 tar_read(ggWeanVariablesSel)
 ```
 
@@ -215,7 +217,17 @@ Del quale sono interessanti alcune "informazioni" particolari:
 
 -   con codice 0 : "standby" che identifica il momento in cui si spegne il ventilatore (e "inizio ventilazione" che ne è la ripresa)
 
--   con codice 267: "pressione sopra PEEP" sembra identificare una delle azioni che avvengono immediatamente prima oppure durante un SBT (ma non solo)
+A queste si aggiungono le azioni o informazioni che dovrebbero (e sembrano) identificare una delle azioni che avvengono immediatamente prima oppure durante un SBT (ma non solo)
+
+-   con codice 267: "pressione sopra PEEP"
+
+-   con codice 291 "concentrazione O2 impostata a...."
+
+-   con codice 321 "livello NAVA impostato a..."
+
+-   con codice 322 "trigger Edi impostato a..."
+
+A questi vanno chiaramente tolte le colonne che iniziano con "silenzialmento" e "pre-silenziamento", in quanto rappresentano azioni non significative.
 
 ## Un esempio: il paziente TS015
 
