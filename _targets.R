@@ -290,30 +290,7 @@ list(
   }),
 
   tar_target(ggMediaMobileSubset, {
-    ggplot(weaning_trd_subset,
-           aes( x = ora)) +
-      tidyquant::geom_ma(aes(
-        y = lavoro_respiratorio_del_ventilatore_joule_l *10),
-        n = 30,
-        linetype = 1) +
-      tidyquant::geom_ma(aes(
-        y = lavoro_respiratorio_del_paziente_joule_l *10),
-        n = 30,
-        color = "dark blue",
-        linetype = 1) +
-      tidyquant::geom_ma(aes(
-        y = pressione_di_fine_esp_cm_h2o),
-        n = 30,
-        color = "dark green",
-        linetype = 1) +
-      tidyquant::geom_ma(aes(
-        y = press_media_vie_aeree_cm_h2o),
-        n = 30,
-        color = "dark orange",
-        linetype = 1) +
-      labs(title = "Moving averages on weanings TRD",
-           x = "", y = "") +
-      facet_wrap(vars(id_univoco, date))
+    plot_trd(weaning_trd_subset, moving_avg = TRUE)
   }),
 
   # compile the report

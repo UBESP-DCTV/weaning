@@ -8,6 +8,8 @@
 #' @param color_files (logical) if TRUE, color the lines according to
 #' the TRD file from which they originate. If FALSE, lines are colored
 #' according to TRD variables
+#' @param moving_avg (logical) if TRUE, a 30 minutes moving average
+#' window is applied to TRD data
 #'
 #' @return a [ggplot][ggplot2::ggplot2-package] showing the plot of
 #'  mechanical ventilation variables
@@ -38,12 +40,16 @@
 #'
 #' }
 #'
-plot_trd <- function(weaning_subset = NA, color_files = FALSE) {
+plot_trd <- function(weaning_subset = NA,
+                     color_files = FALSE,
+                     moving_avg = FALSE) {
 
   checkmate::assert_logical(color_files)
 
   if (color_files == FALSE) {
     return(plot_trd_vars(weaning_subset))
+  } else if (moving_avg == TRUE) {
+    return(plot_trd_mavg(weaning_subset))
   } else {
     return(plot_trd_files(weaning_subset))
   }
@@ -68,6 +74,10 @@ plot_trd_vars <- function(weaning_subset = NA) {
                   lavoro_respiratorio_del_paziente_joule_l,
                   pressione_di_fine_esp_cm_h2o,
                   press_media_vie_aeree_cm_h2o) %>%
+    # STANDARDIZZARE in [0,1] ?
+    # dplyr::mutate(
+    #     dplyr::across( lavoro_respiratorio_del_ventilatore_joule_l:press_media_vie_aeree_cm_h2o,
+    #            ~as.numeric(scales::rescale(., to = c(0, 1))) )) %>%
     tidyr::pivot_longer(cols = 4:7)
 
   plot <- ggplot2::ggplot(trd_subset,
@@ -100,18 +110,61 @@ plot_trd_files <- function(weaning_subset = NA) {
                   lavoro_respiratorio_del_ventilatore_joule_l,
                   lavoro_respiratorio_del_paziente_joule_l,
                   pressione_di_fine_esp_cm_h2o,
-                  press_media_vie_aeree_cm_h2o) %>%
+                  press_media_vie_aeree_cm_h2o,
+                  file) %>%
+    # STANDARDIZZARE in [0,1] ?
+    # dplyr::mutate(
+    #     dplyr::across( lavoro_respiratorio_del_ventilatore_joule_l:press_media_vie_aeree_cm_h2o,
+    #            ~as.numeric(scales::rescale(., to = c(0, 1))) )) %>%
     tidyr::pivot_longer(cols = 4:7)
 
   plot <- ggplot2::ggplot(trd_subset,
                           aes(  x = ora,
                                 y = value,
-                                color = name)) +
+                                color = file)) +
     ggplot2::geom_step() +
     ggplot2::labs(title = "Weanings TRD",
                   x = "", y = "") +
     ggplot2::facet_wrap(vars(id_univoco, date)) +
     ggplot2::theme(legend.position="none")
+
+  return(plot)
+}
+
+plot_trd_mavg <- function(weaning_subset = NA) {
+
+  checkmate::assert_tibble(weaning_subset,
+                           min.rows = 1)
+
+  trd_subset <- tar_read(weaningsTRD) %>%
+    dplyr::mutate( id_univoco = ifelse(
+      test = id_pat <10,
+      yes = paste0(folder, "00", id_pat),
+      no = paste0(folder, "0", id_pat) ) ) %>%
+    dplyr::filter( id_univoco %in% weaning_subset[["id_univoco"]],
+                   date %in% weaning_subset[["data_lettura"]]) %>%
+    dplyr::select(id_univoco,
+                  date,
+                  ora,
+                  lavoro_respiratorio_del_ventilatore_joule_l,
+                  lavoro_respiratorio_del_paziente_joule_l,
+                  pressione_di_fine_esp_cm_h2o,
+                  press_media_vie_aeree_cm_h2o) %>%
+    # STANDARDIZZARE in [0,1] ?
+    dplyr::mutate(
+       dplyr::across( lavoro_respiratorio_del_ventilatore_joule_l:press_media_vie_aeree_cm_h2o,
+              ~as.numeric(scales::rescale(., to = c(0, 1))) )) %>%
+    tidyr::pivot_longer(cols = 4:7)
+
+  plot <- ggplot2::ggplot(trd_subset,
+                          aes( x = ora,
+                               y = value,
+                               color = name)) +
+    tidyquant::geom_ma( n = 30,
+                        linetype = 1) +
+    ggplot2::labs(title = "Moving averages on weanings TRD",
+                  x = "", y = "") +
+    ggplot2::facet_wrap(vars(id_univoco, date))
 
   return(plot)
 }
