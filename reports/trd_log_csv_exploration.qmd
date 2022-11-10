@@ -341,14 +341,14 @@ Un SBT di successo è definito come la presenza contemporanea di due condizioni:
 
 -   il paziente è al momento intubato (o perché intubato post-ingresso in ICU o perché ha necessitato una reintubazione per peggioramento delle condizioni cliniche)
 
-```{r,eval = FALSE}
-weaning_succ <- pt_registry %>%
-  group_by( id_univoco) %>%
-  filter( susp_tot == 12, # criterio 1
-          estubato == 1, # criterio 2
-          lag(estubato, default = 0) == 0) %>%
-  mutate( esito = factor( x = "Successo", 
-                          levels = c("Fallito", "Successo")))
+```{r}
+# weaning_succ <- pt_registry %>%
+#   group_by( id_univoco) %>%
+#   filter( susp_tot == 12, # criterio 1
+#           estubato == 1, # criterio 2
+#           lag(estubato, default = 0) == 0) %>%
+#   mutate( esito = factor( x = "Successo", 
+#                           levels = c("Fallito", "Successo")))
 ```
 
 ```{r}
@@ -368,14 +368,13 @@ Un SBT fallito invece è definito dalla presenza contemporanea di altre due cond
 
 -   la variabile estubazione in quel giorno rimane con valore FALSE
 
-```{r, eval = FALSE}
-weaning_fail <- pt_registry %>%
-  group_by( id_univoco) %>%
-  filter( susp_tot == 12,
-          estubato == 0)  %>%
-  mutate( esito = factor( x = "Fallito", 
-                          levels = c("Fallito", "Successo")))
-
+```{r}
+# weaning_fail <- pt_registry %>%
+#   group_by( id_univoco) %>%
+#   filter( susp_tot == 12,
+#           estubato == 0)  %>%
+#   mutate( esito = factor( x = "Fallito", 
+#                           levels = c("Fallito", "Successo")))
 ```
 
 ```{r}
