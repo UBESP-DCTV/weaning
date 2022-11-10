@@ -290,7 +290,7 @@ list(
   }),
 
   tar_target(ggMediaMobileSubset, {
-    plot_trd(weaning_trd_subset, moving_avg = TRUE)
+    plot_trd(weaning_subset, moving_avg = TRUE)
   }),
 
   # compile the report

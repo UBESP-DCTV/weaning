@@ -404,12 +404,14 @@ tar_read(weaning_subset)
 Si provede quindi al plot del file TRD in quello specifico giorno, usando le variabili precedentemente individuate.
 
 ```{r}
+#| column: page
 tar_read(ggWeaningSubsetDay)
 ```
 
 Dai plot si vede come gli SBT potrebbero essere identificati da quei momenti in cui il ventilatore è spento. Per verificare che non sia un artefatto dovuto a dei buchi nel file (si ricorda infatti che il ventilatore ha un buffer di 24h). si procede a una colorazione per file di origine.
 
 ```{r}
+#| column: page
 tar_read(ggWeaningSubsetFile)
 ```
 
@@ -418,6 +420,7 @@ Alcuni delle "valli" che potevano essere SBT avvengono in corrispondenza di un c
 Si procede a sovrapporre i file di LOG
 
 ```{r}
+#| column: page
 tar_read(ggWeaningLogSubsetRaw)
 ```
 
@@ -433,12 +436,14 @@ weaning_log_filtered <- weaning_log_subset %>%
 ```
 
 ```{r}
+#| column: page
 tar_read(ggWeaningLogSubsetFiltered)
 ```
 
 Per poi passare a una visualizzazione con media mobile con varie finestre (15 e 30 minuti, 30 viene poi mantenuto dopo alcune prove) per vedere se i punti di weaning sono facilmente identificabili.
 
 ```{r}
+#| column: page
 tar_read(ggMediaMobileSubset)
 ```
 

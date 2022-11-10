@@ -120,10 +120,11 @@ plot_trd_files <- function(weaning_subset = NA) {
 
   plot <- ggplot2::ggplot(trd_subset,
                           aes(  x = ora,
-                                y = value,
                                 color = file)) +
-    ggplot2::geom_step() +
+    ggplot2::geom_line(aes( y = value,
+                            group = name)) +
     ggplot2::labs(title = "Weanings TRD",
+                  subtitle = "colore per file di origine",
                   x = "", y = "") +
     ggplot2::facet_wrap(vars(id_univoco, date)) +
     ggplot2::theme(legend.position="none")
