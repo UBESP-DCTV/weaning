@@ -1,0 +1,61 @@
+---
+title: "RNN Crania"
+author: "Andrea Pedot"
+format: html
+editor: visual
+---
+
+# Building the RNN model
+
+```{r}
+library(tidyverse)
+library(abind)
+devtools::load_all(".")
+```
+
+## Creating Arrays as input to the model
+
+First of all, data should be manipulated to be ready for the model train, test and validation. Since the model should support discussion at 7am at the morning briefing, 24h prior to that meeting will be transformed in multidimensional arrays.
+
+### TRD 24h Array ( weaning_attempt, parameter, time)
+
+For TRD, only 3-dimensions are needed:
+
+-   Weaning attempt, obtained combining Patient id (\~180 possible values) and the Day of the attempt
+
+-   Mechanical ventilation parameter, each containing one of the \~32 features recorded each minute by the ventilator
+
+-   Time, with \~1440 with each line representing a minute in the 24h from 7:01am to 7:00am the following day
+
+First of all, let's reduce the problem to only two patients (BS003and TS015) and a handful of TRD variables ( freq_spontanea_resp_min, edi_min_m\_v e press_di_pausa_vie_aeree_cm_h20)
+
+```{r}
+# patient registry
+names_tbl <- tar_read(pt_names)  %>%
+  filter(id_univoco %in% c("BS003", "TS015"))
+
+wdays_tbl <- tar_read(weaning_days)  %>%
+  filter(id_univoco %in% c("BS003", "TS015"))
+
+trd_tbl <- tar_read(weaningsTRD) %>%
+  filter(id_univoco %in% c("BS003", "TS015")) %>%
+  select( id_univoco, date, ora,
+          freq_spontanea_resp_min,
+          edi_min_m_v,
+          press_di_pausa_vie_aeree_cm_h2o)
+```
+
+Di cui si procede a visualizzare la storia clinica
+
+```{r}
+patient_history_plot("BS", 3)
+```
+
+```{r}
+patient_history_plot("TS", 15)
+```
+
+```{r}
+trd_tbl %>%
+  group_by(id_univoco)
+```
