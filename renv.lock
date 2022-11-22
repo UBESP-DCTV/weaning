@@ -454,6 +454,22 @@
       "Hash": "bb4341986bc8b914f0f0acf2e4a3f2f7",
       "Requirements": []
     },
+    "colourpicker": {
+      "Package": "colourpicker",
+      "Version": "1.2.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "ca4d99d106687d68392ffe270081bfc0",
+      "Requirements": [
+        "ggplot2",
+        "htmltools",
+        "htmlwidgets",
+        "jsonlite",
+        "miniUI",
+        "shiny",
+        "shinyjs"
+      ]
+    },
     "commonmark": {
       "Package": "commonmark",
       "Version": "1.8.0",
@@ -892,6 +908,23 @@
         "zip"
       ]
     },
+    "ggExtra": {
+      "Package": "ggExtra",
+      "Version": "0.10.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "f505d7f3058403787145fe0f7b1ff84c",
+      "Requirements": [
+        "R6",
+        "colourpicker",
+        "ggplot2",
+        "gtable",
+        "miniUI",
+        "scales",
+        "shiny",
+        "shinyjs"
+      ]
+    },
     "ggplot2": {
       "Package": "ggplot2",
       "Version": "3.3.6",
@@ -909,6 +942,19 @@
         "scales",
         "tibble",
         "withr"
+      ]
+    },
+    "ggrepel": {
+      "Package": "ggrepel",
+      "Version": "0.9.2",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "610af35a68a1e8a40f05aad45871e719",
+      "Requirements": [
+        "Rcpp",
+        "ggplot2",
+        "rlang",
+        "scales"
       ]
     },
     "gh": {
@@ -2198,6 +2244,18 @@
       "Requirements": [
         "htmltools",
         "htmlwidgets",
+        "jsonlite",
+        "shiny"
+      ]
+    },
+    "shinyjs": {
+      "Package": "shinyjs",
+      "Version": "2.1.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "802e4786b353a4bb27116957558548d5",
+      "Requirements": [
+        "digest",
         "jsonlite",
         "shiny"
       ]

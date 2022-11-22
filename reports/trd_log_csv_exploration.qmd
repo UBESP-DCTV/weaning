@@ -459,23 +459,6 @@ Non è possibile sapere a priori quale tipo di strategia SBT è stata scelta per
 
 Nel caso di paziente ventilato con PSV, si settano i parametri FiO2 , PEEP e  Pressione di Supporto sopra PEEP (oltre ai trigger inspiratori ed espiratori, così come i limiti di sicurezza). La ventilazione NAVA è simile, con la differenza che i trigger sono segnali provenienti dal diaframma.
 
-Si rivedono ora le tre strategie, evidenziando le modifiche che ci si attende dai tracciati o dai log:
+In ogni caso, si decide di costruire un modello che sia utilizzabile durante la riunione di reparto delle 8 di mattina, in cui si deciderà se testare un paziente (piuttosto che no) tramite la valutazione della readiness a un SBT.
 
-1.  T-piece:
-
-2.  CPAP
-
-3.  IMV
-
-...
-
-A questo punto è possibile replicarlo per tutti i pazienti.
-
-```{r}
-weaning_days <- tar_read(weaning_days)
-weaning_subset <- weaning_days %>%
-  select(id_univoco, data_lettura, esito, type) %>%
-  filter( id_univoco %in% weaning_days[["id_univoco"]]) %>%
-  group_by(id_univoco) %>%
-  arrange(data_lettura)
-```
+In questo momento, l'individuazine dell'esatto momento in cui avverrà l'SBT non è un problema da affrontare.
