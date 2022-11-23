@@ -9,6 +9,7 @@ editor: visual
 
 ```{r}
 library(tidyverse)
+library(targets)
 library(abind)
 devtools::load_all(".")
 ```
@@ -56,6 +57,15 @@ patient_history_plot("TS", 15)
 ```
 
 ```{r}
-trd_tbl %>%
-  group_by(id_univoco)
+T <- matrix(1:60, ncol=6) %>%
+  as_tibble() %>%
+  mutate(id_pat = (V1 < 6) )
+
+S <- T %>%
+  group_by(id_pat) %>%
+  group_split( .keep = FALSE ) %>%
+  lapply(FUN = as.matrix)
+  
+A <- abind(S, along = 3)
+
 ```
