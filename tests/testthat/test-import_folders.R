@@ -3,7 +3,7 @@ test_that("import_folder correctly remove duplicates", {
   sample_folder <- file.path(data_test_path(), "AB")
 
   # evaluation
-  res <- suppressMessages(import_folder(sample_folder))
+  res <- suppressWarnings(import_folder(sample_folder))
 
   # tests
   res |>

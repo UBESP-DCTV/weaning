@@ -4,8 +4,12 @@ test_that("import_patient works", {
   sample_path <- file.path(data_test_path(), "pt_registry_giornalieri_test.xlsx")
 
   # execution
-  res <- suppressMessages(import_registry(testing_time = TRUE,
-                                          test_path = sample_path))
+  res <- import_registry(
+      testing_time = TRUE,
+      test_path = sample_path
+    ) |>
+    suppressMessages()
+
   types <- purrr::map_chr(res, ~class(.x)[[1]])
 
   # test

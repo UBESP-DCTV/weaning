@@ -4,8 +4,12 @@ test_that("import_patient works", {
   sample_path <- file.path(data_test_path(), "pt_inclusione_test.xlsx")
 
   # execution
-  res <- suppressMessages(import_patients(testing_time = TRUE,
-                                          test_path = sample_path))
+  res <- import_patients(
+    testing_time = TRUE, test_path = sample_path
+  ) |>
+  suppressMessages() |>
+  suppressWarnings()
+
   types <- purrr::map_chr(res, ~class(.x)[[1]])
 
   # test

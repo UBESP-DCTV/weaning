@@ -54,12 +54,12 @@ import_trd <- function(.file_path, verbose = FALSE) {
 
   ora_x <- which(res[["ora"]] == lubridate::hm("23:59"))
 
-  if(length(ora_x) > 0) {
+  if (length(ora_x) > 0) {
     res_oggi <- res |>
-      dplyr::slice(- (1:ora_x))
+      dplyr::slice(-seq_len(ora_x))
 
     res_ieri <- res |>
-      dplyr::slice(1:ora_x) |>
+      dplyr::slice(seq_len(ora_x)) |>
       dplyr::mutate(
         date = date - 1
       )
@@ -68,13 +68,14 @@ import_trd <- function(.file_path, verbose = FALSE) {
   }
 
   res <- res |>
-    dplyr::filter(dplyr::if_any(-c(.data[["ora"]],
-                                   .data[["id_pat"]],
-                                   .data[["date"]]), ~!is.na(.x))) |>
+    dplyr::filter(
+      dplyr::if_any(
+        -dplyr::all_of(c("ora", "id_pat", "date")),
+        ~!is.na(.x))
+    ) |>
     dplyr::relocate(
-      .data[["id_pat"]],
-      .data[["date"]],
-      .before = .data[["ora"]]
+      dplyr::all_of(c("id_pat", "date")),
+      .before = dplyr::all_of("ora")
     )
 
 

@@ -5,7 +5,9 @@ test_that("import_trd works", {
   fake_path <- fs::file_temp(ext = "SI")
 
   # evaluation
-  res <- suppressMessages(import_trd(sample_path))
+  res <- import_trd(sample_path) |>
+    suppressMessages() |>
+    suppressWarnings()
 
   # tests
   res |>
@@ -33,7 +35,9 @@ test_that("import_folder works for TRD files", {
   sample_folder <- file.path(data_test_path(), "AB")
 
   # evaluation
-  res <- suppressMessages(import_folder(sample_folder))
+  res <- import_folder(sample_folder) |>
+    suppressMessages() |>
+    suppressWarnings()
 
   # tests
   res |>
@@ -67,7 +71,9 @@ test_that("import_folders works for TRD files", {
   sample_folder <- data_test_path()
 
   # evaluation
-  res <- suppressMessages(import_folders(sample_folder, verbose = TRUE))
+  res <- import_folders(sample_folder, verbose = TRUE) |>
+    suppressMessages() |>
+    suppressWarnings()
 
   # tests
   res |>
@@ -95,7 +101,7 @@ test_that("problematic characters are managed by import_trd", {
   sample_path <- file.path(data_test_path(), "BG/BG004_1451_TRD.SI")
 
   # evaluation
-  res <- suppressMessages(import_trd(sample_path))
+  res <- suppressWarnings(import_trd(sample_path))
 
   # tests
   res |>
@@ -116,7 +122,7 @@ test_that("import_trd admit empty content file", {
   )
 
   # evaluation
-  res <- suppressMessages(import_trd(sample_path))
+  res <- suppressWarnings(import_trd(sample_path))
 
   # tests
   res |>

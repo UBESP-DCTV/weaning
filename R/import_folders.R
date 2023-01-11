@@ -84,7 +84,10 @@ import_folder <- function(
     )
 
   res <- aux |>
-    dplyr::distinct(dplyr::across(-.data[["file"]]), .keep_all = TRUE)
+    dplyr::distinct(
+      dplyr::across(-dplyr::all_of("file")),
+      .keep_all = TRUE
+    )
 
   if (!verbose) usethis::ui_done(.dir_path)
   res

@@ -19,9 +19,11 @@
 #' }
 import_patients <- function(verbose = FALSE,
                             testing_time = FALSE, test_path = "") {
-  path_input <- file.path( get_input_data_path(),
-                           "/../",
-                           "pt_names dati inclusione.xlsx") |>
+  path_input <- file.path(
+      get_input_data_path(),
+      "/../",
+      "pt_names dati inclusione.xlsx"
+    ) |>
     normalizePath()
 
   # Testing time override

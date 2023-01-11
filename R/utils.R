@@ -60,3 +60,9 @@ parse_weanings_dates <- function(str_date) {
 
   parser_date(str_date)
 }
+
+
+get_id <- function(x, id_varname = "id_univoco") {
+  checkmate::assert_subset(id_varname, names(x))
+  x[[id_varname]]
+}

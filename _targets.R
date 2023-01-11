@@ -51,7 +51,7 @@ list(
     weaningsLOG,{
     import_folders(weaningFolder, "LOG") |>
       dplyr::mutate( id_univoco = ifelse(
-        test = id_pat <10,
+        test = id_pat < 10,
         yes = paste0(folder, "00", id_pat),
         no = paste0(folder, "0", id_pat) ),
         date = data )
@@ -60,11 +60,9 @@ list(
     format = "qs"
   ),
 
-  tar_target(
-    pt_names,
-    import_patients(),
-    format = "qs"
-  ),
+  tar_target(pt_names, import_patients(), format = "qs"),
+
+  tar_target(pt_ids, get_id(pt_names)),
 
   tar_target(
     pt_registry,

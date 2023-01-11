@@ -32,14 +32,14 @@ First of all, let's reduce the problem to only two patients (BS003and TS015) and
 
 ```{r}
 # patient registry
-names_test <- tar_read(pt_names)  %>%
+clinic_reduced <- tar_read(pt_names)  %>%
   filter(id_univoco %in% c("BS003", "TS015"))
 
-wdays_test <- tar_read(weaning_days)  %>%
+weaning_reduced <- tar_read(weaning_days)  %>%
   filter(id_univoco %in% c("BS003", "TS015")) %>%
   mutate( id_date = paste0(id_univoco, data_lettura))
 
-trd_test <- tar_read(weaningsTRD) %>%
+trd_reduced <- tar_read(weaningsTRD) %>%
   filter(id_univoco %in% c("BS003", "TS015")) %>%
   select( id_univoco, date, ora,
           freq_spontanea_resp_min,
