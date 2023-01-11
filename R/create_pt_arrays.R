@@ -52,16 +52,50 @@ create_pt_weanings <- function(db, pt_id) {
   db |>
     dplyr::filter(.data[["id_univoco"]] == pt_id) |>
     dplyr::arrange(.data[["giorno_studio"]]) |>
-    dplyr::select(
-      dplyr::all_of(c("sofa", "cpis", "susp_tot"))
-    ) |>
+    dplyr::select(dplyr::all_of(c("sofa", "cpis", "susp_tot"))) |>
     as.matrix() |>
     unname() |>
     as.array()
 
 }
 
-create_pt_outcome <- function(db, pt_id) {
+#' Create outcome array
+#'
+#' from the `db` weaning_days, it extracts (i.e., filter and select)
+#' information on the SBT day and its result for the patient indicated
+#' in `pt_id`
+#'
+#' @param db (data.frame) the weaning_days data
+#' @param pt_id (character(1)) patient's id_univoco to consider
+#'
+#' @return (named list of 1D arrays) with the outcomes for the
+#'  corresponding SBT days
+#' @export
+create_pt_outcome <- function(
+    db,
+    pt_id,
+    esiti = c("Insuccesso", "Successo")
+) {
+
+  stop("!!!!!!!!!check me!!!!!!!!!!!")
+
   check_array_creation_inputs(db, pt_id)
-  stop("da weanings")
+  checkmate::assert_subset("esito", choices = names(db))
+
+  aux <- db |>
+    dplyr::filter(.data[["id_univoco"]] == pt_id) |>
+    dplyr::select(dplyr::all_of(c("giorno_studio", "esito"))) |>
+    dplyr::mutate(
+      esito = as.integer(factor(.data[["esito"]], levels = esiti)) - 1L
+    ) |>
+    dplyr::arrange(.data[["giorno_studio"]])
+
+  aux[["giorno_studio"]] |>
+    purrr::set_names() |>
+    purrr::map(\(day) {
+      dplyr::filter(aux, .data[["giorno_studio"]] == day) |>
+        dplyr::pull() |>
+        array()
+    })
+
 }
