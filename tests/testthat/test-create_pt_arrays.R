@@ -43,11 +43,16 @@ test_that("create_pt_ptnames works", {
 
 test_that("create_weanings works", {
   # setup
+  # sbt :=
+  #   `-1` = "stubato",
+  #    `0` = "sbt non provato",
+  #    `1` = "sbt riuscito",
+  #    `2` = "sbt fallito"
   weanings <- tibble::tribble(
-    ~id_univoco, ~giorno_studio, ~sofa, ~cpis, ~susp_tot,
-    "1", 1, 6, 4, 12,
-    "1", 0, 5, 3, 7,
-    "2", 0, 2, 1, 12
+    ~id_univoco, ~giorno_studio, ~sofa, ~cpis, ~susp_tot, ~sbt,
+    "1", 1, 6, 4, 12, 0,
+    "1", 0, 5, 3, 7, 1,
+    "2", 0, 2, 1, 12, 2
   )
 
   # evaluate
@@ -56,9 +61,36 @@ test_that("create_weanings works", {
 
   # tests
   expect_array(res_1, "integerish", any.missing = FALSE, d = 2)
-  expect_equal(res_1, array(c(5, 6, 3, 4, 7, 12), dim = c(2, 3)))
+  expect_equal(res_1, array(c(5, 6, 3, 4, 7, 12, 1, 0), dim = c(2, 4)))
 
   expect_array(res_2, "integerish", any.missing = FALSE, d = 2)
-  expect_equal(res_2, array(c(2, 1, 12), dim = c(1, 3)))
+  expect_equal(res_2, array(c(2, 1, 12, 2), dim = c(1, 4)))
 
 })
+
+
+test_that("create_sbt works", {
+  # setup
+  test_reg <- tibble::tribble(
+    ~id_univoco, ~giorno_studio
+  )
+
+  # eval
+  res <- create_sbt(test_reg)
+
+  # test
+  expect_integerish(res, lower = -1, upper = 2, any.missing = FALSE)
+  expect_length(res, nrow(test_reg))
+})
+
+
+
+
+
+
+
+
+
+
+
+

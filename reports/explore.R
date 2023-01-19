@@ -15,3 +15,7 @@ c <- fix_wrong_hours(b)
 
 
 get_problematic_dupes(c)
+
+
+tar_read(pt_names) |> dplyr::glimpse()
+tar_read(pt_registry) |> dplyr::glimpse()

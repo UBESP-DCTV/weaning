@@ -61,4 +61,5 @@ test_that("import_patient works", {
 
   expect_tibble(res)
   expect_equal(types, expected_coltypes)
+  expect_snapshot(res)
 })

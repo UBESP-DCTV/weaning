@@ -17,24 +17,28 @@
 #'
 #'   import_registry()
 #' }
-import_registry <- function(verbose = FALSE,
-                            testing_time = FALSE, test_path = "") {
-  path_input <- file.path( get_input_data_path(),
-                           "/../",
-                           "pt_registry dati giornalieri.xls.xlsx") |>
+import_registry <- function(
+    verbose = FALSE,
+    testing_time = FALSE,
+    test_path = ""
+) {
+
+  path_input <- file.path(
+    get_input_data_path(),
+    "/../",
+    "pt_registry dati giornalieri.xls.xlsx"
+  ) |>
     normalizePath()
-
-  # Testing time override
-  if (testing_time == TRUE) path_input <- test_path
-
-
   stopifnot(stringr::str_detect(path_input, "giornalieri"))
   checkmate::assert_file_exists(path_input)
 
 
+  # Testing time override
+  if (testing_time == TRUE) {
+    path_input <- test_path
+  }
 
   if (verbose) usethis::ui_todo(path_input)
-
 
   res <- readxl::read_xlsx(
       path = path_input,
@@ -79,20 +83,22 @@ import_registry <- function(verbose = FALSE,
       na = c("", "NULL")
     ) |>
     dplyr::filter(filter_deleted == 0) |>
-    dplyr::mutate( type = forcats::as_factor(type),
-                   data_lettura = lubridate::as_date(data_lettura)
-           # TO FIX: "EGA variables as numeric, problema è la virgola, per ora sono chr
+    dplyr::mutate(
+      type = forcats::as_factor(type),
+      data_lettura = lubridate::as_date(data_lettura),
+      susp_tot = rowSums(dplyr::across(dplyr::starts_with("susp_")))
+      # TO FIX: EGA variables as numeric (sono chr), problema è la virgola
+    ) |>
+    dplyr::with_groups(
+      id_univoco,
+      dplyr::mutate,
+      giorno_studio = data_lettura - dplyr::first(data_lettura)
+    ) |>
+    add_sbt() |>
+    dplyr::mutate(
+      esito = sbt |>
+        factor(levels = 1:2, labels = c("Successo", "Fallito"))
     )
-
-  res <- res |>
-    dplyr::group_by(id_univoco) |>
-    dplyr::mutate(giorno_studio = data_lettura - dplyr::first(data_lettura)) |>
-    dplyr::ungroup()
-
-  res <- res %>%
-    dplyr::select(starts_with("susp_")) %>%
-    dplyr::transmute(susp_tot = rowSums(dplyr::across(dplyr::everything()))) %>%
-    dplyr::bind_cols(res, .)
 
   if (verbose) usethis::ui_done(path_input)
   res

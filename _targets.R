@@ -64,46 +64,19 @@ list(
 
   tar_target(pt_ids, get_id(pt_names)),
 
-  tar_target(
-    pt_registry,
-    import_registry(),
-    format = "qs"
-  ),
+  tar_target(pt_registry, import_registry(), format = "qs"),
 
-  tar_target(
-    weaning_succ, {
-    pt_registry %>%
-      group_by( id_univoco) %>%
-      filter( susp_tot == 12, # criterio 1
-              estubato == 1, # criterio 2
-              lag(estubato, default = 0) == 0) %>%
-      mutate( esito = factor( x = "Successo",
-                              levels = c("Fallito", "Successo")))
-  }),
 
-  tar_target(
-    weaning_fail, {
-    weaning_fail <- pt_registry %>%
-      group_by( id_univoco) %>%
-      filter( susp_tot == 12,
-              estubato == 0)  %>%
-      mutate( esito = factor( x = "Fallito",
-                              levels = c("Fallito", "Successo")))
-    }),
-
-  tar_target(
-    weaning_days, {
-    weaning_succ %>%
-      bind_rows(weaning_fail) %>%
-      arrange(id_univoco)
-  }),
+  tar_target(pt_registry, add_sbt(pt_registry)),
 
   tar_target(
     weaning_subset, {
-    patient_subset <- c("TS012", "BS002", "NO004")
-    weaning_subset <- weaning_days %>%
+    pt_registry %>%
       select(id_univoco, data_lettura, esito, type) %>%
-      filter( id_univoco %in% patient_subset) %>%
+      filter(
+        !is.na(esito),
+        id_univoco %in% c("TS012", "BS002", "NO004")
+      ) %>%
       group_by(id_univoco) %>%
       arrange(data_lettura)
   }),
@@ -251,26 +224,26 @@ list(
   }),
 
   tar_target(ggTentativiPerPaziente, {
-  weaning_days %>%
-    select(id_univoco, esito) %>%
-    mutate(i = 1) %>%
-    pivot_wider( names_from = esito,
-                 values_from = i,
-                 values_fn = sum,
-                 values_fill = 0) %>%
-    ggplot() +
-    geom_count( aes( x = Fallito,
-                     y = Successo,
-                     colour = ..n..)) +
-    labs( title = "Numero di tentativi per paziente")
+    pt_registry |>
+      select(id_univoco, esito) |>
+      group_by(esito, id_univoco) |>
+      tally() |> summarise(sum(n)) #|> pull(n) |> sum()
+      pivot_wider(
+        names_from = esito,
+        values_from = n,
+        values_fill = 0
+      ) |>
+      ggplot(aes(x = Fallito, y = Successo)) +
+      geom_count(aes(colour = ..n.., size = ..n..)) +
+      labs( title = "Numero di tentativi per paziente")
   }),
 
   tar_target(ggWeaningSubsetDay, {
-    plot_trd(weaning_subset, color_files = FALSE)
+    plot_trd(pt_registry, color_files = FALSE)
   }),
 
   tar_target(ggWeaningSubsetFile, {
-    plot_trd(weaning_subset, color_files = TRUE)
+    plot_trd(pt_registry, color_files = TRUE)
   }),
 
   tar_target(ggWeaningLogSubsetRaw,{

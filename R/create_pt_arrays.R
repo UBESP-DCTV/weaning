@@ -1,10 +1,3 @@
-check_array_creation_inputs <- function(db, pt_id) {
-  checkmate::assert_data_frame(db)
-  checkmate::assert_subset("id_univoco", choices = names(db))
-  checkmate::assert_string(pt_id)
-  checkmate::assert_subset(pt_id, choices = db[["id_univoco"]])
-}
-
 create_pt_trd <- function(db, pt_id) {
   check_array_creation_inputs(db, pt_id)
 
@@ -52,12 +45,45 @@ create_pt_weanings <- function(db, pt_id) {
   db |>
     dplyr::filter(.data[["id_univoco"]] == pt_id) |>
     dplyr::arrange(.data[["giorno_studio"]]) |>
-    dplyr::select(dplyr::all_of(c("sofa", "cpis", "susp_tot"))) |>
+    dplyr::select(dplyr::all_of(
+      c("sofa", "cpis", "susp_tot")
+    )) |>
     as.matrix() |>
     unname() |>
     as.array()
 
 }
+
+
+
+add_sbt <- function(db_reg) {
+  db_reg |>
+    dplyr::group_by(id_univoco) |>
+    dplyr::arrange(.data[["id_univoco"]], .data[["data_lettura"]]) |>
+    dplyr::mutate(
+      sbt = dplyr::case_when(
+        # successo sbt (default = TRUE per SBT al primo giorno)
+        .data[["susp_tot"]] == 12 &
+          .data[["estubato"]] &
+          !lag(.data[["estubato"]], default = FALSE) ~ 1L,
+        # sbt non provato (ma fattibile)
+        .data[["susp_tot"]] < 12 ~ 0L,
+        # fallito sbt
+        !.data[["estubato"]] ~ 2L,
+        # sbt non provato (e non fattibile)
+        TRUE ~ -1L
+      )
+    ) |>
+    dplyr::ungroup()
+
+  stop("Non c'è (più) nemmeno un '1'!! (impossibile, e infatti c'era!)")
+  # import_registry() |> dplyr::select(estubato, sbt) |> table(useNA = "always")
+}
+
+
+
+
+
 
 #' Create outcome array
 #'
@@ -77,7 +103,7 @@ create_pt_outcome <- function(
     esiti = c("Insuccesso", "Successo")
 ) {
 
-  stop("!!!!!!!!!check me!!!!!!!!!!!")
+  # stop("!!!!!!!!!check me!!!!!!!!!!!")
 
   check_array_creation_inputs(db, pt_id)
   checkmate::assert_subset("esito", choices = names(db))
@@ -99,3 +125,17 @@ create_pt_outcome <- function(
     })
 
 }
+
+check_array_creation_inputs <- function(db, pt_id) {
+  checkmate::assert_data_frame(db)
+  checkmate::assert_subset("id_univoco", choices = names(db))
+  checkmate::assert_string(pt_id)
+  checkmate::assert_subset(pt_id, choices = db[["id_univoco"]])
+}
+
+
+
+
+
+
+
