@@ -20,7 +20,8 @@
 import_registry <- function(
     verbose = FALSE,
     testing_time = FALSE,
-    test_path = ""
+    test_path = "",
+    remove_wrong_patients = "NO021"
 ) {
 
   path_input <- file.path(
@@ -68,7 +69,7 @@ import_registry <- function(
       ),
       col_names = c(
         "type", "id_registry", "filter_deleted", "id_univoco",
-        "id_medico", "data_lettura", "ega_ph","ega_pao2",
+        "id_medico", "data_lettura", "ega_ph", "ega_pao2",
         "ega_paco2", "sofa", "cpis",
         "estubato", "reintubato", "morto",
         "susp_aspir", "susp_tosse", "susp_gcs", "susp_fcpas",
@@ -82,21 +83,29 @@ import_registry <- function(
       ),
       na = c("", "NULL")
     ) |>
-    dplyr::filter(filter_deleted == 0) |>
+    dplyr::filter(
+      .data[["filter_deleted"]] == 0,
+      (!.data[["id_univoco"]] %in% remove_wrong_patients)
+    ) |>
     dplyr::mutate(
-      type = forcats::as_factor(type),
-      data_lettura = lubridate::as_date(data_lettura),
-      susp_tot = rowSums(dplyr::across(dplyr::starts_with("susp_")))
+      type = forcats::as_factor(.data[["type"]]),
+      data_lettura = lubridate::as_date(.data[["data_lettura"]]),
+      susp_tot = rowSums(dplyr::across(dplyr::starts_with("susp_"))),
+      across(
+        starts_with("ega"),
+        ~ stringr::str_replace(.x, ",", ".") |> readr::parse_double()
+      )
       # TO FIX: EGA variables as numeric (sono chr), problema è la virgola
     ) |>
     dplyr::with_groups(
-      id_univoco,
+      .data[["id_univoco"]],
       dplyr::mutate,
-      giorno_studio = data_lettura - dplyr::first(data_lettura)
+      giorno_studio = .data[["data_lettura"]] -
+        dplyr::first(.data[["data_lettura"]])
     ) |>
     add_sbt() |>
     dplyr::mutate(
-      esito = sbt |>
+      esito = .data[["sbt"]] |>
         factor(levels = 1:2, labels = c("Successo", "Fallito"))
     )
 

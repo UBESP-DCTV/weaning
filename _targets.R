@@ -226,16 +226,24 @@ list(
   }),
 
   tar_target(patientHistoryPlotTS015, {
-    patient_history_plot("TS", 15)
+    patient_history_plot(
+      weaningsTRD, weaningsLOG, pt_names, pt_registry, "TS", 15
+    )
   }),
   tar_target(patientHistoryPlotTS012, {
-    patient_history_plot("TS", 12)
+    patient_history_plot(
+      weaningsTRD, weaningsLOG, pt_names, pt_registry, "TS", 12
+    )
   }),
   tar_target(patientHistoryPlotBS002, {
-    patient_history_plot("BS", 2)
+    patient_history_plot(
+      weaningsTRD, weaningsLOG, pt_names, pt_registry, "BS", 2
+    )
   }),
   tar_target(patientHistoryPlotNO004, {
-    patient_history_plot("NO", 04)
+    patient_history_plot(
+      weaningsTRD, weaningsLOG, pt_names, pt_registry, "NO", 04
+    )
   }),
 
   tar_target(ggTentativiPerPaziente, {

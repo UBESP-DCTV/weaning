@@ -4,7 +4,14 @@
 \alias{patient_history_plot}
 \title{Build a patient history plot}
 \usage{
-patient_history_plot(id_ospedale = NA, id_paziente = NA)
+patient_history_plot(
+  weanings_trd,
+  weanings_log,
+  pt_names,
+  pt_registry,
+  id_ospedale = NA,
+  id_paziente = NA
+)
 }
 \arguments{
 \item{id_ospedale}{(chr) 2 letter string of the hospital}
@@ -30,7 +37,7 @@ Show on a single plot all relevant data about a single patient:
 \dontrun{
   library(weaning)
 
-  patient_history_plot( id_ospedale = "TS", id_paziente = 15)
+  patient_history_plot(id_ospedale = "TS", id_paziente = 15)
 
 }
 

@@ -57,14 +57,14 @@ import_folder <- function(
       full.names = TRUE,
       ignore.case = TRUE
     ) |>
-    {\(.x) .x |>
+    (\(.x) .x |>
         purrr::set_names(
           basename(.x) |>
             stringr::str_remove(
               paste0("_", what, "\\.SI$")
             )
         )
-    }()
+    )()
 
 
   if (length(trd_files)  == 0L) return(NULL)
@@ -133,7 +133,7 @@ import_folders <- function(
   .dir_path |>
     list.dirs(recursive = FALSE, full.names = TRUE) |>
     normalizePath() |>
-    {\(.x) purrr::set_names(.x, basename(.x))}() |>
+    (\(.x) purrr::set_names(.x, basename(.x)))() |>
     purrr::map_dfr(
       import_folder,
       what = what,

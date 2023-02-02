@@ -7,6 +7,8 @@
 #' @param .file_path (chr) path to the LOG file to import
 #' @param verbose (lgl, FALSE) would you like to have additional
 #'   messages to be signaled?
+#' @param need_hdr (lgl, default = FALSE) we do not use that, here for
+#'   potential future purposes
 #'
 #' @return a [tibble][tibble::tibble-package] with the imported
 #'   information (i.e. the tabular content plus the patient id) from the
@@ -20,13 +22,15 @@
 #'   file.path(get_data_path(), "AB/AN001_356_LOG.SI") |>
 #'   import_log()
 #' }
-import_log <- function(.file_path, verbose = FALSE) {
+import_log <- function(.file_path, verbose = FALSE, need_hdr = FALSE) {
   stopifnot(stringr::str_detect(.file_path, "LOG"))
   checkmate::assert_file_exists(.file_path)
 
   if (verbose) usethis::ui_todo(.file_path)
 
-  headr <- readr::read_lines(.file_path, n_max = 10)
+  if (need_hdr) {
+    headr <- readr::read_lines(.file_path, n_max = 10)
+  }
 
   content <- readr::read_lines(.file_path, skip = 10) |>
     stringr::str_subset("Riassunto", negate = TRUE) |>
@@ -48,7 +52,9 @@ import_log <- function(.file_path, verbose = FALSE) {
       .before = dplyr::all_of("data")
     ) |>
     dplyr::mutate(
-      time = lubridate::as_datetime(paste(data, ora))
+      time = lubridate::as_datetime(
+        paste(.data[["data"]], .data[["ora"]])
+      )
     ) |>
     dplyr::arrange(time)
 

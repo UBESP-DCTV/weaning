@@ -44,10 +44,10 @@ test_that("create_pt_ptnames works", {
 test_that("create_weanings works", {
   # setup
   # sbt :=
-  #   `-1` = "stubato",
-  #    `0` = "sbt non provato",
-  #    `1` = "sbt riuscito",
-  #    `2` = "sbt fallito"
+  #   stubato = `-1`,
+  #   sbt non provato =  `0`,
+  #   sbt riuscito =  `1`,
+  #   sbt fallito =  `2`
   weanings <- tibble::tribble(
     ~id_univoco, ~giorno_studio, ~sofa, ~cpis, ~susp_tot, ~sbt,
     "1", 1, 6, 4, 12, 0,
@@ -72,25 +72,14 @@ test_that("create_weanings works", {
 test_that("create_sbt works", {
   # setup
   test_reg <- tibble::tribble(
-    ~id_univoco, ~giorno_studio
+    ~id_univoco, ~giorno_studio, ~susp_tot, ~estubato, ~data_lettura,
+      1, 1, 1, TRUE, 1
   )
 
   # eval
-  res <- create_sbt(test_reg)
+  res <- add_sbt(test_reg)[["sbt"]]
 
   # test
   expect_integerish(res, lower = -1, upper = 2, any.missing = FALSE)
   expect_length(res, nrow(test_reg))
 })
-
-
-
-
-
-
-
-
-
-
-
-

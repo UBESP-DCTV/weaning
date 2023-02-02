@@ -145,11 +145,6 @@ test_that("Controllare casini sui duplicati", {
     qs::qread()
 
   # evaluate
-  ## problem <- weanings_trd |>
-  ##   janitor::get_dupes(file, id_pat, date, ora)
-  # expect_true(nrow(problem) == 0)
-  #
-  # equivalent to (but faster)
   not_problem <- weanings_trd |>
     dplyr::distinct(file, id_pat, date, ora)
 

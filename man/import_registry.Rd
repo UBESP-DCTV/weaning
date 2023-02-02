@@ -4,7 +4,12 @@
 \alias{import_registry}
 \title{Import Patient daily registry Excel file}
 \usage{
-import_registry(verbose = FALSE, testing_time = FALSE, test_path = "")
+import_registry(
+  verbose = FALSE,
+  testing_time = FALSE,
+  test_path = "",
+  remove_wrong_patients = "NO021"
+)
 }
 \arguments{
 \item{verbose}{(lgl, FALSE) would you like to have additional

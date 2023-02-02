@@ -110,5 +110,3 @@ test_that("manage problematic foders with files without dates", {
     )
 
 })
-
-

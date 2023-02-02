@@ -1,7 +1,9 @@
 test_that("import_patient works", {
 
   # setup
-  sample_path <- file.path(data_test_path(), "pt_registry_giornalieri_test.xlsx")
+  sample_path <- file.path(
+    data_test_path(), "pt_registry_giornalieri_test.xlsx"
+  )
 
   # execution
   res <- import_registry(
@@ -20,9 +22,9 @@ test_that("import_patient works", {
     id_univoco = "character",
     id_medico = "numeric",
     data_lettura = "Date",
-    ega_ph = "character",
-    ega_pao2 = "character",
-    ega_paco2 = "character",
+    ega_ph = "numeric",
+    ega_pao2 = "numeric",
+    ega_paco2 = "numeric",
     sofa = "numeric",
     cpis = "numeric",
     estubato = "logical",
@@ -55,8 +57,10 @@ test_that("import_patient works", {
     fail_ph = "logical",
     fail_paco2 = "logical",
     fail_sbp = "logical",
+    susp_tot = "numeric",
     giorno_studio = "difftime",
-    susp_tot = "numeric"
+    sbt = "integer",
+    esito = "factor"
   )
 
   expect_tibble(res)

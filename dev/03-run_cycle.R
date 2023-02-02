@@ -9,4 +9,3 @@ usethis::use_tidy_description()
 ## CTRL + SHIFT + E: run all CRAN tests
 
 source(here::here("run.R"))
-

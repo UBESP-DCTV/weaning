@@ -43,9 +43,10 @@ get_date_format <- function(str_date) {
   if (is_iso) return("iso")
   if (is_ita) return("ita")
 
-  usethis::ui_stop(
-    "Date you have passed is {usethis::ui_value(str_date)} which is in an unknown date format for us."
-  )
+  usethis::ui_stop(paste0(
+    "Date you have passed is {usethis::ui_value(str_date)} ",
+    "which is in an unknown date format for us."
+  ))
 }
 
 
