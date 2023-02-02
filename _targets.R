@@ -27,6 +27,11 @@ tar_option_set(packages = "tidyverse")
 # End this file with a list of target objects.
 list(
 
+
+
+
+  # Import data -----------------------------------------------------
+
   tar_target(
     weaningFolder,
     get_input_data_path(),
@@ -60,6 +65,12 @@ list(
     format = "qs"
   ),
 
+
+
+
+
+# transform data --------------------------------------------------
+
   tar_target(pt_names, import_patients(), format = "qs"),
 
   tar_target(pt_ids, get_id(pt_names)),
@@ -67,7 +78,7 @@ list(
   tar_target(pt_registry, import_registry(), format = "qs"),
 
 
-  tar_target(pt_registry, add_sbt(pt_registry)),
+# AP substets for plots and report [can we remove them?!] ---------
 
   tar_target(
     weaning_subset, {
@@ -103,6 +114,10 @@ list(
                 date %in% weaning_subset[["data_lettura"]])
     }),
 
+
+
+
+  # plots -----------------------------------------------------------
   tar_target(ggPatPerCentro, {
     weaningsTRD |>
       distinct(folder, id_pat) |>
@@ -264,11 +279,19 @@ list(
     plot_trd(weaning_subset, moving_avg = TRUE)
   }),
 
+
+
+
+# report ----------------------------------------------------------
+
   # compile the report
   tar_render(report, here("reports/report.Rmd")),
   tar_quarto(trd_log_csv_exploration, here("reports/trd_log_csv_exploration.qmd")),
 
 
+
+
+# objects to share -------------------------------------------------
   tar_target(
     objectToShare,
     list(

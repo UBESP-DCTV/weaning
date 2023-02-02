@@ -59,7 +59,7 @@ create_pt_weanings <- function(db, pt_id) {
 add_sbt <- function(db_reg) {
   db_reg |>
     dplyr::group_by(id_univoco) |>
-    dplyr::arrange(.data[["id_univoco"]], .data[["data_lettura"]]) |>
+    dplyr::arrange(.data[["data_lettura"]], .by_group = TRUE) |>
     dplyr::mutate(
       sbt = dplyr::case_when(
         # successo sbt (default = TRUE per SBT al primo giorno)
@@ -75,9 +75,6 @@ add_sbt <- function(db_reg) {
       )
     ) |>
     dplyr::ungroup()
-
-  stop("Non c'è (più) nemmeno un '1'!! (impossibile, e infatti c'era!)")
-  # import_registry() |> dplyr::select(estubato, sbt) |> table(useNA = "always")
 }
 
 
