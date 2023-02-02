@@ -51,14 +51,14 @@ patient_history_plot <- function(
 
   pat_trd <- weanings_trd |>
     dplyr::filter(
-      .data[["folder"]] == .data[["id_ospedale"]],
-      .data[["id_pat"]] == .data[["id_paziente"]]
+      .data[["folder"]] == id_ospedale,
+      .data[["id_pat"]] == id_paziente
     )
 
   pat_log <- weanings_log %>%
     dplyr::filter(
-      .data[["folder"]] == .data[["id_ospedale"]],
-      .data[["id_pat"]] == .data[["id_paziente"]]
+      .data[["folder"]] == id_ospedale,
+      .data[["id_pat"]] == id_paziente
     )
 
   pat_registry <- pt_registry %>%
@@ -81,10 +81,12 @@ patient_history_plot <- function(
     g, db, type = c("TRD", "LOG"), main_color, second_color
   ) {
     type <- match.arg(type)
+    time <- if (type == "TRD") "datetime" else "time"
 
+    g +
     ggplot2::geom_violin(
       data = pat_log,
-      aes(x = .data[["time"]], y = "LOG"),
+      aes(x = .data[[time]], y = "LOG"),
       scale = "count",
       alpha = 0.2,
       fill = main_color
@@ -92,22 +94,22 @@ patient_history_plot <- function(
     ggplot2::geom_segment(
       data = db,
       aes(
-        x = min(.data[["time"]]),
+        x = min(.data[[time]]),
         y = type, yend = type,
-        xend = max(.data[["time"]])
+        xend = max(.data[[time]])
       ),
       color = second_color,
       size = 1
     ) +
     ggplot2::geom_point(
       data = db,
-      aes(x = min(.data[["datetime"]]), y = type),
+      aes(x = min(.data[[time]]), y = type),
       color = second_color,
       size = 2
     ) +
     ggplot2::geom_point(
       data = db,
-      aes(x = max(.data[["datetime"]]), y = type),
+      aes(x = max(.data[[time]]), y = type),
       color = second_color,
       size = 2
     )
@@ -115,15 +117,16 @@ patient_history_plot <- function(
 
   # Step 3 - ggplot
 
-  plot <- ggplot2::ggplot() +
+  plot <- ggplot2::ggplot()
 
     # TRD file
-    geom_pt_point(pat_trd, "TRD", "blue", "dark blue") +
+  plot <- geom_pt_point(plot, pat_trd, "TRD", "blue", "dark blue")
 
     # LOG file
-    geom_pt_point(pat_log, "LOG", "violet", "purple") +
+  plot <- geom_pt_point(plot, pat_log, "LOG", "violet", "purple")
 
     # Registry file
+  plot <- plot +
     ggplot2::geom_point(
       data = pat_registry,
       aes(

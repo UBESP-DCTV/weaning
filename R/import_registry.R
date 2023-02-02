@@ -91,14 +91,13 @@ import_registry <- function(
       type = forcats::as_factor(.data[["type"]]),
       data_lettura = lubridate::as_date(.data[["data_lettura"]]),
       susp_tot = rowSums(dplyr::across(dplyr::starts_with("susp_"))),
-      across(
+      dplyr::across(
         starts_with("ega"),
         ~ stringr::str_replace(.x, ",", ".") |> readr::parse_double()
       )
-      # TO FIX: EGA variables as numeric (sono chr), problema è la virgola
     ) |>
     dplyr::with_groups(
-      .data[["id_univoco"]],
+      dplyr::all_of("id_univoco"),
       dplyr::mutate,
       giorno_studio = .data[["data_lettura"]] -
         dplyr::first(.data[["data_lettura"]])

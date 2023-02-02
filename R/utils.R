@@ -67,3 +67,8 @@ get_id <- function(x, id_varname = "id_univoco") {
   checkmate::assert_subset(id_varname, names(x))
   x[[id_varname]]
 }
+
+
+get_gross_minutes <- function(hm) {
+  60 * lubridate::hour(hm) + lubridate::minute(hm)
+}

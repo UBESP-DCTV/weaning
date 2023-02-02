@@ -135,14 +135,10 @@ test_that("import_trd admit empty content file", {
 
 
 test_that("Controllare casini sui duplicati", {
-  skip("Da verificare i duplicati dell'ora sullo stesso file")
+  # skip("Da verificare i duplicati dell'ora sullo stesso file")
 
   # setup
-  weanings_trd <- system.file(
-      "extdata/weanings_trd.qs",
-      package = "weaning"
-    ) |>
-    qs::qread()
+  weanings_trd <- targets::tar_read(weaningsTRD)
 
   # evaluate
   not_problem <- weanings_trd |>

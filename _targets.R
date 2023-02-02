@@ -80,39 +80,22 @@ list(
 
 # AP substets for plots and report [can we remove them?!] ---------
 
-  tar_target(
-    weaning_subset, {
-    pt_registry %>%
-      select(id_univoco, data_lettura, esito, type) %>%
-      filter(
-        !is.na(esito),
-        id_univoco %in% c("TS012", "BS002", "NO004")
-      ) %>%
-      group_by(id_univoco) %>%
-      arrange(data_lettura)
-  }),
+  tar_target(weaning_subset, extract_weaning_subset(pt_registry)),
 
   tar_target(
-    weaning_log_subset,{
-    weaningsLOG %>%
-      filter( id_univoco %in% weaning_subset[["id_univoco"]],
-              date %in% weaning_subset[["data_lettura"]])
-  }),
+    weaning_log_subset,
+    extract_weaning_log_subset(weaningsLOG, weaning_subset)
+  ),
 
   tar_target(
-    weaning_log_filtered,{
-    weaning_log_subset %>%
-      filter( id_info %in% c(0, 267, 291, 321, 322),
-              !str_detect(informazioni, 'Silenziamento'),
-              !str_detect(informazioni, 'Pre-silenziamento') )
-  }),
+    weaning_log_filtered,
+    extract_weaning_log_filtered(weaning_log_subset)
+  ),
 
   tar_target(
-    weaning_trd_subset,{
-      weaningsTRD %>%
-        filter( id_univoco %in% weaning_subset[["id_univoco"]],
-                date %in% weaning_subset[["data_lettura"]])
-    }),
+    weaning_trd_subset,
+    extract_weaning_trd_subset(weaningsTRD, weaning_subset)
+  ),
 
 
 
@@ -248,10 +231,10 @@ list(
 
   tar_target(ggTentativiPerPaziente, {
     pt_registry |>
-      select(id_univoco, esito) |>
-      group_by(esito, id_univoco) |>
-      tally() |> summarise(sum(n)) #|> pull(n) |> sum()
-      pivot_wider(
+      dplyr::select(id_univoco, esito) |>
+      dplyr::group_by(esito, id_univoco) |>
+      dplyr::tally() |>
+      tidyr::pivot_wider(
         names_from = esito,
         values_from = n,
         values_fill = 0
