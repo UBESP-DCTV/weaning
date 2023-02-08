@@ -67,7 +67,12 @@ import_folder <- function(
     )()
 
 
-  if (length(trd_files)  == 0L) return(NULL)
+  if (length(trd_files)  == 0L) {
+    usethis::ui_info(
+      "No TRD file in folder {usethis::ui_value(.dir_path)}"
+    )
+    return(NULL)
+  }
 
   import_fct <- what |>
     switch(
@@ -90,8 +95,57 @@ import_folder <- function(
     )
 
   if (!verbose) usethis::ui_done(.dir_path)
+
   res
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+check_consistency_idpatfile <- function(id_univoco, id_check) {
+
+
+  if (!is.na(id_check) & !identical(id_univoco, id_check)) {
+    usethis::ui_stop(c(
+      "Patient's ID in filename is",
+      "{usethis::ui_value(id_univoco)}",
+      "while inside the file is",
+      "{usethis::ui_value(id_check)}."
+    ))
+  }
+}
+
+#
+#
+# expect_error(
+#   {
+#     import_folders(sample_folder, verbose = TRUE) |>
+#       suppressMessages() |>
+#       suppressWarnings()
+#   },
+#   "BG001"
+# )
+#
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -109,6 +163,7 @@ import_folder <- function(
 #'  "TRD" or "LOG."
 #' @param verbose (lgl, FALSE) would you like to have additional
 #'   messages to be signaled?
+#' @param patients2remove (chr) vector of patient to not consider
 #'
 #' @return a [tibble][tibble::tibble-package] with the imported signals
 #'   (i.e. the tabular content plus the date and the patient id) from
@@ -126,7 +181,8 @@ import_folder <- function(
 import_folders <- function(
     .dir_path,
     what = "TRD",
-    verbose = FALSE
+    verbose = FALSE,
+    patients2remove = character()
 ) {
   checkmate::assert_directory_exists(.dir_path)
 
@@ -139,5 +195,7 @@ import_folders <- function(
       what = what,
       verbose = verbose,
       .id = "folder"
-    )
+    ) |>
+    fix_wrong_hours() |>
+    dplyr::filter(!.data[["id_univoco"]] %in% patients2remove)
 }

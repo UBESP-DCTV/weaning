@@ -5,6 +5,8 @@
 #'
 #' @param verbose (lgl, FALSE) would you like to have additional
 #'   messages to be signaled?
+#' @param testing_time (lgl) is test time?
+#' @param test_path (chr) test folder
 #'
 #' @return a [tibble][tibble::tibble-package] with the imported data
 #'   (i.e. the tabular content with a row for each day for each patient)
@@ -20,8 +22,7 @@
 import_registry <- function(
     verbose = FALSE,
     testing_time = FALSE,
-    test_path = "",
-    remove_wrong_patients = "NO021"
+    test_path = ""
 ) {
 
   path_input <- file.path(
@@ -83,10 +84,7 @@ import_registry <- function(
       ),
       na = c("", "NULL")
     ) |>
-    dplyr::filter(
-      .data[["filter_deleted"]] == 0,
-      (!.data[["id_univoco"]] %in% remove_wrong_patients)
-    ) |>
+    dplyr::filter(.data[["filter_deleted"]] == 0) |>
     dplyr::mutate(
       type = forcats::as_factor(.data[["type"]]),
       data_lettura = lubridate::as_date(.data[["data_lettura"]]),

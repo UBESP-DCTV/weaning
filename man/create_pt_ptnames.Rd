@@ -18,5 +18,5 @@ array [pt, var] = [none, 2]
 baseline: array [pt, var] = [none, 2]
 }
 \examples{
-create_pt_ptnames(pt_names, pt_ids[[1]])
+if (FALSE) create_pt_ptnames(pt_names, pt_ids[[1]])
 }

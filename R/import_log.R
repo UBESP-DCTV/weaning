@@ -28,10 +28,14 @@ import_log <- function(.file_path, verbose = FALSE, need_hdr = FALSE) {
 
   if (verbose) usethis::ui_todo(.file_path)
 
-  if (need_hdr) {
-    headr <- readr::read_lines(.file_path, n_max = 10)
-    utils::str(headr, 1) # just to pur a usage of that (for lintr :-)
-  }
+  headr <- readr::read_lines(.file_path, n_max = 10)
+
+  id_pat <- extract_id_from_filepath(.file_path)
+  .dir_path <- basename(dirname(.file_path))
+  id_univoco <- create_id_univoco(id_pat, .dir_path)
+
+  id_check <- extract_id_from_header(headr)
+  check_consistency_idpatfile(id_univoco, id_check)
 
   content <- readr::read_lines(.file_path, skip = 10) |>
     stringr::str_subset("Riassunto", negate = TRUE) |>
@@ -44,12 +48,12 @@ import_log <- function(.file_path, verbose = FALSE, need_hdr = FALSE) {
     ) |>
     janitor::clean_names() |>
     dplyr::mutate(
-      id_pat = extract_id_from_filepath(.file_path),
+      id_univoco = id_univoco,
       data = parse_weanings_dates(.data[["data"]])
     ) |>
     dplyr::rename(id_info = dplyr::all_of("id")) |>
     dplyr::relocate(
-      dplyr::all_of("id_pat"),
+      dplyr::all_of("id_univoco"),
       .before = dplyr::all_of("data")
     ) |>
     dplyr::mutate(

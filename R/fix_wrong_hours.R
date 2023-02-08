@@ -21,10 +21,6 @@ fix_wrong_hours <- function(db) {
     if (sum(are_to_change) == 1) {
       db[[which(are_to_change), "ora"]] <- correction[["ora_giusta"]]
       usethis::ui_done("row for file {correction[['file']]} fixed")
-    } else {
-      usethis::ui_info(
-        "row for file {correction[['file']]} doesn't found and skipped."
-      )
     }
   }
   db

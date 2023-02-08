@@ -19,7 +19,7 @@ test_that("import_log works", {
 
   # test
   expected_coltypes <- c(
-    id_pat = "numeric",
+    id_univoco = "character",
     data = "Date",
     ora = "hms",
     id_info = "integer",
@@ -99,7 +99,7 @@ test_that("manage problematic foders with files without dates", {
     expect_equal(
       c(
         file = "character",
-        id_pat = "numeric",
+        id_univoco = "character",
         data = "Date",
         ora = "hms",
         id_info = "integer",

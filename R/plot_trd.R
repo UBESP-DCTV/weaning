@@ -10,6 +10,7 @@
 #' according to TRD variables
 #' @param moving_avg (logical) if TRUE, a 30 minutes moving average
 #' window is applied to TRD data
+#' @param trd weaningTRD dataset
 #'
 #' @return a [ggplot][ggplot2::ggplot2-package] showing the plot of
 #'  mechanical ventilation variables

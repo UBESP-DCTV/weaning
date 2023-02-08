@@ -8,12 +8,21 @@ get_input_data_path <- function(folder = "") {
 }
 
 
-data_test_path <- function() {
-  ifelse(
-    dir.exists("../testthat"),
-    "../data-test",
-    here::here("tests/data-test/")
-  )
+data_test_path <- function(wrong = FALSE) {
+
+  if (wrong) {
+    ifelse(
+      dir.exists("../testthat"),
+      "../data-test_wrong",
+      here::here("tests/data-test_wrong/")
+    )
+  } else {
+    ifelse(
+      dir.exists("../testthat"),
+      "../data-test",
+      here::here("tests/data-test/")
+    )
+  }
 }
 
 
@@ -71,4 +80,14 @@ get_id <- function(x, id_varname = "id_univoco") {
 
 get_gross_minutes <- function(hm) {
   60 * lubridate::hour(hm) + lubridate::minute(hm)
+}
+
+
+
+create_id_univoco <- function(id_pat, folder) {
+    dplyr::case_when(
+      id_pat <  10 ~ paste0(folder, "00", id_pat),
+      id_pat < 100 ~ paste0(folder, "0", id_pat),
+      TRUE ~ paste0(folder, id_pat)
+    )
 }

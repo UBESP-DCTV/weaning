@@ -4,7 +4,12 @@
 \alias{import_folders}
 \title{Import folders of weanings files folders}
 \usage{
-import_folders(.dir_path, what = "TRD", verbose = FALSE)
+import_folders(
+  .dir_path,
+  what = "TRD",
+  verbose = FALSE,
+  patients2remove = character()
+)
 }
 \arguments{
 \item{.dir_path}{(chr) path to the folder containing the folders
@@ -16,6 +21,8 @@ to import.}
 
 \item{verbose}{(lgl, FALSE) would you like to have additional
 messages to be signaled?}
+
+\item{patients2remove}{(chr) vector of patient to not consider}
 }
 \value{
 a \link[tibble:tibble-package]{tibble} with the imported signals

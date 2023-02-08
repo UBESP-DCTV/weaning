@@ -1,11 +1,11 @@
 File trend ventilatore	VTD
-Nome del Paziente:	CM003
-ID Paziente:	CD456
-N° di serie Ventilatore:	 20807
+Nome del Paziente:	8217
+ID Paziente:	BG001
+N° di serie Ventilatore:	 2997
 Versione Software del Ventilatore:	Systema:	v7.00	Pannello: 	v24.08.03	Pannello Condiviso: 	v24.08.00	Respirazione: 	v24.08.00	Respiraz. Condivisa: 	v24.08.00	Monitor: 	v24.08.00	Monitor Condiviso: 	v24.08.00	Flusso Esp.: 	v24.08.00	Flusso Esp. Condiviso: 	v24.08.00
-Data creazione del file:	22/09/2013
+Data creazione del file:	09/07/2013
 
-Controllo Pre-uso:	28/08/2013	08:55:56	Passato	Test circuito paziente:	28/08/2013	08:55:56	Passato
+Controllo Pre-uso:	03/07/2013	13:39:14	Passato	Test circuito paziente:	03/07/2013	13:39:14	Passato
 Dettagli controllo Pre-uso:	Test interni: Passato, Test barometro: Passato, Test erogazione gas: Passato, Test perdita interna: Passato, Test trasduttore di pressione: Passato, Test valvola di sicurezza: Passato, Test cella/sensore O₂: Passato, Test trasduttore di flusso: Passato, Test switch batteria: Passato, Test circuito paziente: Passato, Test dello stato di allarme: Passato
 Simbolo decimale:	.
 
@@ -18,40 +18,8 @@ Simbolo decimale:	.
 
 
 
-Ora			etCO₂ 	Eliminazione CO₂ corrente	Eliminazione CO₂ minuto	Caratteristiche Dinamiche	Elastanza	Flusso di fine Esp.	Pressione di fine Esp. 	Resistenza Esp.	Vol. Minuto espirato	Vol. Corrente Espirato	Concentraz. O₂			Resistenza Inspiratoria	Vol. Minuto inspirato	Vol. Corrente Inspirato	Press. Media Vie Aeree	Frequenza Respiraz. misurata	Freq. spontanea	Picco Edi	Edi min	Press. di Pausa Vie Aeree	Press. di Picco delle Vie Aeree	Passa a backup	Backup	Compliance Statica			P 0.1	Lavoro Respiratorio del ventilatore	Lavoro Respiratorio del paziente	SBI	Volume minuto espirato spontaneo	Perdita percentuale
-			%	ml	ml/min	ml/cmH₂O	cmH₂O/l	l/min	cmH₂O	cmH₂O/l/s	l/min	ml	%			cmH₂O/l/s	l/min	ml	cmH₂O	resp/min	resp/min	µV	µV	cmH₂O	cmH₂O	/min	%/min	ml/cmH₂O			cmH₂O	Joule/l	Joule/l		l/min	%
-08:57																																				
-08:58																																				
-08:59																																				
-09:00																																				
-09:01																																				
-09:02																																				
-09:03																																				
-09:04																																				
-09:05																																				
-09:06																																				
-09:07																																				
-09:08																																				
-09:09																																				
-09:10																																				
-09:11																																				
-09:12																																				
-09:13																																				
-09:14																																				
-09:15																																				
-09:16																																				
-09:17																																				
-09:18																																				
-09:19																																				
-09:20																																				
-09:21																																				
-09:22																																				
-09:23																																				
-09:24																																				
-09:25																																				
-09:26																																				
-09:27																																				
-09:28																																				
+Ora						Caratteristiche Dinamiche	Elastanza	Flusso di fine Esp.	Pressione di fine Esp. 	Resistenza Esp.	Vol. Minuto espirato	Vol. Corrente Espirato	Concentraz. O₂			Resistenza Inspiratoria	Vol. Minuto inspirato	Vol. Corrente Inspirato	Press. Media Vie Aeree	Frequenza Respiraz. misurata	Freq. spontanea	Picco Edi	Edi min	Press. di Pausa Vie Aeree	Press. di Picco delle Vie Aeree	Passa a backup	Backup	Compliance Statica			P 0.1	Lavoro Respiratorio del ventilatore	Lavoro Respiratorio del paziente	SBI	Volume minuto espirato spontaneo	Perdita percentuale
+						ml/cmH₂O	cmH₂O/l	l/min	cmH₂O	cmH₂O/l/s	l/min	ml	%			cmH₂O/l/s	l/min	ml	cmH₂O	resp/min	resp/min	µV	µV	cmH₂O	cmH₂O	/min	%/min	ml/cmH₂O			cmH₂O	Joule/l	Joule/l		l/min	%
 09:29																																				
 09:30																																				
 09:31																																				
@@ -1460,5 +1428,37 @@ Ora			etCO₂ 	Eliminazione CO₂ corrente	Eliminazione CO₂ minuto	Caratterist
 08:54																																				
 08:55																																				
 08:56																																				
+08:57																																				
+08:58																																				
+08:59																																				
+09:00																																				
+09:01																																				
+09:02																																				
+09:03																																				
+09:04																																				
+09:05																																				
+09:06																																				
+09:07																																				
+09:08																																				
+09:09																																				
+09:10																																				
+09:11																																				
+09:12																																				
+09:13																																				
+09:14																																				
+09:15																																				
+09:16																																				
+09:17																																				
+09:18																																				
+09:19																																				
+09:20																																				
+09:21																																				
+09:22																																				
+09:23																																				
+09:24																										0	0.00				0.15					
+09:25						42.22		0	7.48	12.14	5.0527	376.0000	40.6				4.9331	381.4000	9.44	13.26	13.26				16.39	0	0.00				0.15	0.73	0.00	36	5.0527	
+09:26						44.35		0	7.51	12.14	4.3889	394.5000	40.6				4.1171	384.5000	8.99	11.02	11.02				16.31	0	0.00				0.13	0.72	0.00	29	4.3889	
+09:27						47.17		0	7.49	12.14	5.6638	417.8000	40.6				5.3727	396.8000	9.54	13.66	13.66				16.39	0	0.00				0.11	0.73	0.00	33	5.6638	
+09:28						62.30		0.8400	7.57	12.14	7.1694	569.0000	40.6				6.8477	469.8000	10.16	15.90	15.90				16.66	0	0.00				0.76	0.72	0.00	32	7.1694	
 
-Riassunto:	0
+Riassunto:	226

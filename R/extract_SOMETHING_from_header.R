@@ -11,3 +11,10 @@ extract_id_from_filepath <- function(filepath) {
     stringr::str_extract("(?<=^[A-Z]{2})\\d+") |>
     readr::parse_number()
 }
+
+extract_id_from_header <- function(headr) {
+  headr |>
+    stringr::str_subset("^ID Paziente") |>
+    stringr::str_extract("[a-zA-Z]{2}\\d{3}$") |>
+    stringr::str_to_upper()
+}

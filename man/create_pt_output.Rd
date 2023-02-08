@@ -18,5 +18,5 @@ array [pt, days, out] = [none, length(giorno_studio), 1]
 dialy: array [pt, days, out] = [none, length(giorno_studio), 1]
 }
 \examples{
-create_pt_output(pt_registry, pt_ids[[1]])
+if (FALSE) create_pt_output(pt_registry, pt_ids[[1]])
 }

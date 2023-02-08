@@ -18,5 +18,5 @@ array [pt, days, var] = [none, length(giorno_studio), 3]
 dialy: array [pt, days, var] = [none, length(giorno_studio), 3]
 }
 \examples{
-create_pt_weanings(pt_registry, pt_ids[[1]])
+if (FALSE) create_pt_weanings(pt_registry, pt_ids[[1]])
 }

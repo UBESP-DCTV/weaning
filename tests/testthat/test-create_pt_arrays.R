@@ -44,10 +44,10 @@ test_that("create_pt_ptnames works", {
 test_that("create_weanings works", {
   # setup
   # sbt :=
-  #   stubato = `-1`,
-  #   sbt non provato =  `0`,
-  #   sbt riuscito =  `1`,
-  #   sbt fallito =  `2`
+  #   - se stubato = `-1`,
+  #   - se sbt non provato =  `0`,
+  #   - se sbt riuscito =  `1`,
+  #   - se sbt fallito =  `2`
   weanings <- tibble::tribble(
     ~id_univoco, ~giorno_studio, ~sofa, ~cpis, ~susp_tot, ~sbt, ~esito,
     "1", 1, 6, 4, 12, 0, NA,
@@ -99,6 +99,7 @@ test_that("create_trd works", {
 
   # evaluate
   res_an001 <- create_pt_trd(trd, "AN001")
+  res_fe002 <- create_pt_trd(trd, "FE002")
 
   # tests
   if (FALSE) {
@@ -110,6 +111,9 @@ test_that("create_trd works", {
 
   expect_array(res_an001, "numeric", any.missing = FALSE, d = 3)
   expect_equal(dim(res_an001), c(1440, 5, 30))
+
+  expect_array(res_fe002, "numeric", any.missing = FALSE, d = 3)
+  expect_equal(dim(res_fe002), c(1440, 4, 30))
 
 })
 

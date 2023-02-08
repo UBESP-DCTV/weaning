@@ -19,5 +19,5 @@ an array of dim
 trd
 }
 \examples{
-create_pt_trd(weaningsTRD, pt_ids)[[1]]
+if (FALSE) create_pt_trd(weaningsTRD, pt_ids)[[1]]
 }

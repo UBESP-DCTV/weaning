@@ -10,6 +10,10 @@
 #'
 #' @param id_ospedale (chr) 2 letter string of the hospital
 #' @param id_paziente (double) id of a patient (between 1 and 99)
+#' @param weanings_trd weaningTRD dataset
+#' @param weanings_log weaningLOG dataset
+#' @param pt_names pt_names dataset
+#' @param pt_registry pt_registry dataset
 #'
 #' @return a [ggplot][ggplot2::ggplot2-package] showing the patient
 #'  history plot

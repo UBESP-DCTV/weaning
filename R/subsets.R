@@ -16,7 +16,7 @@ extract_weaning_log_subset <- function(weaning_log, weaning_subset) {
   weaning_log |>
     dplyr::filter(
       .data[["id_univoco"]] %in% weaning_subset[["id_univoco"]],
-      .data[["date"]] %in% weaning_subset[["data_lettura"]]
+      .data[["data"]] %in% weaning_subset[["data_lettura"]]
     )
 }
 

@@ -22,7 +22,10 @@ list.files(here("R"), pattern = "\\.R$", full.names = TRUE) |>
   lapply(source) |> invisible()
 
 # Set target-specific options such as packages.
-tar_option_set(packages = "tidyverse")
+tar_option_set(
+  packages = "tidyverse",
+  workspace_on_error = TRUE
+)
 
 # End this file with a list of target objects.
 list(
@@ -32,22 +35,20 @@ list(
 
   # Import data -----------------------------------------------------
 
+
   tar_target(
     weaningFolder,
     get_input_data_path(),
     format = "file"
   ),
+
+  tar_target(patientsToRemove, "NO021"),
+
   tar_target(
     weaningsTRD,{
-    import_folders(weaningFolder, "TRD") |>
-      fix_wrong_hours() |>
-      dplyr::mutate(
-        id_univoco = dplyr::if_else(
-          condition = id_pat < 10,
-          true = paste0(folder, "00", id_pat),
-          false = paste0(folder, "0", id_pat)
-        )
-      )
+    import_folders(
+      weaningFolder, "TRD", patients2remove = patientsToRemove
+    )
     },
     packages = "furrr",
     format = "qs"
@@ -57,12 +58,9 @@ list(
 
   tar_target(
     weaningsLOG,{
-    import_folders(weaningFolder, "LOG") |>
-      dplyr::mutate( id_univoco = ifelse(
-        test = id_pat < 10,
-        yes = paste0(folder, "00", id_pat),
-        no = paste0(folder, "0", id_pat) ),
-        date = data )
+    import_folders(
+      weaningFolder, "LOG", patients2remove = patientsToRemove
+    )
     },
     packages = "furrr",
     format = "qs"
@@ -74,10 +72,9 @@ list(
 
 # transform data --------------------------------------------------
 
+
   tar_target(pt_names, import_patients(), format = "qs"),
-
   tar_target(pt_ids, get_id(pt_names)),
-
   tar_target(pt_registry, import_registry(), format = "qs"),
 
 

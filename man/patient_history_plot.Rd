@@ -14,6 +14,14 @@ patient_history_plot(
 )
 }
 \arguments{
+\item{weanings_trd}{weaningTRD dataset}
+
+\item{weanings_log}{weaningLOG dataset}
+
+\item{pt_names}{pt_names dataset}
+
+\item{pt_registry}{pt_registry dataset}
+
 \item{id_ospedale}{(chr) 2 letter string of the hospital}
 
 \item{id_paziente}{(double) id of a patient (between 1 and 99)}

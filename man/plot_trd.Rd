@@ -7,6 +7,8 @@
 plot_trd(trd, weaning_subset = NA, color_files = FALSE, moving_avg = FALSE)
 }
 \arguments{
+\item{trd}{weaningTRD dataset}
+
 \item{weaning_subset}{(tibble) a tibble containing a list of SBT
 with a "id_univoco", "data_lettura" and "esito" variable}
 

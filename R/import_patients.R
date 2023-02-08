@@ -5,6 +5,8 @@
 #'
 #' @param verbose (lgl, FALSE) would you like to have additional
 #'   messages to be signaled?
+#' @param testing_time (lgl) is test time?
+#' @param test_path (chr) test folder
 #'
 #' @return a [tibble][tibble::tibble-package] with the imported data
 #'   (i.e. the tabular content with demographic and clinical info) from
@@ -17,8 +19,11 @@
 #'
 #'   import_patients()
 #' }
-import_patients <- function(verbose = FALSE,
-                            testing_time = FALSE, test_path = "") {
+import_patients <- function(
+    verbose = FALSE,
+    testing_time = FALSE,
+    test_path = ""
+) {
   path_input <- file.path(
       get_input_data_path(),
       "/../",

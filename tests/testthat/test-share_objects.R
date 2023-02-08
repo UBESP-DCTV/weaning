@@ -12,6 +12,7 @@ test_that("share_objects works", {
     normalizePath(mustWork = FALSE)
 
   fs::dir_create(test_output_data_path)
+  withr::defer(fs::dir_delete(test_output_data_path))
 
   withr::local_envvar(
     list(PRJ_SHARED_PATH = test_proj_shared_path)

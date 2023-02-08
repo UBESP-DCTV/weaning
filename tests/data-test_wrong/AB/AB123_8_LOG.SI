@@ -1,0 +1,29 @@
+Archivio eventi ventilatore	VEL
+Nome del Paziente:	8217
+ID Paziente:	AB123
+N° di serie Ventilatore:	 2997
+Versione Software del Ventilatore:	Systema:	v7.00	Pannello: 	v24.08.03	Pannello Condiviso: 	v24.08.00	Respirazione: 	v24.08.00	Respiraz. Condivisa: 	v24.08.00	Monitor: 	v24.08.00	Monitor Condiviso: 	v24.08.00	Flusso Esp.: 	v24.08.00	Flusso Esp. Condiviso: 	v24.08.00
+Data creazione del file:	09/07/2013
+
+Controllo Pre-uso:	03/07/2013	13:39:14	Passato	Test circuito paziente:	03/07/2013	13:39:14	Passato
+Dettagli controllo Pre-uso:	Test interni: Passato, Test barometro: Passato, Test erogazione gas: Passato, Test perdita interna: Passato, Test trasduttore di pressione: Passato, Test valvola di sicurezza: Passato, Test cella/sensore O₂: Passato, Test trasduttore di flusso: Passato, Test switch batteria: Passato, Test circuito paziente: Passato, Test dello stato di allarme: Passato
+Simbolo decimale:	.
+
+
+
+
+
+
+
+
+
+
+Data	Ora	ID	Tipo	Informazioni
+09/07/2013	09:25:56	0	Funzioni	Silenziamento attivato
+09/07/2013	09:25:53	18	Allarme	Allarme: Vol. Min. Esp. basso
+09/07/2013	09:25:36	1	Registrazione	Registrazione salvata
+09/07/2013	09:24:42	305	Variaz. parametro	Altezza paziente impostata a 170 cm
+09/07/2013	09:24:42	258	Variaz. parametro	Peso paziente impostato a 75 kg
+09/07/2013	09:24:36	65535	Funzioni	Nuovo paziente accettato
+
+Riassunto:	0

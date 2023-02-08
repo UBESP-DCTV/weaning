@@ -12,13 +12,15 @@ test_that("import_trd works", {
   # tests
   res |>
     expect_tibble(
-      types = c("numeric", "Date", "hms", rep("numeric", 27)),
+      types = c(
+        "character", "Date", "hms", rep("numeric", 27)
+      ),
       min.rows = 1
     )
   unique(res[["date"]]) |>
     expect_equal(lubridate::ymd("2013/07/09"))
-  unique(res[["id_pat"]]) |>
-    expect_equal(123)
+  unique(res[["id_univoco"]]) |>
+    expect_equal("AB123")
 
 
   import_trd(fake_trd_path) |>
@@ -49,7 +51,7 @@ test_that("import_folder works for TRD files", {
     )
 
   expect_equal(names(res)[[1]], "file")
-  expect_equal(res[["file"]][[1]], "AB123_8")
+  expect_equal(res[["file"]][[1]], "AB123_270")
 })
 
 
@@ -107,7 +109,7 @@ test_that("problematic characters are managed by import_trd", {
   res |>
     expect_tibble(
       min.cols = 21,
-      types = c("numeric", "Date", "hms", rep("numeric", 20)),
+      types = c("character", "Date", "hms", rep("numeric", 20)),
       min.rows = 1
     )
 
@@ -127,7 +129,7 @@ test_that("import_trd admit empty content file", {
   # tests
   res |>
     expect_tibble(
-      types = c("numeric", "Date", "hms", rep("numeric", 20)),
+      types = c("character", "Date", "hms", rep("numeric", 20)),
       min.rows = 0
     )
 

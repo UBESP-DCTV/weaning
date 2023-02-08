@@ -9,6 +9,10 @@ import_patients(verbose = FALSE, testing_time = FALSE, test_path = "")
 \arguments{
 \item{verbose}{(lgl, FALSE) would you like to have additional
 messages to be signaled?}
+
+\item{testing_time}{(lgl) is test time?}
+
+\item{test_path}{(chr) test folder}
 }
 \value{
 a \link[tibble:tibble-package]{tibble} with the imported data

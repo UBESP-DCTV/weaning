@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @examples
-#' create_pt_trd(weaningsTRD, pt_ids)[[1]]
+#' if (FALSE) create_pt_trd(weaningsTRD, pt_ids)[[1]]
 create_pt_trd <- function(db, pt_id) {
   check_array_creation_inputs(db, pt_id)
 
@@ -20,6 +20,7 @@ create_pt_trd <- function(db, pt_id) {
     ))
 
   res <- db[db[["id_univoco"]] == pt_id, var_used, drop = FALSE] |>
+    dplyr::distinct() |>
     dplyr::arrange(.data[["date"]], .data[["ora"]]) |>
     dplyr::mutate(
       day = as.integer(
@@ -78,7 +79,7 @@ create_pt_log <- function(db, pt_id) {
 #' @export
 #'
 #' @examples
-#' create_pt_ptnames(pt_names, pt_ids[[1]])
+#' if (FALSE) create_pt_ptnames(pt_names, pt_ids[[1]])
 create_pt_ptnames <- function(db, pt_id) {
   check_array_creation_inputs(db, pt_id)
 
@@ -121,7 +122,7 @@ create_pt_ptnames <- function(db, pt_id) {
 #' @export
 #'
 #' @examples
-#' create_pt_weanings(pt_registry, pt_ids[[1]])
+#' if (FALSE) create_pt_weanings(pt_registry, pt_ids[[1]])
 create_pt_weanings <- function(db, pt_id) {
   check_array_creation_inputs(db, pt_id)
 
@@ -146,7 +147,7 @@ create_pt_weanings <- function(db, pt_id) {
 #' @export
 #'
 #' @examples
-#' create_pt_output(pt_registry, pt_ids[[1]])
+#' if (FALSE) create_pt_output(pt_registry, pt_ids[[1]])
 create_pt_output <- function(db, pt_id) {
   check_array_creation_inputs(db, pt_id)
 

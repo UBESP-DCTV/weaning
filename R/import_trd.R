@@ -28,6 +28,15 @@ import_trd <- function(.file_path, verbose = FALSE) {
   if (verbose) usethis::ui_todo(.file_path)
 
   headr <- readr::read_lines(.file_path, n_max = 10)
+  id_check <- extract_id_from_header(headr)  # not always present
+
+  id_pat <- extract_id_from_filepath(.file_path)
+  .dir_path <- basename(dirname(.file_path))
+  id_univoco <- create_id_univoco(id_pat, .dir_path)
+
+  check_consistency_idpatfile(id_univoco, id_check)
+
+
   content <- readr::read_lines(.file_path, skip = 10) |>
     stringr::str_subset("Riassunto", negate = TRUE) |>
     stringr::str_subset("^$", negate = TRUE)
@@ -48,7 +57,7 @@ import_trd <- function(.file_path, verbose = FALSE) {
     dplyr::distinct(.data[["ora"]], .keep_all = TRUE) |>
     dplyr::mutate(
       dplyr::across(-dplyr::all_of("ora"), readr::parse_double),
-      id_pat = extract_id_from_filepath(.file_path),
+      id_univoco = id_univoco,
       date = extract_date_from_header(headr),
       ora = readr::parse_time(.data[["ora"]])
     )
@@ -71,11 +80,11 @@ import_trd <- function(.file_path, verbose = FALSE) {
   res <- res |>
     dplyr::filter(
       dplyr::if_any(
-        -dplyr::all_of(c("ora", "id_pat", "date")),
+        -dplyr::all_of(c("ora", "id_univoco", "date")),
         ~!is.na(.x))
     ) |>
     dplyr::relocate(
-      dplyr::all_of(c("id_pat", "date")),
+      dplyr::all_of(c("id_univoco", "date")),
       .before = dplyr::all_of("ora")
     )
 

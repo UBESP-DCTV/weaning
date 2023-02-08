@@ -3,7 +3,7 @@
     Code
       res
     Output
-      # A tibble: 1,926 x 45
+      # A tibble: 1,929 x 45
          type  id_re~1 filte~2 id_un~3 id_me~4 data_let~5 ega_ph ega_p~6 ega_p~7  sofa
          <fct>   <dbl>   <dbl> <chr>     <dbl> <date>      <dbl>   <dbl>   <dbl> <dbl>
        1 nava      356       0 AN001        81 2013-10-22   7400  106000   41000    10
@@ -16,7 +16,7 @@
        8 psv       397       0 AN002        81 2013-10-29   7370  109000   53000     4
        9 psv       400       0 AN002        81 2013-10-30   7510   98000   40000     5
       10 psv       401       0 AN002        81 2013-10-31   7480   80000   41000     5
-      # ... with 1,916 more rows, 35 more variables: cpis <dbl>, estubato <lgl>,
+      # ... with 1,919 more rows, 35 more variables: cpis <dbl>, estubato <lgl>,
       #   reintubato <lgl>, morto <lgl>, susp_aspir <lgl>, susp_tosse <lgl>,
       #   susp_gcs <lgl>, susp_fcpas <lgl>, susp_drugs <lgl>, susp_pafi <lgl>,
       #   susp_peep <lgl>, susp_vt <lgl>, susp_rr <lgl>, susp_distress <lgl>,
