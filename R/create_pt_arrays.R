@@ -1,12 +1,15 @@
 #' trd
-#'  [pt, minutes, days, var] = [none, 1440, length(giorno_studio), ]
-#' @param db
-#' @param pt_id
 #'
-#' @return
+#'
+#' @param db weaningsTRD dataset
+#' @param pt_id a single value from pt_ids identifiying a patient id
+#'
+#' @return an array of dim
+#'   \[pt, minutes, days, var\] = \[none, 1440, length(giorno_studio), \]
 #' @export
 #'
 #' @examples
+#' create_pt_trd(weaningsTRD, pt_ids)[[1]]
 create_pt_trd <- function(db, pt_id) {
   check_array_creation_inputs(db, pt_id)
 
@@ -66,15 +69,16 @@ create_pt_log <- function(db, pt_id) {
 
 #' ptnames
 #'
-#' baseline: array [pt, var] = [none, 2]
+#' baseline: array \[pt, var\] = \[none, 2\]
 #'
-#' @param db
-#' @param pt_id
+#' @param db pt_names dataset
+#' @param pt_id a single value from pt_ids identifiying a patient id
 #'
-#' @return
+#' @return array \[pt, var\] = \[none, 2\]
 #' @export
 #'
 #' @examples
+#' create_pt_ptnames(pt_names, pt_ids[[1]])
 create_pt_ptnames <- function(db, pt_id) {
   check_array_creation_inputs(db, pt_id)
 
@@ -108,15 +112,16 @@ create_pt_ptnames <- function(db, pt_id) {
 
 #' weanings
 #'
-#' dialy: array [pt, days, var] = [none, length(giorno_studio), 3]
+#' dialy: array \[pt, days, var\] = \[none, length(giorno_studio), 3\]
 #'
-#' @param db
-#' @param pt_id
+#' @param db pt_registry dataset
+#' @param pt_id a single value from pt_ids identifiying a patient id
 #'
-#' @return
+#' @return array \[pt, days, var\] = \[none, length(giorno_studio), 3\]
 #' @export
 #'
 #' @examples
+#' create_pt_weanings(pt_registry, pt_ids[[1]])
 create_pt_weanings <- function(db, pt_id) {
   check_array_creation_inputs(db, pt_id)
 
@@ -132,22 +137,27 @@ create_pt_weanings <- function(db, pt_id) {
 
 #' output
 #'
-#' dialy: array [pt, days, out] = [none, length(giorno_studio), 1]
+#' dialy: array \[pt, days, out\] = \[none, length(giorno_studio), 1\]
 #'
-#' @param db
-#' @param pt_id
+#' @param db pt_registry dataset
+#' @param pt_id a single value from pt_ids identifiying a patient id
 #'
-#' @return
+#' @return array \[pt, days, out\] = \[none, length(giorno_studio), 1\]
 #' @export
 #'
 #' @examples
+#' create_pt_output(pt_registry, pt_ids[[1]])
 create_pt_output <- function(db, pt_id) {
   check_array_creation_inputs(db, pt_id)
 
   db |>
     dplyr::filter(.data[["id_univoco"]] == pt_id) |>
     dplyr::arrange(.data[["giorno_studio"]]) |>
-    dplyr::select(dplyr::all_of("sbt", "esito")) |>
+    dplyr::select(dplyr::all_of(c("sbt", "esito"))) |>
+    dplyr::mutate(
+      esito = as.integer(.data[["esito"]] == "Successo") |>
+        tidyr::replace_na(-99L)
+    ) |>
     as.matrix() |>
     unname() |>
     as.array()

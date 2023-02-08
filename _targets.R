@@ -41,10 +41,13 @@ list(
     weaningsTRD,{
     import_folders(weaningFolder, "TRD") |>
       fix_wrong_hours() |>
-      dplyr::mutate( id_univoco = ifelse(
-        test = id_pat <10,
-        yes = paste0(folder, "00", id_pat),
-        no = paste0(folder, "0", id_pat) ))
+      dplyr::mutate(
+        id_univoco = dplyr::if_else(
+          condition = id_pat < 10,
+          true = paste0(folder, "00", id_pat),
+          false = paste0(folder, "0", id_pat)
+        )
+      )
     },
     packages = "furrr",
     format = "qs"
@@ -177,10 +180,10 @@ list(
   tar_target(ggWeanVariablesAll, {
     weaningsTRD |>
       filter( folder == "BS",
-              id_pat == 8) %>%
-      filter(date == "2013-11-27") %>%
-      select_if( function(x) {!all(is.na(x))} ) %>%
-      gather(-ora, key = "var", value = "value") %>%
+              id_pat == 8) |>
+      filter(date == "2013-11-27") |>
+      select_if( function(x) {!all(is.na(x))} ) |>
+      gather(-ora, key = "var", value = "value") |>
       ggplot(aes(x = ora,
                  y = value)) +
       geom_point(size = 0.5) +
@@ -188,16 +191,16 @@ list(
   }),
 
   tar_target(ggWeanVariablesSel, {
-    weaningsTRD %>%
+    weaningsTRD |>
       filter( folder == "BS",
-              id_pat == 8) %>%
+              id_pat == 8) |>
       select(date,
              ora,
              lavoro_respiratorio_del_ventilatore_joule_l,
              lavoro_respiratorio_del_paziente_joule_l,
              pressione_di_fine_esp_cm_h2o,
-             press_media_vie_aeree_cm_h2o) %>%
-      pivot_longer(cols = 3:6) %>%
+             press_media_vie_aeree_cm_h2o) |>
+      pivot_longer(cols = 3:6) |>
       ggplot(aes(x = ora,
                  y = value,
                  color = name)) +
@@ -245,11 +248,11 @@ list(
   }),
 
   tar_target(ggWeaningSubsetDay, {
-    plot_trd(pt_registry, color_files = FALSE)
+    plot_trd(weaningsTRD, pt_registry, color_files = FALSE)
   }),
 
   tar_target(ggWeaningSubsetFile, {
-    plot_trd(pt_registry, color_files = TRUE)
+    plot_trd(weaningsTRD, pt_registry, color_files = TRUE)
   }),
 
   tar_target(ggWeaningLogSubsetRaw,{
@@ -267,8 +270,48 @@ list(
   }),
 
   tar_target(ggMediaMobileSubset, {
-    plot_trd(weaning_subset, moving_avg = TRUE)
+    plot_trd(weaningsTRD, weaning_subset, moving_avg = TRUE)
   }),
+
+
+
+
+
+# keras -----------------------------------------------------------
+
+  tar_target(
+    baselineArrays,
+    # [pt, var] = [none, 2]
+    create_pt_ptnames(pt_names, pt_ids),
+    pattern = map(pt_ids),
+    iteration = "list"
+  ),
+  tar_target(
+    dailyArrays,
+    # [pt, days, var] = [none, length(giorno_studio), 3]
+    create_pt_weanings(pt_registry, pt_ids),
+    pattern = map(pt_ids),
+    iteration = "list"
+  ),
+  tar_target(
+    trdArrays,
+    # [pt, minutes, days, var] = [none, 1440, length(giorno_studio), ]
+    create_pt_trd(weaningsTRD, pt_ids),
+    pattern = map(pt_ids),
+    iteration = "list"
+  ),
+  tar_target(
+    outArrays,
+    # [pt, days, out] = [none, length(giorno_studio), 1]
+    create_pt_output(pt_registry, pt_ids),
+    pattern = map(pt_ids),
+    iteration = "list"
+  ),
+
+
+
+
+
 
 
 

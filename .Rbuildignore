@@ -15,3 +15,6 @@
 ^packages.bib$
 ^run_monitor.R$
 ^_targets.yaml$
+^output$
+^README.Rmd$
+^Rplots.pdf$

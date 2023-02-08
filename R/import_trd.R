@@ -45,12 +45,9 @@ import_trd <- function(.file_path, verbose = FALSE) {
       keep_names = FALSE
     ) |>
     janitor::clean_names() |>
-    dplyr::distinct(
-      dplyr::all_of(c("file", "id_pat", "ora", "folder")),
-      .keep_all = TRUE
-    ) |>
+    dplyr::distinct(.data[["ora"]], .keep_all = TRUE) |>
     dplyr::mutate(
-      dplyr::across(-.data[["ora"]], readr::parse_double),
+      dplyr::across(-dplyr::all_of("ora"), readr::parse_double),
       id_pat = extract_id_from_filepath(.file_path),
       date = extract_date_from_header(headr),
       ora = readr::parse_time(.data[["ora"]])

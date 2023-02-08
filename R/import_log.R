@@ -30,6 +30,7 @@ import_log <- function(.file_path, verbose = FALSE, need_hdr = FALSE) {
 
   if (need_hdr) {
     headr <- readr::read_lines(.file_path, n_max = 10)
+    utils::str(headr, 1) # just to pur a usage of that (for lintr :-)
   }
 
   content <- readr::read_lines(.file_path, skip = 10) |>
@@ -56,7 +57,7 @@ import_log <- function(.file_path, verbose = FALSE, need_hdr = FALSE) {
         paste(.data[["data"]], .data[["ora"]])
       )
     ) |>
-    dplyr::arrange(time)
+    dplyr::arrange(.data[["time"]])
 
   if (verbose) usethis::ui_done(.file_path)
   res

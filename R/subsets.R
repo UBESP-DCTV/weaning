@@ -13,7 +13,7 @@ extract_weaning_subset <- function(pt_reg) {
 }
 
 extract_weaning_log_subset <- function(weaning_log, weaning_subset) {
-  weaning_log %>%
+  weaning_log |>
     dplyr::filter(
       .data[["id_univoco"]] %in% weaning_subset[["id_univoco"]],
       .data[["date"]] %in% weaning_subset[["data_lettura"]]
@@ -22,16 +22,16 @@ extract_weaning_log_subset <- function(weaning_log, weaning_subset) {
 
 
 extract_weaning_log_filtered <- function(weaning_log_subset) {
-  weaning_log_subset %>%
+  weaning_log_subset |>
     dplyr::filter(
       .data[["id_info"]] %in% c(0, 267, 291, 321, 322),
-      !str_detect(.data[["informazioni"]], 'Silenziamento'),
-      !str_detect(.data[["informazioni"]], 'Pre-silenziamento')
+      !stringr::str_detect(.data[["informazioni"]], "Silenziamento"),
+      !stringr::str_detect(.data[["informazioni"]], "Pre-silenziamento")
     )
 }
 
 extract_weaning_trd_subset <- function(weanings_trd, weaning_subset) {
-  weanings_trd %>%
+  weanings_trd |>
     dplyr::filter(
       .data[["id_univoco"]] %in% weaning_subset[["id_univoco"]],
       .data[["date"]] %in% weaning_subset[["data_lettura"]]

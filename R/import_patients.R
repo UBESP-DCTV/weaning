@@ -75,7 +75,7 @@ import_patients <- function(verbose = FALSE,
       bmi = as.double(.data[["bmi"]]),
       ibw = as.double(.data[["ibw"]]),
       reason = forcats::as_factor(.data[["reason"]]),
-      esito = forcats::as_factor(.data[["esito"]]) %>%
+      esito = forcats::as_factor(.data[["esito"]]) |>
         forcats::fct_recode(
           "dimesso" = "1",
           "deceduto icu" = "2",

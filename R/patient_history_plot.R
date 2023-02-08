@@ -46,7 +46,7 @@ patient_history_plot <- function(
 
   # Step 1 - get the data from most updated targets
 
-  pat_names <- pt_names %>%
+  pat_names <- pt_names |>
     dplyr::filter(.data[["id_univoco"]] == id_long)
 
   pat_trd <- weanings_trd |>
@@ -55,20 +55,20 @@ patient_history_plot <- function(
       .data[["id_pat"]] == id_paziente
     )
 
-  pat_log <- weanings_log %>%
+  pat_log <- weanings_log |>
     dplyr::filter(
       .data[["folder"]] == id_ospedale,
       .data[["id_pat"]] == id_paziente
     )
 
-  pat_registry <- pt_registry %>%
+  pat_registry <- pt_registry |>
     dplyr::filter(.data[["id_univoco"]] == id_long)
 
   checkmate::assert_tibble(pat_names, min.rows = 1)
 
   # Step 2 - add to TRD a useful column
 
-  pat_trd <- pat_trd %>%
+  pat_trd <- pat_trd |>
     dplyr::mutate(
       datetime = lubridate::as_datetime(
         paste(.data[["date"]], .data[["ora"]])
@@ -86,14 +86,14 @@ patient_history_plot <- function(
     g +
     ggplot2::geom_violin(
       data = pat_log,
-      aes(x = .data[[time]], y = "LOG"),
+      ggplot2::aes(x = .data[[time]], y = "LOG"),
       scale = "count",
       alpha = 0.2,
       fill = main_color
     ) +
     ggplot2::geom_segment(
       data = db,
-      aes(
+      ggplot2::aes(
         x = min(.data[[time]]),
         y = type, yend = type,
         xend = max(.data[[time]])
@@ -103,13 +103,13 @@ patient_history_plot <- function(
     ) +
     ggplot2::geom_point(
       data = db,
-      aes(x = min(.data[[time]]), y = type),
+      ggplot2::aes(x = min(.data[[time]]), y = type),
       color = second_color,
       size = 2
     ) +
     ggplot2::geom_point(
       data = db,
-      aes(x = max(.data[[time]]), y = type),
+      ggplot2::aes(x = max(.data[[time]]), y = type),
       color = second_color,
       size = 2
     )
@@ -129,7 +129,7 @@ patient_history_plot <- function(
   plot <- plot +
     ggplot2::geom_point(
       data = pat_registry,
-      aes(
+      ggplot2::aes(
         x = as.POSIXct(.data[["data_lettura"]]),
         y = "Registry",
         size = .data[["susp_tot"]],
@@ -143,56 +143,56 @@ patient_history_plot <- function(
     ## ICU
     ggplot2::geom_segment(
       data = pat_names,
-      aes(y = "ICU", yend = "ICU",
+      ggplot2::aes(y = "ICU", yend = "ICU",
            x = as.POSIXct(.data[["icu_in"]]),
            xend = as.POSIXct(.data[["icu_out"]])),
       color = "dark grey",
       size = 2
     ) +
     ggplot2::geom_point(data = pat_names,
-                aes(y = "ICU",
+                ggplot2::aes(y = "ICU",
                      x = as.POSIXct(.data[["icu_in"]])),
                 color = "dark grey",
                 size = 4) +
     ggplot2::geom_point(data = pat_names,
-                aes(y = "ICU",
+                ggplot2::aes(y = "ICU",
                      x = as.POSIXct(.data[["icu_out"]])),
                 color = "dark grey",
                 size = 4) +
     ggrepel::geom_text_repel(data = pat_names,
-               aes(x = as.POSIXct(.data[["icu_out"]]),
+               ggplot2::aes(x = as.POSIXct(.data[["icu_out"]]),
                     y = "ICU",
                     label = "in ICU"),
                nudge_y = -0.3,
                color = "dark grey") +
     ## MV
     ggplot2::geom_segment(data = pat_names,
-                  aes(y = "ICU", yend = "ICU",
+                  ggplot2::aes(y = "ICU", yend = "ICU",
                        x = as.POSIXct(.data[["vm_inizio"]]),
                        xend = as.POSIXct(.data[["vm_fine"]])),
                   color = "black",
                   size = 1) +
     ggplot2::geom_point(data = pat_names,
-                aes(y = "ICU",
+                ggplot2::aes(y = "ICU",
                      x = as.POSIXct(.data[["vm_inizio"]])),
                 color = "black",
                 size = 2) +
     ggplot2::geom_point(data = pat_names,
-                aes(y = "ICU",
+                ggplot2::aes(y = "ICU",
                      x = as.POSIXct(.data[["vm_fine"]])),
                 color = "black",
                 size = 2) +
     ggrepel::geom_text_repel(data = pat_names,
-               aes(x = as.POSIXct(.data[["vm_inizio"]] + 1),
+               ggplot2::aes(x = as.POSIXct(.data[["vm_inizio"]] + 1),
                     y = "ICU",
                     label = "in Ventilazione Meccanica"),
                nudge_y = 0.3,
                color = "black") +
 
     # Estubazioni
-    ggplot2::geom_point(data = pat_registry %>%
+    ggplot2::geom_point(data = pat_registry |>
                            dplyr::filter(.data[["estubato"]] == TRUE),
-                         aes(y = "Registry",
+                         ggplot2::aes(y = "Registry",
                               x = as.POSIXct(.data[["data_lettura"]])),
                          color = "black",
                          shape = 4,

@@ -4,7 +4,7 @@
 \alias{plot_trd}
 \title{Build a plot of most important TRD variables}
 \usage{
-plot_trd(weaning_subset = NA, color_files = FALSE, moving_avg = FALSE)
+plot_trd(trd, weaning_subset = NA, color_files = FALSE, moving_avg = FALSE)
 }
 \arguments{
 \item{weaning_subset}{(tibble) a tibble containing a list of SBT
@@ -32,17 +32,17 @@ for each patient to spot a weaning attempt:
 
   patient_subset <- c("TS012", "BS002", "NO004")
 
-  weaning_days <- tar_read(pt_registry) \%>\%
-    group_by( id_univoco) \%>\%
+  weaning_days <- tar_read(pt_registry) |>
+    group_by( id_univoco) |>
     filter( susp_tot == 12,
-            estubato == 0)  \%>\%
+            estubato == 0)  |>
     mutate( esito = factor( x = "Fallito",
                             levels = c("Fallito", "Successo")))
 
-  weaning_subset <- weaning_days \%>\%
-    select(id_univoco, data_lettura, esito, type) \%>\%
-    filter( id_univoco \%in\% patient_subset) \%>\%
-    group_by(id_univoco) \%>\%
+  weaning_subset <- weaning_days |>
+    select(id_univoco, data_lettura, esito, type) |>
+    filter( id_univoco \%in\% patient_subset) |>
+    group_by(id_univoco) |>
     arrange(data_lettura)
 
   plot_trd( weaning_subset)

@@ -49,10 +49,10 @@ test_that("create_weanings works", {
   #   sbt riuscito =  `1`,
   #   sbt fallito =  `2`
   weanings <- tibble::tribble(
-    ~id_univoco, ~giorno_studio, ~sofa, ~cpis, ~susp_tot, ~sbt, ~esito
-    "1", 1, 6, 4, 12, 0, -99,
-    "1", 0, 5, 3, 7, 1, 1,
-    "2", 0, 2, 1, 12, 2, 0
+    ~id_univoco, ~giorno_studio, ~sofa, ~cpis, ~susp_tot, ~sbt, ~esito,
+    "1", 1, 6, 4, 12, 0, NA,
+    "1", 0, 5, 3, 7, 1, "Successo",
+    "2", 0, 2, 1, 12, 2, "Fallito"
   )
 
   # evaluate
@@ -98,17 +98,32 @@ test_that("create_trd works", {
   trd <- targets::tar_read(weaningsTRD)
 
   # evaluate
-  res_AN001 <- create_pt_trd(trd, "AN001")
+  res_an001 <- create_pt_trd(trd, "AN001")
 
   # tests
   if (FALSE) {
-    expect_tibble(res_AN001, nrows = 7200, ncols = 32)
-    expect_false(any(res_AN001[["minute"]] == -99))
-    expect_false(any(res_AN001[["day"]] == -99))
-    expect_set_equal(res_AN001[["minute"]], 0:1439)
+    expect_tibble(res_an001, nrows = 7200, ncols = 32)
+    expect_false(any(res_an001[["minute"]] == -99))
+    expect_false(any(res_an001[["day"]] == -99))
+    expect_set_equal(res_an001[["minute"]], 0:1439)
   }
 
-  expect_array(res_AN001, "numeric", any.missing = FALSE, d = 3)
-  expect_equal(dim(res_AN001), c(1440, 5, 30))
+  expect_array(res_an001, "numeric", any.missing = FALSE, d = 3)
+  expect_equal(dim(res_an001), c(1440, 5, 30))
+
+})
+
+
+
+test_that("create_pt_output works", {
+  pt_reg <- targets::tar_read(pt_registry)
+
+  # evaluate
+  res_an001 <- create_pt_output(pt_reg, "AN001")
+
+  # tests
+  expect_array(res_an001, "numeric", any.missing = FALSE, d = 2)
+  expect_equal(res_an001[[1, 2]], -99)
+  expect_equal(dim(res_an001), c(5, 2))
 
 })

@@ -80,12 +80,12 @@ ggplotly(p)
 Nel grafico precedente si vedono alcuni outlier, che si procede a indagare
 
 ```{r}
-pt_names %>%
-  filter(osp_out - osp_in > 100) %>%
+pt_names |>
+  filter(osp_out - osp_in > 100) |>
   mutate( id_univoco = id_univoco,
           osp_tot = osp_out - osp_in,
           icu_tot = icu_out - icu_in,
-          vm_tot = vm_fine - vm_inizio) %>%
+          vm_tot = vm_fine - vm_inizio) |>
   select(id_univoco,
          starts_with("osp"),
          starts_with("icu"),
@@ -342,21 +342,21 @@ Un SBT di successo è definito come la presenza contemporanea di due condizioni:
 -   il paziente è al momento intubato (o perché intubato post-ingresso in ICU o perché ha necessitato una reintubazione per peggioramento delle condizioni cliniche)
 
 ```{r}
-# weaning_succ <- pt_registry %>%
-#   group_by( id_univoco) %>%
+# weaning_succ <- pt_registry |>
+#   group_by( id_univoco) |>
 #   filter( susp_tot == 12, # criterio 1
 #           estubato == 1, # criterio 2
-#           lag(estubato, default = 0) == 0) %>%
+#           lag(estubato, default = 0) == 0) |>
 #   mutate( esito = factor( x = "Successo", 
 #                           levels = c("Fallito", "Successo")))
 ```
 
 ```{r}
-tar_read(weaning_succ) %>%
-  select(id_univoco, reintubato) %>%
-  group_by(id_univoco) %>%
-  summarise( SBTsucc_per_paziente = n()) %>%
-  group_by(SBTsucc_per_paziente) %>%
+tar_read(weaning_succ) |>
+  select(id_univoco, reintubato) |>
+  group_by(id_univoco) |>
+  summarise( SBTsucc_per_paziente = n()) |>
+  group_by(SBTsucc_per_paziente) |>
   summarise( tot_pazienti = n())
 ```
 
@@ -369,20 +369,20 @@ Un SBT fallito invece è definito dalla presenza contemporanea di altre due cond
 -   la variabile estubazione in quel giorno rimane con valore FALSE
 
 ```{r}
-# weaning_fail <- pt_registry %>%
-#   group_by( id_univoco) %>%
+# weaning_fail <- pt_registry |>
+#   group_by( id_univoco) |>
 #   filter( susp_tot == 12,
-#           estubato == 0)  %>%
+#           estubato == 0)  |>
 #   mutate( esito = factor( x = "Fallito", 
 #                           levels = c("Fallito", "Successo")))
 ```
 
 ```{r}
-tar_read(weaning_fail) %>%
-  select(id_univoco, reintubato) %>%
-  group_by(id_univoco) %>%
-  summarise( SBTfail_per_paziente = n()) %>%
-  group_by(SBTfail_per_paziente) %>%
+tar_read(weaning_fail) |>
+  select(id_univoco, reintubato) |>
+  group_by(id_univoco) |>
+  summarise( SBTfail_per_paziente = n()) |>
+  group_by(SBTfail_per_paziente) |>
   summarise( tot_pazienti = n())
 ```
 
@@ -429,7 +429,7 @@ Il file mostra una corrispondenza credibile tra i due file.
 Si procede quindi a scremare i log, selezionando solo le categorie utili precedentemente identificate
 
 ```{r, eval = FALSE}
-weaning_log_filtered <- weaning_log_subset %>%
+weaning_log_filtered <- weaning_log_subset |>
   filter( id_info %in% c(0, 267, 291, 321, 322),
           !str_detect(informazioni, 'Silenziamento'),
           !str_detect(informazioni, 'Pre-silenziamento') )

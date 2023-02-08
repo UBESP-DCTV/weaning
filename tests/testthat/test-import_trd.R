@@ -135,8 +135,6 @@ test_that("import_trd admit empty content file", {
 
 
 test_that("Controllare casini sui duplicati", {
-  # skip("Da verificare i duplicati dell'ora sullo stesso file")
-
   # setup
   weanings_trd <- targets::tar_read(weaningsTRD)
 

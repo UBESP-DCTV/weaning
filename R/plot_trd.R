@@ -23,61 +23,62 @@
 #'
 #'   patient_subset <- c("TS012", "BS002", "NO004")
 #'
-#'   weaning_days <- tar_read(pt_registry) %>%
-#'     group_by( id_univoco) %>%
+#'   weaning_days <- tar_read(pt_registry) |>
+#'     group_by( id_univoco) |>
 #'     filter( susp_tot == 12,
-#'             estubato == 0)  %>%
+#'             estubato == 0)  |>
 #'     mutate( esito = factor( x = "Fallito",
 #'                             levels = c("Fallito", "Successo")))
 #'
-#'   weaning_subset <- weaning_days %>%
-#'     select(id_univoco, data_lettura, esito, type) %>%
-#'     filter( id_univoco %in% patient_subset) %>%
-#'     group_by(id_univoco) %>%
+#'   weaning_subset <- weaning_days |>
+#'     select(id_univoco, data_lettura, esito, type) |>
+#'     filter( id_univoco %in% patient_subset) |>
+#'     group_by(id_univoco) |>
 #'     arrange(data_lettura)
 #'
 #'   plot_trd( weaning_subset)
 #'
 #' }
 #'
-plot_trd <- function(weaning_subset = NA,
+plot_trd <- function(trd,
+                     weaning_subset = NA,
                      color_files = FALSE,
                      moving_avg = FALSE) {
 
   checkmate::assert_logical(color_files)
 
   if (color_files == FALSE) {
-    return(plot_trd_vars(weaning_subset))
+    return(plot_trd_vars(trd, weaning_subset))
   } else if (moving_avg == TRUE) {
-    return(plot_trd_mavg(weaning_subset))
+    return(plot_trd_mavg(trd, weaning_subset))
   } else {
-    return(plot_trd_files(weaning_subset))
+    return(plot_trd_files(trd, weaning_subset))
   }
 }
 
-plot_trd_vars <- function(weaning_subset = NA) {
+plot_trd_vars <- function(trd, weaning_subset = NA) {
 
   checkmate::assert_tibble(weaning_subset,
                            min.rows = 1)
 
-  trd_subset <- tar_read(weaningsTRD) %>%
-    dplyr::mutate( id_univoco = ifelse(
+  trd_subset <- trd |>
+    dplyr::mutate(id_univoco = ifelse(
       test = id_pat <10,
       yes = paste0(folder, "00", id_pat),
-      no = paste0(folder, "0", id_pat) ) ) %>%
+      no = paste0(folder, "0", id_pat) ) ) |>
     dplyr::filter( id_univoco %in% weaning_subset[["id_univoco"]],
-                   date %in% weaning_subset[["data_lettura"]]) %>%
+                   date %in% weaning_subset[["data_lettura"]]) |>
     dplyr::select(id_univoco,
                   date,
                   ora,
                   lavoro_respiratorio_del_ventilatore_joule_l,
                   lavoro_respiratorio_del_paziente_joule_l,
                   pressione_di_fine_esp_cm_h2o,
-                  press_media_vie_aeree_cm_h2o) %>%
+                  press_media_vie_aeree_cm_h2o) |>
     # STANDARDIZZARE in [0,1] ?
     # dplyr::mutate(
     #     dplyr::across( lavoro_respiratorio_del_ventilatore_joule_l:press_media_vie_aeree_cm_h2o,
-    #            ~as.numeric(scales::rescale(., to = c(0, 1))) )) %>%
+    #            ~as.numeric(scales::rescale(., to = c(0, 1))) )) |>
     tidyr::pivot_longer(cols = 4:7)
 
   plot <- ggplot2::ggplot(trd_subset,
@@ -92,18 +93,18 @@ plot_trd_vars <- function(weaning_subset = NA) {
   return(plot)
 }
 
-plot_trd_files <- function(weaning_subset = NA) {
+plot_trd_files <- function(trd, weaning_subset = NA) {
 
   checkmate::assert_tibble(weaning_subset,
                            min.rows = 1)
 
-  trd_subset <- tar_read(weaningsTRD) %>%
+  trd_subset <- trd |>
     dplyr::mutate( id_univoco = ifelse(
       test = id_pat <10,
       yes = paste0(folder, "00", id_pat),
-      no = paste0(folder, "0", id_pat) ) ) %>%
+      no = paste0(folder, "0", id_pat) ) ) |>
     dplyr::filter( id_univoco %in% weaning_subset[["id_univoco"]],
-                   date %in% weaning_subset[["data_lettura"]]) %>%
+                   date %in% weaning_subset[["data_lettura"]]) |>
     dplyr::select(id_univoco,
                   date,
                   ora,
@@ -111,11 +112,11 @@ plot_trd_files <- function(weaning_subset = NA) {
                   lavoro_respiratorio_del_paziente_joule_l,
                   pressione_di_fine_esp_cm_h2o,
                   press_media_vie_aeree_cm_h2o,
-                  file) %>%
+                  file) |>
     # STANDARDIZZARE in [0,1] ?
     # dplyr::mutate(
     #     dplyr::across( lavoro_respiratorio_del_ventilatore_joule_l:press_media_vie_aeree_cm_h2o,
-    #            ~as.numeric(scales::rescale(., to = c(0, 1))) )) %>%
+    #            ~as.numeric(scales::rescale(., to = c(0, 1))) )) |>
     tidyr::pivot_longer(cols = 4:7)
 
   plot <- ggplot2::ggplot(trd_subset,
@@ -132,29 +133,29 @@ plot_trd_files <- function(weaning_subset = NA) {
   return(plot)
 }
 
-plot_trd_mavg <- function(weaning_subset = NA) {
+plot_trd_mavg <- function(trd, weaning_subset = NA) {
 
   checkmate::assert_tibble(weaning_subset,
                            min.rows = 1)
 
-  trd_subset <- tar_read(weaningsTRD) %>%
+  trd_subset <- trd |>
     dplyr::mutate( id_univoco = ifelse(
       test = id_pat <10,
       yes = paste0(folder, "00", id_pat),
-      no = paste0(folder, "0", id_pat) ) ) %>%
+      no = paste0(folder, "0", id_pat) ) ) |>
     dplyr::filter( id_univoco %in% weaning_subset[["id_univoco"]],
-                   date %in% weaning_subset[["data_lettura"]]) %>%
+                   date %in% weaning_subset[["data_lettura"]]) |>
     dplyr::select(id_univoco,
                   date,
                   ora,
                   lavoro_respiratorio_del_ventilatore_joule_l,
                   lavoro_respiratorio_del_paziente_joule_l,
                   pressione_di_fine_esp_cm_h2o,
-                  press_media_vie_aeree_cm_h2o) %>%
+                  press_media_vie_aeree_cm_h2o) |>
     # STANDARDIZZARE in [0,1] ?
     dplyr::mutate(
        dplyr::across( lavoro_respiratorio_del_ventilatore_joule_l:press_media_vie_aeree_cm_h2o,
-              ~as.numeric(scales::rescale(., to = c(0, 1))) )) %>%
+              ~as.numeric(scales::rescale(., to = c(0, 1))) )) |>
     tidyr::pivot_longer(cols = 4:7)
 
   plot <- ggplot2::ggplot(trd_subset,

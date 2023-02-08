@@ -92,7 +92,7 @@ import_registry <- function(
       data_lettura = lubridate::as_date(.data[["data_lettura"]]),
       susp_tot = rowSums(dplyr::across(dplyr::starts_with("susp_"))),
       dplyr::across(
-        starts_with("ega"),
+        dplyr::starts_with("ega"),
         ~ stringr::str_replace(.x, ",", ".") |> readr::parse_double()
       )
     ) |>

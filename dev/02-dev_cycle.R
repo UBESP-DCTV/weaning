@@ -3,11 +3,13 @@
 
 {
   prj_pkgs <- c(
-    "abind", "av", "fs", "glue", "magick", "purrr", "quarto", "readr",
-    "stringr", "targets", "tarchetypes", "withr", "reticulate",
-    "tensorflow", "keras"
+    "abind", "forcats", "fs", "ggplot2", "ggrepel", "glue", "purrr",
+    "readr", "readxl", "scales", "stringr", "tidyquant", "tidyr"
   )
-  dev_pkg <- c()#"littler")
+  dev_pkg <- c(
+    "av", "magick", "quarto", "targets", "tarchetypes", "withr",
+    "reticulate", "tensorflow", "keras"
+  ) # "littler")
   gh_prj_pkgs <- c("andrie/deepviz")
   meta_pkgs <- c()
 

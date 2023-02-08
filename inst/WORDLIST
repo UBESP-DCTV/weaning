@@ -23,6 +23,7 @@ alveoli
 chr
 cmH
 datetime
+dialy
 dplyr
 elastance
 electromiography
@@ -32,6 +33,7 @@ expiratory
 fct
 ggplot
 hms
+identifiying
 laims
 lettura
 lgl
@@ -39,10 +41,13 @@ linters
 num
 oro
 predicti
+ptnames
 reproducibility
 rlang
 tibble
+trd
 tunnelled
 tunnelling
 univoco
+weaningsTRD
 yyyymmddHHMM

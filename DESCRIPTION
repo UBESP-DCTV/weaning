@@ -19,32 +19,38 @@ Description: Collect data, functionalities and analyses for the weanings
 License: MIT + file LICENSE
 Imports: 
     abind,
-    av,
     checkmate,
     dplyr,
+    forcats,
     fs,
     furrr,
+    ggplot2,
+    ggrepel,
     glue,
     here,
     janitor,
-    keras,
     lifecycle,
     lubridate,
-    magick,
     purrr,
-    quarto,
     readr,
-    reticulate,
+    readxl,
     rlang (>= 0.4.11),
+    scales,
     stringr,
+    tibble,
+    tidyquant,
+    tidyr,
+    unheadr,
+    usethis
+Suggests: 
     tarchetypes,
+    quarto,
+    reticulate,
     targets,
     tensorflow,
-    tibble,
-    unheadr,
-    usethis,
-    withr
-Suggests: 
+    withr,
+    keras,
+    av,
     bs4Dash,
     cli,
     deepviz (>= 0.0.1.9000),
@@ -69,3 +75,4 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
+Language: en-US
