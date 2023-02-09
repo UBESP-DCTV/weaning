@@ -42,7 +42,10 @@ create_pt_trd <- function(db, pt_id) {
       tidyr::complete,
       minute = 0:1439
     ) |>
-    dplyr::arrange(.data[["day"]], .data[["minute"]])
+    dplyr::arrange(.data[["day"]], .data[["minute"]]) |>
+    dplyr::distinct(.data[["day"]], .data[["minute"]], .keep_all = TRUE)
+
+
 
   res[is.na(res)] <- -99
 
