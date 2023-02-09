@@ -124,7 +124,14 @@ find_mismatch_files <- function(folder_path) {
   ) |>
     normalizePath()
 
-  is_mismatch <- files |>
+  files[are_mismatch(files)] |>
+    basename() |>
+    stringr::str_remove("\\.SI$")
+}
+
+
+are_mismatch <- function(files) {
+  files |>
     purrr::map_lgl(~ {
       # Read the third line of the file
       third_line <- readLines(.x, n = 3)[3]
@@ -137,28 +144,36 @@ find_mismatch_files <- function(folder_path) {
       content_id <- strsplit(third_line, ":")[[1]][2] |>
         stringr::str_remove_all("\\s")
 
-      is_ok <- is.na(content_id) ||
-        content_id == ""  ||
-        (
-          stringr::str_to_lower(filename_id) ==
-            (stringr::str_to_lower(content_id) |> format_string())
-        ) ||
-        (
-          stringr::str_detect(content_id, "^\\d") &&
-            as.numeric(substr(filename_id, 3, 5)) ==
-            as.numeric(content_id)
-        ) ||
-        stringr::str_detect(content_id, "^\\w+ *\\w+$")
-
-      !is_ok
+      !is_ok_filename_id(content_id, filename_id)
     })
-
-  basename(files[is_mismatch]) |>
-    stringr::str_remove("\\.SI$")
 }
+
+
+is_ok_filename_id <- function(content_id, filename_id) {
+  is.na(content_id) ||
+    content_id == ""  ||
+    (
+      stringr::str_to_lower(filename_id) ==
+        (stringr::str_to_lower(content_id) |> format_string())
+    ) ||
+    (
+      stringr::str_detect(content_id, "^\\d") &&
+        as.numeric(substr(filename_id, 3, 5)) ==
+        as.numeric(content_id)
+    ) ||
+    stringr::str_detect(content_id, "^[a-zA-Z]+$")
+}
+
 
 format_string <- function(input_string) {
   # Extract the letter part and the number part of the input string
+  if (
+    stringr::str_detect(input_string, "^\\d") ||
+    stringr::str_detect(input_string, "^[a-zA-Z]+$")
+  ) {
+    return("")
+  }
+
   letter_part <- substr(input_string, 1, 2)
   number_part <- as.numeric(
     substr(input_string, 3, nchar(input_string)) |>

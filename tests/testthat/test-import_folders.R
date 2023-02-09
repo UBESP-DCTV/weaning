@@ -13,14 +13,14 @@ test_that("import_folder correctly remove duplicates", {
 })
 
 
-test_that("stop on wrong match id from patient folder and content", {
+test_that("warns on wrong match id from patient folder and content", {
   # setup
   sample_folder <- data_test_path(wrong = TRUE)
 
-  expect_error(
+  expect_warning(
     import_folders(sample_folder) |>
       suppressMessages(),
-    "while inside the file is"
+    "inconsistency between filename and id patient reported inside"
   ) |>
     suppressWarnings()
 

@@ -405,7 +405,7 @@ list(
     create_pt_output(pt_registry, pt_ids),
     pattern = map(pt_ids),
     iteration = "list"
-  ),
+  )
 
 
 
@@ -418,37 +418,40 @@ list(
 # report ----------------------------------------------------------
 
   # compile the report
-  tar_render(report, here("reports/report.Rmd")),
-  tar_quarto(trd_log_csv_exploration, here("reports/trd_log_csv_exploration.qmd")),
-
+  # tar_render(report, here("reports/report.Rmd")),
+  # tar_quarto(
+  #   trd_log_csv_exploration,
+  #   here("reports/trd_log_csv_exploration.qmd")
+  # ),
+  #
 
 
 
 # objects to share -------------------------------------------------
-  tar_target(
-    objectToShare,
-    list(
-      ggPatPerCentro = ggPatPerCentro,
-      ggDistAllarmi = ggDistAllarmi,
-      ggMissingTRD = ggMissingTRD,
-      weaningsTRD = weaningsTRD,
-      weaningsLOG = weaningsLOG,
-      ggWeanVariablesAll = ggWeanVariablesAll,
-      ggWeanVariablesSel = ggWeanVariablesSel,
-      patientHistoryPlotTS015 = patientHistoryPlotTS015,
-      patientHistoryPlotTS012 = patientHistoryPlotTS012,
-      patientHistoryPlotBS002 = patientHistoryPlotBS002,
-      patientHistoryPlotNO004 = patientHistoryPlotNO004,
-      ggTentativiPerPaziente = ggTentativiPerPaziente,
-      ggWeaningLogSubsetFiltered = ggWeaningLogSubsetFiltered,
-      ggMediaMobileSubset = ggMediaMobileSubset
-    )
-  ),
-
-  tar_target(
-    shareOutput,
-    share_objects(objectToShare),
-    format = "file",
-    pattern = map(objectToShare)
-  )
+  # tar_target(
+  #   objectToShare,
+  #   list(
+  #     # ggPatPerCentro = ggPatPerCentro,
+  #     # ggDistAllarmi = ggDistAllarmi,
+  #     # ggMissingTRD = ggMissingTRD,
+  #     # weaningsTRD = weaningsTRD,
+  #     # weaningsLOG = weaningsLOG,
+  #     # ggWeanVariablesAll = ggWeanVariablesAll,
+  #     # ggWeanVariablesSel = ggWeanVariablesSel,
+  #     # patientHistoryPlotTS015 = patientHistoryPlotTS015,
+  #     # patientHistoryPlotTS012 = patientHistoryPlotTS012,
+  #     # patientHistoryPlotBS002 = patientHistoryPlotBS002,
+  #     # patientHistoryPlotNO004 = patientHistoryPlotNO004,
+  #     # ggTentativiPerPaziente = ggTentativiPerPaziente,
+  #     # ggWeaningLogSubsetFiltered = ggWeaningLogSubsetFiltered,
+  #     # ggMediaMobileSubset = ggMediaMobileSubset
+  #   )
+  # ),
+  #
+  # tar_target(
+  #   shareOutput,
+  #   share_objects(objectToShare),
+  #   format = "file",
+  #   pattern = map(objectToShare)
+  # )
 )

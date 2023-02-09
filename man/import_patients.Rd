@@ -4,7 +4,12 @@
 \alias{import_patients}
 \title{Import Patient DB Excel file}
 \usage{
-import_patients(verbose = FALSE, testing_time = FALSE, test_path = "")
+import_patients(
+  verbose = FALSE,
+  testing_time = FALSE,
+  test_path = "",
+  patient_to_remove = character()
+)
 }
 \arguments{
 \item{verbose}{(lgl, FALSE) would you like to have additional

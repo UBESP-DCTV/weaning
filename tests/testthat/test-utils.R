@@ -44,3 +44,34 @@ test_that("report_skip works", {
     suppressWarnings()
 
 })
+
+
+test_that("is_ok_filename_id works", {
+  # setup
+  opt <- tibble::tribble(
+    ~content, ~file, ~ok,
+    "XX123", "XX123", TRUE,
+    "XX0123", "XX123", TRUE,
+    "XX01", "XX001",TRUE,
+    "", "XX123", TRUE,
+    NA_character_, "XX123", TRUE,
+    "123", "XX123", TRUE,
+    "124", "XX123", FALSE,
+    "XX02", "XX001",FALSE,
+    "XX124", "XX123", FALSE,
+    "XX0124", "XX123", FALSE,
+    "XY124", "XX123", FALSE,
+    "XXo24", "XX024", TRUE,
+    "XXO24", "XX024", TRUE,
+    "ciao", "XX123", TRUE
+  )
+
+
+  # eval
+  res <- purrr:::map2_lgl(
+    opt[["content"]], opt[["file"]], is_ok_filename_id
+  )
+
+  # test
+  expect_equal(res, opt[["ok"]])
+})
