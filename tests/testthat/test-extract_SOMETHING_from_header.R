@@ -65,3 +65,19 @@ test_that("extrtact_id_from_header works", {
   expect_equal(id, "FE001")
   expect_equal(id_noid, NA_character_)
 })
+
+
+
+test_that("extract_date_from_header works", {
+  # setup
+  slashed <- "Data creazione del file:	07/07/2013"
+  dashed <- "Data creazione del file:	2013-07-07"
+
+  # eval
+  slashed_parsed <- extract_date_from_header(slashed)
+  dashed_parsed <- extract_date_from_header(dashed)
+
+  # test
+  expect_equal(slashed_parsed, lubridate::dmy("07/07/2013"))
+  expect_equal(dashed_parsed, lubridate::ymd("2013-07-07"))
+})

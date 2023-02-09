@@ -137,10 +137,20 @@ find_mismatch_files <- function(folder_path) {
       content_id <- strsplit(third_line, ":")[[1]][2] |>
         stringr::str_remove_all("\\s")
 
-      !(is.na(content_id) | content_id == "")  &&
-        stringr::str_to_lower(filename_id) !=
-        stringr::str_to_lower(content_id) |>
-        format_string()
+      is_ok <- is.na(content_id) ||
+        content_id == ""  ||
+        (
+          stringr::str_to_lower(filename_id) ==
+            (stringr::str_to_lower(content_id) |> format_string())
+        ) ||
+        (
+          stringr::str_detect(content_id, "^\\d") &&
+            as.numeric(substr(filename_id, 3, 5)) ==
+            as.numeric(content_id)
+        ) ||
+        stringr::str_detect(content_id, "^\\w+ *\\w+$")
+
+      !is_ok
     })
 
   basename(files[is_mismatch]) |>
@@ -150,7 +160,10 @@ find_mismatch_files <- function(folder_path) {
 format_string <- function(input_string) {
   # Extract the letter part and the number part of the input string
   letter_part <- substr(input_string, 1, 2)
-  number_part <- as.numeric(substr(input_string, 3, nchar(input_string)))
+  number_part <- as.numeric(
+    substr(input_string, 3, nchar(input_string)) |>
+      stringr::str_replace_all("[oO]", "0")
+  )
 
   # Use sprintf to format the number part with leading zeros to make
   #  it have exactly 3 digits

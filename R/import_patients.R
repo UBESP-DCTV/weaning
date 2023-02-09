@@ -22,7 +22,8 @@
 import_patients <- function(
     verbose = FALSE,
     testing_time = FALSE,
-    test_path = ""
+    test_path = "",
+    patient_to_remove = character()
 ) {
   path_input <- file.path(
       get_input_data_path(),
@@ -46,6 +47,7 @@ import_patients <- function(
       sheet = "pt_names",
       guess_max = 5
     ) |>
+    dplyr::filter(!.data[["id_univoco"]] %in% patient_to_remove) |>
     dplyr::select(
       "id_pt",
       "id_univoco",

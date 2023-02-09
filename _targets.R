@@ -43,7 +43,13 @@ list(
     format = "file"
   ),
 
-  tar_target(patientsToRemove, "NO021"),
+  tar_target(
+    patientsToRemove,
+    c(
+      "NO021",
+      "FE017"  # record tutti riferiti (nei metadati interni) a FE016
+    )
+  ),
 
   # tar_target(fileToSkip, c(
   #   "BG003_1119_LOG_2014-03-13_15-53-07",  # BG002
@@ -166,7 +172,11 @@ list(
 # transform data --------------------------------------------------
 
 
-  tar_target(pt_names, import_patients(), format = "qs"),
+  tar_target(
+    pt_names,
+    import_patients(patient_to_remove = patientsToRemove),
+    format = "qs"
+  ),
   tar_target(pt_ids, get_id(pt_names)),
   tar_target(pt_registry, import_registry(), format = "qs"),
 
@@ -196,7 +206,8 @@ list(
   # plots -----------------------------------------------------------
   tar_target(ggPatPerCentro, {
     weaningsTRD |>
-      distinct(folder, id_pat) |>
+      distinct(id_univoco) |>
+      mutate(folder = stringr::str_sub_all(id_univoco, 1, 2)) |>
       ggplot(aes(forcats::fct_infreq(folder), fill = folder)) +
       geom_bar() +
       labs(

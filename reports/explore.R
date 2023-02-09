@@ -113,3 +113,9 @@ mismatched <- tar_read(centerFolder) |>
 db <- tar_read(weaningsTRD)
 a <- create_pt_trd(tar_read(weaningsTRD), "CM001")
 
+
+
+
+
+tar_read(centerFolder)[[2]] |>
+  import_folder("TRD")

@@ -8,7 +8,7 @@
   )
   dev_pkg <- c(
     "av", "magick", "quarto", "targets", "tarchetypes", "withr",
-    "reticulate", "tensorflow", "keras"
+    "quarto", "reticulate", "tensorflow", "keras"
   ) # "littler")
   gh_prj_pkgs <- c("andrie/deepviz")
   meta_pkgs <- c()
