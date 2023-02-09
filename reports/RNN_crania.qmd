@@ -1,0 +1,114 @@
+---
+title: "RNN Crania"
+author: "Andrea Pedot"
+format: html
+editor: visual
+---
+
+# Building the RNN model
+
+```{r}
+library(tidyverse)
+library(targets)
+library(abind)
+devtools::load_all(".")
+```
+
+## Creating Arrays as input to the model
+
+First of all, data should be manipulated to be ready for the model train, test and validation. Since the model should support discussion at 7am at the morning briefing, 24h prior to that meeting will be transformed in multidimensional arrays.
+
+### TRD 24h Array ( weaning_attempt, parameter, time)
+
+For TRD, only 3-dimensions are needed:
+
+-   Weaning attempt, obtained combining Patient id (\~180 possible values) and the Day of the attempt
+
+-   Mechanical ventilation parameter, each containing one of the \~32 features recorded each minute by the ventilator
+
+-   Time, with \~1440 with each line representing a minute in the 24h from 7:01am to 7:00am the following day
+
+First of all, let's reduce the problem to only two patients (BS003and TS015) and a handful of TRD variables ( freq_spontanea_resp_min, edi_min_m\_v e press_di_pausa_vie_aeree_cm_h20)
+
+```{r}
+# patient registry
+clinic_reduced <- tar_read(pt_names)  |>
+  filter(id_univoco %in% c("BS003", "TS015"))
+
+weaning_reduced <- tar_read(weaning_days)  |>
+  filter(id_univoco %in% c("BS003", "TS015")) |>
+  mutate( id_date = paste0(id_univoco, data_lettura))
+
+trd_reduced <- tar_read(weaningsTRD) |>
+  filter(id_univoco %in% c("BS003", "TS015")) |>
+  select( id_univoco, date, ora,
+          freq_spontanea_resp_min,
+          edi_min_m_v,
+          press_di_pausa_vie_aeree_cm_h2o) |>
+  filter( paste0(id_univoco, date) %in% wdays_test[["id_date"]])
+```
+
+Di cui si procede a visualizzare la storia clinica
+
+```{r}
+patient_history_plot("BS", 3)
+```
+
+```{r}
+patient_history_plot("TS", 15)
+```
+
+Pezzo di codice sperimentale per rompere un tibble in un array (due livelli)
+
+```{r}
+T <- matrix(1:60, ncol=6) |>
+  as_tibble() |>
+  mutate(id_pat = (V1 < 6) )
+
+S <- T |>
+  group_by(id_pat) |>
+  group_split( .keep = FALSE ) |>
+  lapply(FUN = as.matrix)
+  
+A <- abind(S, along = 3)
+
+```
+
+A questo punto si applica al tibble con i dati dei pazienti
+
+```{r}
+trd_array_test <- trd_test |>
+  group_by(id_univoco) |>
+  group_split( .keep = FALSE ) |>
+  lapply(FUN = as.matrix) |>
+  abind(along = 3)
+
+dim(trd_array_test)
+#che funziona, è il pz TS015 che ha un errore nella registrazione
+
+```
+
+A questo punto ripetiamo l'operazione, ma senza limitarci a due pazienti
+
+```{r}
+wdays_tbl <- tar_read(weaning_days)  |>
+  mutate( id_date = paste0(id_univoco, data_lettura))
+
+trd_tbl <- tar_read(weaningsTRD) |>
+  complete(id_univoco, date, ora) |>
+  select( id_univoco, date, ora,
+          freq_spontanea_resp_min,
+          edi_min_m_v,
+          press_di_pausa_vie_aeree_cm_h2o) |>
+  filter( paste0(id_univoco, date) %in% wdays_tbl[["id_date"]])
+  
+
+trd_list <- trd_tbl |>
+  group_by(id_univoco) |>
+  group_split( .keep = FALSE ) |>
+  lapply(FUN = as.matrix)
+
+trd_array <-  abind(trd_list, along = 3)
+
+dim(trd_tbl)
+```

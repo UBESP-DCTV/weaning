@@ -2,5 +2,9 @@
 .Rhistory
 .RData
 .Ruserdata
-.Renviron
+.html
 inst/extdata
+
+_targets.yaml
+
+.Renviron

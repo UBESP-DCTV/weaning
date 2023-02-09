@@ -17,7 +17,8 @@
 #' \dontrun{
 #'   library(weaning)
 #'
-#'   file.path(get_data_path(), "AB/AN001_356_TRD.SI") |>
+#'   file.path(get_input_data_path(), "AN/AN001_356_TRD.SI") |>
+#'   normalizePath() |>
 #'   import_trd()
 #' }
 import_trd <- function(.file_path, verbose = FALSE) {
@@ -27,6 +28,15 @@ import_trd <- function(.file_path, verbose = FALSE) {
   if (verbose) usethis::ui_todo(.file_path)
 
   headr <- readr::read_lines(.file_path, n_max = 10)
+  id_check <- extract_id_from_header(headr)  # not always present
+
+  id_pat <- extract_id_from_filepath(.file_path)
+  .dir_path <- basename(dirname(.file_path))
+  id_univoco <- create_id_univoco(id_pat, .dir_path)
+
+  check_consistency_idpatfile(id_univoco, id_check)
+
+
   content <- readr::read_lines(.file_path, skip = 10) |>
     stringr::str_subset("Riassunto", negate = TRUE) |>
     stringr::str_subset("^$", negate = TRUE)
@@ -44,17 +54,38 @@ import_trd <- function(.file_path, verbose = FALSE) {
       keep_names = FALSE
     ) |>
     janitor::clean_names() |>
-    dplyr::filter(dplyr::if_any(-.data[["ora"]], ~!is.na(.x))) |>
+    dplyr::distinct(.data[["ora"]], .keep_all = TRUE) |>
     dplyr::mutate(
-      dplyr::across(-.data[["ora"]], readr::parse_double),
-      id_pat = extract_id_from_filepath(.file_path),
+      dplyr::across(-dplyr::all_of("ora"), readr::parse_double),
+      id_univoco = id_univoco,
       date = extract_date_from_header(headr),
       ora = readr::parse_time(.data[["ora"]])
+    )
+
+  ora_x <- which(res[["ora"]] == lubridate::hm("23:59"))
+
+  if (length(ora_x) > 0) {
+    res_oggi <- res |>
+      dplyr::slice(-seq_len(ora_x))
+
+    res_ieri <- res |>
+      dplyr::slice(seq_len(ora_x)) |>
+      dplyr::mutate(
+        date = date - 1
+      )
+
+    res <- dplyr::bind_rows(res_ieri, res_oggi)
+  }
+
+  res <- res |>
+    dplyr::filter(
+      dplyr::if_any(
+        -dplyr::all_of(c("ora", "id_univoco", "date")),
+        ~!is.na(.x))
     ) |>
     dplyr::relocate(
-      .data[["id_pat"]],
-      .data[["date"]],
-      .before = .data[["ora"]]
+      dplyr::all_of(c("id_univoco", "date")),
+      .before = dplyr::all_of("ora")
     )
 
 

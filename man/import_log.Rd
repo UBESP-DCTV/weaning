@@ -4,13 +4,16 @@
 \alias{import_log}
 \title{Import LOG file}
 \usage{
-import_log(.file_path, verbose = FALSE)
+import_log(.file_path, verbose = FALSE, need_hdr = FALSE)
 }
 \arguments{
 \item{.file_path}{(chr) path to the LOG file to import}
 
 \item{verbose}{(lgl, FALSE) would you like to have additional
 messages to be signaled?}
+
+\item{need_hdr}{(lgl, default = FALSE) we do not use that, here for
+potential future purposes}
 }
 \value{
 a \link[tibble:tibble-package]{tibble} with the imported

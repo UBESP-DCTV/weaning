@@ -109,10 +109,11 @@ out <- capture.output({
   net <- tar_visnetwork(
   # targets_only = TRUE,
   exclude = c(
-    "report",
-    all_of(extract_fct_names(here::here("R/utils.R")))
-  )
-)  
+      "report", "shareOutput",
+      all_of(extract_fct_names(here::here("R/utils.R"))),
+      matches("^\\..*$")
+    )
+  )  
 })
 
 net
@@ -169,12 +170,13 @@ dplyr::slice_sample(weanings_log, n = 50) |>
 
 ```{r}
 paz <- weanings_trd |> 
-  select(folder, id_pat) |> 
+  mutate(Centro = stringr::str_sub(id_univoco, 1, 2)) |> 
+  select(Centro, id_univoco) |> 
   distinct() |> 
-  group_by(folder) |> 
+  group_by(Centro) |> 
   summarise(`Numero pazienti` = n()) |> 
-  arrange(desc(`Numero pazienti`)) |> 
-  rename(Centro = folder)
+  arrange(desc(`Numero pazienti`))
+
 
 paz |> 
   datatable(filter = "top", options = list(scrollX = TRUE))

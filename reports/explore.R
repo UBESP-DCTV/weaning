@@ -1,33 +1,121 @@
 library(tidyverse)
 library(targets)
 
-trd <- tar_read(weaningsTRD)
-log <- tar_read(weaningsLOG)
+tar_read(pt_names) |> dplyr::glimpse()
+tar_read(pt_registry) |> dplyr::glimpse()
+
+
+tar_read(pt_registry) |>
+  select(id_univoco, esito) |>
+  group_by(esito, id_univoco) |>
+  tally() |> #summarise(sum(n)) #|> pull(n) |> sum()
+pivot_wider(
+  names_from = esito,
+  values_from = n,
+  values_fill = 0
+) |>
+  ggplot(aes(x = Fallito, y = Successo)) +
+  geom_count(aes(colour = ..n.., size = ..n..)) +
+  labs( title = "Numero di tentativi per paziente")
+
+
+tar_read(weaningsLOG)$time
+
+
+# patient_history_plot(
+#   ,
+#   tar_read(weaningsLOG),
+#   tar_read(pt_names),
+#   tar_read(pt_registry),
+#   "TS",
+#   12
+# )
+
+
+get_gross_minutes <- function(hm) {
+  60 * lubridate::hour(hm) + lubridate::minute(hm)
+}
+get_gross_minutes(tar_read(weaningsTRD)$ora) |>
+  range()
+
+names(tar_read(weaningsTRD))
+
+tar_read(weaningsTRD)$et_co2_percent
 
 
 
 
-log |> filter(is.na(id_pat))
+res <- targets::tar_read(weaningsTRD) |>
+  create_pt_trd("AN001")
 
-trd |>
-  janitor::get_dupes(-file)
+res_arr <- purrr::map(
+    c(0, seq_len(max(res[["day"]], na.rm = TRUE))),
+    ~ res[res[["day"]] == .x, , drop = FALSE] |>
+      as.matrix()
+  ) |>
+  abind::abind(along = 1.5)
 
-trd <- qs::qread(here::here("_targets/objects/weaningsTRD"))
+str(res_arr)
 
 
-trd |>
-  purrr::map_dbl(~mean(is.na(.x))) |>
-  as.list() |>
-  as_tibble() |>
-  pivot_longer(cols = everything()) |>
-  mutate(value = round(100 * value)) |>
-  ggplot(aes(x=reorder(name, desc(value)), value, fill = name)) +
-  geom_bar(stat = "identity") +
-  coord_flip() +
-  theme_bw() +
-  labs(
-    x = "Variabile",
-    y = "proporzione missing",
-    fill = "Variabili"
-  ) +
-  theme(legend.position = "none")
+  # res <- dplyr::filter(.data[["id_univoco"]] == "AN001") |>
+  # dplyr::arrange(.data[["date"]], .data[["ora"]]) |>
+  # dplyr::select(
+  #   -dplyr::all_of(c(
+  #     "id_univoco", "folder", "file", "id_pat", "stress_index",
+  #     "et_co2_percent"
+  #   ))
+  # ) |>
+  # dplyr::mutate(
+  #   day = as.integer(
+  #     .data[["date"]] - min(.data[["date"]], na.rm = TRUE)
+  #   ),
+  #   minute = get_gross_minutes(.data[["ora"]])
+  # ) |>
+  # dplyr::select(-dplyr::all_of(c("date", "ora"))) |>
+  # dplyr::relocate(
+  #   dplyr::all_of(c("day", "minute")),
+  #   .before = dplyr::everything()
+  # ) |>
+  # tidyr::complete(
+  #   day = c(0, seq_len(max(.data[["day"]], na.rm = TRUE))),
+  #   fill = list(minute = 0)
+  # ) |>
+  # dplyr::group_by(.data[["day"]]) |>
+  # tidyr::complete(minute = 0:1439) |>
+  # dplyr::arrange(.data[["day"]], .data[["minute"]])
+  #
+  # res[is.na(res)] <- -99
+
+
+
+
+abind::abind(
+  list(
+    matrix(1:4, 2, 2),
+    matrix(5:8, 2, 2)
+  ),
+  along = 1.8
+)
+
+
+
+
+
+
+tar_read(weaningsTRD)
+mismatched <- tar_read(centerFolder) |>
+  purrr::map(~{
+    find_mismatch_files(.x) |>
+      stringr::str_subset("LOG|REG", negate = TRUE)
+  })
+
+db <- tar_read(weaningsTRD)
+a <- create_pt_trd(tar_read(weaningsTRD), "CM001")
+
+
+
+
+
+tar_read(centerFolder)[[2]] |>
+  import_folder("TRD")

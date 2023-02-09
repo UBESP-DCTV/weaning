@@ -12,7 +12,6 @@ spelling::update_wordlist()
 # add library(checkmate) to testthat/testthat.R
 usethis::edit_file(here::here("tests/testthat/setup.R"))
 
-
 dev_pkg <- c(
   "testthat", "devtools", "fs", "spelling", "distill", "visNetwork",
   "webshot", "qs", "bs4Dash", "gt", "markdown", "pingr", "shiny",

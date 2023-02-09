@@ -1,0 +1,480 @@
+Archivio eventi ventilatore	VEL
+Nome del Paziente:	BG005
+ID Paziente:	BG005
+N° di serie Ventilatore:	 51743
+Versione Software del Ventilatore:	Systema:	v7.00	Pannello: 	v24.08.03	Pannello Condiviso: 	v24.08.00	Respirazione: 	v24.08.00	Respiraz. Condivisa: 	v24.08.00	Monitor: 	v24.08.00	Monitor Condiviso: 	v24.08.00	Flusso Esp.: 	v24.08.00	Flusso Esp. Condiviso: 	v24.08.00
+Data creazione del file:	10/10/2014
+
+Controllo Pre-uso:	30/09/2014	17:05:18	Passato	Test circuito paziente:	30/09/2014	17:05:18	Passato
+Dettagli controllo Pre-uso:	Test interni: Passato, Test barometro: Passato, Test erogazione gas: Passato, Test perdita interna: Passato, Test trasduttore di pressione: Passato, Test valvola di sicurezza: Passato, Test cella/sensore O₂: Passato, Test trasduttore di flusso: Passato, Test switch batteria: Passato, Test circuito paziente: Passato, Test dello stato di allarme: Passato
+Simbolo decimale:	.
+
+
+
+
+
+
+
+
+
+
+Data	Ora	ID	Tipo	Informazioni
+10/10/2014	10:32:56	61	Allarme	Allarme: Frequenza respiratoria elevata 
+10/10/2014	10:32:39	61	Allarme	Allarme: Frequenza respiratoria elevata 
+10/10/2014	10:32:38	61	Allarme	Allarme: Frequenza respiratoria elevata 
+10/10/2014	10:08:58	61	Allarme	Allarme: Frequenza respiratoria elevata 
+10/10/2014	10:08:47	61	Allarme	Allarme: Frequenza respiratoria elevata 
+10/10/2014	08:27:39	0	Funzioni	Silenziamento attivato
+10/10/2014	08:27:25	61	Allarme	Allarme: Frequenza respiratoria elevata 
+10/10/2014	08:27:14	125	Allarme	Allarme: PEEP bassa
+10/10/2014	08:27:12	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+10/10/2014	08:13:46	110	Allarme	Allarme: Flusso Insp. fuori range
+10/10/2014	08:13:45	125	Allarme	Allarme: PEEP bassa
+10/10/2014	08:13:43	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+10/10/2014	08:07:43	61	Allarme	Allarme: Frequenza respiratoria elevata 
+10/10/2014	03:43:03	291	Variaz. parametro	Concentrazione O₂ impostata a 40 %
+10/10/2014	03:42:01	291	Variaz. parametro	Concentrazione O₂ impostata a 100 %
+10/10/2014	03:42:00	65535	Funzioni	Avvio respiri ossigeno
+10/10/2014	03:41:58	65535	Funzioni	Avvio respiri ossigeno
+10/10/2014	03:41:58	0	Funzioni	Pre-silenziamento attivato
+10/10/2014	02:13:35	18	Allarme	Allarme: Vol. Min. Esp. basso
+10/10/2014	00:38:52	291	Variaz. parametro	Concentrazione O₂ impostata a 40 %
+10/10/2014	00:37:54	18	Allarme	Allarme: Vol. Min. Esp. basso
+10/10/2014	00:37:52	61	Allarme	Allarme: Frequenza respiratoria elevata 
+10/10/2014	00:37:51	65535	Funzioni	Paziente ricollegato
+10/10/2014	00:37:51	0	Funzioni	Pre-silenziamento attivato
+10/10/2014	00:37:34	65535	Funzioni	Paziente scollegato
+10/10/2014	00:37:08	291	Variaz. parametro	Concentrazione O₂ impostata a 70 %
+10/10/2014	00:37:07	65535	Funzioni	Programma aspirazione assistita avviato
+09/10/2014	21:57:57	267	Variaz. parametro	Pressione sopra PEEP impostata a 7 cmH₂O
+09/10/2014	21:43:13	291	Variaz. parametro	Concentrazione O₂ impostata a 40 %
+09/10/2014	21:42:13	18	Allarme	Allarme: Vol. Min. Esp. basso
+09/10/2014	21:42:12	61	Allarme	Allarme: Frequenza respiratoria elevata 
+09/10/2014	21:42:11	65535	Funzioni	Paziente ricollegato
+09/10/2014	21:42:11	0	Funzioni	Pre-silenziamento attivato
+09/10/2014	21:41:53	65535	Funzioni	Paziente scollegato
+09/10/2014	21:41:10	291	Variaz. parametro	Concentrazione O₂ impostata a 70 %
+09/10/2014	21:41:08	65535	Funzioni	Programma aspirazione assistita avviato
+09/10/2014	19:07:34	267	Variaz. parametro	Pressione sopra PEEP impostata a 9 cmH₂O
+09/10/2014	15:35:26	291	Variaz. parametro	Concentrazione O₂ impostata a 40 %
+09/10/2014	15:34:25	61	Allarme	Allarme: Frequenza respiratoria elevata 
+09/10/2014	15:34:24	18	Allarme	Allarme: Vol. Min. Esp. basso
+09/10/2014	15:34:23	65535	Funzioni	Paziente ricollegato
+09/10/2014	15:34:23	0	Funzioni	Pre-silenziamento attivato
+09/10/2014	15:34:01	65535	Funzioni	Paziente scollegato
+09/10/2014	15:33:35	291	Variaz. parametro	Concentrazione O₂ impostata a 70 %
+09/10/2014	15:33:32	65535	Funzioni	Programma aspirazione assistita avviato
+09/10/2014	14:30:24	269	Variaz. parametro	PEEP impostata a 12 cmH₂O
+09/10/2014	13:43:59	291	Variaz. parametro	Concentrazione O₂ impostata a 40 %
+09/10/2014	13:43:03	18	Allarme	Allarme: Vol. Min. Esp. basso
+09/10/2014	13:42:57	65535	Funzioni	Paziente ricollegato
+09/10/2014	13:42:57	0	Funzioni	Pre-silenziamento attivato
+09/10/2014	13:42:37	65535	Funzioni	Paziente scollegato
+09/10/2014	13:41:37	291	Variaz. parametro	Concentrazione O₂ impostata a 70 %
+09/10/2014	13:41:37	65535	Funzioni	Programma aspirazione assistita avviato
+09/10/2014	13:40:25	18	Allarme	Allarme: Vol. Min. Esp. basso
+09/10/2014	11:17:51	267	Variaz. parametro	Pressione sopra PEEP impostata a 13 cmH₂O
+09/10/2014	11:17:40	269	Variaz. parametro	PEEP impostata a 10 cmH₂O
+09/10/2014	11:17:40	267	Variaz. parametro	Pressione sopra PEEP impostata a 21 cmH₂O
+09/10/2014	11:17:31	269	Variaz. parametro	PEEP impostata a 13 cmH₂O
+09/10/2014	11:16:43	157	Variaz. limite allarme	Limite allarme PEEP alto impostato su 32 cmH₂O
+09/10/2014	11:16:28	12	Variaz. limite allarme	Limite di allarme pressione vie aeree impostato a 63 cmH₂O
+09/10/2014	11:16:23	157	Allarme	Allarme: PEEP alta
+09/10/2014	11:16:20	267	Variaz. parametro	Pressione sopra PEEP impostata a 24 cmH₂O
+09/10/2014	11:16:18	269	Variaz. parametro	PEEP impostata a 16 cmH₂O
+09/10/2014	11:16:06	267	Variaz. parametro	Pressione sopra PEEP impostata a 18 cmH₂O
+09/10/2014	11:16:05	61	Allarme	Allarme: Frequenza respiratoria elevata 
+09/10/2014	11:15:54	61	Allarme	Allarme: Frequenza respiratoria elevata 
+09/10/2014	11:15:53	267	Variaz. parametro	Pressione sopra PEEP impostata a 9 cmH₂O
+09/10/2014	11:15:49	267	Variaz. parametro	Pressione sopra PEEP impostata a 17 cmH₂O
+09/10/2014	11:15:49	267	Variaz. parametro	Pressione sopra PEEP impostata a 14 cmH₂O
+09/10/2014	11:14:39	18	Allarme	Allarme: Vol. Min. Esp. basso
+09/10/2014	11:14:38	61	Allarme	Allarme: Frequenza respiratoria elevata 
+09/10/2014	11:14:32	61	Allarme	Allarme: Frequenza respiratoria elevata 
+09/10/2014	11:14:17	18	Allarme	Allarme: Vol. Min. Esp. basso
+09/10/2014	11:13:50	61	Allarme	Allarme: Frequenza respiratoria elevata 
+09/10/2014	11:12:23	61	Allarme	Allarme: Frequenza respiratoria elevata 
+09/10/2014	11:11:45	18	Allarme	Allarme: Vol. Min. Esp. basso
+09/10/2014	11:11:37	61	Allarme	Allarme: Frequenza respiratoria elevata 
+09/10/2014	11:11:27	291	Variaz. parametro	Concentrazione O₂ impostata a 40 %
+09/10/2014	11:10:26	65535	Funzioni	Paziente ricollegato
+09/10/2014	11:10:26	0	Funzioni	Pre-silenziamento attivato
+09/10/2014	11:10:21	65535	Funzioni	Paziente scollegato
+09/10/2014	11:10:05	291	Variaz. parametro	Concentrazione O₂ impostata a 70 %
+09/10/2014	11:10:04	65535	Funzioni	Programma aspirazione assistita avviato
+09/10/2014	10:56:39	61	Allarme	Allarme: Frequenza respiratoria elevata 
+09/10/2014	10:55:07	267	Variaz. parametro	Pressione sopra PEEP impostata a 4 cmH₂O
+09/10/2014	10:55:05	267	Variaz. parametro	Pressione sopra PEEP impostata a 5 cmH₂O
+09/10/2014	10:52:30	61	Allarme	Allarme: Frequenza respiratoria elevata 
+09/10/2014	10:10:39	269	Variaz. parametro	PEEP impostata a 10 cmH₂O
+09/10/2014	10:10:36	269	Variaz. parametro	PEEP impostata a 20 cmH₂O
+09/10/2014	10:10:35	269	Variaz. parametro	PEEP impostata a 16 cmH₂O
+09/10/2014	09:46:05	291	Variaz. parametro	Concentrazione O₂ impostata a 40 %
+09/10/2014	09:46:04	291	Variaz. parametro	Concentrazione O₂ impostata a 41 %
+09/10/2014	09:46:03	291	Variaz. parametro	Concentrazione O₂ impostata a 42 %
+09/10/2014	09:46:01	269	Variaz. parametro	PEEP impostata a 6 cmH₂O
+09/10/2014	09:46:00	269	Variaz. parametro	PEEP impostata a 7 cmH₂O
+09/10/2014	08:38:07	125	Allarme	Allarme: PEEP bassa
+09/10/2014	08:38:04	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+09/10/2014	08:11:39	18	Allarme	Allarme: Vol. Min. Esp. basso
+09/10/2014	08:11:32	61	Allarme	Allarme: Frequenza respiratoria elevata 
+09/10/2014	08:11:30	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+09/10/2014	08:11:26	125	Allarme	Allarme: PEEP bassa
+09/10/2014	08:11:23	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+09/10/2014	08:11:20	125	Allarme	Allarme: PEEP bassa
+09/10/2014	08:11:17	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+09/10/2014	08:10:06	61	Allarme	Allarme: Frequenza respiratoria elevata 
+09/10/2014	08:09:56	61	Allarme	Allarme: Frequenza respiratoria elevata 
+09/10/2014	08:09:16	61	Allarme	Allarme: Frequenza respiratoria elevata 
+09/10/2014	08:08:34	291	Variaz. parametro	Concentrazione O₂ impostata a 55 %
+09/10/2014	08:07:34	65535	Funzioni	Paziente ricollegato
+09/10/2014	08:07:34	0	Funzioni	Pre-silenziamento attivato
+09/10/2014	08:07:26	65535	Funzioni	Paziente scollegato
+09/10/2014	08:07:16	291	Variaz. parametro	Concentrazione O₂ impostata a 85 %
+09/10/2014	08:07:16	65535	Funzioni	Programma aspirazione assistita avviato
+09/10/2014	07:56:20	61	Allarme	Allarme: Frequenza respiratoria elevata 
+09/10/2014	07:56:17	61	Allarme	Allarme: Frequenza respiratoria elevata 
+09/10/2014	01:24:59	291	Variaz. parametro	Concentrazione O₂ impostata a 55 %
+09/10/2014	01:23:59	65535	Funzioni	Paziente ricollegato
+09/10/2014	01:23:59	0	Funzioni	Pre-silenziamento attivato
+09/10/2014	01:23:28	65535	Funzioni	Paziente scollegato
+09/10/2014	01:22:07	291	Variaz. parametro	Concentrazione O₂ impostata a 85 %
+09/10/2014	01:22:07	65535	Funzioni	Programma aspirazione assistita avviato
+09/10/2014	00:48:46	18	Allarme	Allarme: Vol. Min. Esp. basso
+09/10/2014	00:46:42	18	Allarme	Allarme: Vol. Min. Esp. basso
+09/10/2014	00:29:23	18	Allarme	Allarme: Vol. Min. Esp. basso
+09/10/2014	00:29:18	62	Allarme	Allarme: Frequenza respiratoria bassa
+08/10/2014	21:16:14	291	Variaz. parametro	Concentrazione O₂ impostata a 55 %
+08/10/2014	21:15:15	18	Allarme	Allarme: Vol. Min. Esp. basso
+08/10/2014	21:15:14	61	Allarme	Allarme: Frequenza respiratoria elevata 
+08/10/2014	21:15:13	65535	Funzioni	Paziente ricollegato
+08/10/2014	21:15:13	0	Funzioni	Pre-silenziamento attivato
+08/10/2014	21:14:54	65535	Funzioni	Paziente scollegato
+08/10/2014	21:14:19	291	Variaz. parametro	Concentrazione O₂ impostata a 85 %
+08/10/2014	21:14:19	65535	Funzioni	Programma aspirazione assistita avviato
+08/10/2014	20:55:06	61	Allarme	Allarme: Frequenza respiratoria elevata 
+08/10/2014	19:44:03	18	Allarme	Allarme: Vol. Min. Esp. basso
+08/10/2014	17:05:46	291	Variaz. parametro	Concentrazione O₂ impostata a 55 %
+08/10/2014	17:04:45	61	Allarme	Allarme: Frequenza respiratoria elevata 
+08/10/2014	17:04:45	65535	Funzioni	Paziente ricollegato
+08/10/2014	17:04:45	0	Funzioni	Pre-silenziamento attivato
+08/10/2014	17:04:20	65535	Funzioni	Paziente scollegato
+08/10/2014	17:03:35	291	Variaz. parametro	Concentrazione O₂ impostata a 85 %
+08/10/2014	17:03:34	65535	Funzioni	Programma aspirazione assistita avviato
+08/10/2014	14:11:02	264	Variaz. parametro	Trig. Flusso impostata a 5
+08/10/2014	14:07:32	267	Variaz. parametro	Pressione sopra PEEP impostata a 6 cmH₂O
+08/10/2014	14:07:31	267	Variaz. parametro	Pressione sopra PEEP impostata a 5 cmH₂O
+08/10/2014	14:07:29	267	Variaz. parametro	Pressione sopra PEEP impostata a 6 cmH₂O
+08/10/2014	14:07:26	315	Variaz. parametro	PC backup sopra PEEP impostato a 20 cmH₂O
+08/10/2014	14:07:26	281	Variaz. parametro	Tempo di salita insp. impostato a 0.15 s
+08/10/2014	14:07:26	277	Variaz. parametro	I:E di backup impostato a 1:2.0
+08/10/2014	14:07:26	274	Variaz. parametro	Frequenza resp. di backup impostato a 15 resp/min
+08/10/2014	14:07:26	310	Variaz. parametro	Modo di ventilazione impostato a PS/CPAP
+08/10/2014	14:07:25	0	Funzioni	Pre-silenziamento attivato
+08/10/2014	14:02:11	18	Allarme	Allarme: Vol. Min. Esp. basso
+08/10/2014	14:02:06	62	Allarme	Allarme: Frequenza respiratoria bassa
+08/10/2014	13:23:16	61	Allarme	Allarme: Frequenza respiratoria elevata 
+08/10/2014	13:22:33	291	Variaz. parametro	Concentrazione O₂ impostata a 55 %
+08/10/2014	13:21:34	12	Allarme	Allarme: Press. vie aeree elevata
+08/10/2014	13:21:31	65535	Funzioni	Paziente ricollegato
+08/10/2014	13:21:31	0	Funzioni	Pre-silenziamento attivato
+08/10/2014	13:21:04	65535	Funzioni	Paziente scollegato
+08/10/2014	13:20:28	291	Variaz. parametro	Concentrazione O₂ impostata a 85 %
+08/10/2014	13:20:28	65535	Funzioni	Programma aspirazione assistita avviato
+08/10/2014	12:47:32	305	Variaz. parametro	Altezza paziente impostata a 175 cm
+08/10/2014	12:47:32	258	Variaz. parametro	Peso paziente impostato a 75 kg
+08/10/2014	12:47:29	65535	Funzioni	Nuovo paziente accettato
+08/10/2014	12:43:38	1	Registrazione	Registrazione salvata
+08/10/2014	12:43:18	1	Registrazione	Registrazione salvata
+08/10/2014	12:00:50	18	Allarme	Allarme: Vol. Min. Esp. basso
+08/10/2014	11:13:49	18	Allarme	Allarme: Vol. Min. Esp. basso
+08/10/2014	11:13:46	62	Allarme	Allarme: Frequenza respiratoria bassa
+08/10/2014	11:04:34	291	Variaz. parametro	Concentrazione O₂ impostata a 55 %
+08/10/2014	09:26:18	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+08/10/2014	07:59:36	268	Variaz. parametro	Pressione assistita sopra PEEP impostata a 6 cmH₂O
+08/10/2014	07:59:00	0	Funzioni	Pre-silenziamento attivato
+08/10/2014	07:58:59	65535	Funzioni	Avvio blocco pausa esp.
+08/10/2014	07:58:58	1	Registrazione	Registrazione salvata
+08/10/2014	07:08:44	61	Allarme	Allarme: Frequenza respiratoria elevata 
+08/10/2014	07:08:41	61	Allarme	Allarme: Frequenza respiratoria elevata 
+08/10/2014	07:06:38	61	Allarme	Allarme: Frequenza respiratoria elevata 
+08/10/2014	07:04:51	61	Allarme	Allarme: Frequenza respiratoria elevata 
+08/10/2014	07:03:38	61	Allarme	Allarme: Frequenza respiratoria elevata 
+08/10/2014	07:03:33	61	Variaz. limite allarme	Allarme limite superiore freq. respiratoria impostato a 33 resp/min
+08/10/2014	07:03:26	0	Funzioni	Silenziamento attivato
+08/10/2014	07:03:07	12	Allarme	Allarme: Press. vie aeree elevata
+08/10/2014	07:02:50	61	Allarme	Allarme: Frequenza respiratoria elevata 
+08/10/2014	07:01:39	61	Allarme	Allarme: Frequenza respiratoria elevata 
+08/10/2014	07:00:50	0	Funzioni	Silenziamento attivato
+08/10/2014	07:00:50	61	Allarme	Allarme: Frequenza respiratoria elevata 
+08/10/2014	07:00:40	61	Allarme	Allarme: Frequenza respiratoria elevata 
+08/10/2014	07:00:04	12	Allarme	Allarme: Press. vie aeree elevata
+08/10/2014	06:59:56	61	Allarme	Allarme: Frequenza respiratoria elevata 
+08/10/2014	06:59:06	12	Allarme	Allarme: Press. vie aeree elevata
+08/10/2014	06:58:50	61	Allarme	Allarme: Frequenza respiratoria elevata 
+08/10/2014	06:58:03	12	Allarme	Allarme: Press. vie aeree elevata
+08/10/2014	06:56:59	61	Allarme	Allarme: Frequenza respiratoria elevata 
+08/10/2014	06:56:39	61	Allarme	Allarme: Frequenza respiratoria elevata 
+08/10/2014	06:53:54	61	Allarme	Allarme: Frequenza respiratoria elevata 
+08/10/2014	06:52:37	61	Allarme	Allarme: Frequenza respiratoria elevata 
+08/10/2014	06:51:05	291	Variaz. parametro	Concentrazione O₂ impostata a 60 %
+08/10/2014	06:50:53	61	Allarme	Allarme: Frequenza respiratoria elevata 
+08/10/2014	06:50:24	18	Allarme	Allarme: Vol. Min. Esp. basso
+08/10/2014	06:50:01	65535	Funzioni	Paziente ricollegato
+08/10/2014	06:50:01	0	Funzioni	Pre-silenziamento attivato
+08/10/2014	06:49:45	65535	Funzioni	Paziente scollegato
+08/10/2014	06:49:06	291	Variaz. parametro	Concentrazione O₂ impostata a 90 %
+08/10/2014	06:49:06	65535	Funzioni	Programma aspirazione assistita avviato
+08/10/2014	05:37:27	18	Allarme	Allarme: Vol. Min. Esp. basso
+08/10/2014	04:40:23	18	Allarme	Allarme: Vol. Min. Esp. basso
+08/10/2014	04:40:23	62	Allarme	Allarme: Frequenza respiratoria bassa
+08/10/2014	04:39:43	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	21:18:27	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	21:16:23	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	21:08:14	291	Variaz. parametro	Concentrazione O₂ impostata a 60 %
+07/10/2014	21:06:12	291	Variaz. parametro	Concentrazione O₂ impostata a 90 %
+07/10/2014	21:06:12	65535	Funzioni	Programma aspirazione assistita avviato
+07/10/2014	21:04:40	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	11:53:39	291	Variaz. parametro	Concentrazione O₂ impostata a 60 %
+07/10/2014	11:52:41	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+07/10/2014	11:52:38	65535	Funzioni	Paziente ricollegato
+07/10/2014	11:52:38	0	Funzioni	Pre-silenziamento attivato
+07/10/2014	11:52:25	65535	Funzioni	Paziente scollegato
+07/10/2014	11:52:17	291	Variaz. parametro	Concentrazione O₂ impostata a 90 %
+07/10/2014	11:52:17	65535	Funzioni	Programma aspirazione assistita avviato
+07/10/2014	11:20:31	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	11:19:21	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+07/10/2014	10:49:53	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	10:47:50	268	Variaz. parametro	Pressione assistita sopra PEEP impostata a 8 cmH₂O
+07/10/2014	10:47:44	268	Variaz. parametro	Pressione assistita sopra PEEP impostata a 7 cmH₂O
+07/10/2014	10:47:31	268	Variaz. parametro	Pressione assistita sopra PEEP impostata a 9 cmH₂O
+07/10/2014	10:47:16	291	Variaz. parametro	Concentrazione O₂ impostata a 60 %
+07/10/2014	10:47:16	276	Variaz. parametro	Ciclo SIMV impostato a 7.5 s
+07/10/2014	10:47:16	275	Variaz. parametro	Frequenza SIMV impostata a 1 resp/min
+07/10/2014	10:47:16	272	Variaz. parametro	Ciclo off insp. Impostato a 30 %
+07/10/2014	10:47:16	268	Variaz. parametro	Pressione assistita sopra PEEP impostata a 6 cmH₂O
+07/10/2014	10:47:16	267	Variaz. parametro	Pressione sopra PEEP impostata a 22 cmH₂O
+07/10/2014	10:47:16	310	Variaz. parametro	Modo di ventilazione impostato a SIMV(PC) + PS
+07/10/2014	10:47:15	16	Variaz. limite allarme	Tempo di apnea impostato a 45 s
+07/10/2014	10:47:15	0	Funzioni	Pre-silenziamento attivato
+07/10/2014	10:28:23	18	Variaz. limite allarme	Allarme limite inferiore volume minuto impostato a 3.5 l/min
+07/10/2014	10:27:09	18	Allarme	Allarme: Vol. Min. Esp. basso
+07/10/2014	10:27:06	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	10:26:57	110	Allarme	Allarme: Flusso Insp. fuori range
+07/10/2014	10:26:55	125	Allarme	Allarme: PEEP bassa
+07/10/2014	10:26:53	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+07/10/2014	10:22:02	310	Variaz. parametro	Modo di ventilazione impostato a Vol. gar. a reg. di press.
+07/10/2014	10:22:01	0	Funzioni	Pre-silenziamento attivato
+07/10/2014	10:16:30	18	Allarme	Allarme: Vol. Min. Esp. basso
+07/10/2014	10:16:14	18	Allarme	Allarme: Vol. Min. Esp. basso
+07/10/2014	10:16:01	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	10:15:39	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	10:15:20	18	Allarme	Allarme: Vol. Min. Esp. basso
+07/10/2014	10:15:07	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	10:14:56	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	10:14:47	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	10:14:40	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	10:14:35	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	10:14:29	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	10:14:24	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	10:14:03	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	10:13:58	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	10:11:41	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	10:11:17	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	10:11:08	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	10:10:55	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	10:10:47	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	10:10:46	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	10:10:41	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	10:10:40	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	10:10:32	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	10:10:17	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	10:10:06	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	10:09:48	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	10:09:16	18	Allarme	Allarme: Vol. Min. Esp. basso
+07/10/2014	10:09:12	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	10:09:08	18	Allarme	Allarme: Vol. Min. Esp. basso
+07/10/2014	10:08:55	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	10:08:44	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	10:08:32	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	10:08:22	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	10:08:10	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	10:05:49	265	Variaz. parametro	Volume corrente impostato a 520 ml
+07/10/2014	10:05:47	265	Variaz. parametro	Volume corrente impostato a 530 ml
+07/10/2014	10:05:46	265	Variaz. parametro	Volume corrente impostato a 510 ml
+07/10/2014	10:05:42	279	Variaz. parametro	Tempo di pausa impostato a 10 %
+07/10/2014	10:05:42	265	Variaz. parametro	Volume corrente impostato a 390 ml
+07/10/2014	10:05:42	274	Variaz. parametro	Frequenza resp. impostata a 15 resp/min
+07/10/2014	10:05:42	310	Variaz. parametro	Modo di ventilazione impostato a Volume Controllato
+07/10/2014	10:05:41	0	Funzioni	Pre-silenziamento attivato
+07/10/2014	09:57:40	291	Variaz. parametro	Concentrazione O₂ impostata a 100 %
+07/10/2014	09:57:38	291	Variaz. parametro	Concentrazione O₂ impostata a 99 %
+07/10/2014	09:57:37	291	Variaz. parametro	Concentrazione O₂ impostata a 88 %
+07/10/2014	09:57:34	291	Variaz. parametro	Concentrazione O₂ impostata a 70 %
+07/10/2014	09:57:25	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+07/10/2014	09:57:21	65535	Funzioni	Paziente ricollegato
+07/10/2014	09:57:21	0	Funzioni	Pre-silenziamento attivato
+07/10/2014	09:57:14	65535	Funzioni	Paziente scollegato
+07/10/2014	09:57:01	291	Variaz. parametro	Concentrazione O₂ impostata a 100 %
+07/10/2014	09:56:59	65535	Funzioni	Programma aspirazione assistita avviato
+07/10/2014	09:04:09	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:50:59	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:49:00	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:47:59	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:45:01	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:37:59	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:35:02	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:34:59	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:32:25	0	Funzioni	Silenziamento attivato
+07/10/2014	08:32:05	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:31:14	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:31:08	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:30:16	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:29:05	0	Funzioni	Silenziamento attivato
+07/10/2014	08:28:59	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:28:09	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:28:00	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:26:59	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:25:58	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:25:16	0	Funzioni	Silenziamento attivato
+07/10/2014	08:24:49	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:23:59	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:23:01	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:22:03	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:21:00	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:19:03	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:16:56	268	Variaz. parametro	Pressione assistita sopra PEEP impostata a 7 cmH₂O
+07/10/2014	08:16:49	268	Variaz. parametro	Pressione assistita sopra PEEP impostata a 8 cmH₂O
+07/10/2014	08:16:41	268	Variaz. parametro	Pressione assistita sopra PEEP impostata a 9 cmH₂O
+07/10/2014	08:16:41	264	Variaz. parametro	Trig. Flusso impostata a 4
+07/10/2014	08:16:24	16	Variaz. limite allarme	Tempo di apnea impostato a 45 s
+07/10/2014	08:16:22	276	Variaz. parametro	Ciclo SIMV impostato a 7.4 s
+07/10/2014	08:16:22	277	Variaz. parametro	I:E impostato a 1.0:1
+07/10/2014	08:16:22	275	Variaz. parametro	Frequenza SIMV impostata a 1 resp/min
+07/10/2014	08:16:22	272	Variaz. parametro	Ciclo off insp. Impostato a 30 %
+07/10/2014	08:16:22	268	Variaz. parametro	Pressione assistita sopra PEEP impostata a 7 cmH₂O
+07/10/2014	08:16:22	267	Variaz. parametro	Pressione sopra PEEP impostata a 22 cmH₂O
+07/10/2014	08:16:22	310	Variaz. parametro	Modo di ventilazione impostato a SIMV(PC) + PS
+07/10/2014	08:16:21	16	Variaz. limite allarme	Tempo di apnea impostato a 20 s
+07/10/2014	08:16:21	0	Funzioni	Pre-silenziamento attivato
+07/10/2014	08:09:31	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:08:29	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:05:20	291	Variaz. parametro	Concentrazione O₂ impostata a 70 %
+07/10/2014	08:04:56	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:04:51	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	08:04:49	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:04:22	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+07/10/2014	08:04:22	125	Allarme	Allarme: PEEP bassa
+07/10/2014	08:04:20	61	Allarme	Allarme: Frequenza respiratoria elevata 
+07/10/2014	08:04:20	18	Allarme	Allarme: Vol. Min. Esp. basso
+07/10/2014	08:04:20	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	08:04:19	65535	Funzioni	Paziente ricollegato
+07/10/2014	08:04:19	0	Funzioni	Pre-silenziamento attivato
+07/10/2014	08:03:53	65535	Funzioni	Paziente scollegato
+07/10/2014	08:03:25	291	Variaz. parametro	Concentrazione O₂ impostata a 100 %
+07/10/2014	08:03:25	65535	Funzioni	Programma aspirazione assistita avviato
+07/10/2014	07:29:30	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	06:50:55	12	Allarme	Allarme: Press. vie aeree elevata
+07/10/2014	05:15:25	110	Allarme	Allarme: Flusso Insp. fuori range
+07/10/2014	05:15:25	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+07/10/2014	04:55:09	291	Variaz. parametro	Concentrazione O₂ impostata a 70 %
+07/10/2014	04:54:10	65535	Funzioni	Paziente ricollegato
+07/10/2014	04:54:10	0	Funzioni	Pre-silenziamento attivato
+07/10/2014	04:53:35	65535	Funzioni	Paziente scollegato
+07/10/2014	04:53:04	291	Variaz. parametro	Concentrazione O₂ impostata a 100 %
+07/10/2014	04:53:04	65535	Funzioni	Programma aspirazione assistita avviato
+07/10/2014	00:35:37	291	Variaz. parametro	Concentrazione O₂ impostata a 70 %
+07/10/2014	00:35:36	291	Variaz. parametro	Concentrazione O₂ impostata a 71 %
+07/10/2014	00:34:02	291	Variaz. parametro	Concentrazione O₂ impostata a 60 %
+07/10/2014	00:33:59	291	Variaz. parametro	Concentrazione O₂ impostata a 67 %
+07/10/2014	00:25:01	291	Variaz. parametro	Concentrazione O₂ impostata a 70 %
+07/10/2014	00:24:59	291	Variaz. parametro	Concentrazione O₂ impostata a 68 %
+07/10/2014	00:24:58	291	Variaz. parametro	Concentrazione O₂ impostata a 63 %
+07/10/2014	00:24:58	291	Variaz. parametro	Concentrazione O₂ impostata a 62 %
+07/10/2014	00:14:35	291	Variaz. parametro	Concentrazione O₂ impostata a 60 %
+07/10/2014	00:13:35	291	Variaz. parametro	Concentrazione O₂ impostata a 100 %
+07/10/2014	00:13:34	65535	Funzioni	Avvio respiri ossigeno
+07/10/2014	00:13:34	0	Funzioni	Pre-silenziamento attivato
+07/10/2014	00:07:27	291	Variaz. parametro	Concentrazione O₂ impostata a 60 %
+07/10/2014	00:06:25	65535	Funzioni	Paziente ricollegato
+07/10/2014	00:06:25	0	Funzioni	Pre-silenziamento attivato
+07/10/2014	00:05:40	65535	Funzioni	Paziente scollegato
+07/10/2014	00:04:44	291	Variaz. parametro	Concentrazione O₂ impostata a 90 %
+07/10/2014	00:04:41	65535	Funzioni	Programma aspirazione assistita avviato
+06/10/2014	21:37:14	291	Variaz. parametro	Concentrazione O₂ impostata a 60 %
+06/10/2014	21:36:16	61	Allarme	Allarme: Frequenza respiratoria elevata 
+06/10/2014	21:36:15	18	Allarme	Allarme: Vol. Min. Esp. basso
+06/10/2014	21:36:13	65535	Funzioni	Paziente ricollegato
+06/10/2014	21:36:13	0	Funzioni	Pre-silenziamento attivato
+06/10/2014	21:35:50	65535	Funzioni	Paziente scollegato
+06/10/2014	21:35:41	291	Variaz. parametro	Concentrazione O₂ impostata a 90 %
+06/10/2014	21:35:40	65535	Funzioni	Programma aspirazione assistita avviato
+06/10/2014	20:18:21	265	Variaz. parametro	Volume corrente impostato a 570 ml
+06/10/2014	20:18:20	265	Variaz. parametro	Volume corrente impostato a 560 ml
+06/10/2014	20:18:18	265	Variaz. parametro	Volume corrente impostato a 730 ml
+06/10/2014	20:18:07	265	Variaz. parametro	Volume corrente impostato a 800 ml
+06/10/2014	20:18:06	265	Variaz. parametro	Volume corrente impostato a 750 ml
+06/10/2014	20:18:04	265	Variaz. parametro	Volume corrente impostato a 700 ml
+06/10/2014	20:18:02	265	Variaz. parametro	Volume corrente impostato a 690 ml
+06/10/2014	20:18:00	265	Variaz. parametro	Volume corrente impostato a 540 ml
+06/10/2014	19:30:40	274	Variaz. parametro	Frequenza resp. impostata a 17 resp/min
+06/10/2014	19:30:38	265	Variaz. parametro	Volume corrente impostato a 530 ml
+06/10/2014	19:30:31	65535	Funzioni	Avvio blocco pausa insp.
+06/10/2014	19:30:27	49	Allarme	Allarme: Pressione limitata
+06/10/2014	19:30:15	65535	Funzioni	Avvio blocco pausa insp.
+06/10/2014	19:30:11	265	Variaz. parametro	Volume corrente impostato a 1310 ml
+06/10/2014	19:30:06	65535	Funzioni	Avvio blocco pausa insp.
+06/10/2014	19:30:02	265	Variaz. parametro	Volume corrente impostato a 1270 ml
+06/10/2014	19:29:56	0	Funzioni	Pre-silenziamento attivato
+06/10/2014	19:29:56	65535	Funzioni	Avvio blocco pausa insp.
+06/10/2014	19:29:52	265	Variaz. parametro	Volume corrente impostato a 1220 ml
+06/10/2014	19:29:47	265	Variaz. parametro	Volume corrente impostato a 1160 ml
+06/10/2014	19:29:46	265	Variaz. parametro	Volume corrente impostato a 1090 ml
+06/10/2014	19:29:41	12	Variaz. limite allarme	Limite di allarme pressione vie aeree impostato a 43 cmH₂O
+06/10/2014	19:29:37	265	Variaz. parametro	Volume corrente impostato a 1070 ml
+06/10/2014	19:29:35	265	Variaz. parametro	Volume corrente impostato a 990 ml
+06/10/2014	19:29:34	265	Variaz. parametro	Volume corrente impostato a 790 ml
+06/10/2014	19:29:33	265	Variaz. parametro	Volume corrente impostato a 620 ml
+06/10/2014	19:19:18	291	Variaz. parametro	Concentrazione O₂ impostata a 60 %
+06/10/2014	19:19:17	291	Variaz. parametro	Concentrazione O₂ impostata a 55 %
+06/10/2014	19:19:15	291	Variaz. parametro	Concentrazione O₂ impostata a 51 %
+06/10/2014	19:18:47	0	Funzioni	Pre-silenziamento attivato
+06/10/2014	19:18:47	65535	Funzioni	Avvio blocco pausa insp.
+06/10/2014	19:17:40	110	Allarme	Allarme: Flusso Insp. fuori range
+06/10/2014	19:17:40	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+06/10/2014	19:15:46	110	Allarme	Allarme: Flusso Insp. fuori range
+06/10/2014	19:15:45	125	Allarme	Allarme: PEEP bassa
+06/10/2014	19:15:44	110	Allarme	Allarme: Flusso Insp. fuori range
+06/10/2014	19:15:43	18	Allarme	Allarme: Vol. Min. Esp. basso
+06/10/2014	19:15:43	61	Allarme	Allarme: Frequenza respiratoria elevata 
+06/10/2014	19:15:42	63	Allarme	Allarme: Vol. Corrente Insp. fuori range
+06/10/2014	19:15:41	65535	Variaz. limite allarme	Livello sonoro allarme impostato a 100 %
+06/10/2014	19:15:41	265	Variaz. parametro	Volume corrente impostato a 500 ml
+06/10/2014	19:15:41	291	Variaz. parametro	Concentrazione O₂ impostata a 50 %
+06/10/2014	19:15:41	280	Variaz. parametro	Tempo di salita insp. impostato a 5 %
+06/10/2014	19:15:41	277	Variaz. parametro	I:E impostato a 1:2.0
+06/10/2014	19:15:41	274	Variaz. parametro	Frequenza resp. impostata a 20 resp/min
+06/10/2014	19:15:41	269	Variaz. parametro	PEEP impostata a 10 cmH₂O
+06/10/2014	19:15:41	264	Variaz. parametro	Trig. Flusso impostata a 5
+06/10/2014	19:15:41	310	Variaz. parametro	Modo di ventilazione impostato a Vol. gar. a reg. di press.
+06/10/2014	19:15:41	311	Variaz. parametro	Calcolata Compliance circuito 0.21 ml/cmH₂O
+06/10/2014	19:15:41	339	Variaz. parametro	Possibilità di impostare profili di flusso alternativi in VC Disabilitata
+06/10/2014	19:15:41	335	Variaz. parametro	Funzionalità deconnessione impostata su Flusso basso
+06/10/2014	19:15:41	260	Variaz. parametro	Compensazione Compliance circuito Acceso
+06/10/2014	19:15:41	305	Variaz. parametro	Altezza paziente impostata a 160 cm
+06/10/2014	19:15:41	258	Variaz. parametro	Peso paziente impostato a 50 kg
+06/10/2014	19:15:41	263	Variaz. parametro	Tipo di ventilazione base impostato a V. Invasiva
+06/10/2014	19:15:41	62	Variaz. limite allarme	Allarme limite inferiore freq. respiratoria impostato a 5 resp/min
+06/10/2014	19:15:41	61	Variaz. limite allarme	Allarme limite superiore freq. respiratoria impostato a 30 resp/min
+06/10/2014	19:15:41	26	Variaz. limite allarme	Allarme limite inferiore conc.O₂ impostato a 45 %
+06/10/2014	19:15:41	25	Variaz. limite allarme	Allarme limite superiore conc.O₂ impostato a 55 %
+06/10/2014	19:15:41	125	Variaz. limite allarme	Allarme limite inferiore PEEP impostato a 2 cmH₂O
+06/10/2014	19:15:41	157	Variaz. limite allarme	Limite allarme PEEP alto impostato su 14 cmH₂O
+06/10/2014	19:15:41	18	Variaz. limite allarme	Allarme limite inferiore volume minuto impostato a 5.0 l/min
+06/10/2014	19:15:41	17	Variaz. limite allarme	Allarme limite superiore volume minuto impostato a 40.0 l/min
+06/10/2014	19:15:41	12	Variaz. limite allarme	Limite di allarme pressione vie aeree impostato a 40 cmH₂O
+06/10/2014	19:15:41	0	Funzioni	Pre-silenziamento attivato
+06/10/2014	19:15:41	5	Tipo di gas cambiato	Tipo gas: aria
+06/10/2014	19:15:41	0	Funzioni	Inizio ventilazione
+
+Riassunto:	8
