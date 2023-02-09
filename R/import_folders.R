@@ -51,23 +51,33 @@ import_folder <- function(
   if (!verbose) usethis::ui_todo(.dir_path)
 
 
-  trd_files <- normalizePath(.dir_path) |>
+  overall_trd_files <- normalizePath(.dir_path) |>
     list.files(
       pattern = what,
       full.names = TRUE,
       ignore.case = TRUE
     ) |>
-    {\(.x) .x |>
+    (\(.x) .x |>
         purrr::set_names(
           basename(.x) |>
-            stringr::str_remove(
-              paste0("_", what, "\\.SI$")
-            )
+            stringr::str_remove("\\.SI$")
         )
-    }()
+    )()
+
+  file2skip <- find_mismatch_files(.dir_path)
+
+  trd_files <- overall_trd_files[setdiff(
+    names(overall_trd_files),
+    report_skip(file2skip[file2skip %in% names(overall_trd_files)])
+  )]
 
 
-  if (length(trd_files)  == 0L) return(NULL)
+  if (length(trd_files) == 0L) {
+    usethis::ui_info(
+      "No TRD file in folder {usethis::ui_value(.dir_path)}"
+    )
+    return(NULL)
+  }
 
   import_fct <- what |>
     switch(
@@ -84,11 +94,33 @@ import_folder <- function(
     )
 
   res <- aux |>
-    dplyr::distinct(dplyr::across(-.data[["file"]]), .keep_all = TRUE)
+    dplyr::distinct(
+      dplyr::across(-dplyr::all_of("file")),
+      .keep_all = TRUE
+    )
 
   if (!verbose) usethis::ui_done(.dir_path)
+
   res
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -106,6 +138,7 @@ import_folder <- function(
 #'  "TRD" or "LOG."
 #' @param verbose (lgl, FALSE) would you like to have additional
 #'   messages to be signaled?
+#' @param patients2remove (chr) vector of patient to not consider
 #'
 #' @return a [tibble][tibble::tibble-package] with the imported signals
 #'   (i.e. the tabular content plus the date and the patient id) from
@@ -123,18 +156,25 @@ import_folder <- function(
 import_folders <- function(
     .dir_path,
     what = "TRD",
-    verbose = FALSE
+    verbose = FALSE,
+    patients2remove = character()
 ) {
   checkmate::assert_directory_exists(.dir_path)
 
-  .dir_path |>
-    list.dirs(recursive = FALSE, full.names = TRUE) |>
-    normalizePath() |>
-    {\(.x) purrr::set_names(.x, basename(.x))}() |>
+  get_center_folders(.dir_path) |>
     purrr::map_dfr(
       import_folder,
       what = what,
-      verbose = verbose,
-      .id = "folder"
-    )
+      verbose = verbose
+    ) |>
+    fix_wrong_hours() |>
+    dplyr::filter(!.data[["id_univoco"]] %in% patients2remove)
+}
+
+
+get_center_folders <- function(.dir_path) {
+  .dir_path |>
+    list.dirs(recursive = FALSE, full.names = TRUE) |>
+    normalizePath() |>
+    (\(.x) purrr::set_names(.x, basename(.x)))()
 }

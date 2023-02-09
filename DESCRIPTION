@@ -18,9 +18,14 @@ Description: Collect data, functionalities and analyses for the weanings
     project at UBEP.
 License: MIT + file LICENSE
 Imports: 
+    abind,
     checkmate,
     dplyr,
+    forcats,
+    fs,
     furrr,
+    ggplot2,
+    ggrepel,
     glue,
     here,
     janitor,
@@ -28,37 +33,46 @@ Imports:
     lubridate,
     purrr,
     readr,
+    readxl,
     rlang (>= 0.4.11),
+    scales,
     stringr,
     tibble,
+    tidyquant,
+    tidyr,
     unheadr,
     usethis
 Suggests: 
+    av,
     bs4Dash,
     cli,
+    deepviz (>= 0.0.1.9000),
     devtools,
     distill,
     DT,
-    fs,
     gt,
+    keras,
     markdown,
     pingr,
     qs,
+    quarto,
+    reticulate,
     roxygen2,
     shiny,
     shinybusy,
     shinyWidgets,
     spelling,
-    tarchetypes (>= 0.5.0.9000),
-    targets (>= 0.11.0.9000),
+    tarchetypes,
+    targets,
+    tensorflow,
     testthat (>= 3.0.0),
     visNetwork,
     webshot,
     withr
 Remotes: 
-    ropensci/tarchetypes,
-    ropensci/targets
+    andrie/deepviz
 Config/testthat/edition: 3
 Encoding: UTF-8
+Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3

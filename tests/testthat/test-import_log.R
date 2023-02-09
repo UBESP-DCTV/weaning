@@ -19,12 +19,13 @@ test_that("import_log works", {
 
   # test
   expected_coltypes <- c(
-    id_pat = "numeric",
+    id_univoco = "character",
     data = "Date",
     ora = "hms",
     id_info = "integer",
     tipo = "factor",
-    informazioni = "character"
+    informazioni = "character",
+    time = "POSIXct"
   )
 
   expect_tibble(res)
@@ -49,13 +50,14 @@ test_that("import_folder works for LOG files", {
     expect_tibble(
       types = c(
         "character",  # Added
-        "numeric", "Date", "hms", " integer", "factor", "character"
+        "numeric", "Date", "hms", " integer", "factor", "character",
+        "POSIXct", "POSIXt"
       ),
       min.rows = 6
     )
 
   expect_equal(names(res)[[1]], "file")
-  expect_equal(res[["file"]][[1]], "AB123_8")
+  expect_equal(res[["file"]][[1]], "AB123_8_LOG")
 })
 
 
@@ -65,20 +67,27 @@ test_that("import_folders works for LOG filed", {
 
   # evaluation
   res <- suppressMessages(import_folders(sample_folder, "LOG"))
+  types <- purrr::map_chr(res, ~class(.x)[[1]])
 
   # tests
   res |>
-    expect_tibble(
-      types = c(
-        rep("character", 2),  # Added
-        "numeric", "Date", "hms", " integer", "factor", "character"
-      ),
-      ncols = 8,
-      nrows = 1696
+    expect_tibble(ncols = 8, nrows = 1696)
+  types |>
+    expect_equal(
+      c(
+        file = "character",
+        id_univoco = "character",
+        data = "Date",
+        ora = "hms",
+        id_info = "integer",
+        tipo = "factor",
+        informazioni = "character",
+        time = "POSIXct"
+      )
     )
 
-  expect_equal(names(res)[[1]], "folder")
-  expect_equal(res[["folder"]][[1]], "AB")
+  expect_equal(names(res)[[1]], "file")
+  expect_equal(res[["file"]][[1]], "AB123_8_LOG")
 })
 
 test_that("manage problematic foders with files without dates", {
@@ -96,15 +105,14 @@ test_that("manage problematic foders with files without dates", {
     expect_equal(
       c(
         file = "character",
-        id_pat = "numeric",
+        id_univoco = "character",
         data = "Date",
         ora = "hms",
         id_info = "integer",
         tipo = "factor",
-        informazioni = "character"
+        informazioni = "character",
+        time = "POSIXct"
       )
     )
 
 })
-
-

@@ -1,0 +1,464 @@
+---
+title: "trd_log_csv_exploration"
+author: "Andrea Pedot"
+editor: visual
+warning: false
+format:
+  html:
+    toc: true
+    code-fold: true
+---
+
+## Introduzione
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(plotly)
+library(lubridate)
+library(targets)
+library(ggExtra)
+# library(tidyquant) # non caricare tutto il pacchetto che maschera il mondo
+
+devtools::load_all(".")
+```
+
+I file principali utilizzati nello studio sono 4
+
+-   il file excel "pt_names dati inclusione", che contiene una riga per paziente, con il successo o l'insuccesso del tentativo di svezzamento
+
+-   il file excel "pt_registry dati giornalieri", che contiene una riga al giorno per paziente, che contiene i dati raccolti clinicamente oppure quelli da analisi di laboratorio (es. prelievo di sangue arterioso) e la storia clinica limitatamente a data di ricovero ospedaliero, in ICU, svezzamento, reintubazione, comparsa di complicanze e fine del ricovero
+
+-   il file "TRD", aggegato in uno per paziente, che contiene una riga per minuto per paziente, contiene i dati registrati dal ventilatore, limitatamente allo stato del paziente
+
+-   il file "LOG" aggegato in uno per paziente, che contiene una riga per minuto per paziente, contiene i dati registrati dal ventilatore, limitatamente ai segnali, gli allarmi e ai parametri che vengono impostati
+
+Da questi dati è possibile ricostruire la storia di ogni tentativo di SBT o Trial di Respiro Spontaneo (potenzialmente anche molti per paziente, uno al giorno fino a quello di successo che porta allo svezzamento dal ventilatore).
+
+L'ipotesi sperimentale che si vuole testare è se un modello sia in grado di offrire una performance soddisfacente nel predire l'esito del SBT dai dati raccolti nelle 24h che lo precedono.
+
+## Pazienti inclusi
+
+Dei 180 pazienti inclusi nello studio sono registrate le colonne che lo descrivono, in cui "id_univoco" contiene la chiave di associazione presente anche negli altri file.
+
+Rilevanti come variabili che non cambiano durante il ricovero, potenzialmente utili per un'analisi successiva:
+
+-   variabili demografiche come "sesso", "anni_eta", "kg_peso", "cm_altezza", "bmi" e "ibw"
+
+-   le ragioni d'inizio della ventilazione meccanica in "name reason_mv"
+
+-   date rilevanti come "data_ricovero ospedaliero", "data_ricovero_terapia intensiva", "data_inizio ventilazione meccanica", "data_fine ventilazione meccanica", "data_out_ti", "data_dimissione"
+
+Mentre le altre colonne contengono variabili ridondanti, derivate oppure disponibili solo alla fine del ricovero del paziente.
+
+```{r}
+#| echo: true
+pt_names <- tar_read(pt_names)
+
+glimpse(pt_names)
+```
+
+A titolo esplorativo, si mostra la distribuzione dei giorni di ricovero, di terapia intensiva e di ventilazione meccanica
+
+```{r}
+p <- ggplot(pt_names) +
+  geom_histogram(aes(osp_out - osp_in),
+                 fill = "red", alpha = 0.3) +
+  geom_histogram(aes(icu_out - icu_in),
+                 fill = "blue", alpha = 0.3) +
+  geom_histogram(aes(vm_fine - vm_inizio),
+                 fill = "green", alpha = 0.3) +
+  facet_wrap(~esito) +
+  labs( title = "Distribuzione per esito",
+        subtitle = "in ospedale (rosso), in ICU (blu), in ventilazione meccanica (verde)",
+        x = "giorni di ricovero",
+        y = "numero di pazienti")
+
+ggplotly(p)
+```
+
+Nel grafico precedente si vedono alcuni outlier, che si procede a indagare
+
+```{r}
+pt_names |>
+  filter(osp_out - osp_in > 100) |>
+  mutate( id_univoco = id_univoco,
+          osp_tot = osp_out - osp_in,
+          icu_tot = icu_out - icu_in,
+          vm_tot = vm_fine - vm_inizio) |>
+  select(id_univoco,
+         starts_with("osp"),
+         starts_with("icu"),
+         starts_with("vm"),
+         esito)
+```
+
+Da cui si evince che
+
+-   il paziente AN004, pur rimandendo ricoverato 472 giorni, ha 5 giorni di ventilazione meccanica nello studio e 10 di ICU (non è necessario modificare il dato)
+
+-   il paziente MI006 ha un errore di registrazione di "osp_out" (dovrebbe essere "2014-03-17" invece di "2015-03-17")
+
+-   il paziente VM008 trascorre 66 giorni in ICU, dove decede. Il che fa pensare alla data di dimissione dall'ospedale esattamente un anno più tardi, come a un errore di inserimento dei dati (non è necessario modificare il dato)
+
+-   Il paziente LG029, TS012 ha un tempo di permanenza in ICU e in VM credibile (non è necessario modificare il dato)
+
+-   il paziente NO021 ha registrate delle estubazioni senza essere mai stato "ready". I dati relativi sono così confusi (solo 3 giorni nel registro giornaliero, si veda sotto) che se ne suggerisce l'esclusione
+
+::: callout-caution
+## decidere cosa fare con i pz MI006, VM008 e NO021
+:::
+
+## Registro giornaliero dei pazienti
+
+Tenendo a mente che in una giornata si svolge al più un SBT, l'obiettivo è quello di costruire per ogni paziente che rispetta i criteri della tabella 1 (che rispondono alla domanda "sospetto che il paziente possa essere pronto per un SBT?"), una riga che contenga tutti i dati delle 24 precedenti e il risultato.
+
+Si noti come in questo caso la probabilità sia condizionata sulla risposta positiva alla valutazione clinica, visto che l'SBT non viene eseguito se non dietro decisione del medico.
+
+Le variabili d'interesse sono:
+
+-   "id_registry"
+
+-   "id_univoco", che è chiave in comune con il file excel dei pz inclusi
+
+-   "deleted", che permette di individuare le righe che contengono dati errati o incompleti
+
+-   "data_lettura" identifica la data alla quale il tentativo si riferisce
+
+-   le variabili che iniziano con "ega" contengono dati sull'emogasanalisi (ma non si riesce a determinare se prima o dopo l'SBT)
+
+-   le colonne che hanno come descrizione "weaning" e "SBT criteri di interruzione" contengono i parametri delle tabelle 1 (pre-SBT) e 2 (post-SBT)
+
+-   la variabile di esito "estubato" contiene informazioni sullo stato d'estubazione (non sull'azione), mentre la variabile "reintubato" contiene informazioni sull'azione di reintubazione (non sullo stato)
+
+```{r}
+pt_registry <- tar_read(pt_registry)
+
+glimpse(pt_registry)
+```
+
+::: callout-warning
+## le variabili ega vengono importante come \<chr\> e non come \<dbl\>, nell'excel sono con virgola e non con il punto decimale. Se dovessero servire (ma non si sa l'orario a cui sono prese), correggere l'import
+:::
+
+```{r}
+#| label: fig-ggSmoothReadinessSBT
+#| fig-cap: "Double density shows most of data concentrate around 0/12 or 12/12 readiness. Smoothing line shows how readiness increase on average in the first week of mechanical ventilation. After 15 days, dta are very sparse"
+tar_read(ggSmoothReadinessSBT)
+```
+
+## File TRD
+
+Ogni ventilatore mentre è attaccato al paziente, registra dei dati ogni minuto, somma o media (dipende dalla variabile), mentre i dati LOG registrano parametri e allarmi associandoli al momento in cui avvengono.
+
+Si seleziona, nel paziente BS_008, un giorno di svezzamento. Per trovarlo, si filtra il registro giornaliero dei pazienti.
+
+```{r}
+pt_registry |>
+  dplyr::filter(
+    id_univoco == "BS008",
+    susp_tot == 12
+  ) |>
+  dplyr::select(data_lettura, estubato, reintubato)
+```
+
+A questo punto è possibile procedere all'importazione dei file e a selezionarle unicamente 24h in cui è avvenuto lo svezzamento.
+
+```{r}
+paz <- c( ospedale = "BS",
+          paziente = 8)
+
+# moved to targets
+# trd <- tar_read(weaningsTRD) |> 
+#   filter( folder == paz["ospedale"],
+#           id_pat == paz["paziente"]) # giorno di svezzamento
+
+```
+
+A questo punto è possibile aprire i dati e verificare cosa contengono.
+
+Innanzitutto si plottano tutte le variabili vs l'ora, così da identificare quelle che mostrano un cambiamento durante uno SBT.
+
+```{r}
+#| column: page
+tar_read(ggWeanVariablesAll)
+```
+
+Da cui si ricava che quelle più interessanti sono:
+
+-   lavoro respiratorio del ventilatore (del pz è meno rilevante) \[NERO\]
+
+-   pressione di picco delle vie aeree
+
+-   pressione media delle vie aeree
+
+-   pressione di fine espirazione
+
+```{r}
+#| column: page
+tar_read(ggWeanVariablesSel)
+```
+
+Si noti come le unità di misura non siano consistenti nella scala (sono visualizzati sia pressione in cm_h20 che lavoro in joule_L), ma ai fini di capire il comportamento del LOG questo non è rilevante.
+
+I tentativi di SBT si sospetta che siano quei momenti in cui per circa 30m i parametri si modificano in modo significativo.
+
+## File LOG
+
+```{r}
+`%ni%` <- Negate(`%in%`)
+log <- tar_read(weaningsLOG) |> 
+  filter( folder == paz["ospedale"],
+          id_pat == paz["paziente"],
+          data   == "2013-12-08") # giorno di svezzamento
+```
+
+Del quale sono interessanti alcune "informazioni" particolari:
+
+-   con codice 0 : "standby" che identifica il momento in cui si spegne il ventilatore (e "inizio ventilazione" che ne è la ripresa)
+
+A queste si aggiungono le azioni o informazioni che dovrebbero (e sembrano) identificare una delle azioni che avvengono immediatamente prima oppure durante un SBT (ma non solo)
+
+-   con codice 267: "pressione sopra PEEP"
+
+-   con codice 291 "concentrazione O2 impostata a...."
+
+-   con codice 321 "livello NAVA impostato a..."
+
+-   con codice 322 "trigger Edi impostato a..."
+
+A questi vanno chiaramente tolte le colonne che iniziano con "silenzialmento" e "pre-silenziamento", in quanto rappresentano azioni non significative.
+
+## Un esempio: il paziente TS015
+
+Come esempio, iniziamo da uno slice di dati relativi unicamente a questo paziente.
+
+```{r}
+ts15_names <- pt_names |>
+  filter(id_univoco == "TS015")
+glimpse(ts15_names)
+```
+
+```{r}
+ts15_registry <- pt_registry |>
+  filter(id_univoco == "TS015")
+ts15_registry |>
+  select(data_lettura, estubato, susp_tot)
+```
+
+Il pz viene estubato dopo 3 giorni nello studio (attenzione: si parte da 0 al ricovero), non appena raggiunge un valore complessivo di readiness di 12/12.
+
+Si deduce dal fatto che viene estubato lo stesso giorno, che l'SBT ha avuto successo.
+
+```{r}
+paz <- list( ospedale = "TS",
+             paziente = 15)
+
+ts15_trd <- tar_read(weaningsTRD) |> 
+  filter( folder == paz["ospedale"],
+          id_pat == paz["paziente"])
+
+ts15_log <- tar_read(weaningsLOG) |> 
+  filter( folder == paz["ospedale"],
+          id_pat == paz["paziente"])
+```
+
+A questo punto si può procedere ad alcune visualizzazioni per valutare la salute dei dati.
+
+Ad esempio, si verifica che la progressione delle righe corrisponda a una progressione degli orari di registrazione.
+
+```{r}
+ts15_log |>
+  rowid_to_column(var = "id_row") |>
+  ggplot() +
+  geom_point(aes(x = id_row,
+                 y = ora,
+                 color = as.factor(data)) ) +
+  labs( title = "Plot of LOG data",
+        subtitle = "Patient TS015",
+        y = "ora",
+        x = "row number")
+```
+
+```{r}
+ts15_trd |>
+  rowid_to_column(var = "id_row") |>
+  ggplot() +
+  geom_point(aes(x = id_row,
+                 y = ora,
+                 color = as.factor(date)) ) +
+  labs( title = "Plot of TRD data",
+        subtitle = "Patient TS015",
+        y = "ora",
+        x = "row number")
+```
+
+In secondo luogo, si verifica che i giorni di ricovero elencati nel registro clinico, quelli in cui c'è un registro del log e quelli nel trd siano credibili.
+
+```{r, fig.height = 3, fig.width = 9}
+tar_read(patientHistoryPlotTS015)
+```
+
+Per come è strutturato lo studio, è normale che registry arrivi fino a +2 giorni rispetto alla data di fine della ventilazione meccanica (infatti è quello il lasso di tempo per valutare la riuscita o meno dello svezzamento dal ventilatore).
+
+Altrettanto normale è che LOG e TRD finiscano nello stesso momento e che questi siano compresi dentro il periodo in cui il paziente era in ventilazione meccanica (segmento nero).
+
+Non è chiaro perché LOG inizi prima dell'inizio di TRD, probailmente per errori nello scaricamento dei dati. In ogni caso, quello che è importante è l'associazione tra le informazioni cliniche (rappresentate dai punti rosa e blu, per indicare la readiness al tentativo di svezzamento) e la registrazione dei TRD, che rimane conservata.
+
+Un SBT fallito è rappresentato da un punto azzurro (che indica una giornata in cui il paziente era considerato "ready" considerati i suoi parametri clinici), senza altri elementi. Invece, un SBT riuscito porta a un'estubazione, rappresentata da una X sovrapposta a quel punto.
+
+Ci si aspetterebbe che il momento in cui viene spento il ventilatore (2014-10-02 17:15) sia nello stesso giorno in cui l'SBT ha successo (e quindi si abbia poi un'estubazione). Ma mentre dal registro dei pazienti sappiamo che il primo SBT (in data 2014-10-03 ha successo e porta a un'estubazione), i dati raccolti arrivano unicamente fino al 2014-10-02, con un sospetto di SBT tra le 16:38 e le 17:14 un cui il ventilatore rimane spento. Non si può escludere un errore nella raccolta dei dati o nella scrittura delle date nel registro clinico (una dimenticanza di scaricare i dati?), mentre si può ragionevolmente escludere un errore di importazione dal ventilatore.
+
+In ogni caso, altri pazienti non mostrano in modo sistematico questo tipo di errore.
+
+Si vedano ad esempio
+
+```{r, fig.height = 3, fig.width = 9}
+tar_read(patientHistoryPlotTS012)
+```
+
+Oppure
+
+```{r, fig.height = 3, fig.width = 9}
+tar_read(patientHistoryPlotBS002)
+```
+
+o ancora
+
+```{r, fig.height = 3, fig.width = 9}
+tar_read(patientHistoryPlotNO004)
+```
+
+## Identificare gli SBT
+
+### Identificare i giorni in cui avviene un SBT
+
+Da protocollo dello studio, un SBT viene tentato quando sussistono alternativamente due condizioni: un SBT di successo oppure un SBT fallito.
+
+Un SBT di successo è definito come la presenza contemporanea di due condizioni:
+
+-   il paziente è considerato pronto (ready) nei 12 elementi clinici che vengono indagati
+
+-   il paziente è al momento intubato (o perché intubato post-ingresso in ICU o perché ha necessitato una reintubazione per peggioramento delle condizioni cliniche)
+
+```{r}
+# weaning_succ <- pt_registry |>
+#   group_by( id_univoco) |>
+#   filter( susp_tot == 12, # criterio 1
+#           estubato == 1, # criterio 2
+#           lag(estubato, default = 0) == 0) |>
+#   mutate( esito = factor( x = "Successo", 
+#                           levels = c("Fallito", "Successo")))
+```
+
+```{r}
+tar_read(weaning_succ) |>
+  select(id_univoco, reintubato) |>
+  group_by(id_univoco) |>
+  summarise( SBTsucc_per_paziente = n()) |>
+  group_by(SBTsucc_per_paziente) |>
+  summarise( tot_pazienti = n())
+```
+
+Si noti che con la formula usata non è possibile riconoscere pazienti reintubati e successivamente estubati in un intervallo di 24h, comunque clinicamente improbabile e il cui impatto sul modello è minimo.
+
+Un SBT fallito invece è definito dalla presenza contemporanea di altre due condizioni:
+
+-   il paziente è considerato pronto (ready) nei 12 elementi clinici che vengono indagati
+
+-   la variabile estubazione in quel giorno rimane con valore FALSE
+
+```{r}
+# weaning_fail <- pt_registry |>
+#   group_by( id_univoco) |>
+#   filter( susp_tot == 12,
+#           estubato == 0)  |>
+#   mutate( esito = factor( x = "Fallito", 
+#                           levels = c("Fallito", "Successo")))
+```
+
+```{r}
+tar_read(weaning_fail) |>
+  select(id_univoco, reintubato) |>
+  group_by(id_univoco) |>
+  summarise( SBTfail_per_paziente = n()) |>
+  group_by(SBTfail_per_paziente) |>
+  summarise( tot_pazienti = n())
+```
+
+In tutto si hanno quindi un totale di 342 tentativi.
+
+```{r}
+# weaning_days <- tar_read(weaning_days)
+tar_read(ggTentativiPerPaziente)
+```
+
+### Identificare un SBT in quella giornata
+
+Si prendano come esempio i tre pazienti analizzati precedentemente: TS012, BS002 e NO004, dei quali abbiamo registrati come SBT i seguenti
+
+```{r}
+tar_read(weaning_subset)
+```
+
+Si provede quindi al plot del file TRD in quello specifico giorno, usando le variabili precedentemente individuate.
+
+```{r}
+#| column: page
+tar_read(ggWeaningSubsetDay)
+```
+
+Dai plot si vede come gli SBT potrebbero essere identificati da quei momenti in cui il ventilatore è spento. Per verificare che non sia un artefatto dovuto a dei buchi nel file (si ricorda infatti che il ventilatore ha un buffer di 24h). si procede a una colorazione per file di origine.
+
+```{r}
+#| column: page
+tar_read(ggWeaningSubsetFile)
+```
+
+Alcuni delle "valli" che potevano essere SBT avvengono in corrispondenza di un cambio di file, deponendo a favore di una perdita di dati piuttosto che a un vero spegnimento del ventilatore.
+
+Si procede a sovrapporre i file di LOG
+
+```{r}
+#| column: page
+tar_read(ggWeaningLogSubsetRaw)
+```
+
+Il file mostra una corrispondenza credibile tra i due file.
+
+Si procede quindi a scremare i log, selezionando solo le categorie utili precedentemente identificate
+
+```{r, eval = FALSE}
+weaning_log_filtered <- weaning_log_subset |>
+  filter( id_info %in% c(0, 267, 291, 321, 322),
+          !str_detect(informazioni, 'Silenziamento'),
+          !str_detect(informazioni, 'Pre-silenziamento') )
+```
+
+```{r}
+#| column: page
+tar_read(ggWeaningLogSubsetFiltered)
+```
+
+Per poi passare a una visualizzazione con media mobile con varie finestre (15 e 30 minuti, 30 viene poi mantenuto dopo alcune prove) per vedere se i punti di weaning sono facilmente identificabili.
+
+```{r}
+#| column: page
+tar_read(ggMediaMobileSubset)
+```
+
+Dalla letteratura, lo Spontaneus Breathing Trial può essere svolto con tre diverse strategie:
+
+1.  Solo con Ossigeno supplementare fornito attraverso un pezzo a T collegato al tubo endotracheale
+
+2.  CPAP con lo stesso livello di PEEP precedente
+
+3.  Ventilazione invasiva con Pressure Support rdotto (5-8 cmH2O) o unicamente con la compensazione automatica della resistenza dei tubi
+
+Non è possibile sapere a priori quale tipo di strategia SBT è stata scelta per ogni paziente, in quanto nessuna è sempre superiore alle altre (e quindi non ci sono linee guida forti in merito).
+
+Nel caso di paziente ventilato con PSV, si settano i parametri FiO2 , PEEP e  Pressione di Supporto sopra PEEP (oltre ai trigger inspiratori ed espiratori, così come i limiti di sicurezza). La ventilazione NAVA è simile, con la differenza che i trigger sono segnali provenienti dal diaframma.
+
+In ogni caso, si decide di costruire un modello che sia utilizzabile durante la riunione di reparto delle 8 di mattina, in cui si deciderà se testare un paziente (piuttosto che no) tramite la valutazione della readiness a un SBT.
+
+In questo momento, l'individuazine dell'esatto momento in cui avverrà l'SBT non è un problema da affrontare.

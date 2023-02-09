@@ -26,7 +26,8 @@ patient' ID as \code{id_pat} and the date of the recording as \code{date}.
 \dontrun{
   library(weaning)
 
-  file.path(get_data_path(), "AB/AN001_356_TRD.SI") |>
+  file.path(get_input_data_path(), "AN/AN001_356_TRD.SI") |>
+  normalizePath() |>
   import_trd()
 }
 }

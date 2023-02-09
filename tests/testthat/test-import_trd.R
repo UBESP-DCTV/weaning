@@ -5,18 +5,22 @@ test_that("import_trd works", {
   fake_path <- fs::file_temp(ext = "SI")
 
   # evaluation
-  res <- suppressMessages(import_trd(sample_path))
+  res <- import_trd(sample_path) |>
+    suppressMessages() |>
+    suppressWarnings()
 
   # tests
   res |>
     expect_tibble(
-      types = c("numeric", "Date", "hms", rep("numeric", 27)),
+      types = c(
+        "character", "Date", "hms", rep("numeric", 27)
+      ),
       min.rows = 1
     )
   unique(res[["date"]]) |>
     expect_equal(lubridate::ymd("2013/07/09"))
-  unique(res[["id_pat"]]) |>
-    expect_equal(123)
+  unique(res[["id_univoco"]]) |>
+    expect_equal("AB123")
 
 
   import_trd(fake_trd_path) |>
@@ -33,7 +37,9 @@ test_that("import_folder works for TRD files", {
   sample_folder <- file.path(data_test_path(), "AB")
 
   # evaluation
-  res <- suppressMessages(import_folder(sample_folder))
+  res <- import_folder(sample_folder) |>
+    suppressMessages() |>
+    suppressWarnings()
 
   # tests
   res |>
@@ -45,7 +51,7 @@ test_that("import_folder works for TRD files", {
     )
 
   expect_equal(names(res)[[1]], "file")
-  expect_equal(res[["file"]][[1]], "AB123_8")
+  expect_equal(res[["file"]][[1]], "AB123_270_TRD")
 })
 
 
@@ -67,12 +73,13 @@ test_that("import_folders works for TRD files", {
   sample_folder <- data_test_path()
 
   # evaluation
-  res <- suppressMessages(import_folders(sample_folder, verbose = TRUE))
+  res <- import_folders(sample_folder, verbose = TRUE) |>
+    suppressMessages() |>
+    suppressWarnings()
 
   # tests
   res |>
     expect_tibble(
-      min.cols = 25,
       types = c(
         rep("character", 2),
         "numeric",
@@ -80,11 +87,12 @@ test_that("import_folders works for TRD files", {
         "hms",
         rep("numeric", 20)
       ),
-      min.rows = 1e3
+      ncols = 34,
+      nrows = 4327
     )
 
-  expect_equal(names(res)[[1]], "folder")
-  expect_equal(res[["folder"]][[1]], "AB")
+  expect_equal(names(res)[[1]], "file")
+  expect_equal(res[["file"]][[1]], "AB123_270_TRD")
 })
 
 
@@ -95,13 +103,13 @@ test_that("problematic characters are managed by import_trd", {
   sample_path <- file.path(data_test_path(), "BG/BG004_1451_TRD.SI")
 
   # evaluation
-  res <- suppressMessages(import_trd(sample_path))
+  res <- suppressWarnings(import_trd(sample_path))
 
   # tests
   res |>
     expect_tibble(
       min.cols = 21,
-      types = c("numeric", "Date", "hms", rep("numeric", 20)),
+      types = c("character", "Date", "hms", rep("numeric", 20)),
       min.rows = 1
     )
 
@@ -116,12 +124,12 @@ test_that("import_trd admit empty content file", {
   )
 
   # evaluation
-  res <- suppressMessages(import_trd(sample_path))
+  res <- suppressWarnings(import_trd(sample_path))
 
   # tests
   res |>
     expect_tibble(
-      types = c("numeric", "Date", "hms", rep("numeric", 20)),
+      types = c("character", "Date", "hms", rep("numeric", 20)),
       min.rows = 0
     )
 
@@ -129,23 +137,12 @@ test_that("import_trd admit empty content file", {
 
 
 test_that("Controllare casini sui duplicati", {
-  skip("Da verificare i duplicati dell'ora sullo stesso file")
-
   # setup
-  weanings_trd <- system.file(
-      "extdata/weanings_trd.qs",
-      package = "weaning"
-    ) |>
-    qs::qread()
+  weanings_trd <- targets::tar_read(weaningsTRD)
 
   # evaluate
-  ## problem <- weanings_trd |>
-  ##   janitor::get_dupes(file, id_pat, date, ora)
-  # expect_true(nrow(problem) == 0)
-  #
-  # equivalent to (but faster)
   not_problem <- weanings_trd |>
-    dplyr::distinct(file, id_pat, date, ora)
+    dplyr::distinct(file, id_univoco, date, ora)
 
   # test
   expect_equal(nrow(weanings_trd), nrow(not_problem))

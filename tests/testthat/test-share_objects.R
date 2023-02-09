@@ -6,11 +6,13 @@ test_that("share_objects works", {
 
   test_output_data_path <- file.path(
     test_proj_shared_path,
-    output_data_folder
-  ) |>
+    "/../",
+    Sys.getenv("OUTPUT_DATA_FOLDER")
+    ) |>
     normalizePath(mustWork = FALSE)
 
   fs::dir_create(test_output_data_path)
+  withr::defer(fs::dir_delete(test_output_data_path))
 
   withr::local_envvar(
     list(PRJ_SHARED_PATH = test_proj_shared_path)

@@ -1,0 +1,24 @@
+File trend ventilatore	VTD
+Nome del Paziente:
+ID Paziente:
+N° di serie Ventilatore:	 22218
+Versione Software del Ventilatore:	Systema:	v7.00	Pannello: 	v24.08.05	Pannello Condiviso: 	v24.08.00	Respirazione: 	v24.08.00	Respiraz. Condivisa: 	v24.08.00	Monitor: 	v24.08.05	Monitor Condiviso: 	v24.08.00	Flusso Esp.: 	v24.08.00	Flusso Esp. Condiviso: 	v24.08.00
+Data creazione del file:	02/01/2014
+
+Controllo Pre-uso:	02/01/2014	10:18:39	Non eseguito	Test circuito paziente:	02/01/2014	10:18:39	Non eseguito
+Dettagli controllo Pre-uso:	Test interni: Non eseguito, Test barometro: Non eseguito, Test erogazione gas: Non eseguito, Test perdita interna: Non eseguito, Test trasduttore di pressione: Non eseguito, Test valvola di sicurezza: Non eseguito, Test cella/sensore O₂: Non eseguito, Test trasduttore di flusso: Non eseguito, Test switch batteria: Non eseguito, Test circuito paziente: Non eseguito, Test dello stato di allarme: Non eseguito
+Simbolo decimale:	.
+
+
+
+
+
+
+
+
+
+
+Ora						Caratteristiche Dinamiche	Elastanza	Flusso di fine Esp.	Pressione di fine Esp. 	Resistenza Esp.	Vol. Minuto espirato	Vol. Corrente Espirato	Concentraz. O₂			Resistenza Inspiratoria	Vol. Minuto inspirato	Vol. Corrente Inspirato	Press. Media Vie Aeree	Frequenza Respiraz. misurata	Freq. spontanea	Picco Edi	Edi min	Press. di Pausa Vie Aeree	Press. di Picco delle Vie Aeree	Passa a backup	Backup	Compliance Statica			P 0.1	Lavoro Respiratorio del ventilatore	Lavoro Respiratorio del paziente	SBI	Volume minuto espirato spontaneo	Perdita percentuale
+						ml/cmH₂O	cmH₂O/l	l/min	cmH₂O	cmH₂O/l/s	l/min	ml	%			cmH₂O/l/s	l/min	ml	cmH₂O	resp/min	resp/min	µV	µV	cmH₂O	cmH₂O	/min	%/min	ml/cmH₂O			cmH₂O	Joule/l	Joule/l		l/min	%
+
+Riassunto:	0
