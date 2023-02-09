@@ -41,11 +41,7 @@ patient_history_plot <- function(
   checkmate::assert_character(id_ospedale)
   checkmate::assert_int(id_paziente)
 
-  id_long <- if (id_paziente < 10) {
-    paste0(id_ospedale, "00", id_paziente)
-  } else {
-    paste0(id_ospedale, "0", id_paziente)
-  }
+  id_long <- create_id_univoco(id_paziente, id_ospedale)
 
 
   # Step 1 - get the data from most updated targets
@@ -55,14 +51,14 @@ patient_history_plot <- function(
 
   pat_trd <- weanings_trd |>
     dplyr::filter(
-      .data[["folder"]] == id_ospedale,
-      .data[["id_pat"]] == id_paziente
+      .data[["id_univoco"]] ==
+      create_id_univoco(id_paziente, id_ospedale)
     )
 
   pat_log <- weanings_log |>
     dplyr::filter(
-      .data[["folder"]] == id_ospedale,
-      .data[["id_pat"]] == id_paziente
+      .data[["id_univoco"]] ==
+        create_id_univoco(id_paziente, id_ospedale)
     )
 
   pat_registry <- pt_registry |>

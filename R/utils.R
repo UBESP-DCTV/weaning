@@ -91,3 +91,72 @@ create_id_univoco <- function(id_pat, folder) {
       TRUE ~ paste0(folder, id_pat)
     )
 }
+
+
+check_consistency_idpatfile <- function(id_univoco, id_check) {
+
+
+  if (!is.na(id_check) && !identical(id_univoco, id_check)) {
+    usethis::ui_stop(c(
+      "Patient's ID in filename is",
+      "{usethis::ui_value(id_univoco)}",
+      "while inside the file is",
+      "{usethis::ui_value(id_check)}."
+    ))
+  }
+}
+
+
+report_skip <- function(files2skip) {
+  files2skip |>
+    purrr::walk(~usethis::ui_warn(c(
+      "file {usethis::ui_value(.x)} skipped because it reports",
+      "inconsistency between filename and id patient reported inside."
+    )))
+}
+
+find_mismatch_files <- function(folder_path) {
+  # Get the list of all files in the folder
+  files <- list.files(
+    path = folder_path,
+    pattern = "*.SI",
+    full.names = TRUE
+  ) |>
+    normalizePath()
+
+  is_mismatch <- files |>
+    purrr::map_lgl(~ {
+      # Read the third line of the file
+      third_line <- readLines(.x, n = 3)[3]
+
+      # Extract the id from the filename
+      filename_id <- strsplit(basename(.x), "_")[[1]][1] |>
+        format_string()
+
+      # Extract the id from the third line, if present
+      content_id <- strsplit(third_line, ":")[[1]][2] |>
+        stringr::str_remove_all("\\s")
+
+      !(is.na(content_id) | content_id == "")  &&
+        stringr::str_to_lower(filename_id) !=
+        stringr::str_to_lower(content_id) |>
+        format_string()
+    })
+
+  basename(files[is_mismatch]) |>
+    stringr::str_remove("\\.SI$")
+}
+
+format_string <- function(input_string) {
+  # Extract the letter part and the number part of the input string
+  letter_part <- substr(input_string, 1, 2)
+  number_part <- as.numeric(substr(input_string, 3, nchar(input_string)))
+
+  # Use sprintf to format the number part with leading zeros to make
+  #  it have exactly 3 digits
+  formatted_number <- sprintf("%03d", number_part)
+
+  # Concatenate the letter part and the formatted number part to get
+  #  the final formatted string
+  paste0(letter_part, formatted_number)
+  }

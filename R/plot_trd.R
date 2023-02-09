@@ -63,10 +63,10 @@ plot_trd_vars <- function(trd, weaning_subset = NA) {
                            min.rows = 1)
 
   trd_subset <- trd |>
-    dplyr::mutate(id_univoco = ifelse(
-      test = id_pat <10,
-      yes = paste0(folder, "00", id_pat),
-      no = paste0(folder, "0", id_pat) ) ) |>
+    # dplyr::mutate(id_univoco = ifelse(
+    #   test = id_pat < 10,
+    #   yes = paste0(folder, "00", id_pat),
+    #   no = paste0(folder, "0", id_pat) ) ) |>
     dplyr::filter( id_univoco %in% weaning_subset[["id_univoco"]],
                    date %in% weaning_subset[["data_lettura"]]) |>
     dplyr::select(id_univoco,
@@ -100,10 +100,10 @@ plot_trd_files <- function(trd, weaning_subset = NA) {
                            min.rows = 1)
 
   trd_subset <- trd |>
-    dplyr::mutate( id_univoco = ifelse(
-      test = id_pat <10,
-      yes = paste0(folder, "00", id_pat),
-      no = paste0(folder, "0", id_pat) ) ) |>
+    # dplyr::mutate( id_univoco = ifelse(
+    #   test = id_pat <10,
+    #   yes = paste0(folder, "00", id_pat),
+    #   no = paste0(folder, "0", id_pat) ) ) |>
     dplyr::filter( id_univoco %in% weaning_subset[["id_univoco"]],
                    date %in% weaning_subset[["data_lettura"]]) |>
     dplyr::select(id_univoco,
@@ -140,10 +140,10 @@ plot_trd_mavg <- function(trd, weaning_subset = NA) {
                            min.rows = 1)
 
   trd_subset <- trd |>
-    dplyr::mutate( id_univoco = ifelse(
-      test = id_pat <10,
-      yes = paste0(folder, "00", id_pat),
-      no = paste0(folder, "0", id_pat) ) ) |>
+    # dplyr::mutate( id_univoco = ifelse(
+    #   test = id_pat <10,
+    #   yes = paste0(folder, "00", id_pat),
+    #   no = paste0(folder, "0", id_pat) ) ) |>
     dplyr::filter( id_univoco %in% weaning_subset[["id_univoco"]],
                    date %in% weaning_subset[["data_lettura"]]) |>
     dplyr::select(id_univoco,

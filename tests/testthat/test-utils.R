@@ -28,3 +28,19 @@ test_that("parse_weanings_dates works", {
   # test
   expect_equal(res_iso, res_ita)
 })
+
+
+test_that("report_skip works", {
+  expect_warning({
+    res <- report_skip("a")
+    expect_equal(res, "a")
+  }, "skipped because it reports") |>
+    suppressWarnings()
+
+  expect_warning({
+    res <- report_skip(letters)
+    expect_equal(res, letters)
+  }, "skipped because it reports") |>
+    suppressWarnings()
+
+})

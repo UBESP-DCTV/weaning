@@ -15,7 +15,7 @@ create_pt_trd <- function(db, pt_id) {
 
   var_used <- names(db) |>
     setdiff(c(
-      "id_univoco", "folder", "file", "id_pat", "stress_index",
+      "id_univoco", "folder", "id_pat", "file", "stress_index",
       "et_co2_percent"
     ))
 

@@ -17,12 +17,12 @@ test_that("stop on wrong match id from patient folder and content", {
   # setup
   sample_folder <- data_test_path(wrong = TRUE)
 
-  expect_error(
+  expect_warning(
     import_folders(sample_folder) |>
-      suppressMessages() |>
-      suppressWarnings(),
-    "while inside the file is"
-  )
+      suppressMessages(),
+    "inconsistency between filename and id patient reported inside"
+  ) |>
+    suppressWarnings()
 
 
 

@@ -104,8 +104,12 @@ abind::abind(
 
 
 tar_read(weaningsTRD)
+mismatched <- tar_read(centerFolder) |>
+  purrr::map(~{
+    find_mismatch_files(.x) |>
+      stringr::str_subset("LOG|REG", negate = TRUE)
+  })
 
-
-
-
+db <- tar_read(weaningsTRD)
+a <- create_pt_trd(tar_read(weaningsTRD), "CM001")
 

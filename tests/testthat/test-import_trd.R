@@ -51,7 +51,7 @@ test_that("import_folder works for TRD files", {
     )
 
   expect_equal(names(res)[[1]], "file")
-  expect_equal(res[["file"]][[1]], "AB123_270")
+  expect_equal(res[["file"]][[1]], "AB123_270_TRD")
 })
 
 
@@ -80,7 +80,6 @@ test_that("import_folders works for TRD files", {
   # tests
   res |>
     expect_tibble(
-      min.cols = 25,
       types = c(
         rep("character", 2),
         "numeric",
@@ -88,11 +87,12 @@ test_that("import_folders works for TRD files", {
         "hms",
         rep("numeric", 20)
       ),
-      min.rows = 1e3
+      ncols = 34,
+      nrows = 4327
     )
 
-  expect_equal(names(res)[[1]], "folder")
-  expect_equal(res[["folder"]][[1]], "AB")
+  expect_equal(names(res)[[1]], "file")
+  expect_equal(res[["file"]][[1]], "AB123_270_TRD")
 })
 
 
@@ -142,7 +142,7 @@ test_that("Controllare casini sui duplicati", {
 
   # evaluate
   not_problem <- weanings_trd |>
-    dplyr::distinct(file, id_pat, date, ora)
+    dplyr::distinct(file, id_univoco, date, ora)
 
   # test
   expect_equal(nrow(weanings_trd), nrow(not_problem))
