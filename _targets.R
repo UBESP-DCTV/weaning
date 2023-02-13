@@ -405,7 +405,7 @@ list(
     create_pt_output(pt_registry, pt_ids),
     pattern = map(pt_ids),
     iteration = "list"
-  )
+  ),
 
 
 
@@ -425,6 +425,10 @@ list(
   # ),
   #
 
+  tar_quarto(
+    minireport_tesi,
+    here("reports/minireport_tesi.qmd")
+  )
 
 
 # objects to share -------------------------------------------------
