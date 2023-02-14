@@ -9,7 +9,7 @@ editor: visual
 
 Questo report contiene alcune analisi e tabelle utili alla tesi, in particolare:
 
-1.  n pat
+1.  n pat (cohort size) and time span
 
 2.  tot days, min/max I/II/II quartile days/pat
 
@@ -29,13 +29,25 @@ library(gtsummary)
 
 e i targets
 
-```{r, echo = FALSE}
+```{r, eval = FALSE}
 tar_visnetwork(TRUE, exclude = starts_with("gg") | contains("Plot"))
 ```
 
 ```{r}
 baseline <- tar_read(pt_names) |>
-  select("id_univoco", "type", "sesso", "anni_eta", "reason")
+  select("id_univoco", "type", "sesso", "anni_eta", "reason",
+         "vm_inizio", "vm_fine") |>
+  mutate(reason = reason |>
+           fct_recode(
+             "Sepsis" = "Sepsi",
+             "Pneumonia" = "Polmonite",
+             "Post-surgical complications" = "Complicanze Postoperatorie",
+             "Heart Failure" = "Scompenso Cardiaco",
+             "COPD exacerbation" = "BPCO Riacutizzata",
+             "Other" = "Altro (specificare)",
+             "Trauma - Polytrauma" = "Trauma - Politrauma"
+             # ARDS doesn't need recoding
+           ))
 daily <- tar_read(pt_registry) |>
   select("id_univoco", "type", "data_lettura", "giorno_studio", "sbt") |>
     # sbt :=
@@ -46,10 +58,10 @@ daily <- tar_read(pt_registry) |>
   mutate(sbt = sbt |>
            as.character() |>
            fct_recode(
-             "Estubato" = "-1",
-             "Non tentato" = "0",
-             "SBT riuscito" = "1",
-             "SBT fallito" = "2"
+             "Already extubated" = "-1",
+             "Weaning not attempted" = "0",
+             "SBT success" = "1",
+             "SBT failure" = "2"
            )
   )
 ```
@@ -58,12 +70,24 @@ daily <- tar_read(pt_registry) |>
 
 ```{r}
 baseline |>
-  select(-id_univoco) |>
+  select(-id_univoco, -starts_with("vm")) |>
   tbl_summary(
-    label = list( type ~ "Tipo ventilazione",
-                  sesso ~ "Sesso",
-                  anni_eta ~ "Età (anni)",
-                  reason ~ "Motivo di ricovero")
+    label = list( type ~ "Ventilation mode",
+                  sesso ~ "Gender",
+                  anni_eta ~ "Age (years)",
+                  reason ~ "Reason for MV")
+  )
+```
+
+```{r}
+baseline |>
+  select(starts_with("vm")) |>
+  tbl_summary(
+    label = list(
+      vm_inizio ~ "MV start",
+      vm_fine ~ "MV end"
+    ),
+    statistic = ~ "{min}, {max}"
   )
 ```
 
@@ -75,7 +99,7 @@ daily |>
   summarise(giorno_finale = max(giorno_studio)) |>
   select(giorno_finale) |>
   tbl_summary(
-    label = giorno_finale ~ "Giorno di studio",
+    label = giorno_finale ~ "Day of study",
     statistic = ~ "{median}  (range: {min}, {max})  (IQR: {p25}, {p75})",
     # digits = ~ 2
   )
@@ -85,7 +109,7 @@ daily |>
 
 ```{r}
 daily |>
-  filter( sbt %in% c("SBT riuscito", "SBT fallito")) |>
+  filter( sbt %in% c("SBT success", "SBT failure")) |>
   mutate( sbt = fct_drop(sbt)) |>
   group_by(id_univoco) |>
   count(sbt) |>
