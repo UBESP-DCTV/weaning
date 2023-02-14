@@ -116,7 +116,7 @@ create_pt_ptnames <- function(db, pt_id) {
 
 #' weanings
 #'
-#' dialy: array \[pt, days, var\] = \[none, length(giorno_studio), 3\]
+#' daily: array \[pt, days, var\] = \[none, length(giorno_studio), 3\]
 #'
 #' @param db pt_registry dataset
 #' @param pt_id a single value from pt_ids identifiying a patient id
