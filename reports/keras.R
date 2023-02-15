@@ -3,6 +3,7 @@ here::here("R") |>
   lapply(source) |>
   invisible()
 
+is_develop <- TRUE
 on_cpu <- TRUE
 
 library(targets)
@@ -25,7 +26,7 @@ k <- reticulate::import("keras", convert = TRUE)
 
 
 # parameters ------------------------------------------------------
-epochs <- 10
+epochs <- 100
 batch_size <- 16
 
 
@@ -34,14 +35,16 @@ summary({
 })
 
 
-if (FALSE && requireNamespace("deepviz")) {
-  deepviz::plot_model(model, to_file = "topology-full.png")
+if (is_develop && requireNamespace("deepviz")) {
+  model |>
+    deepviz::plot_model(
+      to_file = "topology-full.png"
+    )
 }
 
 model %>%
   compile(
     optimizer = k$optimizers$Adam(amsgrad = TRUE),
-    run_eagerly = TRUE,
     loss = loss_binary_crossentropy(),
     metrics = "accuracy"
   )
@@ -57,15 +60,21 @@ model %>%
   tic <- Sys.time()
   history <- model %>%
     keras::fit(
-      x = xxxxxxxx,
+      x = targets::tar_read(baselineArrays) |>
+        abind::abind(along = 0),
+      y = targets::tar_read(outArrays) |>
+        purrr::map(~.x[nrow(.x), 1L, drop = FALSE]) |>
+        abind::abind(along = 0) |>
+        purrr::map_dbl(identical, -1L),
       epochs = epochs,
-      callbacks = list(
-        callback_model_checkpoint(
-          filepath = "models_epoch-{epoch:02d}.hdf5",
-          monitor = "val_loss",
-          mode = "min"
-        )
-      )
+      validation_split = 0.2
+      # callbacks = list(
+      #   callback_model_checkpoint(
+      #     filepath = "models_epoch-{epoch:02d}.hdf5",
+      #     monitor = "val_loss",
+      #     mode = "min"
+      #   )
+      # )
     )
   (toc <- Sys.time() - tic)
 }

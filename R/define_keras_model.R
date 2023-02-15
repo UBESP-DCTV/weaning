@@ -4,7 +4,7 @@ define_keras_model <- function() {
 
   input_baseline <- keras::layer_input(
     name = "input_baseline",
-    shape = c(2)
+    shape = c(5)
   )
 
 
