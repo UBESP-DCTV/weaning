@@ -8,6 +8,11 @@
       }
     ]
   },
+  "Python": {
+    "Version": "3.9.13",
+    "Type": "virtualenv",
+    "Name": "r-reticulate"
+  },
   "Packages": {
     "BH": {
       "Package": "BH",

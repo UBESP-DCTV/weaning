@@ -24,10 +24,13 @@ tf$constant("Hello Tensorflow!")
 
 
 # aux -------------------------------------------------------------
+renv::use_python()
+
 install.packages("deepviz")
 usethis::use_package("deepviz", type = "Suggests")
 
 # pkgs for model plot
+reticulate::virtualenv_install(packages = "pydot")
 reticulate::py_install(
   "pydot",
   envname = "r-reticulate",
