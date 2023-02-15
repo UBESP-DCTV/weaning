@@ -394,14 +394,14 @@ list(
   ),
   tar_target(
     trdArrays,
-    # [pt, minutes, days, var] = [none, 1440, length(giorno_studio), ]
+    # [pt, minutes, days, var] = [none, 1440, length(giorno_studio), 30]
     create_pt_trd(weaningsTRD, pt_ids),
     pattern = map(pt_ids),
     iteration = "list"
   ),
   tar_target(
     outArrays,
-    # [pt, days, out] = [none, length(giorno_studio), 1]
+    # [pt, days, out] = [none, length(giorno_studio), 2]
     create_pt_output(pt_registry, pt_ids),
     pattern = map(pt_ids),
     iteration = "list"
