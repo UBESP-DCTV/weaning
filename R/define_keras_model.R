@@ -7,6 +7,10 @@ define_keras_model <- function() {
     shape = c(5)
   )
 
+  input_daily <- keras::layer_input(
+    name = "input_daily",
+    shape = c(NULL, 3)
+  )
 
 
 # network ---------------------------------------------------------
