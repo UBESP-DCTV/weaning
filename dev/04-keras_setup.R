@@ -27,4 +27,19 @@ tf$constant("Hello Tensorflow!")
 install.packages("deepviz")
 usethis::use_package("deepviz", type = "Suggests")
 
+# pkgs for model plot
+reticulate::py_install(
+  "pydot",
+  envname = "r-reticulate",
+  pip = TRUE,
+  method = "virtualenv"
+)
+reticulate::conda_install(
+  envname = "r-reticulate",
+  packages = "graphviz"
+)
+
+
+
+# model definition script -----------------------------------------
 use_r("define_keras_model")

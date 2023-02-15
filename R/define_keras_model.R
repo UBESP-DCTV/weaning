@@ -9,30 +9,47 @@ define_keras_model <- function() {
 
   input_daily <- keras::layer_input(
     name = "input_daily",
-    shape = c(NULL, 3)
+    shape = c(NA, 3)
+  )
+
+  input_trd <- keras::layer_input(
+    name = "input_trd",
+    shape = c(1440, NA, 30)
   )
 
 
 # network ---------------------------------------------------------
 
-  baseline_l1 <- input_baseline %>%
-    keras::layer_dense(
-      name = "baseline_l1", units = 8, activation = "relu"
+
+  trd_l1 <- input_trd %>%
+    keras::layer_conv_lstm_1d(
+      filters = 8,
+      kernel_size = 1,
+      name = "trd_l1"
     )
 
+  merged_daily_trd <- keras::k_concatenate(c(input_daily, trd_l1))
 
+  merged_l3 <- merged_daily_trd %>%
+    keras::layer_gru(units = 8, name = "merged_l3")
+
+  merged_l4 <- keras::k_concatenate(c(merged_l3, input_baseline))
+
+  dense_l6 <- merged_l4 %>%
+    keras::layer_dense(name = "dense_l5", units = 8) %>%
+    keras::layer_dense(name = "dense_l6", units = 8)
 
 # Output ----------------------------------------------------------
 
-  out <- baseline_l1 %>%
-    keras::layer_dense(name = "out", units = 1, activation = "sigmoid")
+  out <- dense_l6 %>%
+    keras::layer_dense(name = "out", units = 3, activation = "sigmoid")
 
 
 
 # Model -----------------------------------------------------------
 
   keras::keras_model(
-    inputs = input_baseline,
+    inputs = c(input_baseline, input_daily, input_trd),
     outputs = out
   )
 }

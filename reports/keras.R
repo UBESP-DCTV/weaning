@@ -1,13 +1,8 @@
-here::here("R") |>
-  list.files(pattern = "define_keras_model\\.R$", full.names = TRUE) |>
-  lapply(source) |>
-  invisible()
-
 is_develop <- TRUE
 on_cpu <- TRUE
 
-library(targets)
 library(reticulate)
+reticulate::use_virtualenv("r-reticulate", required = TRUE)
 
 
 if (on_cpu) {
@@ -23,10 +18,16 @@ library(keras)
 k <- reticulate::import("keras", convert = TRUE)
 
 
+library(targets)
+
+here::here("R") |>
+  list.files(pattern = "define_keras_model\\.R$", full.names = TRUE) |>
+  lapply(source) |>
+  invisible()
 
 
 # parameters ------------------------------------------------------
-epochs <- 100
+epochs <- 30
 batch_size <- 16
 
 
@@ -35,9 +36,14 @@ summary({
 })
 
 
-if (is_develop && requireNamespace("deepviz")) {
+if (is_develop) {
   model |>
-    deepviz::plot_model(
+    # keras:::plot.keras.engine.training.Model(
+    plot(
+      show_shapes = TRUE,
+      show_dtype = TRUE,
+      expand_nested = TRUE,
+      show_layer_activations = TRUE,
       to_file = "topology-full.png"
     )
 }
