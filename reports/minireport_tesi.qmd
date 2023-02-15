@@ -1,7 +1,11 @@
 ---
 title: "Minireport tesi"
 author: "AP"
-format: html
+format:
+  html:
+    embed-resources: true
+    code-fold: true
+    code-summary: "Show the code"
 editor: visual
 ---
 
@@ -22,6 +26,9 @@ Questo report contiene alcune analisi e tabelle utili alla tesi, in particolare:
 When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
 
 ```{r}
+if (!interactive()) {
+  options(tidyverse.quiet = TRUE)
+}
 library(tidyverse)
 library(targets)
 library(gtsummary)
