@@ -72,12 +72,6 @@ plot_trd_vars <- function(trd, weaning_subset = NA) {
                   lavoro_respiratorio_del_paziente_joule_l,
                   pressione_di_fine_esp_cm_h2o,
                   press_media_vie_aeree_cm_h2o) |>
-    # STANDARDIZZARE in [0,1] ?
-    # dplyr::mutate(
-    #     dplyr::across(
-    # lavoro_respiratorio_del_ventilatore_joule_l :
-    #    press_media_vie_aeree_cm_h2o,
-    #            ~as.numeric(scales::rescale(., to = c(0, 1))) )) |>
     tidyr::pivot_longer(cols = 4:7)
 
   plot <- ggplot2::ggplot(trd_subset,
@@ -155,7 +149,7 @@ plot_trd_mavg <- function(trd, weaning_subset = NA) {
                        linetype = 1) +
     ggplot2::labs(title = "Moving averages on weanings TRD",
                   x = "", y = "") +
-    ggplot2::facet_wrap(vars(id_univoco, date))
+    ggplot2::facet_wrap(dplyr::vars(id_univoco, date))
 
   return(plot)
 }
