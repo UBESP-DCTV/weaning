@@ -21,6 +21,8 @@ Questo report contiene alcune analisi e tabelle utili alla tesi, in particolare:
 
 4.  min/max I/II/III quartile SBT riusciti / SBT provati per paziente (e overall)
 
+Ma anche, per la parte dei metodi "Describe the basic statistics of the dataset, particularly of the response variable. These include the ratio of positive to negative classes for a classification problem and the distribution of the response variable for regression problem".
+
 ## Caricamento pacchetti
 
 When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
