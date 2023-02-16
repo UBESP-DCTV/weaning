@@ -142,28 +142,28 @@ daily |>
 
 ```{r}
 
-rt_yes <- 10
-rt_no <- 5
-sbt_yes <- 7
-sbt_no <- 3
-wea_yes <- 4
-wea_no <- 3
-
+sbt_yes <- daily |> filter(sbt == "SBT success") |>
+  tally() |> as.integer()
+sbt_no <- daily |> filter(sbt == "SBT failure") |>
+  tally() |> as.integer()
+rt_yes <- sbt_yes + sbt_no
+rt_no <- daily |> filter(sbt == "Weaning not attempted") |> 
+  tally()  |>   as.integer()
+all_attempts <- rt_yes + rt_no
 
 # collater input
 diagram_links <- tribble(
   ~source,           ~target,           ~value,
-  "all patients",    "RT success",      rt_yes,
-  "all patients",    "RT failure",      rt_no,
+  "all attempts",    "RT success",      rt_yes,
+  "all attempts",    "RT failure",      rt_no,
   "RT success",      "SBT success",     sbt_yes,
-  "RT success",      "SBT failure",     sbt_no,
-  "SBT success",     "weaning success", wea_yes,
-  "SBT success",     "weaning failure", wea_no
+  "RT success",      "SBT failure",     sbt_no
 )
 
 diagram_nodes <- tibble(
-  name = c(as.character(diagram_links[["source"]]), 
-  as.character(diagram_links[["target"]])) |>
+  name = c(
+    as.character(diagram_links[["source"]]), 
+    as.character(diagram_links[["target"]])) |>
     unique()
 )
 
