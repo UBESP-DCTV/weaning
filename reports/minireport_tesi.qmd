@@ -35,7 +35,6 @@ library(tidyverse)
 library(targets)
 library(gtsummary)
 library(networkD3)
-library(viridis)
 ```
 
 e i targets
@@ -61,7 +60,7 @@ baseline <- tar_read(pt_names) |>
            ))
 daily <- tar_read(pt_registry) |>
   select("id_univoco", "type", "data_lettura", "giorno_studio", 
-         "sbt", "reintubato", "morto") |>
+         "sbt") |>
     # sbt :=
     #   - se stubato = `-1`,
     #   - se sbt non provato =  `0`,
@@ -71,7 +70,7 @@ daily <- tar_read(pt_registry) |>
            as.character() |>
            fct_recode(
              "Already extubated" = "-1",
-             "Weaning not attempted" = "0",
+             "Readiness Testing failure" = "0",
              "SBT success" = "1",
              "SBT failure" = "2"
            )
@@ -129,7 +128,7 @@ daily |>
   #             values_from = n,
   #             values_fill = 0) |>
   ungroup() |>
-  select(-id_univoco, -reintubato, -morto) |>
+  select(-id_univoco) |>
   tbl_summary( 
     by = sbt,
     statistic =  ~ "{median}  (range: {min}, {max})  (IQR: {p25}, {p75})",
@@ -147,7 +146,7 @@ sbt_yes <- daily |> filter(sbt == "SBT success") |>
 sbt_no <- daily |> filter(sbt == "SBT failure") |>
   tally() |> as.integer()
 rt_yes <- sbt_yes + sbt_no
-rt_no <- daily |> filter(sbt == "Weaning not attempted") |> 
+rt_no <- daily |> filter(sbt == "Readiness Testing failure") |> 
   tally()  |>   as.integer()
 all_attempts <- rt_yes + rt_no
 
@@ -185,4 +184,12 @@ sankeyNetwork(Links = diagram_links,
               colourScale = ColourScal,
               nodeWidth=30, fontSize=15, nodePadding=20)
 
+```
+
+```{r}
+daily |>
+  select(sbt) |>
+  tbl_summary(
+    label = sbt ~ "Daily attempt"
+  )
 ```
