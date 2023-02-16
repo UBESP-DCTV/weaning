@@ -34,11 +34,13 @@ if (!interactive()) {
 library(tidyverse)
 library(targets)
 library(gtsummary)
+library(networkD3)
+library(viridis)
 ```
 
 e i targets
 
-```{r, eval = FALSE}
+```{r}
 tar_visnetwork(TRUE, exclude = starts_with("gg") | contains("Plot"))
 ```
 
@@ -58,7 +60,8 @@ baseline <- tar_read(pt_names) |>
              # ARDS doesn't need recoding
            ))
 daily <- tar_read(pt_registry) |>
-  select("id_univoco", "type", "data_lettura", "giorno_studio", "sbt") |>
+  select("id_univoco", "type", "data_lettura", "giorno_studio", 
+         "sbt", "reintubato", "morto") |>
     # sbt :=
     #   - se stubato = `-1`,
     #   - se sbt non provato =  `0`,
@@ -126,11 +129,60 @@ daily |>
   #             values_from = n,
   #             values_fill = 0) |>
   ungroup() |>
-  select(-id_univoco) |>
+  select(-id_univoco, -reintubato, -morto) |>
   tbl_summary( 
     by = sbt,
     statistic =  ~ "{median}  (range: {min}, {max})  (IQR: {p25}, {p75})",
     # digits =  ~ 2
   ) |>
   add_overall( col_label = "Totale")
+```
+
+## Analisi dell'outcome variable
+
+```{r}
+
+rt_yes <- 10
+rt_no <- 5
+sbt_yes <- 7
+sbt_no <- 3
+wea_yes <- 4
+wea_no <- 3
+
+
+# collater input
+diagram_links <- tribble(
+  ~source,           ~target,           ~value,
+  "all patients",    "RT success",      rt_yes,
+  "all patients",    "RT failure",      rt_no,
+  "RT success",      "SBT success",     sbt_yes,
+  "RT success",      "SBT failure",     sbt_no,
+  "SBT success",     "weaning success", wea_yes,
+  "SBT success",     "weaning failure", wea_no
+)
+
+diagram_nodes <- tibble(
+  name = c(as.character(diagram_links[["source"]]), 
+  as.character(diagram_links[["target"]])) |>
+    unique()
+)
+
+diagram_links[["IDsource"]] <- match(
+  diagram_links[["source"]], diagram_nodes[["name"]])-1 
+diagram_links[["IDtarget"]] <- match(
+  diagram_links[["target"]], diagram_nodes[["name"]])-1
+
+# prepare colour scale
+ColourScal ='d3.scaleOrdinal() .range(["#FDE725FF","#B4DE2CFF","#6DCD59FF","#35B779FF","#1F9E89FF","#26828EFF","#31688EFF","#3E4A89FF","#482878FF","#440154FF"])'
+
+sankeyNetwork(Links = diagram_links,
+              Nodes = diagram_nodes,
+              Source = "IDsource", 
+              Target = "IDtarget",
+              Value = "value",
+              NodeID = "name", 
+              sinksRight=FALSE,
+              colourScale = ColourScal,
+              nodeWidth=30, fontSize=15, nodePadding=20)
+
 ```
