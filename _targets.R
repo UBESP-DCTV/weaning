@@ -408,7 +408,12 @@ list(
   ),
 
 
-
+  tar_target(
+    subdata_2_days,
+    create_subdata(
+      pt_ids, baselineArrays, dailyArrays, trdArrays, outArrays
+    )
+  ),
 
 
 

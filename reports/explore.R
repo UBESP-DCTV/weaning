@@ -10,4 +10,8 @@ ids <- tar_read(pt_ids)
 baseline <- tar_read(baselineArrays)
 daily <- tar_read(dailyArrays)
 trd <- tar_read(trdArrays)
-out <- tar_read(outArrays)
+outcome <- tar_read(outArrays)
+
+
+str(baseline, 1)
+str(daily[[1]], 1)
