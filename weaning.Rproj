@@ -21,6 +21,6 @@ PackageUseDevtools: Yes
 PackageInstallArgs: --no-multiarch --with-keep.source
 PackageRoxygenize: rd,collate,namespace,vignette
 
-PythonType: virtualenv
-PythonVersion: 3.9.13
-PythonPath: ~/.virtualenvs/r-reticulate/Scripts/python.exe
+PythonType: conda
+PythonVersion: 3.10.6
+PythonPath: ~/miniconda3/envs/tf/bin/python3.10

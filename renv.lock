@@ -9,9 +9,9 @@
     ]
   },
   "Python": {
-    "Version": "3.9.13",
+    "Version": "3.10.6",
     "Type": "virtualenv",
-    "Name": "C:/Users/andre/OneDrive/Documenti/.virtualenvs/r-reticulate"
+    "Name": "./renv/python/virtualenvs/renv-python-3.10"
   },
   "Packages": {
     "BH": {

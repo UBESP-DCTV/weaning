@@ -1,8 +1,9 @@
+# renv::use_python()
 is_develop <- TRUE
-on_cpu <- TRUE
+on_cpu <- FALSE
 
 library(reticulate)
-reticulate::use_virtualenv("r-reticulate", required = TRUE)
+reticulate::use_condaenv("tf", required = TRUE)
 
 
 if (on_cpu) {
@@ -27,14 +28,13 @@ here::here("R") |>
 
 
 # parameters ------------------------------------------------------
-epochs <- 30
+epochs <- 50
 batch_size <- 16
 
 
 summary({
   model <- define_keras_model()
 })
-
 
 if (is_develop) {
   model |>
