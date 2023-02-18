@@ -17,3 +17,16 @@ str(baseline, 1)
 str(daily[[1]], 1)
 
 a <- create_subdata(ids, baseline, daily, trd, outcome)
+
+
+
+daily[["BA001"]]
+outcome[["BA001"]]
+
+ba001_trd <- tar_read(weaningsTRD) |>
+  dplyr::filter(id_univoco == "BA001")
+
+ba001_trd |>
+  dplyr::select(date, ora) |>
+  group_by(date) |>
+  count()

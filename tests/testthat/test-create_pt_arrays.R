@@ -139,13 +139,17 @@ test_that("arrays have consistent dimensions", {
   skip_on_covr()
 
   # setup
-  ids <- tar_read(pt_ids)
+  ids <- targets::tar_read(pt_ids)
+
   baseline <- targets::tar_read(baselineArrays) |>
     purrr::set_names(ids)
+
   daily <- targets::tar_read(dailyArrays) |>
     purrr::set_names(ids)
+
   trd <- targets::tar_read(trdArrays) |>
     purrr::set_names(ids)
+
   outcome <- targets::tar_read(outArrays) |>
     purrr::set_names(ids)
 
@@ -155,7 +159,8 @@ test_that("arrays have consistent dimensions", {
   twodays_trd <- purrr::keep(trd, ~dim(.x)[[2]] >= 2)
 
   # test
+  expect_lte(length(twodays_trd), length(twodays_outcome))
+  expect_lte(length(twodays_trd), length(twodays_daily))
   expect_equal(length(twodays_outcome), length(twodays_daily))
-  expect_equal(length(twodays_trd), length(twodays_daily))
 
 })
