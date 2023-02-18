@@ -61,8 +61,6 @@ remove_lasts_value <- function(x, value = -1) {
   # if (!is_value[length(is_value)]) return(x)
   #
   #   stop("implementing faster procedure")
-  # # ✖ error target subdata_2_days
-  # # Error: Can't recycle `.x` (size 177) to match `.y` (size 178).
 
   lenx <- length(x)
   if (lenx == 0) return(x)
