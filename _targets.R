@@ -408,7 +408,8 @@ list(
   ),
 
   tar_target(
-    maxRelevantDays, get_max_day(dailyArrays, trdArrays, outArrays)
+    maxRelevantDays,
+    seq_len(get_max_day(dailyArrays, trdArrays, outArrays))
   ),
 
   tar_target(
