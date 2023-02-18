@@ -26,3 +26,6 @@ ba001_trd |>
   dplyr::select(date, ora) |>
   group_by(date) |>
   count()
+
+
+a <- tar_read(subdata_2_days)

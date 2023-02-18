@@ -52,7 +52,14 @@ create_subdata <- function(ids, baseline, daily, trd, outcome, n_days = 2) {
 }
 
 get_max_day <- function(daily) {
-  max(purrr::map_int(daily, ~dim(.x)[[1]]))
+  max_trd <- max(purrr::map_int(trd, ~dim(.x)[[2]]))
+  max_daily <- max(purrr::map_int(daily, ~dim(.x)[[1]]))
+  max_outcome <- outcome |>
+    purrr::map_int(
+      ~dim(remove_lasts_value(.x[, 1, drop = FALSE]))[[1]]
+    ) |>
+    max()
+  min(max_trd, max_daily, max_outcome)
 }
 
 
@@ -69,8 +76,3 @@ remove_lasts_value <- function(x, value = -1) {
   )
   x
 }
-
-
-
-
-
