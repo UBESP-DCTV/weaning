@@ -51,7 +51,7 @@ create_subdata <- function(ids, baseline, daily, trd, outcome, n_days = 2) {
   )
 }
 
-get_max_day <- function(daily) {
+get_max_day <- function(daily, trd, outcome) {
   max_trd <- max(purrr::map_int(trd, ~dim(.x)[[2]]))
   max_daily <- max(purrr::map_int(daily, ~dim(.x)[[1]]))
   max_outcome <- outcome |>
