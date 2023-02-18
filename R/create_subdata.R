@@ -4,34 +4,46 @@ create_subdata <- function(ids, baseline, daily, trd, outcome, n_days = 2) {
   stopifnot(length(ids) == length(trd))
   stopifnot(length(ids) == length(outcome))
 
-  current_outcome <- outcome |>
-    purrr::set_names(ids) |>
-    purrr::keep(~dim(.x)[[1]] >= n_days) |>
+  baseline <- purrr::set_names(baseline, ids)
+  daily <- purrr::set_names(daily, ids)
+  trd <- purrr::set_names(trd, ids)
+  outcome <- purrr::set_names(outcome, ids)
+
+  outcome_relevant_days <- outcome |>
     purrr::map(~{
       .x[seq_len(n_days), 1L, drop = FALSE] |>
         remove_lasts_value()
     })
 
-  current_daily <- daily |>
-    purrr::set_names(ids) |>
-    purrr::keep(~dim(.x)[[1]] >= n_days) |>
-    purrr::map2(
-      current_outcome,
-       ~.x[seq_len(nrow(.y)), , drop = FALSE]
-    )
+  outcome_days <- purrr::map_int(outcome_relevant_days, ~dim(.x)[[1]])
+  daily_days <- purrr::map_int(daily, ~dim(.x)[[1]])
+  trd_days <- purrr::map_int(trd, ~dim(.x)[[2]])
 
-  current_trd <- trd |>
-    purrr::set_names(ids) |>
-    purrr::keep(~dim(.x)[[2]] >= n_days) |>
+  max_common_days <- pmin(daily_days, trd_days, outcome_days)
+  have_enough_day <- max_common_days >= n_days
+
+  current_ids <- ids[have_enough_day]
+  current_baseline <- baseline[have_enough_day]
+  current_outcome <- outcome[have_enough_day] |>
+    purrr::map2(
+      max_common_days[have_enough_day],
+      ~.x[seq_len(.y), 1L, drop = FALSE])
+
+  current_trd <- trd[have_enough_day] |>
     purrr::map2(
       current_outcome,
       ~.x[, seq_len(nrow(.y)), , drop = FALSE]
     )
 
+  current_daily <- daily[have_enough_day] |>
+    purrr::map2(
+      current_outcome,
+       ~.x[seq_len(nrow(.y)), , drop = FALSE]
+    )
 
   list(
-    ids = ids[names(current_daily)],
-    baseline = abind::abind(baseline, along = 0L),
+    ids = current_ids,
+    baseline = abind::abind(current_baseline, along = 0L),
     daily = abind::abind(current_daily, along = 0L),
     trd = abind::abind(current_trd, along = 0L),
     n_patients = length(current_daily),
