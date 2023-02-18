@@ -45,14 +45,14 @@ get_max_day <- function(daily) {
 
 
 remove_lasts_value <- function(x, value = -1) {
-  is_value <- x[, 1] == value
-  if (!is_value[length(is_value)]) return(x)
+  # is_value <- x[, 1] == value
+  # if (!is_value[length(is_value)]) return(x)
+  #
+  #   stop("implementing faster procedure")
+  # # ✖ error target subdata_2_days
+  # # Error: Can't recycle `.x` (size 177) to match `.y` (size 178).
 
-    stop("implementing faster procedure")
-  # ✖ error target subdata_2_days
-  # Error: Can't recycle `.x` (size 177) to match `.y` (size 178).
-
-
+  lenx <- length(x)
   if (lenx == 0) return(x)
   if (x[[lenx, 1L]] == value) return(
     remove_lasts_value(x[-lenx, 1L, drop = FALSE], value = value)
