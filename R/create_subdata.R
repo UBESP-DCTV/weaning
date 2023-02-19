@@ -11,7 +11,7 @@ create_subdata <- function(ids, baseline, daily, trd, outcome, n_days = 2) {
 
   outcome_relevant_days <- outcome |>
     purrr::map(~{
-      .x[seq_len(n_days), 1L, drop = FALSE] |>
+      .x[seq_len(min(n_days, dim(.x)[[1]])), 1L, drop = FALSE] |>
         remove_lasts_value()
     })
 

@@ -5,14 +5,14 @@ tar_read(pt_names) |> dplyr::glimpse()
 tar_read(pt_registry) |> dplyr::glimpse()
 
 
-ids <- tar_read(pt_ids)
+ids <- (pt_ids)
 
-baseline <- tar_read(baselineArrays)
-daily <- tar_read(dailyArrays)
-trd <- tar_read(trdArrays)
-outcome <- tar_read(outArrays)
+baseline <- (baselineArrays)
+daily <- (dailyArrays)
+trd <- (trdArrays)
+outcome <- (outArrays)
 
-a <- create_subdata(ids, baseline, daily, trd, outcome)
+a <- create_subdata(ids, baseline, daily, trd, outcome, n_days = maxRelevantDays)
 
 
 
