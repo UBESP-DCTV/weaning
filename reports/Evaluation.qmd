@@ -1,0 +1,59 @@
+---
+bibliography: references.bib
+---
+
+# Robust Model Evaluation
+
+Evaluation of the test set is the final step of model building, which comes after proper validation, model refinement and a fair comparison among all candidate models. It is necessary to have valid results from which reliable conclusions can be drawn from [@lones]. Evaluation is a multi-step process, which we document, share and report to improve the reproducibility of our workflow, and build confidence on our results \[cite Pineau, 2020\].
+
+-   Appropriate validation set (and multiple model comparison)
+
+-   Appropriate test set use
+
+-   Appropriate set of metrics selection
+
+-   Statistical test for model comparison
+
+-   Transparent reporting
+
+-   Multiple ways of model performance reporting
+
+-   Statistical significance of the model
+
+-   Explanation of prediction with global methods
+
+-   Explanation of a single prediction
+
+## Appropriate validation set
+
+It refers to the data set that is not part of the test set and the training set but is meant to guide model training. The model on the test set is run only once on data that weren't seen before, to prevent selecting a model that performs well on the test set for some specific reason, but not necessarily in real-world scenarios [@cawley2010]. Since the model is evaluated at each iteration against the validation set during the training process, it can quickly overfit. To prevent that, [early stopping](https://keras.io/api/callbacks/early_stopping/) was implemented, combined with a Learning Rate [Scheduler](https://keras.io/api/callbacks/learning_rate_scheduler/) and an [Optimizator](https://keras.io/api/callbacks/reduce_lr_on_plateau/) that stops when validation metrics reach a plateau for a sufficient time.
+
+Moreover, since time series can't undergo cross-validation in the usual way because of temporal leakage, each patient model was trained on n days and evaluated on n+1 results, progressively increasing its ability to generalize.
+
+Since the dataset was unbalanced, stratification ensured in each fold of the cross-validation process, the proper representation also of the minor classes.
+
+## Appropriate Test set
+
+The test set should not overlap with the training or validation set and be representative of a wider population to measure the model's generality [@lones]. To prevent information leakage from the test set, input data were screened for duplicates before the split, and eliminated by keeping only the first instance. In addition to that, the split was conducted in a time-wise fashion, setting aside for each hospital the 20% of days, to better simulate the process.
+
+::: {.callout-note appearance="minimal"}
+## Additional screening required?
+
+Consider data leakage screening according to Reproducible ML from [Princeton](https://reproducible.cs.princeton.edu) \[cite Kapoor "Leakage and Reproducibility"\]
+:::
+
+Ideally, since all our training and test data come from the same kind of equipment, the ability to generalize to data collected with others could not be tested (since it wouldn't be detectable). No community benchmark was available for our data to test our model on an external dataset, so this part of the analysis was not performed, relying only on internal split to evaluate our model.
+
+## Appropriate set of metrics selection
+
+Since data are unbalanced, accuracy could be misleading. As a comparison, a model always predicting the majority class would result in a 75% accuracy. Also, the standard of care is suboptimal: we don't have the counterfactual example where an SBT is tried after a negative RT, but a positive RT heighten the probability of a successful SBT to slightly more than 50% in our dataset.
+
+To build a case for AI adoption in clinical practice, we selected some models to highlight improvement through comparison: a model always predicting the majority class (as a baseline), a model only using baseline data, a model using baseline and daily data (which is the most similar to what clinicians are doing in this study protocol) and a full model including also track data from MV. To compare those classifiers, Mann-Whitney's U test was performed on outcome distributions, since it does not assume their normality \[cite Rashka and Carrasco\], with Holm-Hochberg correction \[citare Streiner, 2015 e cite original paper\] to correct for multiplicity.
+
+::: callout-note
+## Other corrections for multiplicity \[cite Streiner, 2015\]
+
+Also, the Storey-Tibshirany q-value, to control the positive False Discovery Rate could be an option (also easy to implement), while bootstrapping (resampling), as suggested by Tibshirani could be problematic given the size of the models.
+:::
+
+Performance was reported with a multiplicity of metrics, since each of them gives different information about model
