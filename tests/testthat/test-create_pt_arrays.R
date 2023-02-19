@@ -131,3 +131,36 @@ test_that("create_pt_output works", {
   expect_equal(dim(res_an001), c(5, 2))
 
 })
+
+
+test_that("arrays have consistent dimensions", {
+  skip_on_ci()
+  skip_on_cran()
+  skip_on_covr()
+
+  # setup
+  ids <- targets::tar_read(pt_ids)
+
+  baseline <- targets::tar_read(baselineArrays) |>
+    purrr::set_names(ids)
+
+  daily <- targets::tar_read(dailyArrays) |>
+    purrr::set_names(ids)
+
+  trd <- targets::tar_read(trdArrays) |>
+    purrr::set_names(ids)
+
+  outcome <- targets::tar_read(outArrays) |>
+    purrr::set_names(ids)
+
+  # eval
+  twodays_outcome <- purrr::keep(outcome, ~dim(.x)[[1]] >= 2)
+  twodays_daily <- purrr::keep(daily, ~dim(.x)[[1]] >= 2)
+  twodays_trd <- purrr::keep(trd, ~dim(.x)[[2]] >= 2)
+
+  # test
+  expect_lte(length(twodays_trd), length(twodays_outcome))
+  expect_lte(length(twodays_trd), length(twodays_daily))
+  expect_equal(length(twodays_outcome), length(twodays_daily))
+
+})

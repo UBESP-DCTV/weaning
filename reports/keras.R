@@ -66,8 +66,12 @@ model %>%
   tic <- Sys.time()
   history <- model %>%
     keras::fit(
-      x = targets::tar_read(baselineArrays) |>
-        abind::abind(along = 0),
+      x = list(
+        input_baseline = targets::tar_read(baselineArrays),
+        input_daily = targets::tar_read(dailyArrays),
+        input_trd = targets::tar_read(trdArrays)
+      ) |>
+        purrr::map(abind::abind, along = 0),
       y = targets::tar_read(outArrays) |>
         purrr::map(~.x[nrow(.x), 1L, drop = FALSE]) |>
         abind::abind(along = 0) |>

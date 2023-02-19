@@ -407,8 +407,19 @@ list(
     iteration = "list"
   ),
 
+  tar_target(
+    maxRelevantDays,
+    seq_len(get_max_day(dailyArrays, trdArrays, outArrays))
+  ),
 
-
+  tar_target(
+    subdata_2_days,
+    create_subdata(
+      pt_ids, baselineArrays, dailyArrays, trdArrays, outArrays,
+      maxRelevantDays
+    ),
+    pattern = map(maxRelevantDays)
+  ),
 
 
 
