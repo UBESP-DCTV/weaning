@@ -1,7 +1,8 @@
 # renv::use_python()
-is_develop <- TRUE
+is_develop <- FALSE
 on_cpu <- FALSE
 
+Sys.unsetenv("RETICULATE_PYTHON")
 library(reticulate)
 reticulate::use_condaenv("tf", required = TRUE)
 
@@ -51,10 +52,16 @@ if (is_develop) {
 model %>%
   compile(
     optimizer = k$optimizers$Adam(amsgrad = TRUE),
-    loss = loss_binary_crossentropy(),
+    loss = loss_categorical_crossentropy(),
     metrics = "accuracy"
   )
 
+n_days <- 4
+data_used <- targets::tar_read(trainArraysByDays, branches = n_days)[[1]]
+baseline <- data_used[[2]]
+daily <- data_used[[3]]
+trd <- data_used[[4]]
+outcome <- keras::k_one_hot(data_used[[5]], 3L)
 
 {
   run_id <- glue::glue(paste0(
@@ -67,15 +74,11 @@ model %>%
   history <- model %>%
     keras::fit(
       x = list(
-        input_baseline = targets::tar_read(baselineArrays),
-        input_daily = targets::tar_read(dailyArrays),
-        input_trd = targets::tar_read(trdArrays)
-      ) |>
-        purrr::map(abind::abind, along = 0),
-      y = targets::tar_read(outArrays) |>
-        purrr::map(~.x[nrow(.x), 1L, drop = FALSE]) |>
-        abind::abind(along = 0) |>
-        purrr::map_dbl(identical, -1L),
+        input_baseline = baseline,
+        input_daily = daily,
+        input_trd = trd
+      ),
+      y = outcome,
       epochs = epochs,
       validation_split = 0.2
       # callbacks = list(
