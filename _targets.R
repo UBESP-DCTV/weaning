@@ -413,12 +413,13 @@ list(
   ),
 
   tar_target(
-    subdata_2_days,
+    trainArraysByDays,
     create_subdata(
       pt_ids, baselineArrays, dailyArrays, trdArrays, outArrays,
       maxRelevantDays
     ),
-    pattern = map(maxRelevantDays)
+    pattern = map(maxRelevantDays),
+    iteration = "list"
   ),
 
 

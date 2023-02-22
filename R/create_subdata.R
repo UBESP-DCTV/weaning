@@ -40,12 +40,15 @@ create_subdata <- function(ids, baseline, daily, trd, outcome, n_days = 2) {
       current_outcome,
        ~.x[seq_len(nrow(.y)), , drop = FALSE]
     )
+  current_outcome <- current_outcome |>
+    purrr::map_int(~.x[length(.x), ])
 
   list(
     ids = current_ids,
     baseline = abind::abind(current_baseline, along = 0L),
     daily = abind::abind(current_daily, along = 0L),
     trd = abind::abind(current_trd, along = 0L),
+    outcome = current_outcome,
     n_patients = length(current_daily),
     n_days = n_days
   )
