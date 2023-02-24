@@ -5,7 +5,9 @@ create_subdata <- function(ids, baseline, daily, trd, outcome, n_days = 2) {
   stopifnot(length(ids) == length(outcome))
 
   baseline <- purrr::set_names(baseline, ids)
-  daily <- purrr::set_names(daily, ids)
+  daily <- daily |>
+    purrr::map(~.x[rowSums(is.na(.x)) == 0, , drop = FALSE]) |>
+    purrr::set_names(ids)
   trd <- purrr::set_names(trd, ids)
   outcome <- purrr::set_names(outcome, ids)
 

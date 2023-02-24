@@ -2,6 +2,7 @@
 is_develop <- FALSE
 on_cpu <- FALSE
 
+
 Sys.unsetenv("RETICULATE_PYTHON")
 library(reticulate)
 reticulate::use_condaenv("tf", required = TRUE)
@@ -22,6 +23,14 @@ k <- reticulate::import("keras", convert = TRUE)
 
 library(targets)
 
+n_days <- 10
+data_used <- targets::tar_read(trainArraysByDays, branches = n_days)[[1]]
+baseline <- data_used[[2]]
+daily <- data_used[[3]]
+trd <- data_used[[4]]
+outcome <- keras::k_one_hot(data_used[[5]], 3L)
+
+
 here::here("R") |>
   list.files(pattern = "define_keras_model\\.R$", full.names = TRUE) |>
   lapply(source) |>
@@ -29,8 +38,8 @@ here::here("R") |>
 
 
 # parameters ------------------------------------------------------
-epochs <- 50
-batch_size <- 16
+epochs <- 10
+batch_size <- 32
 
 
 summary({
@@ -56,12 +65,6 @@ model %>%
     metrics = "accuracy"
   )
 
-n_days <- 4
-data_used <- targets::tar_read(trainArraysByDays, branches = n_days)[[1]]
-baseline <- data_used[[2]]
-daily <- data_used[[3]]
-trd <- data_used[[4]]
-outcome <- keras::k_one_hot(data_used[[5]], 3L)
 
 {
   run_id <- glue::glue(paste0(
@@ -80,6 +83,7 @@ outcome <- keras::k_one_hot(data_used[[5]], 3L)
       ),
       y = outcome,
       epochs = epochs,
+      batch_size  = batch_size,
       validation_split = 0.2
       # callbacks = list(
       #   callback_model_checkpoint(
