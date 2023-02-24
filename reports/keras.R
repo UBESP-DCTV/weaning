@@ -30,7 +30,10 @@ outcome <- keras::k_one_hot(data_used[[5]], 3L)
 
 
 here::here("R") |>
-  list.files(pattern = "define_keras_model\\.R$", full.names = TRUE) |>
+  list.files(
+    pattern = "keras",
+    full.names = TRUE
+  ) |>
   lapply(source) |>
   invisible()
 

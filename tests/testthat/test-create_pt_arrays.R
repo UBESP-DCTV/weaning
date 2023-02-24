@@ -116,10 +116,10 @@ test_that("create_trd works", {
   }
 
   expect_array(res_an001, "numeric", any.missing = FALSE, d = 3)
-  expect_equal(dim(res_an001), c(1440, 5, 30))
+  expect_equal(dim(res_an001), c(1440, 5, 21))
 
   expect_array(res_fe002, "numeric", any.missing = FALSE, d = 3)
-  expect_equal(dim(res_fe002), c(1440, 4, 30))
+  expect_equal(dim(res_fe002), c(1440, 4, 21))
 
 })
 

@@ -15,8 +15,13 @@ create_pt_trd <- function(db, pt_id) {
 
   var_used <- names(db) |>
     setdiff(c(
-      "id_univoco", "folder", "id_pat", "file", "stress_index",
-      "et_co2_percent"
+      "id_univoco", "folder", "id_pat", "file",
+      # over 2/3 missing
+      "stress_index", "et_co2_percent", "eliminazione_co2_corrente_ml",
+      "eliminazione_co2_minuto_ml_min", "elastanza_cm_h2o_l",
+      "resistenza_esp_cm_h2o_l_s", "resistenza_inspiratoria_cm_h2o_l_s",
+      "press_di_pausa_vie_aeree_cm_h2o", "compliance_statica_ml_cm_h2o",
+      "perdita_percentuale_percent", "et_co2_mm_hg"
     ))
 
   res <- db[db[["id_univoco"]] == pt_id, var_used, drop = FALSE] |>

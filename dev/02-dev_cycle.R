@@ -51,6 +51,13 @@ renv::status()
   usethis::use_r()
 
 
+"utils_keras" |>
+  usethis::use_test() |>
+  basename() |>
+  stringr::str_remove("test-") |>
+  usethis::use_r()
+
+
 
 # Execute ---------------------------------------------------------
 rstudioapi::navigateToFile(here::here("dev/03-run_cycle.R"))

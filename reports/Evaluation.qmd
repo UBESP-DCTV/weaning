@@ -1,5 +1,9 @@
 ---
 bibliography: references.bib
+format:
+  html:
+    toc: true
+    embed-resources: true
 ---
 
 # Robust Model Evaluation
@@ -28,7 +32,7 @@ Since the model is evaluated at each iteration against the validation set during
 
 Moreover, since time series can't undergo cross-validation in the usual way because of temporal leakage, each patient model was trained on N days and evaluated on the Nth+1 day, progressively increasing its ability to generalize.
 
-Since the dataset was unbalanced, stratification ensured in each fold of the cross-validation process, the proper representation also of the minor classes. Training class proportion was used to properly stratify data, re-sampling to rebalance the sample space to alleviate the effect of skewed class distribution \[cite Haixiang\]. For a dataset like ours, the over-sampling method SMOT was found a better choice in comparative studies \[cite three papers studied the performances of different re-sampling methods \[ cite Loyola-González et al., 2016; Napierala and Stefanowski, 2015; Zhou 2013 from Haixiang\]
+Since the dataset was unbalanced, stratification ensured in each fold of the cross-validation process, the proper representation also of the minor classes. Training class proportion was used to properly stratify data, re-sampling to rebalance the sample space to alleviate the effect of skewed class distribution \[cite Haixiang\]. For a dataset like ours, the over-sampling method SMOTe was found a better choice in comparative studies \[cite three papers studied the performances of different re-sampling methods \[ cite Loyola-González et al., 2016; Napierala and Stefanowski, 2015; Zhou 2013 from Haixiang\]
 
 ## Appropriate Test set
 
