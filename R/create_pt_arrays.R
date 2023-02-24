@@ -101,7 +101,7 @@ create_pt_ptnames <- function(db, pt_id) {
     dplyr::filter(.data[["id_univoco"]] == pt_id) |>
     dplyr::select(
       dplyr::all_of(
-        c("type", "sesso", "anni_eta", "bmi", "reason")
+        c("type", "sesso", "anni_eta", "bmi", "ibw", "saps", "reason")
       )
     ) |>
     dplyr::mutate(
@@ -132,7 +132,10 @@ create_pt_weanings <- function(db, pt_id) {
   db |>
     dplyr::filter(.data[["id_univoco"]] == pt_id) |>
     dplyr::arrange(.data[["giorno_studio"]]) |>
-    dplyr::select(dplyr::all_of(c("sofa", "cpis", "susp_tot"))) |>
+    dplyr::select(
+      dplyr::all_of(c("sofa", "susp_tot")),
+      dplyr::starts_with("ega_")
+    ) |>
     as.matrix() |>
     unname() |>
     as.array()

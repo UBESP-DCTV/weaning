@@ -2,11 +2,9 @@
 is_develop <- FALSE
 on_cpu <- FALSE
 
-
 Sys.unsetenv("RETICULATE_PYTHON")
 library(reticulate)
 reticulate::use_condaenv("tf", required = TRUE)
-
 
 if (on_cpu) {
   Sys.setenv("CUDA_VISIBLE_DEVICES" = -1)

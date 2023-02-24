@@ -4,12 +4,12 @@ define_keras_model <- function() {
 
   input_baseline <- keras::layer_input(
     name = "input_baseline",
-    shape = c(5)
+    shape = c(7)
   )
 
   input_daily <- keras::layer_input(
     name = "input_daily",
-    shape = c(NA, 3)
+    shape = c(NA, 5)
   )
 
   input_trd <- keras::layer_input(

@@ -24,6 +24,7 @@ test_that("import_patient works", {
     cm_altezza = "numeric",
     bmi = "numeric",
     ibw = "numeric",
+    saps = "numeric",
     reason = "factor",
     osp_in = "Date",
     icu_in = "Date",

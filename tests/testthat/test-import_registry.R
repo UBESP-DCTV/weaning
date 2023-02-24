@@ -66,4 +66,8 @@ test_that("import_patient works", {
   expect_tibble(res)
   expect_equal(types, expected_coltypes)
   expect_snapshot(res)
+  expect_true(all(res[["ega_ph"]] < 14, na.rm = TRUE))
+  expect_true(all(res[["ega_paco2"]] < 150, na.rm = TRUE))
+  expect_true(all(res[["ega_pao2"]] < 300, na.rm = TRUE))
+
 })

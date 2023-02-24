@@ -91,7 +91,7 @@ import_registry <- function(
       susp_tot = rowSums(dplyr::across(dplyr::starts_with("susp_"))),
       dplyr::across(
         dplyr::starts_with("ega"),
-        ~ stringr::str_replace(.x, ",", ".") |> readr::parse_double()
+        ~ as.numeric(.x)/1000
       )
     ) |>
     dplyr::with_groups(
