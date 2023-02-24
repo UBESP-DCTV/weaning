@@ -58,6 +58,7 @@ import_patients <- function(
       "kg_peso",
       "cm_altezza",
       "bmi", "ibw",
+      "saps",
       "name reason_mv",
       dplyr::starts_with("data"),
       dplyr::starts_with("esito")

@@ -1,0 +1,87 @@
+---
+bibliography: references.bib
+---
+
+# Robust Model Evaluation
+
+Evaluation of the test set is the final step of model building, which comes after proper validation, model refinement, and a fair comparison among all candidate models. It is necessary to have valid results from which reliable conclusions can be drawn from [@lones]. Evaluation is a multi-step process, which we document, share, and report to improve the reproducibility of our workflow, and build confidence in our results \[cite Pineau, 2020\].
+
+-   Appropriate validation set (and multiple model comparison)
+
+-   Appropriate test set use
+
+-   Appropriate set of metrics selection and statistical test for model comparison
+
+-   Model interpretability with global methods
+
+-   Explanation of a single prediction
+
+The term "robust" is used to imply insensitivity to irrelevant experimental factors, such as sampling and partitioning of the data in training, validation, and test sets \[cite Cawley, 2010\].
+
+## Appropriate validation set
+
+It refers to the data set that is not part of the test set and the training set but is meant to guide model training. The model on the test set is run only once on data that weren't seen before, to prevent selecting a model that performs well on the test set for some specific reason, but not necessarily in real-world scenarios [@cawley2010].
+
+A broader issue is hyperparameter tuning as part of the learning process. In fact. low variance is at least as important as unbiasedness in model selection criteria, as the degreadation in performance due to overfitting arising from selection bias can be surprisingly large \[cite Cawley, 2010\]. Model is defined by parameters (which weights are learned thourgh the training process) and hyper-parameters (which are set by the user). It is customary to try out a different range of hyperparameters, with pair of nested loops, with the hyperparameters adjusted to optimise a model selection criterion in the outer loop (model selection) and the parameters set to optimise a training criterion in the inner loop (model fitting/training). In a previous study \[cite Cawley and Talbot, 2007\], it was noted that validation set error is strongly biased, since it was directly minimised during model selection, thus should not be used for performance estimation To mitigate this problem, and to improve generality of resulting model, a Cross-validation was performed.
+
+Since the model is evaluated at each iteration against the validation set during the training process, it can quickly overfit. To prevent that, [early stopping](https://keras.io/api/callbacks/early_stopping/) was implemented, combined with a Learning Rate [Scheduler](https://keras.io/api/callbacks/learning_rate_scheduler/) and an [Optimizator](https://keras.io/api/callbacks/reduce_lr_on_plateau/) that stops when validation metrics reach a plateau for a sufficient time.
+
+Moreover, since time series can't undergo cross-validation in the usual way because of temporal leakage, each patient model was trained on N days and evaluated on the Nth+1 day, progressively increasing its ability to generalize.
+
+Since the dataset was unbalanced, stratification ensured in each fold of the cross-validation process, the proper representation also of the minor classes. Training class proportion was used to properly stratify data, re-sampling to rebalance the sample space to alleviate the effect of skewed class distribution \[cite Haixiang\]. For a dataset like ours, the over-sampling method SMOT was found a better choice in comparative studies \[cite three papers studied the performances of different re-sampling methods \[ cite Loyola-González et al., 2016; Napierala and Stefanowski, 2015; Zhou 2013 from Haixiang\]
+
+## Appropriate Test set
+
+\[Data Leakage da Kapoor e Kaufmann for ways to prevent it\] The test set should not overlap with the training or validation set and be representative of a wider population to measure the model's generality [@lones]. Leakage is defined as the introduction of information about the data mining target that should not be legitimately available to mine from \[cite Kaufman, 2012\]. To prevent information leakage from the test set, input data were screened for duplicates before the split, and eliminated by keeping only the first instance. In addition to that, the split was conducted in a time-wise fashion, setting aside for each hospital the last 20% of days, to better simulate the process and to properly separate the training and test dataset. Thus, temporal leakage in the test set was prevented. Moreover, to prevent illegitimate (or artifact) feature use, variables with \>67% of NA values were removed from the analysis, since their effect could be inflated if a real-case scenario. At the same time, the model employs data only available at 7 am, referring to the previous day of MV, to prevent the use of features that would not be available at that time.
+
+But leakage is not limited to the explicit use of illegitimate examples in the training process, but also through design decisions \[cite Kaufmann\], and it wouldn't be detectable. This is why each decision about model, split, or feature selection is provided with a clinical rationale and evaluation protocol for was written before seeing results.
+
+Ideally, since all our training and test data come from the same kind of equipment, the ability to generalize to data collected with others could not be tested (since it wouldn't be detectable). Moreover, no community benchmark was available for our data to test our model on an external dataset, so this part of the analysis could not be performed, relying only on an internal split to evaluate our model. Nevertheless, given the experimental protocol adopted and the multicentral nature of the study (including both community and university hospitals), we consider the study population drawn from the population of interest.
+
+::: {.callout-note appearance="minimal"}
+## Additional screening required?
+
+Consider data leakage screening according to Reproducible ML from [Princeton](https://reproducible.cs.princeton.edu) \[cite Kapoor "Leakage and Reproducibility"\]
+:::
+
+To reduce bias in performance estimation, arising due to over-fitting in model selection, requirestraining and model selection to be performed at the same time of the evaluation process \[cite Cawley, 2010\]. Critical difference diagram (Demˇsar, 2006) displays the mean rank of a set of classifiers over a suite of benchmark data sets, with cliques of classifiers with statistically similar performance connected by a bar. To reduce bias in estimation, CV should be performed to robustly estimate intervals.
+
+## Appropriate set of metrics selection
+
+To build a case for AI adoption in clinical practice, we selected some models to highlight improvement through comparison: a model always predicting the majority class (as a baseline), a model only using baseline data, a model using baseline and daily data (which is the most similar to what clinicians are doing in this study protocol) and the full model including also track data from MV. A chi-square test was performed on outcome distributions to compare those classifiers \[cite Rashka and Carrasco\], with Holm-Hochberg correction on the p-value \[citare Streiner, 2015 e cite original paper\] to correct for multiplicity.
+
+\[Add on how to estimate effect size, both test and visual\]
+
+::: callout-note
+## Other corrections for multiplicity \[cite Streiner, 2015\]
+
+Also, the Storey-Tibshirany q-value, to control the positive False Discovery Rate could be an option (also easy to implement), while bootstrapping (resampling), as suggested by Tibshirani could be problematic given the size of the models.
+:::
+
+Since data are unbalanced, accuracy could be misleading. As a comparison, a model always predicting the majority class would result in a 75% accuracy. Also, the standard of care is suboptimal: we don't have the counterfactual example where an SBT is tried after a negative RT, but a positive RT heightens the probability of a successful SBT to slightly more than 50% in our dataset. Not only accuracy would be misleading in an unbalanced scenario, but it would also be incomplete, as we have seen. Thus, performance was reported with a multiplicity of metrics since each of them gives different information about the model. In the field, balanced accuracy, Precision, and Recall are commonly used metrics, which can be implemented with a generalization for multi-class classification tasks \[cite Sokolova and Lapalme, 2009. Opitz and Burst 2019 from Blagec, 2021\]. Since F1-score may yield misleading results for classifiers biased towards predicting the majority class and it is susceptible to swapping of class labels \[cite Powers 2015 from Blagec\] and it is unclear in the definition for multi-class problems \[Opitz and Burst 2019\], Matthews Correlation Coefficient and Fowlkes--Mallows index (FM) has been proposed instead \[cite Boughorbel et al 2017; Chicco and Jurman 2020 from Blagec, cite also Fowlkes and Mallows 1983\].
+
+Proper calibration is also needed since not all classification errors have the same impact on the clinical management of weaning...
+
+::: callout-note
+## ROC use
+
+\[from Blagec\] Cost curves have frequently been proposed as an alternative to ROC curves when dealing with imbalanced datasets. (Drummond and Holte 2004; Chawla et al 2004) Variants of the AUC for multi-class classification, such as AUNU or AUNP, exist but seem to be used to a much lesser extent by the Machine Learning community. (Fawcett 2001; Fawcett 2006; Ferri et al 2009) Moreover, pinned AUC was proposed as a variant of ROC-AUC for measuring unintended bias in classification settings with class imbalances. It has, however, later been shown to be susceptible to providing a skewed measurement of bias. (Dixon et al 2018; Borkan et al 2019
+
+\[from Haixiang\] A natural way to extend these metrics to multiclass cases is to employ decomposition methods (the One Vs All and One Vs One scheme) and take the average of each pair-wise metric ( Cerf et al., 2013 ). MAUC ( Hand and Till, 2001 ) is an example of a mean AUC and in Guo et al. (2016) and Li et al. (2016c), a derivation of AUC was used. Another AUC-based multi-class metric, Volume Under ROC (VUC) was employed by Phoungphol et al. (2012) and an extension of the G-mean was adopted by Sun et al. (2006)
+:::
+
+\[Focus on precisely reporting on different subpopulations as required by Mitchell, 2019 for fairness purposes, also Highlighted in Kapoor & Narayanan\] Sex split possible, ethnicity split not (but we assume most of the patients were caucasic
+
+## Interpretability with global methods
+
+Along with prediction performance, a barrier to widespread clinical adoption is the interpretability of models. Especially neural networks could be seen as black boxes. Interpretability can be defined as the degree to which a human can understand the cause of a decision. The higher the interpretability of a machine learning model, the easier it is for someone to comprehend why certain decisions or predictions have been made. It hels the developer to debug and improve the model, build trust in the model, justify model predictions and gain insights. The increased need for machine learning interpretability is a natural consequence of an increased use of machine learning \[cite Christoph book\].
+
+Moreover, the European Union General Data Protection Regulation requires a right to an explanation, stated as "\[the data subject should have\] the right ... to obtain an explanation of the decision reached" \[cite Recital 71, EU\]
+
+Interpretability is built of many layers: first one is algorithm transparency, which is intrinsic to the chosen approach. Another one helps to understand how differnt parts of the model affect predictions, while the last one could explain while a model makes a particular prediction for a specific instance. While interpretability and explainability can both be used, there is a difference with the term explanation, which will be used for individual predictions \[cite Miller, 2019\].
+
+From all the published methods, Global model-agnostic method of choice for this task was Feature Importance through Permutation \[cite Book, cite LSTM from Kaggle\], since it has a nice interpretation that provides a highly compressed global insight on model's behavoius. For interpretation purposes, feature importances do not add up, since interaction between features is represented in the relative importance of both of them \[cite Pengfei Wei and Fisher, Aaron\]
+
+## Explanation of a single prediction
+
+SHAP (SHapley Additive exPlanations) by Lundberg and Lee (2017) is a method to explain individual predictions. SHAP is based on the game theoretically optimal Shapley values, which suffer from extreme computational burden to be calculated and are pronte to be misinterpreted. The Shapley value of a feature value is not the difference of the predicted value after removing the feature from the model training. Instead they are the difference between the actual prediction and the mean prediction. The goal of SHAP is to explain the prediction of an instance x by computing the contribution of each feature to the prediction.

@@ -1,10 +1,10 @@
 # renv::use_python()
-is_develop <- TRUE
+is_develop <- FALSE
 on_cpu <- FALSE
 
+Sys.unsetenv("RETICULATE_PYTHON")
 library(reticulate)
 reticulate::use_condaenv("tf", required = TRUE)
-
 
 if (on_cpu) {
   Sys.setenv("CUDA_VISIBLE_DEVICES" = -1)
@@ -21,6 +21,14 @@ k <- reticulate::import("keras", convert = TRUE)
 
 library(targets)
 
+n_days <- 10
+data_used <- targets::tar_read(trainArraysByDays, branches = n_days)[[1]]
+baseline <- data_used[[2]]
+daily <- data_used[[3]]
+trd <- data_used[[4]]
+outcome <- keras::k_one_hot(data_used[[5]], 3L)
+
+
 here::here("R") |>
   list.files(pattern = "define_keras_model\\.R$", full.names = TRUE) |>
   lapply(source) |>
@@ -28,8 +36,8 @@ here::here("R") |>
 
 
 # parameters ------------------------------------------------------
-epochs <- 50
-batch_size <- 16
+epochs <- 10
+batch_size <- 32
 
 
 summary({
@@ -51,7 +59,7 @@ if (is_develop) {
 model %>%
   compile(
     optimizer = k$optimizers$Adam(amsgrad = TRUE),
-    loss = loss_binary_crossentropy(),
+    loss = loss_categorical_crossentropy(),
     metrics = "accuracy"
   )
 
@@ -67,16 +75,13 @@ model %>%
   history <- model %>%
     keras::fit(
       x = list(
-        input_baseline = targets::tar_read(baselineArrays),
-        input_daily = targets::tar_read(dailyArrays),
-        input_trd = targets::tar_read(trdArrays)
-      ) |>
-        purrr::map(abind::abind, along = 0),
-      y = targets::tar_read(outArrays) |>
-        purrr::map(~.x[nrow(.x), 1L, drop = FALSE]) |>
-        abind::abind(along = 0) |>
-        purrr::map_dbl(identical, -1L),
+        input_baseline = baseline,
+        input_daily = daily,
+        input_trd = trd
+      ),
+      y = outcome,
       epochs = epochs,
+      batch_size  = batch_size,
       validation_split = 0.2
       # callbacks = list(
       #   callback_model_checkpoint(

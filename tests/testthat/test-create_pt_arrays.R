@@ -12,9 +12,9 @@ test_that("create_pt_ptnames works", {
   )
 
   pt_names <- tibble::tribble(
-    ~id_univoco, ~type, ~sesso, ~anni_eta, ~bmi, ~reason,
-    "1", "nava", "M", 82, 18, "Sepsi",
-    "2", "psv", "F", 74, 26, "Polmonite",
+    ~id_univoco, ~type, ~sesso, ~anni_eta, ~bmi, ~ibw, ~saps, ~reason,
+    "1", "nava", "M", 82, 18, 20, 30,"Sepsi",
+    "2", "psv", "F", 74, 26, 21, 50,"Polmonite",
   ) |>
     dplyr::mutate(
       type = factor(type, levels = c("nava", "psv")),
@@ -32,10 +32,10 @@ test_that("create_pt_ptnames works", {
 
   # tests
   expect_array(res_1, "integerish", any.missing = FALSE, d = 1)
-  expect_equal(res_1, array(c(1, 2, 82, 18, 7), dim = 5))
+  expect_equal(res_1, array(c(1, 2, 82, 18, 20, 30, 7), dim = 7))
 
   expect_array(res_2, "integerish", any.missing = FALSE, d = 1)
-  expect_equal(res_2, array(c(2, 1, 74, 26, 5), dim = 5))
+  expect_equal(res_2, array(c(2, 1, 74, 26, 21, 50, 5), dim = 7))
 
   expect_equal(res_3, res_1)
 })
@@ -49,10 +49,10 @@ test_that("create_weanings works", {
   #   - se sbt riuscito =  `1`,
   #   - se sbt fallito =  `2`
   weanings <- tibble::tribble(
-    ~id_univoco, ~giorno_studio, ~sofa, ~cpis, ~susp_tot, ~sbt, ~esito,
-    "1", 1, 6, 4, 12, 0, NA,
-    "1", 0, 5, 3, 7, 1, "Successo",
-    "2", 0, 2, 1, 12, 2, "Fallito"
+    ~id_univoco, ~giorno_studio, ~sofa, ~susp_tot, ~ega_ph, ~ega_pao2, ~ega_paco2, ~sbt, ~esito,
+    "1", 1, 6, 4, 12, 1, 2, 0, NA,
+    "1", 0, 5, 3, 7, 1, 1, 1, "Successo",
+    "2", 0, 2, 1, 12, 4, 3, 2, "Fallito"
   )
 
   # evaluate
@@ -65,9 +65,15 @@ test_that("create_weanings works", {
   # tests
   expect_array(res_1, "integerish", any.missing = FALSE, d = 2)
   ## sbt should be removed!
-  expect_equal(res_1, array(c(5, 6, 3, 4, 7, 12), dim = c(2, 3)))
+  expect_equal(
+    res_1,
+    array(c(5, 6, 3, 4, 7, 12, 1, 1, 1, 2, 1, 0), dim = c(2, 5))
+  )
   expect_array(res_2, "integerish", any.missing = FALSE, d = 2)
-  expect_equal(res_2, array(c(2, 1, 12), dim = c(1, 3)))
+  expect_equal(
+    res_2,
+    array(c(2, 1, 12, 4, 3), dim = c(1, 5))
+  )
 
   expect_array(out_1, "integerish", any.missing = FALSE, d = 2)
   expect_equal(out_1, array(c(1, 0, 1, -99), dim = c(2, 2)))

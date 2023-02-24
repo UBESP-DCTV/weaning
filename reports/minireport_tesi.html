@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.2.269">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -8620,64 +8620,58 @@ return function(){for(var n=0,e=0;e<t;++e)n+=Math.random();return n}},um=functio
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(targets)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>#BlackLivesMatter</code></pre>
-</div>
-<details>
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(networkD3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(networkD3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>e i targets</p>
 <div class="cell">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_visnetwork</span>(<span class="cn">TRUE</span>, <span class="at">exclude =</span> <span class="fu">starts_with</span>(<span class="st">&quot;gg&quot;</span>) <span class="sc">|</span> <span class="fu">contains</span>(<span class="st">&quot;Plot&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_visnetwork</span>(<span class="cn">TRUE</span>, <span class="at">exclude =</span> <span class="fu">starts_with</span>(<span class="st">&quot;gg&quot;</span>) <span class="sc">|</span> <span class="fu">contains</span>(<span class="st">&quot;Plot&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>here() starts at C:/Users/corrado.lanera/Documents/GitHub/ubep/weaning</code></pre>
+<pre><code>here() starts at /home/cl/GitHub/UBEP/weaning</code></pre>
 </div>
 <div class="cell-output-display">
-<div class="visNetwork html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-86de581bc9bd1cba1a2c" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-86de581bc9bd1cba1a2c">{"x":{"nodes":{"name":["baselineArrays","centerFolder","dailyArrays","maxRelevantDays","minireport_tesi","outArrays","patientsToRemove","problematicDupes","pt_ids","pt_names","pt_registry","subdata_2_days","trdArrays","weaning_log_filtered","weaning_log_subset","weaning_subset","weaning_trd_subset","weaningFolder","weaningsCentersLOG","weaningsCentersTRD","weaningsLOG","weaningsTRD"],"type":["pattern","stem","pattern","stem","stem","pattern","stem","stem","stem","stem","stem","pattern","pattern","stem","stem","stem","stem","stem","pattern","pattern","stem","stem"],"status":["uptodate","uptodate","uptodate","uptodate","started","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","outdated","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate"],"seconds":[3.10999999999999,0,0,0.005,253.97,0,0.89,29.34,0,0.67,1.27,5.452,34.84,0.03,0.04,0.01,0.09,1.25,184.06,439.27,3.33,37.78],"bytes":[15380,284,0,102,1994711,0,64,601,496,4164,26160,42481684,65776610,3731,21566,303,462672,518496145,2295388,143058299,2181377,144441597],"branches":[178,null,178,null,null,178,null,null,null,null,null,78,178,null,null,null,null,null,14,14,null,null],"label":["baselineArrays","centerFolder","dailyArrays","maxRelevantDays","minireport_tesi","outArrays","patientsToRemove","problematicDupes","pt_ids","pt_names","pt_registry","subdata_2_days","trdArrays","weaning_log_filtered","weaning_log_subset","weaning_subset","weaning_trd_subset","weaningFolder","weaningsCentersLOG","weaningsCentersTRD","weaningsLOG","weaningsTRD"],"color":["#354823","#354823","#354823","#354823","#DC863B","#354823","#354823","#354823","#354823","#354823","#354823","#78B7C5","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823"],"id":["baselineArrays","centerFolder","dailyArrays","maxRelevantDays","minireport_tesi","outArrays","patientsToRemove","problematicDupes","pt_ids","pt_names","pt_registry","subdata_2_days","trdArrays","weaning_log_filtered","weaning_log_subset","weaning_subset","weaning_trd_subset","weaningFolder","weaningsCentersLOG","weaningsCentersTRD","weaningsLOG","weaningsTRD"],"level":[4,2,4,6,3,4,1,5,3,2,1,7,5,6,5,2,5,1,3,3,4,4],"shape":["square","dot","square","dot","dot","square","dot","dot","dot","dot","dot","square","square","dot","dot","dot","dot","dot","square","square","dot","dot"]},"edges":{"from":["patientsToRemove","weaningsCentersTRD","weaning_log_subset","centerFolder","pt_ids","pt_registry","patientsToRemove","weaningsCentersLOG","pt_names","pt_ids","weaningsTRD","weaningFolder","pt_registry","pt_ids","pt_registry","centerFolder","weaning_subset","weaningsLOG","dailyArrays","outArrays","trdArrays","pt_names","pt_registry","baselineArrays","dailyArrays","maxRelevantDays","outArrays","pt_ids","trdArrays","weaningsTRD","weaning_subset","weaningsTRD","patientsToRemove","pt_ids","pt_names"],"to":["weaningsTRD","weaningsTRD","weaning_log_filtered","weaningsCentersTRD","dailyArrays","dailyArrays","weaningsLOG","weaningsLOG","pt_ids","trdArrays","trdArrays","centerFolder","weaning_subset","outArrays","outArrays","weaningsCentersLOG","weaning_log_subset","weaning_log_subset","maxRelevantDays","maxRelevantDays","maxRelevantDays","minireport_tesi","minireport_tesi","subdata_2_days","subdata_2_days","subdata_2_days","subdata_2_days","subdata_2_days","subdata_2_days","problematicDupes","weaning_trd_subset","weaning_trd_subset","pt_names","baselineArrays","baselineArrays"],"arrows":["to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"interaction":{"zoomSpeed":1},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":true,"hoverNearest":false,"degree":{"from":1,"to":1},"algorithm":"hierarchical","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Up to date","Started","Outdated","Pattern","Stem"],"color":["#354823","#DC863B","#78B7C5","#899DA4","#899DA4"],"shape":["dot","dot","dot","square","dot"]},"nodesToDataframe":true},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);"},"evals":[],"jsHooks":[]}</script>
+<div class="visNetwork html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-d204ef04d966c9d1a051" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-d204ef04d966c9d1a051">{"x":{"nodes":{"name":["baselineArrays","centerFolder","dailyArrays","maxRelevantDays","minireport_tesi","outArrays","patientsToRemove","problematicDupes","pt_ids","pt_names","pt_registry","trainArraysByDays","trdArrays","weaning_log_filtered","weaning_log_subset","weaning_subset","weaning_trd_subset","weaningFolder","weaningsCentersLOG","weaningsCentersTRD","weaningsLOG","weaningsTRD"],"type":["pattern","stem","pattern","stem","stem","pattern","stem","stem","stem","stem","stem","pattern","pattern","stem","stem","stem","stem","stem","pattern","pattern","stem","stem"],"status":["outdated","uptodate","outdated","outdated","started","outdated","uptodate","uptodate","outdated","uptodate","uptodate","outdated","outdated","outdated","outdated","uptodate","outdated","uptodate","uptodate","uptodate","uptodate","uptodate"],"seconds":[3.10999999999999,0,0,0.005,12.674,0,0.89,22.359,0,0.556,1.513,13.779,19.54,0.011,0.02,0.027,0.077,0.567,96.031,222.547,0.133,1.862],"bytes":[15380,287,0,102,1995729,0,64,601,496,4389,32898,661042572,65780858,3731,21566,303,462672,4096,2302737,143064752,2183820,144438623],"branches":[178,null,178,null,null,178,null,null,null,null,null,78,178,null,null,null,null,null,14,14,null,null],"label":["baselineArrays","centerFolder","dailyArrays","maxRelevantDays","minireport_tesi","outArrays","patientsToRemove","problematicDupes","pt_ids","pt_names","pt_registry","trainArraysByDays","trdArrays","weaning_log_filtered","weaning_log_subset","weaning_subset","weaning_trd_subset","weaningFolder","weaningsCentersLOG","weaningsCentersTRD","weaningsLOG","weaningsTRD"],"color":["#78B7C5","#354823","#78B7C5","#78B7C5","#DC863B","#78B7C5","#354823","#354823","#78B7C5","#354823","#354823","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#354823","#78B7C5","#354823","#354823","#354823","#354823","#354823"],"id":["baselineArrays","centerFolder","dailyArrays","maxRelevantDays","minireport_tesi","outArrays","patientsToRemove","problematicDupes","pt_ids","pt_names","pt_registry","trainArraysByDays","trdArrays","weaning_log_filtered","weaning_log_subset","weaning_subset","weaning_trd_subset","weaningFolder","weaningsCentersLOG","weaningsCentersTRD","weaningsLOG","weaningsTRD"],"level":[4,2,4,6,3,4,1,5,3,2,1,7,5,6,5,2,5,1,3,3,4,4],"shape":["square","dot","square","dot","dot","square","dot","dot","dot","dot","dot","square","square","dot","dot","dot","dot","dot","square","square","dot","dot"]},"edges":{"from":["patientsToRemove","weaningsCentersTRD","weaning_log_subset","centerFolder","pt_ids","pt_registry","patientsToRemove","weaningsCentersLOG","pt_names","pt_ids","weaningsTRD","weaningFolder","pt_registry","pt_ids","pt_registry","centerFolder","weaning_subset","weaningsLOG","dailyArrays","outArrays","trdArrays","pt_names","pt_registry","weaningsTRD","weaning_subset","weaningsTRD","patientsToRemove","baselineArrays","dailyArrays","maxRelevantDays","outArrays","pt_ids","trdArrays","pt_ids","pt_names"],"to":["weaningsTRD","weaningsTRD","weaning_log_filtered","weaningsCentersTRD","dailyArrays","dailyArrays","weaningsLOG","weaningsLOG","pt_ids","trdArrays","trdArrays","centerFolder","weaning_subset","outArrays","outArrays","weaningsCentersLOG","weaning_log_subset","weaning_log_subset","maxRelevantDays","maxRelevantDays","maxRelevantDays","minireport_tesi","minireport_tesi","problematicDupes","weaning_trd_subset","weaning_trd_subset","pt_names","trainArraysByDays","trainArraysByDays","trainArraysByDays","trainArraysByDays","trainArraysByDays","trainArraysByDays","baselineArrays","baselineArrays"],"arrows":["to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"interaction":{"zoomSpeed":1},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":true,"hoverNearest":false,"degree":{"from":1,"to":1},"algorithm":"hierarchical","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Outdated","Up to date","Started","Pattern","Stem"],"color":["#78B7C5","#354823","#DC863B","#899DA4","#899DA4"],"shape":["dot","dot","dot","square","dot"]},"nodesToDataframe":true},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="cell">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>baseline <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(pt_names) <span class="sc">|&gt;</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">&quot;id_univoco&quot;</span>, <span class="st">&quot;type&quot;</span>, <span class="st">&quot;sesso&quot;</span>, <span class="st">&quot;anni_eta&quot;</span>, <span class="st">&quot;reason&quot;</span>,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;vm_inizio&quot;</span>, <span class="st">&quot;vm_fine&quot;</span>) <span class="sc">|&gt;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">reason =</span> reason <span class="sc">|&gt;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>           <span class="fu">fct_recode</span>(</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Sepsis&quot;</span> <span class="ot">=</span> <span class="st">&quot;Sepsi&quot;</span>,</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Pneumonia&quot;</span> <span class="ot">=</span> <span class="st">&quot;Polmonite&quot;</span>,</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Post-surgical complications&quot;</span> <span class="ot">=</span> <span class="st">&quot;Complicanze Postoperatorie&quot;</span>,</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Heart Failure&quot;</span> <span class="ot">=</span> <span class="st">&quot;Scompenso Cardiaco&quot;</span>,</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;COPD exacerbation&quot;</span> <span class="ot">=</span> <span class="st">&quot;BPCO Riacutizzata&quot;</span>,</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Other&quot;</span> <span class="ot">=</span> <span class="st">&quot;Altro (specificare)&quot;</span>,</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Trauma - Polytrauma&quot;</span> <span class="ot">=</span> <span class="st">&quot;Trauma - Politrauma&quot;</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>             <span class="co"># ARDS doesn&#39;t need recoding</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>           ))</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>daily <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(pt_registry) <span class="sc">|&gt;</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">&quot;id_univoco&quot;</span>, <span class="st">&quot;type&quot;</span>, <span class="st">&quot;data_lettura&quot;</span>, <span class="st">&quot;giorno_studio&quot;</span>, </span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;sbt&quot;</span>) <span class="sc">|&gt;</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sbt :=</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   - se stubato = `-1`,</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   - se sbt non provato =  `0`,</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   - se sbt riuscito =  `1`,</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   - se sbt fallito =  `2`</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sbt =</span> sbt <span class="sc">|&gt;</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>           <span class="fu">as.character</span>() <span class="sc">|&gt;</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>           <span class="fu">fct_recode</span>(</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Already extubated&quot;</span> <span class="ot">=</span> <span class="st">&quot;-1&quot;</span>,</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Readiness Testing failure&quot;</span> <span class="ot">=</span> <span class="st">&quot;0&quot;</span>,</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;SBT success&quot;</span> <span class="ot">=</span> <span class="st">&quot;1&quot;</span>,</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;SBT failure&quot;</span> <span class="ot">=</span> <span class="st">&quot;2&quot;</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>           )</span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>baseline <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(pt_names) <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">&quot;id_univoco&quot;</span>, <span class="st">&quot;type&quot;</span>, <span class="st">&quot;sesso&quot;</span>, <span class="st">&quot;anni_eta&quot;</span>, <span class="st">&quot;reason&quot;</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;vm_inizio&quot;</span>, <span class="st">&quot;vm_fine&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">reason =</span> reason <span class="sc">|&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>           <span class="fu">fct_recode</span>(</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Sepsis&quot;</span> <span class="ot">=</span> <span class="st">&quot;Sepsi&quot;</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Pneumonia&quot;</span> <span class="ot">=</span> <span class="st">&quot;Polmonite&quot;</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Post-surgical complications&quot;</span> <span class="ot">=</span> <span class="st">&quot;Complicanze Postoperatorie&quot;</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Heart Failure&quot;</span> <span class="ot">=</span> <span class="st">&quot;Scompenso Cardiaco&quot;</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;COPD exacerbation&quot;</span> <span class="ot">=</span> <span class="st">&quot;BPCO Riacutizzata&quot;</span>,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Other&quot;</span> <span class="ot">=</span> <span class="st">&quot;Altro (specificare)&quot;</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Trauma - Polytrauma&quot;</span> <span class="ot">=</span> <span class="st">&quot;Trauma - Politrauma&quot;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>             <span class="co"># ARDS doesn&#39;t need recoding</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>           ))</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>daily <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(pt_registry) <span class="sc">|&gt;</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">&quot;id_univoco&quot;</span>, <span class="st">&quot;type&quot;</span>, <span class="st">&quot;data_lettura&quot;</span>, <span class="st">&quot;giorno_studio&quot;</span>, </span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;sbt&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sbt :=</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   - se stubato = `-1`,</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   - se sbt non provato =  `0`,</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   - se sbt riuscito =  `1`,</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   - se sbt fallito =  `2`</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sbt =</span> sbt <span class="sc">|&gt;</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>           <span class="fu">as.character</span>() <span class="sc">|&gt;</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>           <span class="fu">fct_recode</span>(</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Already extubated&quot;</span> <span class="ot">=</span> <span class="st">&quot;-1&quot;</span>,</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Readiness Testing failure&quot;</span> <span class="ot">=</span> <span class="st">&quot;0&quot;</span>,</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;SBT success&quot;</span> <span class="ot">=</span> <span class="st">&quot;1&quot;</span>,</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;SBT failure&quot;</span> <span class="ot">=</span> <span class="st">&quot;2&quot;</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>           )</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -8686,22 +8680,22 @@ return function(){for(var n=0,e=0;e<t;++e)n+=Math.random();return n}},um=functio
 <div class="cell">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>baseline <span class="sc">|&gt;</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>id_univoco, <span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">&quot;vm&quot;</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">list</span>( type <span class="sc">~</span> <span class="st">&quot;Ventilation mode&quot;</span>,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                  sesso <span class="sc">~</span> <span class="st">&quot;Gender&quot;</span>,</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                  anni_eta <span class="sc">~</span> <span class="st">&quot;Age (years)&quot;</span>,</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                  reason <span class="sc">~</span> <span class="st">&quot;Reason for MV&quot;</span>)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>baseline <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>id_univoco, <span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">&quot;vm&quot;</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">list</span>( type <span class="sc">~</span> <span class="st">&quot;Ventilation mode&quot;</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                  sesso <span class="sc">~</span> <span class="st">&quot;Gender&quot;</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                  anni_eta <span class="sc">~</span> <span class="st">&quot;Age (years)&quot;</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                  reason <span class="sc">~</span> <span class="st">&quot;Reason for MV&quot;</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 
-<div id="gyjmrqxdjk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="sepezgjrar" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
-:where(#gyjmrqxdjk) .gt_table {
+:where(#sepezgjrar) .gt_table {
 display: table;
 border-collapse: collapse;
 margin-left: auto;
@@ -8725,7 +8719,7 @@ border-left-style: none;
 border-left-width: 2px;
 border-left-color: #D3D3D3;
 }
-:where(#gyjmrqxdjk) .gt_heading {
+:where(#sepezgjrar) .gt_heading {
 background-color: #FFFFFF;
 text-align: center;
 border-bottom-color: #FFFFFF;
@@ -8736,11 +8730,11 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-:where(#gyjmrqxdjk) .gt_caption {
+:where(#sepezgjrar) .gt_caption {
 padding-top: 4px;
 padding-bottom: 4px;
 }
-:where(#gyjmrqxdjk) .gt_title {
+:where(#sepezgjrar) .gt_title {
 color: #333333;
 font-size: 125%;
 font-weight: initial;
@@ -8751,7 +8745,7 @@ padding-right: 5px;
 border-bottom-color: #FFFFFF;
 border-bottom-width: 0;
 }
-:where(#gyjmrqxdjk) .gt_subtitle {
+:where(#sepezgjrar) .gt_subtitle {
 color: #333333;
 font-size: 85%;
 font-weight: initial;
@@ -8762,12 +8756,12 @@ padding-right: 5px;
 border-top-color: #FFFFFF;
 border-top-width: 0;
 }
-:where(#gyjmrqxdjk) .gt_bottom_border {
+:where(#sepezgjrar) .gt_bottom_border {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-:where(#gyjmrqxdjk) .gt_col_headings {
+:where(#sepezgjrar) .gt_col_headings {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -8781,7 +8775,7 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-:where(#gyjmrqxdjk) .gt_col_heading {
+:where(#sepezgjrar) .gt_col_heading {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -8800,7 +8794,7 @@ padding-left: 5px;
 padding-right: 5px;
 overflow-x: hidden;
 }
-:where(#gyjmrqxdjk) .gt_column_spanner_outer {
+:where(#sepezgjrar) .gt_column_spanner_outer {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -8811,13 +8805,13 @@ padding-bottom: 0;
 padding-left: 4px;
 padding-right: 4px;
 }
-:where(#gyjmrqxdjk) .gt_column_spanner_outer:first-child {
+:where(#sepezgjrar) .gt_column_spanner_outer:first-child {
 padding-left: 0;
 }
-:where(#gyjmrqxdjk) .gt_column_spanner_outer:last-child {
+:where(#sepezgjrar) .gt_column_spanner_outer:last-child {
 padding-right: 0;
 }
-:where(#gyjmrqxdjk) .gt_column_spanner {
+:where(#sepezgjrar) .gt_column_spanner {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
@@ -8828,7 +8822,7 @@ overflow-x: hidden;
 display: inline-block;
 width: 100%;
 }
-:where(#gyjmrqxdjk) .gt_group_heading {
+:where(#sepezgjrar) .gt_group_heading {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -8853,7 +8847,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 text-align: left;
 }
-:where(#gyjmrqxdjk) .gt_empty_group_heading {
+:where(#sepezgjrar) .gt_empty_group_heading {
 padding: 0.5px;
 color: #333333;
 background-color: #FFFFFF;
@@ -8867,13 +8861,13 @@ border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 vertical-align: middle;
 }
-:where(#gyjmrqxdjk) .gt_from_md > :first-child {
+:where(#sepezgjrar) .gt_from_md > :first-child {
 margin-top: 0;
 }
-:where(#gyjmrqxdjk) .gt_from_md > :last-child {
+:where(#sepezgjrar) .gt_from_md > :last-child {
 margin-bottom: 0;
 }
-:where(#gyjmrqxdjk) .gt_row {
+:where(#sepezgjrar) .gt_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -8891,7 +8885,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 overflow-x: hidden;
 }
-:where(#gyjmrqxdjk) .gt_stub {
+:where(#sepezgjrar) .gt_stub {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -8903,7 +8897,7 @@ border-right-color: #D3D3D3;
 padding-left: 5px;
 padding-right: 5px;
 }
-:where(#gyjmrqxdjk) .gt_stub_row_group {
+:where(#sepezgjrar) .gt_stub_row_group {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -8916,10 +8910,10 @@ padding-left: 5px;
 padding-right: 5px;
 vertical-align: top;
 }
-:where(#gyjmrqxdjk) .gt_row_group_first td {
+:where(#sepezgjrar) .gt_row_group_first td {
 border-top-width: 2px;
 }
-:where(#gyjmrqxdjk) .gt_summary_row {
+:where(#sepezgjrar) .gt_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -8928,14 +8922,14 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-:where(#gyjmrqxdjk) .gt_first_summary_row {
+:where(#sepezgjrar) .gt_first_summary_row {
 border-top-style: solid;
 border-top-color: #D3D3D3;
 }
-:where(#gyjmrqxdjk) .gt_first_summary_row.thick {
+:where(#sepezgjrar) .gt_first_summary_row.thick {
 border-top-width: 2px;
 }
-:where(#gyjmrqxdjk) .gt_last_summary_row {
+:where(#sepezgjrar) .gt_last_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -8944,7 +8938,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-:where(#gyjmrqxdjk) .gt_grand_summary_row {
+:where(#sepezgjrar) .gt_grand_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -8953,7 +8947,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-:where(#gyjmrqxdjk) .gt_first_grand_summary_row {
+:where(#sepezgjrar) .gt_first_grand_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -8962,10 +8956,10 @@ border-top-style: double;
 border-top-width: 6px;
 border-top-color: #D3D3D3;
 }
-:where(#gyjmrqxdjk) .gt_striped {
+:where(#sepezgjrar) .gt_striped {
 background-color: rgba(128, 128, 128, 0.05);
 }
-:where(#gyjmrqxdjk) .gt_table_body {
+:where(#sepezgjrar) .gt_table_body {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -8973,7 +8967,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-:where(#gyjmrqxdjk) .gt_footnotes {
+:where(#sepezgjrar) .gt_footnotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -8986,7 +8980,7 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-:where(#gyjmrqxdjk) .gt_footnote {
+:where(#sepezgjrar) .gt_footnote {
 margin: 0px;
 font-size: 90%;
 padding-left: 4px;
@@ -8994,7 +8988,7 @@ padding-right: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-:where(#gyjmrqxdjk) .gt_sourcenotes {
+:where(#sepezgjrar) .gt_sourcenotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -9007,58 +9001,58 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-:where(#gyjmrqxdjk) .gt_sourcenote {
+:where(#sepezgjrar) .gt_sourcenote {
 font-size: 90%;
 padding-top: 4px;
 padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-:where(#gyjmrqxdjk) .gt_left {
+:where(#sepezgjrar) .gt_left {
 text-align: left;
 }
-:where(#gyjmrqxdjk) .gt_center {
+:where(#sepezgjrar) .gt_center {
 text-align: center;
 }
-:where(#gyjmrqxdjk) .gt_right {
+:where(#sepezgjrar) .gt_right {
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
-:where(#gyjmrqxdjk) .gt_font_normal {
+:where(#sepezgjrar) .gt_font_normal {
 font-weight: normal;
 }
-:where(#gyjmrqxdjk) .gt_font_bold {
+:where(#sepezgjrar) .gt_font_bold {
 font-weight: bold;
 }
-:where(#gyjmrqxdjk) .gt_font_italic {
+:where(#sepezgjrar) .gt_font_italic {
 font-style: italic;
 }
-:where(#gyjmrqxdjk) .gt_super {
+:where(#sepezgjrar) .gt_super {
 font-size: 65%;
 }
-:where(#gyjmrqxdjk) .gt_footnote_marks {
+:where(#sepezgjrar) .gt_footnote_marks {
 font-style: italic;
 font-weight: normal;
 font-size: 75%;
 vertical-align: 0.4em;
 }
-:where(#gyjmrqxdjk) .gt_asterisk {
+:where(#sepezgjrar) .gt_asterisk {
 font-size: 100%;
 vertical-align: 0;
 }
-:where(#gyjmrqxdjk) .gt_indent_1 {
+:where(#sepezgjrar) .gt_indent_1 {
 text-indent: 5px;
 }
-:where(#gyjmrqxdjk) .gt_indent_2 {
+:where(#sepezgjrar) .gt_indent_2 {
 text-indent: 10px;
 }
-:where(#gyjmrqxdjk) .gt_indent_3 {
+:where(#sepezgjrar) .gt_indent_3 {
 text-indent: 15px;
 }
-:where(#gyjmrqxdjk) .gt_indent_4 {
+:where(#sepezgjrar) .gt_indent_4 {
 text-indent: 20px;
 }
-:where(#gyjmrqxdjk) .gt_indent_5 {
+:where(#sepezgjrar) .gt_indent_5 {
 text-indent: 25px;
 }
 </style>
@@ -9117,23 +9111,23 @@ text-indent: 25px;
 <div class="cell">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>baseline <span class="sc">|&gt;</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;vm&quot;</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>      vm_inizio <span class="sc">~</span> <span class="st">&quot;MV start&quot;</span>,</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>      vm_fine <span class="sc">~</span> <span class="st">&quot;MV end&quot;</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="sc">~</span> <span class="st">&quot;{min}, {max}&quot;</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>baseline <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;vm&quot;</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>      vm_inizio <span class="sc">~</span> <span class="st">&quot;MV start&quot;</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>      vm_fine <span class="sc">~</span> <span class="st">&quot;MV end&quot;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="sc">~</span> <span class="st">&quot;{min}, {max}&quot;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 
-<div id="qeceuupjkr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="rynmjscgpv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
-:where(#qeceuupjkr) .gt_table {
+:where(#rynmjscgpv) .gt_table {
 display: table;
 border-collapse: collapse;
 margin-left: auto;
@@ -9157,7 +9151,7 @@ border-left-style: none;
 border-left-width: 2px;
 border-left-color: #D3D3D3;
 }
-:where(#qeceuupjkr) .gt_heading {
+:where(#rynmjscgpv) .gt_heading {
 background-color: #FFFFFF;
 text-align: center;
 border-bottom-color: #FFFFFF;
@@ -9168,11 +9162,11 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-:where(#qeceuupjkr) .gt_caption {
+:where(#rynmjscgpv) .gt_caption {
 padding-top: 4px;
 padding-bottom: 4px;
 }
-:where(#qeceuupjkr) .gt_title {
+:where(#rynmjscgpv) .gt_title {
 color: #333333;
 font-size: 125%;
 font-weight: initial;
@@ -9183,7 +9177,7 @@ padding-right: 5px;
 border-bottom-color: #FFFFFF;
 border-bottom-width: 0;
 }
-:where(#qeceuupjkr) .gt_subtitle {
+:where(#rynmjscgpv) .gt_subtitle {
 color: #333333;
 font-size: 85%;
 font-weight: initial;
@@ -9194,12 +9188,12 @@ padding-right: 5px;
 border-top-color: #FFFFFF;
 border-top-width: 0;
 }
-:where(#qeceuupjkr) .gt_bottom_border {
+:where(#rynmjscgpv) .gt_bottom_border {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-:where(#qeceuupjkr) .gt_col_headings {
+:where(#rynmjscgpv) .gt_col_headings {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -9213,7 +9207,7 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-:where(#qeceuupjkr) .gt_col_heading {
+:where(#rynmjscgpv) .gt_col_heading {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -9232,7 +9226,7 @@ padding-left: 5px;
 padding-right: 5px;
 overflow-x: hidden;
 }
-:where(#qeceuupjkr) .gt_column_spanner_outer {
+:where(#rynmjscgpv) .gt_column_spanner_outer {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -9243,13 +9237,13 @@ padding-bottom: 0;
 padding-left: 4px;
 padding-right: 4px;
 }
-:where(#qeceuupjkr) .gt_column_spanner_outer:first-child {
+:where(#rynmjscgpv) .gt_column_spanner_outer:first-child {
 padding-left: 0;
 }
-:where(#qeceuupjkr) .gt_column_spanner_outer:last-child {
+:where(#rynmjscgpv) .gt_column_spanner_outer:last-child {
 padding-right: 0;
 }
-:where(#qeceuupjkr) .gt_column_spanner {
+:where(#rynmjscgpv) .gt_column_spanner {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
@@ -9260,7 +9254,7 @@ overflow-x: hidden;
 display: inline-block;
 width: 100%;
 }
-:where(#qeceuupjkr) .gt_group_heading {
+:where(#rynmjscgpv) .gt_group_heading {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -9285,7 +9279,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 text-align: left;
 }
-:where(#qeceuupjkr) .gt_empty_group_heading {
+:where(#rynmjscgpv) .gt_empty_group_heading {
 padding: 0.5px;
 color: #333333;
 background-color: #FFFFFF;
@@ -9299,13 +9293,13 @@ border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 vertical-align: middle;
 }
-:where(#qeceuupjkr) .gt_from_md > :first-child {
+:where(#rynmjscgpv) .gt_from_md > :first-child {
 margin-top: 0;
 }
-:where(#qeceuupjkr) .gt_from_md > :last-child {
+:where(#rynmjscgpv) .gt_from_md > :last-child {
 margin-bottom: 0;
 }
-:where(#qeceuupjkr) .gt_row {
+:where(#rynmjscgpv) .gt_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -9323,7 +9317,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 overflow-x: hidden;
 }
-:where(#qeceuupjkr) .gt_stub {
+:where(#rynmjscgpv) .gt_stub {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -9335,7 +9329,7 @@ border-right-color: #D3D3D3;
 padding-left: 5px;
 padding-right: 5px;
 }
-:where(#qeceuupjkr) .gt_stub_row_group {
+:where(#rynmjscgpv) .gt_stub_row_group {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -9348,10 +9342,10 @@ padding-left: 5px;
 padding-right: 5px;
 vertical-align: top;
 }
-:where(#qeceuupjkr) .gt_row_group_first td {
+:where(#rynmjscgpv) .gt_row_group_first td {
 border-top-width: 2px;
 }
-:where(#qeceuupjkr) .gt_summary_row {
+:where(#rynmjscgpv) .gt_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -9360,14 +9354,14 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-:where(#qeceuupjkr) .gt_first_summary_row {
+:where(#rynmjscgpv) .gt_first_summary_row {
 border-top-style: solid;
 border-top-color: #D3D3D3;
 }
-:where(#qeceuupjkr) .gt_first_summary_row.thick {
+:where(#rynmjscgpv) .gt_first_summary_row.thick {
 border-top-width: 2px;
 }
-:where(#qeceuupjkr) .gt_last_summary_row {
+:where(#rynmjscgpv) .gt_last_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -9376,7 +9370,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-:where(#qeceuupjkr) .gt_grand_summary_row {
+:where(#rynmjscgpv) .gt_grand_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -9385,7 +9379,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-:where(#qeceuupjkr) .gt_first_grand_summary_row {
+:where(#rynmjscgpv) .gt_first_grand_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -9394,10 +9388,10 @@ border-top-style: double;
 border-top-width: 6px;
 border-top-color: #D3D3D3;
 }
-:where(#qeceuupjkr) .gt_striped {
+:where(#rynmjscgpv) .gt_striped {
 background-color: rgba(128, 128, 128, 0.05);
 }
-:where(#qeceuupjkr) .gt_table_body {
+:where(#rynmjscgpv) .gt_table_body {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -9405,7 +9399,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-:where(#qeceuupjkr) .gt_footnotes {
+:where(#rynmjscgpv) .gt_footnotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -9418,7 +9412,7 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-:where(#qeceuupjkr) .gt_footnote {
+:where(#rynmjscgpv) .gt_footnote {
 margin: 0px;
 font-size: 90%;
 padding-left: 4px;
@@ -9426,7 +9420,7 @@ padding-right: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-:where(#qeceuupjkr) .gt_sourcenotes {
+:where(#rynmjscgpv) .gt_sourcenotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -9439,58 +9433,58 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-:where(#qeceuupjkr) .gt_sourcenote {
+:where(#rynmjscgpv) .gt_sourcenote {
 font-size: 90%;
 padding-top: 4px;
 padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-:where(#qeceuupjkr) .gt_left {
+:where(#rynmjscgpv) .gt_left {
 text-align: left;
 }
-:where(#qeceuupjkr) .gt_center {
+:where(#rynmjscgpv) .gt_center {
 text-align: center;
 }
-:where(#qeceuupjkr) .gt_right {
+:where(#rynmjscgpv) .gt_right {
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
-:where(#qeceuupjkr) .gt_font_normal {
+:where(#rynmjscgpv) .gt_font_normal {
 font-weight: normal;
 }
-:where(#qeceuupjkr) .gt_font_bold {
+:where(#rynmjscgpv) .gt_font_bold {
 font-weight: bold;
 }
-:where(#qeceuupjkr) .gt_font_italic {
+:where(#rynmjscgpv) .gt_font_italic {
 font-style: italic;
 }
-:where(#qeceuupjkr) .gt_super {
+:where(#rynmjscgpv) .gt_super {
 font-size: 65%;
 }
-:where(#qeceuupjkr) .gt_footnote_marks {
+:where(#rynmjscgpv) .gt_footnote_marks {
 font-style: italic;
 font-weight: normal;
 font-size: 75%;
 vertical-align: 0.4em;
 }
-:where(#qeceuupjkr) .gt_asterisk {
+:where(#rynmjscgpv) .gt_asterisk {
 font-size: 100%;
 vertical-align: 0;
 }
-:where(#qeceuupjkr) .gt_indent_1 {
+:where(#rynmjscgpv) .gt_indent_1 {
 text-indent: 5px;
 }
-:where(#qeceuupjkr) .gt_indent_2 {
+:where(#rynmjscgpv) .gt_indent_2 {
 text-indent: 10px;
 }
-:where(#qeceuupjkr) .gt_indent_3 {
+:where(#rynmjscgpv) .gt_indent_3 {
 text-indent: 15px;
 }
-:where(#qeceuupjkr) .gt_indent_4 {
+:where(#rynmjscgpv) .gt_indent_4 {
 text-indent: 20px;
 }
-:where(#qeceuupjkr) .gt_indent_5 {
+:where(#rynmjscgpv) .gt_indent_5 {
 text-indent: 25px;
 }
 </style>
@@ -9524,23 +9518,23 @@ text-indent: 25px;
 <div class="cell">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>daily <span class="sc">|&gt;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id_univoco) <span class="sc">|&gt;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">giorno_finale =</span> <span class="fu">max</span>(giorno_studio)) <span class="sc">|&gt;</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(giorno_finale) <span class="sc">|&gt;</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> giorno_finale <span class="sc">~</span> <span class="st">&quot;Day of study&quot;</span>,</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="sc">~</span> <span class="st">&quot;{median}  (range: {min}, {max})  (IQR: {p25}, {p75})&quot;</span>,</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># digits = ~ 2</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>daily <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id_univoco) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">giorno_finale =</span> <span class="fu">max</span>(giorno_studio)) <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(giorno_finale) <span class="sc">|&gt;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> giorno_finale <span class="sc">~</span> <span class="st">&quot;Day of study&quot;</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">statistic =</span> <span class="sc">~</span> <span class="st">&quot;{median}  (range: {min}, {max})  (IQR: {p25}, {p75})&quot;</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># digits = ~ 2</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 
-<div id="mainrukefq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="oygexrnjrj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
-:where(#mainrukefq) .gt_table {
+:where(#oygexrnjrj) .gt_table {
 display: table;
 border-collapse: collapse;
 margin-left: auto;
@@ -9564,7 +9558,7 @@ border-left-style: none;
 border-left-width: 2px;
 border-left-color: #D3D3D3;
 }
-:where(#mainrukefq) .gt_heading {
+:where(#oygexrnjrj) .gt_heading {
 background-color: #FFFFFF;
 text-align: center;
 border-bottom-color: #FFFFFF;
@@ -9575,11 +9569,11 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-:where(#mainrukefq) .gt_caption {
+:where(#oygexrnjrj) .gt_caption {
 padding-top: 4px;
 padding-bottom: 4px;
 }
-:where(#mainrukefq) .gt_title {
+:where(#oygexrnjrj) .gt_title {
 color: #333333;
 font-size: 125%;
 font-weight: initial;
@@ -9590,7 +9584,7 @@ padding-right: 5px;
 border-bottom-color: #FFFFFF;
 border-bottom-width: 0;
 }
-:where(#mainrukefq) .gt_subtitle {
+:where(#oygexrnjrj) .gt_subtitle {
 color: #333333;
 font-size: 85%;
 font-weight: initial;
@@ -9601,12 +9595,12 @@ padding-right: 5px;
 border-top-color: #FFFFFF;
 border-top-width: 0;
 }
-:where(#mainrukefq) .gt_bottom_border {
+:where(#oygexrnjrj) .gt_bottom_border {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-:where(#mainrukefq) .gt_col_headings {
+:where(#oygexrnjrj) .gt_col_headings {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -9620,7 +9614,7 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-:where(#mainrukefq) .gt_col_heading {
+:where(#oygexrnjrj) .gt_col_heading {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -9639,7 +9633,7 @@ padding-left: 5px;
 padding-right: 5px;
 overflow-x: hidden;
 }
-:where(#mainrukefq) .gt_column_spanner_outer {
+:where(#oygexrnjrj) .gt_column_spanner_outer {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -9650,13 +9644,13 @@ padding-bottom: 0;
 padding-left: 4px;
 padding-right: 4px;
 }
-:where(#mainrukefq) .gt_column_spanner_outer:first-child {
+:where(#oygexrnjrj) .gt_column_spanner_outer:first-child {
 padding-left: 0;
 }
-:where(#mainrukefq) .gt_column_spanner_outer:last-child {
+:where(#oygexrnjrj) .gt_column_spanner_outer:last-child {
 padding-right: 0;
 }
-:where(#mainrukefq) .gt_column_spanner {
+:where(#oygexrnjrj) .gt_column_spanner {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
@@ -9667,7 +9661,7 @@ overflow-x: hidden;
 display: inline-block;
 width: 100%;
 }
-:where(#mainrukefq) .gt_group_heading {
+:where(#oygexrnjrj) .gt_group_heading {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -9692,7 +9686,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 text-align: left;
 }
-:where(#mainrukefq) .gt_empty_group_heading {
+:where(#oygexrnjrj) .gt_empty_group_heading {
 padding: 0.5px;
 color: #333333;
 background-color: #FFFFFF;
@@ -9706,13 +9700,13 @@ border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 vertical-align: middle;
 }
-:where(#mainrukefq) .gt_from_md > :first-child {
+:where(#oygexrnjrj) .gt_from_md > :first-child {
 margin-top: 0;
 }
-:where(#mainrukefq) .gt_from_md > :last-child {
+:where(#oygexrnjrj) .gt_from_md > :last-child {
 margin-bottom: 0;
 }
-:where(#mainrukefq) .gt_row {
+:where(#oygexrnjrj) .gt_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -9730,7 +9724,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 overflow-x: hidden;
 }
-:where(#mainrukefq) .gt_stub {
+:where(#oygexrnjrj) .gt_stub {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -9742,7 +9736,7 @@ border-right-color: #D3D3D3;
 padding-left: 5px;
 padding-right: 5px;
 }
-:where(#mainrukefq) .gt_stub_row_group {
+:where(#oygexrnjrj) .gt_stub_row_group {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -9755,10 +9749,10 @@ padding-left: 5px;
 padding-right: 5px;
 vertical-align: top;
 }
-:where(#mainrukefq) .gt_row_group_first td {
+:where(#oygexrnjrj) .gt_row_group_first td {
 border-top-width: 2px;
 }
-:where(#mainrukefq) .gt_summary_row {
+:where(#oygexrnjrj) .gt_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -9767,14 +9761,14 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-:where(#mainrukefq) .gt_first_summary_row {
+:where(#oygexrnjrj) .gt_first_summary_row {
 border-top-style: solid;
 border-top-color: #D3D3D3;
 }
-:where(#mainrukefq) .gt_first_summary_row.thick {
+:where(#oygexrnjrj) .gt_first_summary_row.thick {
 border-top-width: 2px;
 }
-:where(#mainrukefq) .gt_last_summary_row {
+:where(#oygexrnjrj) .gt_last_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -9783,7 +9777,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-:where(#mainrukefq) .gt_grand_summary_row {
+:where(#oygexrnjrj) .gt_grand_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -9792,7 +9786,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-:where(#mainrukefq) .gt_first_grand_summary_row {
+:where(#oygexrnjrj) .gt_first_grand_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -9801,10 +9795,10 @@ border-top-style: double;
 border-top-width: 6px;
 border-top-color: #D3D3D3;
 }
-:where(#mainrukefq) .gt_striped {
+:where(#oygexrnjrj) .gt_striped {
 background-color: rgba(128, 128, 128, 0.05);
 }
-:where(#mainrukefq) .gt_table_body {
+:where(#oygexrnjrj) .gt_table_body {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -9812,7 +9806,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-:where(#mainrukefq) .gt_footnotes {
+:where(#oygexrnjrj) .gt_footnotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -9825,7 +9819,7 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-:where(#mainrukefq) .gt_footnote {
+:where(#oygexrnjrj) .gt_footnote {
 margin: 0px;
 font-size: 90%;
 padding-left: 4px;
@@ -9833,7 +9827,7 @@ padding-right: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-:where(#mainrukefq) .gt_sourcenotes {
+:where(#oygexrnjrj) .gt_sourcenotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -9846,58 +9840,58 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-:where(#mainrukefq) .gt_sourcenote {
+:where(#oygexrnjrj) .gt_sourcenote {
 font-size: 90%;
 padding-top: 4px;
 padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-:where(#mainrukefq) .gt_left {
+:where(#oygexrnjrj) .gt_left {
 text-align: left;
 }
-:where(#mainrukefq) .gt_center {
+:where(#oygexrnjrj) .gt_center {
 text-align: center;
 }
-:where(#mainrukefq) .gt_right {
+:where(#oygexrnjrj) .gt_right {
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
-:where(#mainrukefq) .gt_font_normal {
+:where(#oygexrnjrj) .gt_font_normal {
 font-weight: normal;
 }
-:where(#mainrukefq) .gt_font_bold {
+:where(#oygexrnjrj) .gt_font_bold {
 font-weight: bold;
 }
-:where(#mainrukefq) .gt_font_italic {
+:where(#oygexrnjrj) .gt_font_italic {
 font-style: italic;
 }
-:where(#mainrukefq) .gt_super {
+:where(#oygexrnjrj) .gt_super {
 font-size: 65%;
 }
-:where(#mainrukefq) .gt_footnote_marks {
+:where(#oygexrnjrj) .gt_footnote_marks {
 font-style: italic;
 font-weight: normal;
 font-size: 75%;
 vertical-align: 0.4em;
 }
-:where(#mainrukefq) .gt_asterisk {
+:where(#oygexrnjrj) .gt_asterisk {
 font-size: 100%;
 vertical-align: 0;
 }
-:where(#mainrukefq) .gt_indent_1 {
+:where(#oygexrnjrj) .gt_indent_1 {
 text-indent: 5px;
 }
-:where(#mainrukefq) .gt_indent_2 {
+:where(#oygexrnjrj) .gt_indent_2 {
 text-indent: 10px;
 }
-:where(#mainrukefq) .gt_indent_3 {
+:where(#oygexrnjrj) .gt_indent_3 {
 text-indent: 15px;
 }
-:where(#mainrukefq) .gt_indent_4 {
+:where(#oygexrnjrj) .gt_indent_4 {
 text-indent: 20px;
 }
-:where(#mainrukefq) .gt_indent_5 {
+:where(#oygexrnjrj) .gt_indent_5 {
 text-indent: 25px;
 }
 </style>
@@ -9929,30 +9923,30 @@ text-indent: 25px;
 <div class="cell">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>daily <span class="sc">|&gt;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>( sbt <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;SBT success&quot;</span>, <span class="st">&quot;SBT failure&quot;</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">sbt =</span> <span class="fu">fct_drop</span>(sbt)) <span class="sc">|&gt;</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id_univoco) <span class="sc">|&gt;</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(sbt) <span class="sc">|&gt;</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pivot_wider(names_from = sbt,</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#             values_from = n,</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">#             values_fill = 0) |&gt;</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>id_univoco) <span class="sc">|&gt;</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>( </span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> sbt,</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">statistic =</span>  <span class="sc">~</span> <span class="st">&quot;{median}  (range: {min}, {max})  (IQR: {p25}, {p75})&quot;</span>,</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># digits =  ~ 2</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_overall</span>( <span class="at">col_label =</span> <span class="st">&quot;Totale&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>daily <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>( sbt <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;SBT success&quot;</span>, <span class="st">&quot;SBT failure&quot;</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">sbt =</span> <span class="fu">fct_drop</span>(sbt)) <span class="sc">|&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id_univoco) <span class="sc">|&gt;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(sbt) <span class="sc">|&gt;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pivot_wider(names_from = sbt,</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#             values_from = n,</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">#             values_fill = 0) |&gt;</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>id_univoco) <span class="sc">|&gt;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>( </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> sbt,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">statistic =</span>  <span class="sc">~</span> <span class="st">&quot;{median}  (range: {min}, {max})  (IQR: {p25}, {p75})&quot;</span>,</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># digits =  ~ 2</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_overall</span>( <span class="at">col_label =</span> <span class="st">&quot;Totale&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 
-<div id="dqplawxwus" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="uajzhtadyw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
-:where(#dqplawxwus) .gt_table {
+:where(#uajzhtadyw) .gt_table {
 display: table;
 border-collapse: collapse;
 margin-left: auto;
@@ -9976,7 +9970,7 @@ border-left-style: none;
 border-left-width: 2px;
 border-left-color: #D3D3D3;
 }
-:where(#dqplawxwus) .gt_heading {
+:where(#uajzhtadyw) .gt_heading {
 background-color: #FFFFFF;
 text-align: center;
 border-bottom-color: #FFFFFF;
@@ -9987,11 +9981,11 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-:where(#dqplawxwus) .gt_caption {
+:where(#uajzhtadyw) .gt_caption {
 padding-top: 4px;
 padding-bottom: 4px;
 }
-:where(#dqplawxwus) .gt_title {
+:where(#uajzhtadyw) .gt_title {
 color: #333333;
 font-size: 125%;
 font-weight: initial;
@@ -10002,7 +9996,7 @@ padding-right: 5px;
 border-bottom-color: #FFFFFF;
 border-bottom-width: 0;
 }
-:where(#dqplawxwus) .gt_subtitle {
+:where(#uajzhtadyw) .gt_subtitle {
 color: #333333;
 font-size: 85%;
 font-weight: initial;
@@ -10013,12 +10007,12 @@ padding-right: 5px;
 border-top-color: #FFFFFF;
 border-top-width: 0;
 }
-:where(#dqplawxwus) .gt_bottom_border {
+:where(#uajzhtadyw) .gt_bottom_border {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-:where(#dqplawxwus) .gt_col_headings {
+:where(#uajzhtadyw) .gt_col_headings {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -10032,7 +10026,7 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-:where(#dqplawxwus) .gt_col_heading {
+:where(#uajzhtadyw) .gt_col_heading {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -10051,7 +10045,7 @@ padding-left: 5px;
 padding-right: 5px;
 overflow-x: hidden;
 }
-:where(#dqplawxwus) .gt_column_spanner_outer {
+:where(#uajzhtadyw) .gt_column_spanner_outer {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -10062,13 +10056,13 @@ padding-bottom: 0;
 padding-left: 4px;
 padding-right: 4px;
 }
-:where(#dqplawxwus) .gt_column_spanner_outer:first-child {
+:where(#uajzhtadyw) .gt_column_spanner_outer:first-child {
 padding-left: 0;
 }
-:where(#dqplawxwus) .gt_column_spanner_outer:last-child {
+:where(#uajzhtadyw) .gt_column_spanner_outer:last-child {
 padding-right: 0;
 }
-:where(#dqplawxwus) .gt_column_spanner {
+:where(#uajzhtadyw) .gt_column_spanner {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
@@ -10079,7 +10073,7 @@ overflow-x: hidden;
 display: inline-block;
 width: 100%;
 }
-:where(#dqplawxwus) .gt_group_heading {
+:where(#uajzhtadyw) .gt_group_heading {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -10104,7 +10098,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 text-align: left;
 }
-:where(#dqplawxwus) .gt_empty_group_heading {
+:where(#uajzhtadyw) .gt_empty_group_heading {
 padding: 0.5px;
 color: #333333;
 background-color: #FFFFFF;
@@ -10118,13 +10112,13 @@ border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 vertical-align: middle;
 }
-:where(#dqplawxwus) .gt_from_md > :first-child {
+:where(#uajzhtadyw) .gt_from_md > :first-child {
 margin-top: 0;
 }
-:where(#dqplawxwus) .gt_from_md > :last-child {
+:where(#uajzhtadyw) .gt_from_md > :last-child {
 margin-bottom: 0;
 }
-:where(#dqplawxwus) .gt_row {
+:where(#uajzhtadyw) .gt_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -10142,7 +10136,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 overflow-x: hidden;
 }
-:where(#dqplawxwus) .gt_stub {
+:where(#uajzhtadyw) .gt_stub {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -10154,7 +10148,7 @@ border-right-color: #D3D3D3;
 padding-left: 5px;
 padding-right: 5px;
 }
-:where(#dqplawxwus) .gt_stub_row_group {
+:where(#uajzhtadyw) .gt_stub_row_group {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -10167,10 +10161,10 @@ padding-left: 5px;
 padding-right: 5px;
 vertical-align: top;
 }
-:where(#dqplawxwus) .gt_row_group_first td {
+:where(#uajzhtadyw) .gt_row_group_first td {
 border-top-width: 2px;
 }
-:where(#dqplawxwus) .gt_summary_row {
+:where(#uajzhtadyw) .gt_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -10179,14 +10173,14 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-:where(#dqplawxwus) .gt_first_summary_row {
+:where(#uajzhtadyw) .gt_first_summary_row {
 border-top-style: solid;
 border-top-color: #D3D3D3;
 }
-:where(#dqplawxwus) .gt_first_summary_row.thick {
+:where(#uajzhtadyw) .gt_first_summary_row.thick {
 border-top-width: 2px;
 }
-:where(#dqplawxwus) .gt_last_summary_row {
+:where(#uajzhtadyw) .gt_last_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -10195,7 +10189,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-:where(#dqplawxwus) .gt_grand_summary_row {
+:where(#uajzhtadyw) .gt_grand_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -10204,7 +10198,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-:where(#dqplawxwus) .gt_first_grand_summary_row {
+:where(#uajzhtadyw) .gt_first_grand_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -10213,10 +10207,10 @@ border-top-style: double;
 border-top-width: 6px;
 border-top-color: #D3D3D3;
 }
-:where(#dqplawxwus) .gt_striped {
+:where(#uajzhtadyw) .gt_striped {
 background-color: rgba(128, 128, 128, 0.05);
 }
-:where(#dqplawxwus) .gt_table_body {
+:where(#uajzhtadyw) .gt_table_body {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -10224,7 +10218,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-:where(#dqplawxwus) .gt_footnotes {
+:where(#uajzhtadyw) .gt_footnotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -10237,7 +10231,7 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-:where(#dqplawxwus) .gt_footnote {
+:where(#uajzhtadyw) .gt_footnote {
 margin: 0px;
 font-size: 90%;
 padding-left: 4px;
@@ -10245,7 +10239,7 @@ padding-right: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-:where(#dqplawxwus) .gt_sourcenotes {
+:where(#uajzhtadyw) .gt_sourcenotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -10258,58 +10252,58 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-:where(#dqplawxwus) .gt_sourcenote {
+:where(#uajzhtadyw) .gt_sourcenote {
 font-size: 90%;
 padding-top: 4px;
 padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-:where(#dqplawxwus) .gt_left {
+:where(#uajzhtadyw) .gt_left {
 text-align: left;
 }
-:where(#dqplawxwus) .gt_center {
+:where(#uajzhtadyw) .gt_center {
 text-align: center;
 }
-:where(#dqplawxwus) .gt_right {
+:where(#uajzhtadyw) .gt_right {
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
-:where(#dqplawxwus) .gt_font_normal {
+:where(#uajzhtadyw) .gt_font_normal {
 font-weight: normal;
 }
-:where(#dqplawxwus) .gt_font_bold {
+:where(#uajzhtadyw) .gt_font_bold {
 font-weight: bold;
 }
-:where(#dqplawxwus) .gt_font_italic {
+:where(#uajzhtadyw) .gt_font_italic {
 font-style: italic;
 }
-:where(#dqplawxwus) .gt_super {
+:where(#uajzhtadyw) .gt_super {
 font-size: 65%;
 }
-:where(#dqplawxwus) .gt_footnote_marks {
+:where(#uajzhtadyw) .gt_footnote_marks {
 font-style: italic;
 font-weight: normal;
 font-size: 75%;
 vertical-align: 0.4em;
 }
-:where(#dqplawxwus) .gt_asterisk {
+:where(#uajzhtadyw) .gt_asterisk {
 font-size: 100%;
 vertical-align: 0;
 }
-:where(#dqplawxwus) .gt_indent_1 {
+:where(#uajzhtadyw) .gt_indent_1 {
 text-indent: 5px;
 }
-:where(#dqplawxwus) .gt_indent_2 {
+:where(#uajzhtadyw) .gt_indent_2 {
 text-indent: 10px;
 }
-:where(#dqplawxwus) .gt_indent_3 {
+:where(#uajzhtadyw) .gt_indent_3 {
 text-indent: 15px;
 }
-:where(#dqplawxwus) .gt_indent_4 {
+:where(#uajzhtadyw) .gt_indent_4 {
 text-indent: 20px;
 }
-:where(#dqplawxwus) .gt_indent_5 {
+:where(#uajzhtadyw) .gt_indent_5 {
 text-indent: 25px;
 }
 </style>
@@ -10345,48 +10339,48 @@ text-indent: 25px;
 <div class="cell">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sbt_yes <span class="ot">&lt;-</span> daily <span class="sc">|&gt;</span> <span class="fu">filter</span>(sbt <span class="sc">==</span> <span class="st">&quot;SBT success&quot;</span>) <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>() <span class="sc">|&gt;</span> <span class="fu">as.integer</span>()</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>sbt_no <span class="ot">&lt;-</span> daily <span class="sc">|&gt;</span> <span class="fu">filter</span>(sbt <span class="sc">==</span> <span class="st">&quot;SBT failure&quot;</span>) <span class="sc">|&gt;</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>() <span class="sc">|&gt;</span> <span class="fu">as.integer</span>()</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>rt_yes <span class="ot">&lt;-</span> sbt_yes <span class="sc">+</span> sbt_no</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>rt_no <span class="ot">&lt;-</span> daily <span class="sc">|&gt;</span> <span class="fu">filter</span>(sbt <span class="sc">==</span> <span class="st">&quot;Readiness Testing failure&quot;</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>()  <span class="sc">|&gt;</span>   <span class="fu">as.integer</span>()</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>all_attempts <span class="ot">&lt;-</span> rt_yes <span class="sc">+</span> rt_no</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># collater input</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>diagram_links <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>source,           <span class="sc">~</span>target,           <span class="sc">~</span>value,</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;all attempts&quot;</span>,    <span class="st">&quot;RT success&quot;</span>,      rt_yes,</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;all attempts&quot;</span>,    <span class="st">&quot;RT failure&quot;</span>,      rt_no,</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;RT success&quot;</span>,      <span class="st">&quot;SBT success&quot;</span>,     sbt_yes,</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;RT success&quot;</span>,      <span class="st">&quot;SBT failure&quot;</span>,     sbt_no</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>diagram_nodes <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="fu">c</span>(</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.character</span>(diagram_links[[<span class="st">&quot;source&quot;</span>]]), </span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.character</span>(diagram_links[[<span class="st">&quot;target&quot;</span>]])) <span class="sc">|&gt;</span></span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unique</span>()</span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>diagram_links[[<span class="st">&quot;IDsource&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">match</span>(</span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>  diagram_links[[<span class="st">&quot;source&quot;</span>]], diagram_nodes[[<span class="st">&quot;name&quot;</span>]])<span class="sc">-</span><span class="dv">1</span> </span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>diagram_links[[<span class="st">&quot;IDtarget&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">match</span>(</span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>  diagram_links[[<span class="st">&quot;target&quot;</span>]], diagram_nodes[[<span class="st">&quot;name&quot;</span>]])<span class="sc">-</span><span class="dv">1</span></span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="co"># prepare colour scale</span></span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>ColourScal <span class="ot">=</span><span class="st">&#39;d3.scaleOrdinal() .range([&quot;#FDE725FF&quot;,&quot;#B4DE2CFF&quot;,&quot;#6DCD59FF&quot;,&quot;#35B779FF&quot;,&quot;#1F9E89FF&quot;,&quot;#26828EFF&quot;,&quot;#31688EFF&quot;,&quot;#3E4A89FF&quot;,&quot;#482878FF&quot;,&quot;#440154FF&quot;])&#39;</span></span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a><span class="fu">sankeyNetwork</span>(<span class="at">Links =</span> diagram_links,</span>
-<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>              <span class="at">Nodes =</span> diagram_nodes,</span>
-<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>              <span class="at">Source =</span> <span class="st">&quot;IDsource&quot;</span>, </span>
-<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>              <span class="at">Target =</span> <span class="st">&quot;IDtarget&quot;</span>,</span>
-<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>              <span class="at">Value =</span> <span class="st">&quot;value&quot;</span>,</span>
-<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>              <span class="at">NodeID =</span> <span class="st">&quot;name&quot;</span>, </span>
-<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>              <span class="at">sinksRight=</span><span class="cn">FALSE</span>,</span>
-<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>              <span class="at">colourScale =</span> ColourScal,</span>
-<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>              <span class="at">nodeWidth=</span><span class="dv">30</span>, <span class="at">fontSize=</span><span class="dv">15</span>, <span class="at">nodePadding=</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sbt_yes <span class="ot">&lt;-</span> daily <span class="sc">|&gt;</span> <span class="fu">filter</span>(sbt <span class="sc">==</span> <span class="st">&quot;SBT success&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>() <span class="sc">|&gt;</span> <span class="fu">as.integer</span>()</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>sbt_no <span class="ot">&lt;-</span> daily <span class="sc">|&gt;</span> <span class="fu">filter</span>(sbt <span class="sc">==</span> <span class="st">&quot;SBT failure&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>() <span class="sc">|&gt;</span> <span class="fu">as.integer</span>()</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>rt_yes <span class="ot">&lt;-</span> sbt_yes <span class="sc">+</span> sbt_no</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>rt_no <span class="ot">&lt;-</span> daily <span class="sc">|&gt;</span> <span class="fu">filter</span>(sbt <span class="sc">==</span> <span class="st">&quot;Readiness Testing failure&quot;</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>()  <span class="sc">|&gt;</span>   <span class="fu">as.integer</span>()</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>all_attempts <span class="ot">&lt;-</span> rt_yes <span class="sc">+</span> rt_no</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># collater input</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>diagram_links <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>source,           <span class="sc">~</span>target,           <span class="sc">~</span>value,</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;all attempts&quot;</span>,    <span class="st">&quot;RT success&quot;</span>,      rt_yes,</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;all attempts&quot;</span>,    <span class="st">&quot;RT failure&quot;</span>,      rt_no,</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;RT success&quot;</span>,      <span class="st">&quot;SBT success&quot;</span>,     sbt_yes,</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;RT success&quot;</span>,      <span class="st">&quot;SBT failure&quot;</span>,     sbt_no</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>diagram_nodes <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="fu">c</span>(</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.character</span>(diagram_links[[<span class="st">&quot;source&quot;</span>]]), </span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.character</span>(diagram_links[[<span class="st">&quot;target&quot;</span>]])) <span class="sc">|&gt;</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unique</span>()</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>diagram_links[[<span class="st">&quot;IDsource&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">match</span>(</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  diagram_links[[<span class="st">&quot;source&quot;</span>]], diagram_nodes[[<span class="st">&quot;name&quot;</span>]])<span class="sc">-</span><span class="dv">1</span> </span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>diagram_links[[<span class="st">&quot;IDtarget&quot;</span>]] <span class="ot">&lt;-</span> <span class="fu">match</span>(</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>  diagram_links[[<span class="st">&quot;target&quot;</span>]], diagram_nodes[[<span class="st">&quot;name&quot;</span>]])<span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="co"># prepare colour scale</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>ColourScal <span class="ot">=</span><span class="st">&#39;d3.scaleOrdinal() .range([&quot;#FDE725FF&quot;,&quot;#B4DE2CFF&quot;,&quot;#6DCD59FF&quot;,&quot;#35B779FF&quot;,&quot;#1F9E89FF&quot;,&quot;#26828EFF&quot;,&quot;#31688EFF&quot;,&quot;#3E4A89FF&quot;,&quot;#482878FF&quot;,&quot;#440154FF&quot;])&#39;</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="fu">sankeyNetwork</span>(<span class="at">Links =</span> diagram_links,</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>              <span class="at">Nodes =</span> diagram_nodes,</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>              <span class="at">Source =</span> <span class="st">&quot;IDsource&quot;</span>, </span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>              <span class="at">Target =</span> <span class="st">&quot;IDtarget&quot;</span>,</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>              <span class="at">Value =</span> <span class="st">&quot;value&quot;</span>,</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>              <span class="at">NodeID =</span> <span class="st">&quot;name&quot;</span>, </span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>              <span class="at">sinksRight=</span><span class="cn">FALSE</span>,</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>              <span class="at">colourScale =</span> ColourScal,</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>              <span class="at">nodeWidth=</span><span class="dv">30</span>, <span class="at">fontSize=</span><span class="dv">15</span>, <span class="at">nodePadding=</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Links is a tbl_df. Converting to a plain data frame.</code></pre>
@@ -10395,26 +10389,26 @@ text-indent: 25px;
 <pre><code>Nodes is a tbl_df. Converting to a plain data frame.</code></pre>
 </div>
 <div class="cell-output-display">
-<div class="sankeyNetwork html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-3190d7fa83dda9caf0e4" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-3190d7fa83dda9caf0e4">{"x":{"links":{"source":[0,0,1,1],"target":[1,2,3,4],"value":[342,1216,182,160]},"nodes":{"name":["all attempts","RT success","RT failure","SBT success","SBT failure"],"group":["all attempts","RT success","RT failure","SBT success","SBT failure"]},"options":{"NodeID":"name","NodeGroup":"name","LinkGroup":null,"colourScale":"d3.scaleOrdinal() .range([\"#FDE725FF\",\"#B4DE2CFF\",\"#6DCD59FF\",\"#35B779FF\",\"#1F9E89FF\",\"#26828EFF\",\"#31688EFF\",\"#3E4A89FF\",\"#482878FF\",\"#440154FF\"])","fontSize":15,"fontFamily":null,"nodeWidth":30,"nodePadding":20,"units":"","margin":{"top":null,"right":null,"bottom":null,"left":null},"iterations":32,"sinksRight":false}},"evals":[],"jsHooks":[]}</script>
+<div class="sankeyNetwork html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-31580dcc9f091d32ffde" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-31580dcc9f091d32ffde">{"x":{"links":{"source":[0,0,1,1],"target":[1,2,3,4],"value":[342,1216,182,160]},"nodes":{"name":["all attempts","RT success","RT failure","SBT success","SBT failure"],"group":["all attempts","RT success","RT failure","SBT success","SBT failure"]},"options":{"NodeID":"name","NodeGroup":"name","LinkGroup":null,"colourScale":"d3.scaleOrdinal() .range([\"#FDE725FF\",\"#B4DE2CFF\",\"#6DCD59FF\",\"#35B779FF\",\"#1F9E89FF\",\"#26828EFF\",\"#31688EFF\",\"#3E4A89FF\",\"#482878FF\",\"#440154FF\"])","fontSize":15,"fontFamily":null,"nodeWidth":30,"nodePadding":20,"units":"","margin":{"top":null,"right":null,"bottom":null,"left":null},"iterations":32,"sinksRight":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="cell">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>daily <span class="sc">|&gt;</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sbt) <span class="sc">|&gt;</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> sbt <span class="sc">~</span> <span class="st">&quot;Daily attempt&quot;</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>daily <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sbt) <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> sbt <span class="sc">~</span> <span class="st">&quot;Daily attempt&quot;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 
-<div id="xncifbrgcr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="lyqnihcftn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
-:where(#xncifbrgcr) .gt_table {
+:where(#lyqnihcftn) .gt_table {
 display: table;
 border-collapse: collapse;
 margin-left: auto;
@@ -10438,7 +10432,7 @@ border-left-style: none;
 border-left-width: 2px;
 border-left-color: #D3D3D3;
 }
-:where(#xncifbrgcr) .gt_heading {
+:where(#lyqnihcftn) .gt_heading {
 background-color: #FFFFFF;
 text-align: center;
 border-bottom-color: #FFFFFF;
@@ -10449,11 +10443,11 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-:where(#xncifbrgcr) .gt_caption {
+:where(#lyqnihcftn) .gt_caption {
 padding-top: 4px;
 padding-bottom: 4px;
 }
-:where(#xncifbrgcr) .gt_title {
+:where(#lyqnihcftn) .gt_title {
 color: #333333;
 font-size: 125%;
 font-weight: initial;
@@ -10464,7 +10458,7 @@ padding-right: 5px;
 border-bottom-color: #FFFFFF;
 border-bottom-width: 0;
 }
-:where(#xncifbrgcr) .gt_subtitle {
+:where(#lyqnihcftn) .gt_subtitle {
 color: #333333;
 font-size: 85%;
 font-weight: initial;
@@ -10475,12 +10469,12 @@ padding-right: 5px;
 border-top-color: #FFFFFF;
 border-top-width: 0;
 }
-:where(#xncifbrgcr) .gt_bottom_border {
+:where(#lyqnihcftn) .gt_bottom_border {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-:where(#xncifbrgcr) .gt_col_headings {
+:where(#lyqnihcftn) .gt_col_headings {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -10494,7 +10488,7 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-:where(#xncifbrgcr) .gt_col_heading {
+:where(#lyqnihcftn) .gt_col_heading {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -10513,7 +10507,7 @@ padding-left: 5px;
 padding-right: 5px;
 overflow-x: hidden;
 }
-:where(#xncifbrgcr) .gt_column_spanner_outer {
+:where(#lyqnihcftn) .gt_column_spanner_outer {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -10524,13 +10518,13 @@ padding-bottom: 0;
 padding-left: 4px;
 padding-right: 4px;
 }
-:where(#xncifbrgcr) .gt_column_spanner_outer:first-child {
+:where(#lyqnihcftn) .gt_column_spanner_outer:first-child {
 padding-left: 0;
 }
-:where(#xncifbrgcr) .gt_column_spanner_outer:last-child {
+:where(#lyqnihcftn) .gt_column_spanner_outer:last-child {
 padding-right: 0;
 }
-:where(#xncifbrgcr) .gt_column_spanner {
+:where(#lyqnihcftn) .gt_column_spanner {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
@@ -10541,7 +10535,7 @@ overflow-x: hidden;
 display: inline-block;
 width: 100%;
 }
-:where(#xncifbrgcr) .gt_group_heading {
+:where(#lyqnihcftn) .gt_group_heading {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -10566,7 +10560,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 text-align: left;
 }
-:where(#xncifbrgcr) .gt_empty_group_heading {
+:where(#lyqnihcftn) .gt_empty_group_heading {
 padding: 0.5px;
 color: #333333;
 background-color: #FFFFFF;
@@ -10580,13 +10574,13 @@ border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 vertical-align: middle;
 }
-:where(#xncifbrgcr) .gt_from_md > :first-child {
+:where(#lyqnihcftn) .gt_from_md > :first-child {
 margin-top: 0;
 }
-:where(#xncifbrgcr) .gt_from_md > :last-child {
+:where(#lyqnihcftn) .gt_from_md > :last-child {
 margin-bottom: 0;
 }
-:where(#xncifbrgcr) .gt_row {
+:where(#lyqnihcftn) .gt_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -10604,7 +10598,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 overflow-x: hidden;
 }
-:where(#xncifbrgcr) .gt_stub {
+:where(#lyqnihcftn) .gt_stub {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -10616,7 +10610,7 @@ border-right-color: #D3D3D3;
 padding-left: 5px;
 padding-right: 5px;
 }
-:where(#xncifbrgcr) .gt_stub_row_group {
+:where(#lyqnihcftn) .gt_stub_row_group {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -10629,10 +10623,10 @@ padding-left: 5px;
 padding-right: 5px;
 vertical-align: top;
 }
-:where(#xncifbrgcr) .gt_row_group_first td {
+:where(#lyqnihcftn) .gt_row_group_first td {
 border-top-width: 2px;
 }
-:where(#xncifbrgcr) .gt_summary_row {
+:where(#lyqnihcftn) .gt_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -10641,14 +10635,14 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-:where(#xncifbrgcr) .gt_first_summary_row {
+:where(#lyqnihcftn) .gt_first_summary_row {
 border-top-style: solid;
 border-top-color: #D3D3D3;
 }
-:where(#xncifbrgcr) .gt_first_summary_row.thick {
+:where(#lyqnihcftn) .gt_first_summary_row.thick {
 border-top-width: 2px;
 }
-:where(#xncifbrgcr) .gt_last_summary_row {
+:where(#lyqnihcftn) .gt_last_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -10657,7 +10651,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-:where(#xncifbrgcr) .gt_grand_summary_row {
+:where(#lyqnihcftn) .gt_grand_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -10666,7 +10660,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-:where(#xncifbrgcr) .gt_first_grand_summary_row {
+:where(#lyqnihcftn) .gt_first_grand_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -10675,10 +10669,10 @@ border-top-style: double;
 border-top-width: 6px;
 border-top-color: #D3D3D3;
 }
-:where(#xncifbrgcr) .gt_striped {
+:where(#lyqnihcftn) .gt_striped {
 background-color: rgba(128, 128, 128, 0.05);
 }
-:where(#xncifbrgcr) .gt_table_body {
+:where(#lyqnihcftn) .gt_table_body {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -10686,7 +10680,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-:where(#xncifbrgcr) .gt_footnotes {
+:where(#lyqnihcftn) .gt_footnotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -10699,7 +10693,7 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-:where(#xncifbrgcr) .gt_footnote {
+:where(#lyqnihcftn) .gt_footnote {
 margin: 0px;
 font-size: 90%;
 padding-left: 4px;
@@ -10707,7 +10701,7 @@ padding-right: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-:where(#xncifbrgcr) .gt_sourcenotes {
+:where(#lyqnihcftn) .gt_sourcenotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -10720,58 +10714,58 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-:where(#xncifbrgcr) .gt_sourcenote {
+:where(#lyqnihcftn) .gt_sourcenote {
 font-size: 90%;
 padding-top: 4px;
 padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-:where(#xncifbrgcr) .gt_left {
+:where(#lyqnihcftn) .gt_left {
 text-align: left;
 }
-:where(#xncifbrgcr) .gt_center {
+:where(#lyqnihcftn) .gt_center {
 text-align: center;
 }
-:where(#xncifbrgcr) .gt_right {
+:where(#lyqnihcftn) .gt_right {
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
-:where(#xncifbrgcr) .gt_font_normal {
+:where(#lyqnihcftn) .gt_font_normal {
 font-weight: normal;
 }
-:where(#xncifbrgcr) .gt_font_bold {
+:where(#lyqnihcftn) .gt_font_bold {
 font-weight: bold;
 }
-:where(#xncifbrgcr) .gt_font_italic {
+:where(#lyqnihcftn) .gt_font_italic {
 font-style: italic;
 }
-:where(#xncifbrgcr) .gt_super {
+:where(#lyqnihcftn) .gt_super {
 font-size: 65%;
 }
-:where(#xncifbrgcr) .gt_footnote_marks {
+:where(#lyqnihcftn) .gt_footnote_marks {
 font-style: italic;
 font-weight: normal;
 font-size: 75%;
 vertical-align: 0.4em;
 }
-:where(#xncifbrgcr) .gt_asterisk {
+:where(#lyqnihcftn) .gt_asterisk {
 font-size: 100%;
 vertical-align: 0;
 }
-:where(#xncifbrgcr) .gt_indent_1 {
+:where(#lyqnihcftn) .gt_indent_1 {
 text-indent: 5px;
 }
-:where(#xncifbrgcr) .gt_indent_2 {
+:where(#lyqnihcftn) .gt_indent_2 {
 text-indent: 10px;
 }
-:where(#xncifbrgcr) .gt_indent_3 {
+:where(#lyqnihcftn) .gt_indent_3 {
 text-indent: 15px;
 }
-:where(#xncifbrgcr) .gt_indent_4 {
+:where(#lyqnihcftn) .gt_indent_4 {
 text-indent: 20px;
 }
-:where(#xncifbrgcr) .gt_indent_5 {
+:where(#lyqnihcftn) .gt_indent_5 {
 text-indent: 25px;
 }
 </style>
