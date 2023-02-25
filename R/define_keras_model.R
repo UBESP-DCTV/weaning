@@ -33,9 +33,23 @@ define_keras_model <- function() {
 
   trd_l1 <- input_trd_normalized %>%
     keras::bidirectional(keras::layer_conv_lstm_1d(
-      filters = 8,
+      filters = 64,
       kernel_size = 1,
       name = "trd_l1",
+      activation = "relu",
+      return_sequences = TRUE
+    )) %>%
+    keras::bidirectional(keras::layer_conv_lstm_1d(
+      filters = 32,
+      kernel_size = 1,
+      name = "trd_l1-1",
+      activation = "relu",
+      return_sequences = TRUE
+    )) %>%
+    keras::bidirectional(keras::layer_conv_lstm_1d(
+      filters = 64,
+      kernel_size = 1,
+      name = "trd_l1-2",
       activation = "relu"
     ))
 
@@ -46,8 +60,20 @@ define_keras_model <- function() {
 
   merged_l3 <- merged_daily_trd %>%
     keras::bidirectional(keras::layer_gru(
-      units = 8,
+      units = 64,
       name = "merged_l3",
+      activation = "relu",
+      return_sequences = TRUE
+    )) %>%
+    keras::bidirectional(keras::layer_gru(
+      units = 32,
+      name = "merged_l3-1",
+      activation = "relu",
+      return_sequences = TRUE
+    )) %>%
+    keras::bidirectional(keras::layer_gru(
+      units = 64,
+      name = "merged_l3-2",
       activation = "relu"
     ))
 
@@ -58,14 +84,14 @@ define_keras_model <- function() {
   dense_l6 <- merged_l4 %>%
     keras::layer_dense(
       name = "dense_l5",
-      units = 8,
+      units = 32,
       activation = "relu"
     ) %>%
     keras::layer_batch_normalization() %>%
     keras::layer_activity_regularization(l1 = 1e-1, l2 = 1e-1) %>%
     keras::layer_dense(
       name = "dense_l6",
-      units = 8,
+      units = 32,
       activation = "relu"
     ) %>%
     keras::layer_batch_normalization() %>%
