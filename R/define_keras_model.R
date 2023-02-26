@@ -33,7 +33,7 @@ define_keras_model <- function() {
   )
 
   input_baseline_normalized <- input_baseline |>
-    layer_rescale_1d(c(2, 2, 92, 30, 90, 120, 8)) |>
+    layer_rescale_1d(1/c(2, 2, 92, 30, 90, 120, 8)) |>
     layer_batch_normalization()
 
   input_daily <- keras::layer_input(
@@ -42,7 +42,7 @@ define_keras_model <- function() {
   )
 
   input_daily_normalized <- input_daily |>
-    layer_rescale_1d(c(14, 12, 8, 160, 95)) |>
+    layer_rescale_1d(1/c(14, 12, 8, 160, 95)) |>
     layer_batch_normalization()
 
 
@@ -52,11 +52,11 @@ define_keras_model <- function() {
   )
 
   input_trd_normalized <- input_trd |>
-    layer_rescale_1d(c(
-      100, 20, 24, 20, 800, 100, 20, 800  , 20 , 40  ,
-       40, 35,  3,  40,  10, 100,  3.9,  2.1, 2.1,
-      330, 20
-    ))
+    layer_rescale_1d(1/c(
+      100, 20, 24, 20, 800, 100, 20  , 800  , 20  ,  40,
+      40, 35,  3, 40,  10, 100,  3.9,   2.1,  2.1, 330,
+      20
+    )) |>
     layer_batch_normalization()
 
 

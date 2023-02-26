@@ -52,7 +52,7 @@ create_pt_trd <- function(db, pt_id) {
 
 
 
-  res[is.na(res)] <- -99
+  res[is.na(res)] <- -1
 
   purrr::map(
     c(0, seq_len(max(res[["day"]], na.rm = TRUE))),
