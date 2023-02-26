@@ -9,7 +9,7 @@
     ]
   },
   "Python": {
-    "Version": "3.9.13",
+    "Version": "3.10.6",
     "Type": "virtualenv",
     "Name": "./renv/python/virtualenvs/renv-python-3.10"
   },
