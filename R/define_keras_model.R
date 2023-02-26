@@ -42,7 +42,7 @@ define_keras_model <- function() {
   )
 
   input_daily_normalized <- input_daily |>
-    layer_rescale_1d(c(14, 8, 160, 95)) |> stop("should be 5?!")
+    layer_rescale_1d(c(14, 12, 8, 160, 95)) |>
     layer_batch_normalization()
 
 
@@ -54,9 +54,9 @@ define_keras_model <- function() {
   input_trd_normalized <- input_trd |>
     layer_rescale_1d(c(
       100, 20, 24, 20, 800, 100, 20, 800  , 20 , 40  ,
-       40, 35,  3, 50,  40,  10, 100,  3.9,  2.1, 2.1,
+       40, 35,  3,  40,  10, 100,  3.9,  2.1, 2.1,
       330, 20
-    )) |> stop("should be 21?!")
+    ))
     layer_batch_normalization()
 
 
