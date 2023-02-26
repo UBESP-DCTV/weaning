@@ -1,5 +1,31 @@
 define_keras_model <- function() {
 
+
+# custom layers ---------------------------------------------------
+
+  layer_rescale_1d <- keras::new_layer_class(
+    classname = "rescale1d",
+
+    initialize = function(scalars) {
+      super$initialize()
+      self$scalars <- scalars
+    },
+
+    build = function(input_shape) {
+      input_dim <- input_shape[length(input_shape)]
+      self$W <- tf$constant(self$scalars)
+    },
+
+    call = function(inputs) {
+      self$W <- tf$cast(self$W, inputs$dtype)
+      tf$multiply(inputs, self$W)
+    }
+  )
+
+
+
+
+
 # inputs ----------------------------------------------------------
   input_baseline <- keras::layer_input(
     name = "input_baseline",
@@ -7,6 +33,7 @@ define_keras_model <- function() {
   )
 
   input_baseline_normalized <- input_baseline |>
+    layer_rescale_1d(c(2, 2, 92, 30, 90, 120, 8)) |>
     layer_batch_normalization()
 
   input_daily <- keras::layer_input(
@@ -15,6 +42,7 @@ define_keras_model <- function() {
   )
 
   input_daily_normalized <- input_daily |>
+    layer_rescale_1d(c(14, 8, 160, 95)) |> stop("should be 5?!")
     layer_batch_normalization()
 
 
@@ -24,6 +52,11 @@ define_keras_model <- function() {
   )
 
   input_trd_normalized <- input_trd |>
+    layer_rescale_1d(c(
+      100, 20, 24, 20, 800, 100, 20, 800  , 20 , 40  ,
+       40, 35,  3, 50,  40,  10, 100,  3.9,  2.1, 2.1,
+      330, 20
+    )) |> stop("should be 21?!")
     layer_batch_normalization()
 
 
@@ -36,20 +69,6 @@ define_keras_model <- function() {
       filters = 64,
       kernel_size = 1,
       name = "trd_l1",
-      activation = "relu",
-      return_sequences = TRUE
-    )) %>%
-    keras::bidirectional(keras::layer_conv_lstm_1d(
-      filters = 32,
-      kernel_size = 1,
-      name = "trd_l1-1",
-      activation = "relu",
-      return_sequences = TRUE
-    )) %>%
-    keras::bidirectional(keras::layer_conv_lstm_1d(
-      filters = 64,
-      kernel_size = 1,
-      name = "trd_l1-2",
       activation = "relu"
     ))
 
@@ -62,18 +81,6 @@ define_keras_model <- function() {
     keras::bidirectional(keras::layer_gru(
       units = 64,
       name = "merged_l3",
-      activation = "relu",
-      return_sequences = TRUE
-    )) %>%
-    keras::bidirectional(keras::layer_gru(
-      units = 32,
-      name = "merged_l3-1",
-      activation = "relu",
-      return_sequences = TRUE
-    )) %>%
-    keras::bidirectional(keras::layer_gru(
-      units = 64,
-      name = "merged_l3-2",
       activation = "relu"
     ))
 
