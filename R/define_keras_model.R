@@ -32,39 +32,21 @@ define_keras_model <- function() {
     shape = c(7)
   )
 
-  input_baseline_normalized <- input_baseline # |>
-    # layer_rescale_1d(1/rep(500, 7)) |> #c(2, 2, 104, 100, 90, 120, 8)) |>
-    # layer_batch_normalization()
-
   input_daily <- keras::layer_input(
     name = "input_daily",
     shape = c(NA, 5)
   )
-
-  input_daily_normalized <- input_daily # |>
-    # layer_rescale_1d(1/rep(500, 5)) |> #c(30, 12, 8, 300, 300)) |>
-    # layer_batch_normalization()
-
 
   input_trd <- keras::layer_input(
     name = "input_trd",
     shape = c(1440, NA, 21)
   )
 
-  input_trd_normalized <- input_trd # |>
-    # layer_rescale_1d(1/rep(1000, 21)) |> #c(
-    #   # 100, 20, 24, 20, 1200, 100, 20  , 800  , 20  ,  47,
-    #   # 47, 35,  35, 40,  10, 100,  12,   2.1,  2.1, 1000,
-    #   # 20
-    # # )) |>
-    # layer_batch_normalization()
-
-
 
 # network ---------------------------------------------------------
 
 
-  trd_l1 <- input_trd_normalized %>%
+  trd_l1 <- input_trd %>%
     keras::bidirectional(keras::layer_conv_lstm_1d(
       filters = 64,
       kernel_size = 5,
@@ -74,7 +56,8 @@ define_keras_model <- function() {
     ))
 
 
-  merged_daily_trd <- keras::k_concatenate(c(input_daily_normalized, trd_l1)) %>%
+  merged_daily_trd <- keras::k_concatenate(c(input_daily, trd_l1)) %>%
+    keras::layer_dropout(rate = 0.5) |>
     keras::layer_batch_normalization() %>%
     keras::layer_activity_regularization(l1 = 1e-1, l2 = 1e-1)
 
@@ -85,7 +68,8 @@ define_keras_model <- function() {
       activation = "relu"
     ))
 
-  merged_l4 <- keras::k_concatenate(c(merged_l3, input_baseline_normalized)) %>%
+  merged_l4 <- keras::k_concatenate(c(merged_l3, input_baseline)) %>%
+    keras::layer_dropout(rate = 0.5) |>
     keras::layer_batch_normalization() %>%
     keras::layer_activity_regularization(l1 = 1e-1, l2 = 1e-1)
 
@@ -95,6 +79,7 @@ define_keras_model <- function() {
       units = 32,
       activation = "relu"
     ) %>%
+    keras::layer_dropout(rate = 0.5) |>
     keras::layer_batch_normalization() %>%
     keras::layer_activity_regularization(l1 = 1e-1, l2 = 1e-1) %>%
     keras::layer_dense(
@@ -102,6 +87,7 @@ define_keras_model <- function() {
       units = 32,
       activation = "relu"
     ) %>%
+    keras::layer_dropout(rate = 0.5) |>
     keras::layer_batch_normalization() %>%
     keras::layer_activity_regularization(l1 = 1e-1, l2 = 1e-1)
 
@@ -114,7 +100,7 @@ define_keras_model <- function() {
 
 # Model -----------------------------------------------------------
 
-  keras::keras_model(
+  model <- keras::keras_model(
     inputs = c(
       input_baseline = input_baseline,
       input_daily = input_daily,
@@ -122,4 +108,17 @@ define_keras_model <- function() {
     ),
     outputs = out
   )
+
+  model %>%
+    compile(
+      optimizer = keras::optimizer_adam(
+        clipnorm = 0.1,
+        clipvalue = 0.1,
+        amsgrad = TRUE
+      ),
+      loss = loss_categorical_crossentropy(),
+      metrics = "accuracy"
+    )
+
+  model
 }
