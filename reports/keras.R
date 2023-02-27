@@ -23,9 +23,9 @@ library(targets)
 
 n_days <- 6
 data_used <- targets::tar_read(trainArraysByDays, branches = n_days)[[1]]
-baseline <- data_used[[2]]
-daily <- data_used[[3]]
-trd <- data_used[[4]]
+baseline <- data_used[[2]] / 500
+daily <- data_used[[3]] / 500
+trd <- data_used[[4]] / 1000
 outcome <- keras::k_one_hot(data_used[[5]], 3L)
 
 
@@ -61,7 +61,11 @@ if (is_develop) {
 
 model %>%
   compile(
-    optimizer = k$optimizers$Adam(amsgrad = TRUE),
+    optimizer = keras::optimizer_adam(
+      clipnorm = 0.1,
+      clipvalue = 0.1,
+      amsgrad = TRUE
+    ),
     loss = loss_categorical_crossentropy(),
     metrics = "accuracy"
   )

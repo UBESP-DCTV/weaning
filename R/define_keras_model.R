@@ -32,18 +32,18 @@ define_keras_model <- function() {
     shape = c(7)
   )
 
-  input_baseline_normalized <- input_baseline |>
-    layer_rescale_1d(1/c(2, 2, 92, 30, 90, 120, 8)) |>
-    layer_batch_normalization()
+  input_baseline_normalized <- input_baseline # |>
+    # layer_rescale_1d(1/rep(500, 7)) |> #c(2, 2, 104, 100, 90, 120, 8)) |>
+    # layer_batch_normalization()
 
   input_daily <- keras::layer_input(
     name = "input_daily",
     shape = c(NA, 5)
   )
 
-  input_daily_normalized <- input_daily |>
-    layer_rescale_1d(1/c(14, 12, 8, 160, 95)) |>
-    layer_batch_normalization()
+  input_daily_normalized <- input_daily # |>
+    # layer_rescale_1d(1/rep(500, 5)) |> #c(30, 12, 8, 300, 300)) |>
+    # layer_batch_normalization()
 
 
   input_trd <- keras::layer_input(
@@ -51,13 +51,13 @@ define_keras_model <- function() {
     shape = c(1440, NA, 21)
   )
 
-  input_trd_normalized <- input_trd |>
-    layer_rescale_1d(1/c(
-      100, 20, 24, 20, 800, 100, 20  , 800  , 20  ,  40,
-      40, 35,  3, 40,  10, 100,  3.9,   2.1,  2.1, 330,
-      20
-    )) |>
-    layer_batch_normalization()
+  input_trd_normalized <- input_trd # |>
+    # layer_rescale_1d(1/rep(1000, 21)) |> #c(
+    #   # 100, 20, 24, 20, 800, 100, 20  , 800  , 20  ,  47,
+    #   # 47, 35,  35, 40,  10, 100,  3.9,   2.1,  2.1, 1000,
+    #   # 20
+    # # )) |>
+    # layer_batch_normalization()
 
 
 
@@ -67,7 +67,8 @@ define_keras_model <- function() {
   trd_l1 <- input_trd_normalized %>%
     keras::bidirectional(keras::layer_conv_lstm_1d(
       filters = 64,
-      kernel_size = 1,
+      kernel_size = 5,
+      padding = "same",
       name = "trd_l1",
       activation = "relu"
     ))
