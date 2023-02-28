@@ -189,6 +189,6 @@ predicted_4 = sample(
   0:2,
   size = length(observed),
   replace = TRUE,
-  prob = c(78,12,10))
+  prob = c(78,12,10)) # from training set
 table(predicted_4, observed)
 ```

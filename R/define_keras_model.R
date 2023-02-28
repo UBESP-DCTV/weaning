@@ -3,27 +3,6 @@ define_keras_model <- function() {
 
 # custom layers ---------------------------------------------------
 
-  layer_rescale_1d <- keras::new_layer_class(
-    classname = "rescale1d",
-
-    initialize = function(scalars) {
-      super$initialize()
-      self$scalars <- scalars
-    },
-
-    build = function(input_shape) {
-      input_dim <- input_shape[length(input_shape)]
-      self$W <- tf$constant(self$scalars)
-    },
-
-    call = function(inputs) {
-      self$W <- tf$cast(self$W, inputs$dtype)
-      tf$multiply(inputs, self$W)
-    }
-  )
-
-
-
 
 
 # inputs ----------------------------------------------------------
@@ -46,9 +25,9 @@ define_keras_model <- function() {
 # network ---------------------------------------------------------
 
 
-  trd_l1 <- input_trd %>%
+  trd_l1 <- input_trd |>
     keras::bidirectional(keras::layer_conv_lstm_1d(
-      filters = 64,
+      filters = 32,
       kernel_size = 5,
       padding = "same",
       name = "trd_l1",
@@ -56,40 +35,28 @@ define_keras_model <- function() {
     ))
 
 
-  merged_daily_trd <- keras::k_concatenate(c(input_daily, trd_l1)) %>%
-    keras::layer_dropout(rate = 0.5) |>
-    keras::layer_batch_normalization() %>%
-    keras::layer_activity_regularization(l1 = 1e-1, l2 = 1e-1)
+  merged_daily_trd <- keras::k_concatenate(c(input_daily, trd_l1))
 
-  merged_l3 <- merged_daily_trd %>%
+  merged_l3 <- merged_daily_trd |>
     keras::bidirectional(keras::layer_gru(
-      units = 64,
+      units = 32,
       name = "merged_l3",
       activation = "relu"
     ))
 
-  merged_l4 <- keras::k_concatenate(c(merged_l3, input_baseline)) %>%
-    keras::layer_dropout(rate = 0.5) |>
-    keras::layer_batch_normalization() %>%
-    keras::layer_activity_regularization(l1 = 1e-1, l2 = 1e-1)
+  merged_l4 <- keras::k_concatenate(c(merged_l3, input_baseline))
 
-  dense_l6 <- merged_l4 %>%
+  dense_l6 <- merged_l4 |>
     keras::layer_dense(
       name = "dense_l5",
-      units = 32,
+      units = 16,
       activation = "relu"
-    ) %>%
-    keras::layer_dropout(rate = 0.5) |>
-    keras::layer_batch_normalization() %>%
-    keras::layer_activity_regularization(l1 = 1e-1, l2 = 1e-1) %>%
+    ) |>
     keras::layer_dense(
       name = "dense_l6",
-      units = 32,
+      units = 16,
       activation = "relu"
-    ) %>%
-    keras::layer_dropout(rate = 0.5) |>
-    keras::layer_batch_normalization() %>%
-    keras::layer_activity_regularization(l1 = 1e-1, l2 = 1e-1)
+    )
 
 # Output ----------------------------------------------------------
 
