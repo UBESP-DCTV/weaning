@@ -98,7 +98,6 @@ for (i in seq_len(k_folds)) {
     )
   k_time[[i]] <- round(Sys.time() - tic, 2)
 
-  ui_todo("Evaluating model...")
   res <- model |>
     keras::evaluate(x_val, y_val, verbose = 0)
 
