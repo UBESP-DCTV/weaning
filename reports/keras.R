@@ -32,27 +32,36 @@ here::here("R") |>
   invisible()
 
 
+
+# setting data ----------------------------------------------------
+db_full <- targets::tar_read(trainArraysByDays)
+
+ids <- targets::tar_read(pt_ids)
+ids_test <- character()
+ids_trval <- setdiff(ids, ids_test)
+
+db_test <- db_full |>
+  filter_db_ids(ids_test)
+
+db_trval <- db_full |>
+  filter_db_ids(ids_trval)
+
+rm(ids, db_full)
+
 # parameters ------------------------------------------------------
-n_days <- 6
+verbose <- as.integer(interactive())
 k_folds <- 5
+fold_id <- sample(rep(seq_len(k_folds), length.out = length(ids_trval)))
+
 epochs <- 10
 rec_units = 32
 dense_unit = 16
 batch_size <- 64
 
-data_used <- targets::tar_read(
-  trainArraysByDays,
-  branches = n_days
-)[[1]]
+run_id <- glue::glue(paste0(
+  "{stringr::str_remove_all(lubridate::now(), '\\\\W')}_run"
+))
 
-ids <- data_used[[1]]
-baseline <- data_used[[2]] / 500
-daily <- data_used[[3]] / 500
-trd <- data_used[[4]] / 1000
-outcome <- data_used[[5]]
-
-
-fold_id <- sample(rep(seq_len(k_folds), length.out = length(ids)))
 k_scores <- tibble::tibble(
   fold = integer(),
   epochs = integer(),
@@ -63,36 +72,34 @@ k_scores <- tibble::tibble(
 k_histories <- vector("list", k_folds)
 k_time <- vector("list", k_folds)
 
-run_id <- glue::glue(paste0(
-  "{stringr::str_remove_all(lubridate::now(), '\\\\W')}_run"
-))
+
+# ids <- data_used[[1]]
+# baseline <- data_used[[2]] / 500
+# daily <- data_used[[3]] / 500
+# trd <- data_used[[4]] / 1000
+# outcome <- data_used[[5]]
+#
 
 for (i in seq_len(k_folds)) {
   ui_todo("Processing fold {ui_value(i)}/{k_folds}...")
-  are_in_val <- ids[fold_id == i]
-  are_in_train <- ids[fold_id != i]
+  ids_in_val <- ids_trval[fold_id == i]
+  ids_in_train <- ids_trval[fold_id != i]
 
-  baseline_train <- baseline[are_in_train, ]
-  daily_train <- daily[are_in_train, , ]
-  trd_train <- trd[are_in_train, , , ]
-  x_train <- list(
-    input_baseline = baseline_train,
-    input_daily = daily_train,
-    input_trd = trd_train
-  )
-  y_train <- outcome[are_in_train] |>
-    keras::k_one_hot(num_classes = 3)
+  db_tr <- db_trval |>
+    filter_db_ids(ids_in_train)
 
-  baseline_val <- baseline[are_in_val, ]
-  daily_val <- daily[are_in_val, , ]
-  trd_val <- trd[are_in_val, , , ]
-  x_val <- list(
-    input_baseline = baseline_val,
-    input_daily = daily_val,
-    input_trd = trd_val
-  )
-  y_val <- outcome[are_in_val] |>
-    keras::k_one_hot(num_classes = 3)
+  db_val <- db_trval |>
+    filter_db_ids(ids_in_val)
+
+  tr_n_batches <- db_tr |>
+    purrr::map_int(~ceiling(length(.x[["ids"]]) / batch_size)) |>
+    sum()
+  val_n_batches <- db_val |>
+    purrr::map_int(~ceiling(length(.x[["ids"]]) / batch_size)) |>
+    sum()
+
+  tr_generator <- create_batch_generator(db_tr, batch_size)
+  val_generator <- create_batch_generator(db_val, batch_size)
 
   model <- define_keras_model(
     rec_units = rec_units,
@@ -102,12 +109,12 @@ for (i in seq_len(k_folds)) {
   tic <- Sys.time()
   k_histories[[i]] <- model %>%
     keras::fit(
-      x = x_train,
-      y = y_train,
-      validation_data = list(x_val, y_val),
+      x = tr_generator,
+      steps_per_epoch = tr_n_batches,
+      validation_data = val_generator,
+      validation_steps = val_n_batches,
       epochs = epochs,
-      batch_size  = batch_size,
-      verbose = 0
+      verbose = varbose
     )
   (k_time[[i]] <- round(Sys.time() - tic, 2))
   k_scores <- k_scores |>
