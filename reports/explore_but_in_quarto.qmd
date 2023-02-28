@@ -2,15 +2,23 @@
 title: "Explore but in quarto"
 author: "AP"
 format: html
+format:
+  html:
+    embed-resources: true
+    code-fold: true
+    code-summary: "Show the code"
 editor: visual
 ---
 
-## Test set
+## Preliminary preprocessing
 
 ```{r}
 library(tidyverse)
 library(gtsummary)
 library(targets)
+library(yardstick)
+# install.packages("familiar", dependencies = TRUE)
+library(familiar)
 
 baseline <- tar_read(pt_names)
 daily <- tar_read(pt_registry)
@@ -40,6 +48,8 @@ trd <- trd |>
   mutate( test_set = id_univoco %in% test_ids)
 
 ```
+
+## Test set
 
 Baseline differences
 
@@ -118,7 +128,7 @@ daily |>
 
 TRD differences
 
-```{r}
+```{r, eval = FALSE}
 trd |>
   select(-file,
          -id_univoco,
@@ -133,44 +143,29 @@ trd |>
 
 ## Dummy models
 
--   Model 0 to 3 - always predict a single class
-
-Model always predict Class 0
+-   Model 0 always predict Class 0
+-   Model 1 always predict Class 1
+-   Model 2 always predict Class 2
 
 ```{r}
 observed <- daily |>
   select(sbt) |>
   unlist()
 
-predicted_0 = rep_len(0, length.out = length(observed))
-table(predicted_0, observed)
+pred_obs <- tibble(
+  observed,
+  pred0 = rep_len(0, length.out = length(observed)),
+  pred1 = rep_len(1, length.out = length(observed)),
+  pred2 = rep_len(2, length.out = length(observed))
+  
+)
+
+#example
+table(pred_obs$pred0, pred_obs$observed)
 ```
 
-Model always predict 1
-
-```{r}
-predicted_1 = rep_len(1, length.out = length(observed))
-table(predicted_1, observed)
-```
-
-Model always predict 2
-
-```{r}
-predicted_2 = rep_len(2, length.out = length(observed))
-table(predicted_2, observed)
-```
-
--   Model 3 and 4- random prediction
-
-Model random predicts with random classes
-
-```{r}
-set.seed(4242)
-predicted_3 = sample(0:2, size = length(observed), replace = TRUE)
-table(predicted_3, observed)
-```
-
-Model random predicts with observed class frequencies
+-   Model 3 predicts with random classes
+-   Model 4 predicts random with observed class frequencies
 
 ```{r}
 daily |>
@@ -181,14 +176,95 @@ daily |>
   ) |>
   add_p() |>
   add_q()
+
+set.seed(4242)
+pred_obs <- pred_obs |>
+  mutate(
+    pred3 = sample(0:2, size = length(observed), replace = TRUE),
+    pred4 = sample(
+      0:2,
+      size = length(observed),
+      replace = TRUE,
+      prob = c(78,12,10)
+    )
+  )
+  
+table(pred_obs$pred3, pred_obs$observed)
 ```
 
+Model 5 predicts with baseline and daily input
+
 ```{r}
-set.seed(4242)
-predicted_4 = sample(
-  0:2,
-  size = length(observed),
-  replace = TRUE,
-  prob = c(78,12,10)) # from training set
-table(predicted_4, observed)
+dailydata <- daily |>
+  select(id_univoco,
+         starts_with("ega"),
+         sofa,
+         susp_tot,
+         giorno_studio,
+         sbt,
+         test_set) |>
+  left_join(
+    y = baseline |>
+      select(
+        id_univoco,
+        type,
+        sesso,
+        anni_eta,
+        bmi,
+        ibw,
+        saps,
+        reason
+      ),
+    by = "id_univoco"
+  )
+
+model5 <- summon_familiar(
+  data = filter(dailydata, test_set == FALSE),
+  experiment_dir = file.path(tempdir(), "familiar_1"),
+  sample_id_column = "id_univoco",
+  outcome_type = "multinomial",
+  outcome_column = "sbt",
+  experimental_design = "cv(fs+mb,10,1)",
+  fs_method = "mrmr",
+  learner = "xgboost_lm",
+  optimisation_metric = "balanced_accuracy",
+  imputation_method = "simple"
+  )
+
+plots <- familiar::plot_model_performance(
+  object = familiar_1,
+  data = filter(dailydata, test_set == TRUE),
+  metric = c("accuracy", "balanced_accuracy", "precision")
+  )
+
+plots[[1]]
+```
+
+Metric evaluation
+
+```{r}
+pred_obs <- pred_obs |>
+  mutate(
+    across(
+      everything(),
+      ~ factor(
+        .x,
+        levels = c(0,1,2)
+      )
+    )
+  )
+
+multi_metric <- metric_set(
+  accuracy,
+  bal_accuracy,
+  precision,
+  mcc,
+  ppv,
+  npv)
+  
+pred_obs |>
+  multi_metric(
+    truth = observed, 
+    estimate = pred4,
+    estimator = "macro_weighted")
 ```
