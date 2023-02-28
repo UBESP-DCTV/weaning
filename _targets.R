@@ -364,7 +364,10 @@ list(
     iteration = "list"
   ),
 
-
+  tar_target(idsTest, c()),
+  tar_target(dbTest, filter_db_ids(trainArraysByDays, idsTest)),
+  tar_target(idsTrVal, setdiff(pt_ids, idsTest)),
+  tar_target(dbTrVal, filter_db_ids(trainArraysByDays, idsTrVal)),
 
 
 
