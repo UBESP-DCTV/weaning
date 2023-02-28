@@ -15,6 +15,7 @@ if (on_cpu) {
 }
 
 library(usethis)
+library(tidyverse)
 library(tensorflow)
 library(keras)
 k <- reticulate::import("keras", convert = TRUE)
@@ -35,6 +36,8 @@ here::here("R") |>
 n_days <- 6
 k_folds <- 5
 epochs <- 10
+rec_units = 32
+dense_unit = 16
 batch_size <- 64
 
 data_used <- targets::tar_read(
@@ -50,7 +53,13 @@ outcome <- data_used[[5]]
 
 
 fold_id <- sample(rep(seq_len(k_folds), length.out = length(ids)))
-k_scores <- numeric(k_folds)
+k_scores <- tibble::tibble(
+  fold = integer(),
+  epochs = integer(),
+  set = character(), # train, validation
+  loss = numeric(),
+  accuracy = numeric()
+)
 k_histories <- vector("list", k_folds)
 k_time <- vector("list", k_folds)
 
@@ -85,44 +94,96 @@ for (i in seq_len(k_folds)) {
   y_val <- outcome[are_in_val] |>
     keras::k_one_hot(num_classes = 3)
 
-  model <- define_keras_model()
+  model <- define_keras_model(
+    rec_units = rec_units,
+    dense_unit = dense_unit
+  )
 
   tic <- Sys.time()
   k_histories[[i]] <- model %>%
     keras::fit(
       x = x_train,
       y = y_train,
+      validation_data = list(x_val, y_val),
       epochs = epochs,
       batch_size  = batch_size,
       verbose = 0
     )
-  k_time[[i]] <- round(Sys.time() - tic, 2)
-
-  res <- model |>
-    keras::evaluate(x_val, y_val, verbose = 0)
-
-  k_scores[[i]] <- res[["accuracy"]]
-  ui_done(
-    "Validation accuracy: {ui_value(round(100 * k_scores[[i]], 2))}%."
-  )
-  (round(Sys.time() - tic, 2))
+  (k_time[[i]] <- round(Sys.time() - tic, 2))
+  k_scores <- k_scores |>
+    dplyr::bind_rows(tibble::tibble(
+      fold = i,
+      set = "train", # train, validation
+      epochs = seq_len(k_histories[[i]][["params"]][["epochs"]]),
+      loss = k_histories[[i]][["metrics"]][["loss"]],
+      accuracy = k_histories[[i]][["metrics"]][["accuracy"]]
+    )) |>
+    dplyr::bind_rows(tibble::tibble(
+      fold = i,
+      set = "validation", # train, validation
+      epochs = seq_len(k_histories[[i]][["params"]][["epochs"]]),
+      loss = k_histories[[i]][["metrics"]][["val_loss"]],
+      accuracy = k_histories[[i]][["metrics"]][["val_accuracy"]]
+    ))
 }
+
+overall_time <- do.call(sum, k_time)
+gg <- k_scores |>
+  dplyr::mutate(fold = as.factor(fold)) |>
+  tidyr::pivot_longer(c(loss, accuracy)) |>
+  ggplot(aes(epochs, value, colour = set, fill = set)) +
+  geom_smooth() +
+  geom_point() +
+  facet_grid(name ~., scales = "free_y") +
+  scale_x_continuous(breaks = seq_len(max(epochs))) +
+  theme_bw() +
+  theme(legend.position = "top") +
+  labs(
+    subtitle = paste0(
+      "Recurrent units: ", rec_units, " - ",
+      "Dense units: ", dense_unit, " - ",
+      "Batch size: ", batch_size, "\n",
+      "Recurrent depth: ", 1, " - ",
+      "Dense depth: ", 2, "\n",
+      "Input drop-out: ", 0, "% - ",
+      "Internal drop-out: ", 0, "% - ",
+      "Recurrent drop-out: ", 0, "%\n",
+      "Internal activations: ReLU", " - ",
+      "Optimizer: Adam + AMSgrad."
+    ),
+    x = "Epoch",
+    y = "Value",
+    caption = paste0(
+      lubridate::today(), " - ",
+      "Training time: ",
+      overall_time, " ", attr(overall_time, "units"), "."
+    ),
+    colour = "Set",
+    fill = "Set"
+  )
 
 run <- list(
   k_scores = k_scores,
   k_histories = k_histories,
-  k_time = k_time
+  gg_histories = gg,
+  k_time = k_time,
+  k_final_scores = dplyr::filter(
+    k_scores,
+    set == "validation", epochs == max(.data[["epochs"]])
+  )[["accuracy"]]
 )
 ui_info(paste0(
-  "Mean k-fold validation accuracy: ",
-  "{ui_value(round(100 * mean(run[['k_scores']]), 2))}%."
+  "Mean k-fold validation last-epoch accuracy: ",
+  "{ui_value(round(100 * mean(run[['k_final_scores']]), 2))}%."
 ))
-ui_info("Overall training time: ")
-print(sum(unlist(run[["k_time"]])))
+ui_info(
+  "{ui_field('nan')}: {ui_value(sum(is.nan(k_scores[['loss']])))}."
+)
+print(do.call(sum, k_time))
 
 readr::write_rds(run, here::here("runs", paste0(run_id, ".rds")))
 
-
+if (interactive()) print(gg)
 
 if (is_develop) {
   model |>

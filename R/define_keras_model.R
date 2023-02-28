@@ -1,4 +1,4 @@
-define_keras_model <- function() {
+define_keras_model <- function(rec_units = 32, dense_unit = 16) {
 
 
 # custom layers ---------------------------------------------------
@@ -27,7 +27,7 @@ define_keras_model <- function() {
 
   trd_l1 <- input_trd |>
     keras::bidirectional(keras::layer_conv_lstm_1d(
-      filters = 32,
+      filters = rec_units,
       kernel_size = 5,
       padding = "same",
       name = "trd_l1",
@@ -39,7 +39,7 @@ define_keras_model <- function() {
 
   merged_l3 <- merged_daily_trd |>
     keras::bidirectional(keras::layer_gru(
-      units = 32,
+      units = rec_units,
       name = "merged_l3",
       activation = "relu"
     ))
@@ -49,12 +49,12 @@ define_keras_model <- function() {
   dense_l6 <- merged_l4 |>
     keras::layer_dense(
       name = "dense_l5",
-      units = 16,
+      units = rec_units,
       activation = "relu"
     ) |>
     keras::layer_dense(
       name = "dense_l6",
-      units = 16,
+      units = rec_units,
       activation = "relu"
     )
 
