@@ -1,0 +1,194 @@
+---
+title: "Explore but in quarto"
+author: "AP"
+format: html
+editor: visual
+---
+
+## Test set
+
+```{r}
+library(tidyverse)
+library(gtsummary)
+library(targets)
+
+baseline <- tar_read(pt_names)
+daily <- tar_read(pt_registry)
+trd <- tar_read(weaningsTRD)
+
+baselineArrays <- tar_read(baselineArrays)
+dailyArrays <- tar_read(dailyArrays)
+trdArrays <- tar_read(trdArrays)
+outArrays <- tar_read(outArrays)
+```
+
+Data import
+
+```{r}
+set.seed(4242)
+test_ids <- baseline |>
+  slice_sample(n = 36) |>
+  select(id_univoco) |>
+  unlist(use.names = FALSE)
+
+baseline <- baseline |>
+  mutate( test_set = id_univoco %in% test_ids)
+daily <- daily |>
+  mutate( test_set = id_univoco %in% test_ids) |>
+  filter(sbt != -1)
+trd <- trd |>
+  mutate( test_set = id_univoco %in% test_ids)
+
+```
+
+Baseline differences
+
+```{r}
+baseline |>
+  select(-id_univoco, -starts_with("vm")) |>
+  mutate(reason = reason |>
+           fct_recode(
+             "Sepsis" = "Sepsi",
+             "Pneumonia" = "Polmonite",
+             "Post-surgical complications" = "Complicanze Postoperatorie",
+             "Heart Failure" = "Scompenso Cardiaco",
+             "COPD exacerbation" = "BPCO Riacutizzata",
+             "Other" = "Altro (specificare)",
+             "Trauma - Polytrauma" = "Trauma - Politrauma"
+             # ARDS doesn't need recoding
+           )) |>
+  tbl_summary(
+    by = test_set,
+    label = list( type ~ "Ventilation mode",
+                  sesso ~ "Gender",
+                  anni_eta ~ "Age (years)",
+                  reason ~ "Reason for MV")
+  ) |>
+  add_p() |>
+  add_q()
+```
+
+Daily differences (all but study days)
+
+```{r}
+daily |>
+  select(-id_registry,
+         -filter_deleted,
+         -id_univoco,
+         -id_medico,
+         -starts_with("susp_"),
+         -starts_with("stop_"),
+         -starts_with("fail_"),
+         susp_tot) |>
+  mutate(sbt = sbt |>
+           as.character() |>
+           fct_recode(
+             # "Already extubated" = "-1",
+             "Readiness Testing failure" = "0",
+             "SBT success" = "1",
+             "SBT failure" = "2"
+           )
+  ) |>
+  tbl_summary(
+    by= test_set
+  ) |>
+  add_p() |>
+  add_q()
+  
+```
+
+Daily differences ( study days)
+
+```{r}
+daily |>
+  group_by(id_univoco) |>
+  summarise(giorno_finale = max(giorno_studio),
+            test_set = unique(test_set)) |>
+  select(giorno_finale,
+         test_set) |>
+  tbl_summary(
+    by = test_set,
+    label = giorno_finale ~ "Day of study",
+    statistic = all_continuous() ~ "{median}  (range: {min}, {max})"
+    # digits = ~ 2
+  ) |>
+  add_p() |>
+  add_q()
+```
+
+TRD differences
+
+```{r}
+trd |>
+  select(-file,
+         -id_univoco,
+         -date,
+         -ora) |>
+  tbl_summary(
+    by = test_set
+  ) |>
+  add_p() |>
+  add_q()
+```
+
+## Dummy models
+
+-   Model 0 to 3 - always predict a single class
+
+Model always predict Class 0
+
+```{r}
+observed <- daily |>
+  select(sbt) |>
+  unlist()
+
+predicted_0 = rep_len(0, length.out = length(observed))
+table(predicted_0, observed)
+```
+
+Model always predict 1
+
+```{r}
+predicted_1 = rep_len(1, length.out = length(observed))
+table(predicted_1, observed)
+```
+
+Model always predict 2
+
+```{r}
+predicted_2 = rep_len(2, length.out = length(observed))
+table(predicted_2, observed)
+```
+
+-   Model 3 and 4- random prediction
+
+Model random predicts with random classes
+
+```{r}
+set.seed(4242)
+predicted_3 = sample(0:2, size = length(observed), replace = TRUE)
+table(predicted_3, observed)
+```
+
+Model random predicts with observed class frequencies
+
+```{r}
+daily |>
+  select(sbt, test_set) |>
+  tbl_summary(
+    by = test_set,
+    label = sbt ~ "Daily attempt"
+  ) |>
+  add_p() |>
+  add_q()
+```
+
+```{r}
+set.seed(4242)
+predicted_4 = sample(
+  0:2,
+  size = length(observed),
+  replace = TRUE,
+  prob = c(78,12,10))
+table(predicted_4, observed)
+```
