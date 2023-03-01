@@ -1,4 +1,9 @@
-define_keras_model <- function(rec_units = 32, dense_unit = 16) {
+define_keras_model <- function(
+    rec_units = 32,
+    dense_unit = 16,
+    inner_do = 0.5,
+    rec_do = 0.5
+) {
 
 
 # custom layers ---------------------------------------------------
@@ -30,9 +35,12 @@ define_keras_model <- function(rec_units = 32, dense_unit = 16) {
       filters = rec_units,
       kernel_size = 5,
       padding = "same",
+      dropout = inner_do,
+      recurrent_dropout = rec_do,
       name = "trd_l1",
       activation = "relu"
     ))
+
 
 
   merged_daily_trd <- keras::k_concatenate(c(input_daily, trd_l1))
@@ -40,6 +48,8 @@ define_keras_model <- function(rec_units = 32, dense_unit = 16) {
   merged_l3 <- merged_daily_trd |>
     keras::bidirectional(keras::layer_gru(
       units = rec_units,
+      dropout = inner_do,
+      recurrent_dropout = rec_do,
       name = "merged_l3",
       activation = "relu"
     ))
@@ -52,11 +62,13 @@ define_keras_model <- function(rec_units = 32, dense_unit = 16) {
       units = rec_units,
       activation = "relu"
     ) |>
+    keras::layer_dropout(inner_do) |>
     keras::layer_dense(
       name = "dense_l6",
       units = rec_units,
       activation = "relu"
-    )
+    ) |>
+    keras::layer_dropout(inner_do)
 
 # Output ----------------------------------------------------------
 

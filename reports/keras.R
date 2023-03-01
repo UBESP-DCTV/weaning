@@ -33,12 +33,14 @@ list.files(here("R"), pattern = "keras", full.names = TRUE) |>
 # Parameters ------------------------------------------------------
 run_id <- str_remove_all(now(), '\\W') |> paste0("_run")
 
-k_folds <- 5
+k_folds <- 2
 epochs <- 10
 batch_size <- 64
 
 rec_units = 32
 dense_unit = 16
+inner_do = 0.5
+rec_do = 0.5
 
 
 # Global variables ------------------------------------------------
@@ -104,7 +106,9 @@ for (i in seq_len(k_folds)) {
   ui_todo("Training in progress...")
   model <- define_keras_model(
     rec_units = rec_units,
-    dense_unit = dense_unit
+    dense_unit = dense_unit,
+    inner_do = inner_do,
+    rec_do = rec_do
   )
 
   tic <- Sys.time()
@@ -156,10 +160,11 @@ gg <- k_scores |>
       "Recurrent depth: ", 1, " - ",
       "Dense depth: ", 2, "\n",
       "Input drop-out: ", 0, "% - ",
-      "Internal drop-out: ", 0, "% - ",
-      "Recurrent drop-out: ", 0, "%\n",
+      "Internal drop-out: ", inner_do, "% - ",
+      "Recurrent drop-out: ", rec_do, "%\n",
       "Internal activations: ReLU", " - ",
-      "Optimizer: Adam + AMSgrad."
+      "Optimizer: Adam + AMSgrad.\n",
+      "CV folds: ", k_folds, "."
     ),
     x = "Epoch",
     y = "Value",
