@@ -1,6 +1,7 @@
 define_keras_model <- function(
     rec_units = 32,
     dense_unit = 16,
+    input_do = 0.1,
     inner_do = 0.5,
     rec_do = 0.5
 ) {
@@ -14,17 +15,23 @@ define_keras_model <- function(
   input_baseline <- keras::layer_input(
     name = "input_baseline",
     shape = c(7)
-  )
+  ) |>
+    keras::layer_dropout(input_do)
+
 
   input_daily <- keras::layer_input(
     name = "input_daily",
     shape = c(NA, 5)
-  )
+  ) |>
+    keras::layer_dropout(input_do)
+
 
   input_trd <- keras::layer_input(
     name = "input_trd",
     shape = c(1440, NA, 21)
-  )
+  ) |>
+    keras::layer_dropout(input_do)
+
 
 
 # network ---------------------------------------------------------
@@ -43,7 +50,8 @@ define_keras_model <- function(
 
 
   merged_daily_trd <- keras::k_concatenate(c(input_daily, trd_l1)) |>
-    keras::layer_batch_normalization()
+    keras::layer_batch_normalization() |>
+    keras::layer_activity_regularization(l1 = 1e-1, l2 = 1e-1)
 
 
   merged_l3 <- merged_daily_trd |>
@@ -56,7 +64,8 @@ define_keras_model <- function(
     ))
 
   merged_l4 <- keras::k_concatenate(c(merged_l3, input_baseline)) |>
-    keras::layer_batch_normalization()
+    keras::layer_batch_normalization() |>
+    keras::layer_activity_regularization(l1 = 1e-1, l2 = 1e-1)
 
 
   dense_l6 <- merged_l4 |>
@@ -67,13 +76,15 @@ define_keras_model <- function(
     ) |>
     keras::layer_dropout(inner_do) |>
     keras::layer_batch_normalization() |>
+    keras::layer_activity_regularization(l1 = 1e-1, l2 = 1e-1) |>
     keras::layer_dense(
       name = "dense_l6",
       units = rec_units,
       activation = "relu"
     ) |>
     keras::layer_dropout(inner_do) |>
-    keras::layer_batch_normalization()
+    keras::layer_batch_normalization() |>
+    keras::layer_activity_regularization(l1 = 1e-1, l2 = 1e-1)
 
 # Output ----------------------------------------------------------
 
