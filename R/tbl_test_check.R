@@ -5,20 +5,20 @@ tbl_test_check <- function(
     trd_input) {
 
   baseline <- baseline_input |>
-    mutate( test_set = id_univoco %in% test_ids)
+    dplyr::mutate( test_set = id_univoco %in% test_ids)
   daily <- daily_input |>
-    mutate( test_set = id_univoco %in% test_ids) |>
-    filter(sbt != -1)
+    dplyr::mutate( test_set = id_univoco %in% test_ids) |>
+    dplyr::filter(sbt != -1)
   trd <- trd_input |>
-    mutate( test_set = id_univoco %in% test_ids)
+    dplyr::mutate( test_set = id_univoco %in% test_ids)
 
   table_baseline <- baseline |>
-    select(-id_univoco,
-           -starts_with("vm"),
-           -starts_with("icu"),
-           -starts_with("osp")) |>
-    mutate(reason = reason |>
-             fct_recode(
+    dplyr::select(-id_univoco,
+                  -dplyr::starts_with("vm"),
+                  -dplyr::starts_with("icu"),
+                  -dplyr::starts_with("osp")) |>
+    dplyr::mutate(reason = reason |>
+             forcats::fct_recode(
                "Sepsis" = "Sepsi",
                "Pneumonia" = "Polmonite",
                "Post-surgical complications" = "Complicanze Postoperatorie",
@@ -28,61 +28,62 @@ tbl_test_check <- function(
                "Trauma - Polytrauma" = "Trauma - Politrauma"
                # ARDS doesn't need recoding
              )) |>
-    tbl_summary(
+    gtsummary::tbl_summary(
       by = test_set,
       label = list( type ~ "Ventilation mode",
                     sesso ~ "Gender",
                     anni_eta ~ "Age (years)",
                     reason ~ "Reason for MV")
     ) |>
-    add_p() |>
-    add_q()
+    gtsummary::add_p() |>
+    gtsummary::add_q()
 
   table_daily <- daily |>
-    select(-id_registry,
+    dplyr::select(-id_registry,
            -filter_deleted,
            -id_univoco,
            -id_medico,
-           -starts_with("susp_"),
-           -starts_with("stop_"),
-           -starts_with("fail_"),
+           -dplyr::starts_with("susp_"),
+           -dplyr::starts_with("stop_"),
+           -dplyr::starts_with("fail_"),
            -cpis,
            -data_lettura,
            -giorno_studio,
            susp_tot) |>
-    mutate(sbt = sbt |>
+    dplyr::mutate(sbt = sbt |>
              as.character() |>
-             fct_recode(
+             forcats::fct_recode(
                # "Already extubated" = "-1",
                "Readiness Testing failure" = "0",
                "SBT success" = "1",
                "SBT failure" = "2"
              )
     ) |>
-    tbl_summary(
+    gtsummary::tbl_summary(
       by= test_set
     ) |>
-    add_p() |>
-    add_q()
+    gtsummary::add_p() |>
+    gtsummary::add_q()
 
   table_days <- daily |>
-    group_by(id_univoco) |>
-    summarise(giorno_finale = max(giorno_studio),
-              test_set = unique(test_set)) |>
-    select(giorno_finale,
-           test_set) |>
-    tbl_summary(
+    dplyr::group_by(id_univoco) |>
+    dplyr::summarise(
+      giorno_finale = max(giorno_studio),
+      test_set = unique(test_set)) |>
+    dplyr::select(
+      giorno_finale,
+      test_set) |>
+    gtsummary::tbl_summary(
       by = test_set,
       label = giorno_finale ~ "Day of study",
-      statistic = all_continuous() ~ "{median}  (range: {min}, {max})"
-      # digits = ~ 2
+      statistic = giorno_finale ~ "{median}  (range: {min}, {max})"
     ) |>
-    add_p() |>
-    add_q()
+    gtsummary::add_p() |>
+    gtsummary::add_q()
 
   table_trd <- trd_table_create(trd)
 
-  tbl_stack(
+  gtsummary::tbl_stack(
     list(
       table_baseline,
       table_daily,
@@ -96,15 +97,16 @@ tbl_test_check <- function(
   )
 }
 
-trd_table_create(trd) {
+
+trd_table_create <- function(trd) {
   trd |>
-    select(-file,
+    dplyr::select(-file,
            -id_univoco,
            -date,
            -ora) |>
-    tbl_summary(
+    gtsummary::tbl_summary(
       by = test_set
     ) |>
-    add_p() |>
-    add_q()
+    gtsummary::add_p() |>
+    gtsummary::add_q()
 }

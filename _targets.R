@@ -364,13 +364,13 @@ list(
     iteration = "list"
   ),
 
-  tar_targetidsT(
+  tar_target(
     idsTest,
     {
       set.seed(4242)
       pt_names |>
-        slice_sample(n = 36) |>
-        select(id_univoco) |>
+        dplyr::slice_sample(n = 36) |>
+        dplyr::select(id_univoco) |>
         unlist(use.names = FALSE)
     }
   ),
