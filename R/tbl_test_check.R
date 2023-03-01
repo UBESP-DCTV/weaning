@@ -1,14 +1,15 @@
 tbl_test_check <- function(
     test_ids,
-    baseline,
-    daily,
-    trd) {
-  baseline <- baseline |>
+    baseline_input,
+    daily_input,
+    trd_input) {
+
+  baseline <- baseline_input |>
     mutate( test_set = id_univoco %in% test_ids)
-  daily <- daily |>
+  daily <- daily_input |>
     mutate( test_set = id_univoco %in% test_ids) |>
     filter(sbt != -1)
-  trd <- trd |>
+  trd <- trd_input |>
     mutate( test_set = id_univoco %in% test_ids)
 
   table_baseline <- baseline |>
@@ -79,16 +80,7 @@ tbl_test_check <- function(
     add_p() |>
     add_q()
 
-  table_trd <- trd |>
-    select(-file,
-           -id_univoco,
-           -date,
-           -ora) |>
-    tbl_summary(
-      by = test_set
-    ) |>
-    add_p() |>
-    add_q()
+  table_trd <- trd_table_create(trd)
 
   tbl_stack(
     list(
@@ -102,4 +94,17 @@ tbl_test_check <- function(
       "Days of MV"
     )
   )
+}
+
+trd_table_create(trd) {
+  trd |>
+    select(-file,
+           -id_univoco,
+           -date,
+           -ora) |>
+    tbl_summary(
+      by = test_set
+    ) |>
+    add_p() |>
+    add_q()
 }
