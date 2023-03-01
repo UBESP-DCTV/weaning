@@ -378,18 +378,12 @@ list(
   tar_target(
     test_set_check,
     tbl_test_check(
-      test_ids,
+      idsTest,
       pt_names,
       pt_registry,
       weaningsTRD
     )
   ),
-=======
-  tar_target(idsTest, c()),
-  tar_target(dbTest, filter_db_ids(trainArraysByDays, idsTest)),
-  tar_target(idsTrVal, setdiff(pt_ids, idsTest)),
-  tar_target(dbTrVal, filter_db_ids(trainArraysByDays, idsTrVal)),
->>>>>>> 1d4153b362e5270d17451c3b5e77cd55f342a84b
 
   tar_target(dbTest, filter_db_ids(trainArraysByDays, idsTest)),
   tar_target(idsTrVal, setdiff(pt_ids, idsTest)),

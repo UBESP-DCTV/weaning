@@ -2,8 +2,7 @@ tbl_test_check <- function(
     test_ids,
     baseline,
     daily,
-    trd
-), {
+    trd) {
   baseline <- baseline |>
     mutate( test_set = id_univoco %in% test_ids)
   daily <- daily |>
