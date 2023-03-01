@@ -43,7 +43,7 @@ define_keras_model <- function(
 
 
   merged_daily_trd <- keras::k_concatenate(c(input_daily, trd_l1)) |>
-    keras::k_batch_normalization()
+    keras::layer_batch_normalization()
 
 
   merged_l3 <- merged_daily_trd |>
@@ -56,7 +56,7 @@ define_keras_model <- function(
     ))
 
   merged_l4 <- keras::k_concatenate(c(merged_l3, input_baseline)) |>
-    keras::k_batch_normalization()
+    keras::layer_batch_normalization()
 
 
   dense_l6 <- merged_l4 |>
@@ -66,14 +66,14 @@ define_keras_model <- function(
       activation = "relu"
     ) |>
     keras::layer_dropout(inner_do) |>
-    keras::k_batch_normalization() |>
+    keras::layer_batch_normalization() |>
     keras::layer_dense(
       name = "dense_l6",
       units = rec_units,
       activation = "relu"
     ) |>
     keras::layer_dropout(inner_do) |>
-    keras::k_batch_normalization()
+    keras::layer_batch_normalization()
 
 # Output ----------------------------------------------------------
 
