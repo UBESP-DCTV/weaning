@@ -364,7 +364,26 @@ list(
     iteration = "list"
   ),
 
+  tar_target(
+    test_ids,
+    {
+      set.seed(4242)
+      pt_names |>
+        slice_sample(n = 36) |>
+        select(id_univoco) |>
+        unlist(use.names = FALSE)
+    }
+  ),
 
+  tar_target(
+    test_set_check,
+    tbl_test_check(
+      test_ids,
+      pt_names,
+      pt_registry,
+      weaningsTRD
+    )
+  ),
 
 
 

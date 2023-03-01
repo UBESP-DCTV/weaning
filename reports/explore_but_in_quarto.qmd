@@ -20,33 +20,15 @@ library(yardstick)
 # install.packages("familiar", dependencies = TRUE)
 library(familiar)
 
-baseline <- tar_read(pt_names)
-daily <- tar_read(pt_registry)
-trd <- tar_read(weaningsTRD)
+test_ids <- tar_read(test_ids)
 
-baselineArrays <- tar_read(baselineArrays)
-dailyArrays <- tar_read(dailyArrays)
-trdArrays <- tar_read(trdArrays)
-outArrays <- tar_read(outArrays)
-```
-
-Data import
-
-```{r}
-set.seed(4242)
-test_ids <- baseline |>
-  slice_sample(n = 36) |>
-  select(id_univoco) |>
-  unlist(use.names = FALSE)
-
-baseline <- baseline |>
+baseline <- tar_read(pt_names) |>
   mutate( test_set = id_univoco %in% test_ids)
-daily <- daily |>
+daily <- tar_read(pt_registry) |>
   mutate( test_set = id_univoco %in% test_ids) |>
   filter(sbt != -1)
-trd <- trd |>
+trd <- tar_read(weaningsTRD) |>
   mutate( test_set = id_univoco %in% test_ids)
-
 ```
 
 ## Test set
@@ -54,8 +36,11 @@ trd <- trd |>
 Baseline differences
 
 ```{r}
-baseline |>
-  select(-id_univoco, -starts_with("vm")) |>
+table_baseline <- baseline |>
+  select(-id_univoco, 
+         -starts_with("vm"),
+         -starts_with("icu"),
+         -starts_with("osp")) |>
   mutate(reason = reason |>
            fct_recode(
              "Sepsis" = "Sepsi",
@@ -81,7 +66,7 @@ baseline |>
 Daily differences (all but study days)
 
 ```{r}
-daily |>
+table_daily <- daily |>
   select(-id_registry,
          -filter_deleted,
          -id_univoco,
@@ -89,6 +74,9 @@ daily |>
          -starts_with("susp_"),
          -starts_with("stop_"),
          -starts_with("fail_"),
+         -cpis,
+         -data_lettura,
+         -giorno_studio,
          susp_tot) |>
   mutate(sbt = sbt |>
            as.character() |>
@@ -110,7 +98,7 @@ daily |>
 Daily differences ( study days)
 
 ```{r}
-daily |>
+table_days <- daily |>
   group_by(id_univoco) |>
   summarise(giorno_finale = max(giorno_studio),
             test_set = unique(test_set)) |>
@@ -129,7 +117,7 @@ daily |>
 TRD differences
 
 ```{r, eval = FALSE}
-trd |>
+table_trd <- trd |>
   select(-file,
          -id_univoco,
          -date,
@@ -139,6 +127,21 @@ trd |>
   ) |>
   add_p() |>
   add_q()
+```
+
+```{r}
+complete_table <- tbl_stack(
+  list(
+    table_baseline,
+    table_daily,
+    table_days
+    ),
+  group_header = c(
+    "Baseline data",
+    "Daily registry",
+    "Days of MV"
+  )
+)
 ```
 
 ## Dummy models
@@ -227,7 +230,7 @@ model5 <- summon_familiar(
   outcome_type = "multinomial",
   outcome_column = "sbt",
   fs_method = "mrmr",
-  learner = c("glm", "xgboost_tree", "svm_nu"),
+  learner = c("glm", "xgboost_tree"),
   evaluation_metric = c("accuracy", "balanced_accuracy", "precision"),
   imputation_method = "simple"
   )
