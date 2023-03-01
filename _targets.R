@@ -364,8 +364,8 @@ list(
     iteration = "list"
   ),
 
-  tar_target(
-    test_ids,
+  tar_targetidsT(
+    idsTest,
     {
       set.seed(4242)
       pt_names |>
@@ -384,6 +384,11 @@ list(
       weaningsTRD
     )
   ),
+
+  tar_target(dbTest, filter_db_ids(trainArraysByDays, idsTest)),
+  tar_target(idsTrVal, setdiff(pt_ids, idsTest)),
+  tar_target(dbTrVal, filter_db_ids(trainArraysByDays, idsTrVal)),
+
 
 
 
