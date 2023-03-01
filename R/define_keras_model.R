@@ -50,8 +50,7 @@ define_keras_model <- function(
   trd_l1 <- input_trd |>
     keras::bidirectional(keras::layer_conv_lstm_1d(
       filters = rec_units,
-      kernel_size = 5,
-      padding = "same",
+      kernel_size = 1,
       dropout = inner_do,
       recurrent_dropout = rec_do,
       name = "trd_l1",
