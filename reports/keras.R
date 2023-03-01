@@ -2,7 +2,7 @@
 options(tidyverse.quiet = TRUE)
 Sys.unsetenv("RETICULATE_PYTHON")
 seed <- 1234
-on_cpu <- FALSE
+on_cpu <- TRUE
 is_develop <- as.integer(interactive())
 verbose <- 1
 
@@ -25,6 +25,7 @@ if (on_cpu) {
 library(tensorflow)
 library(keras)
 k <- reticulate::import("keras", convert = TRUE)
+tf <- reticulate::import("tensorflow", convert = TRUE)
 
 list.files(here("R"), pattern = "keras", full.names = TRUE) |>
   lapply(source) |>
@@ -35,12 +36,14 @@ run_id <- str_remove_all(now(), '\\W') |> paste0("_run")
 
 k_folds <- 3
 epochs <- 10
-batch_size <- 64
+batch_size <- 128
 
 rec_units = 32
 dense_unit = 16
+input_do = 0.1
 inner_do = 0.5
 rec_do = 0.5
+lr = 1e-5
 
 
 # Global variables ------------------------------------------------
@@ -84,7 +87,7 @@ for (i in seq_len(k_folds)) {
     normalize_daily(means_daily, sd_daily) |>
     normalize_trd(means_trd, sd_trd)
 
-  tr_generator <- create_batch_generator(db_tr, batch_size)
+  tr_generator <- create_batch_generator(db_tr_scaled, batch_size)
   tr_n_batches <- db_tr |>
     purrr::map_int(~ceiling(length(.x[["ids"]]) / batch_size)) |>
     sum()
@@ -107,8 +110,10 @@ for (i in seq_len(k_folds)) {
   model <- define_keras_model(
     rec_units = rec_units,
     dense_unit = dense_unit,
+    input_do = input_do,
     inner_do = inner_do,
-    rec_do = rec_do
+    rec_do = rec_do,
+    lr = lr
   )
 
   tic <- Sys.time()
@@ -159,11 +164,12 @@ gg <- k_scores |>
       "Batch size: ", batch_size, "\n",
       "Recurrent depth: ", 1, " - ",
       "Dense depth: ", 2, "\n",
-      "Input drop-out: ", 0, "% - ",
+      "Input drop-out: ", input_do, "% - ",
       "Internal drop-out: ", inner_do, "% - ",
       "Recurrent drop-out: ", rec_do, "%\n",
+      "Batch norm, L1, L2 regularization.\n",
       "Internal activations: ReLU", " - ",
-      "Optimizer: Adam + AMSgrad.\n",
+      "Optimizer: Adam + AMSgrad (starting lr: 1e-4).\n",
       "CV folds: ", k_folds, "."
     ),
     x = "Epoch",

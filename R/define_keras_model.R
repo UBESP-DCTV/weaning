@@ -3,7 +3,8 @@ define_keras_model <- function(
     dense_unit = 16,
     input_do = 0.1,
     inner_do = 0.5,
-    rec_do = 0.5
+    rec_do = 0.5,
+    lr = 0.001
 ) {
 
 
@@ -16,21 +17,30 @@ define_keras_model <- function(
     name = "input_baseline",
     shape = c(7)
   ) |>
-    keras::layer_dropout(input_do)
+    keras::layer_activation_relu() |>
+    keras::layer_dropout(input_do) |>
+    keras::layer_batch_normalization() |>
+    keras::layer_activity_regularization(l1 = 1e-2, l2 = 1e-2)
 
 
   input_daily <- keras::layer_input(
     name = "input_daily",
     shape = c(NA, 5)
   ) |>
-    keras::layer_dropout(input_do)
+    keras::layer_activation_relu() |>
+    keras::layer_dropout(input_do) |>
+    keras::layer_batch_normalization() |>
+    keras::layer_activity_regularization(l1 = 1e-2, l2 = 1e-2)
 
 
   input_trd <- keras::layer_input(
     name = "input_trd",
     shape = c(1440, NA, 21)
   ) |>
-    keras::layer_dropout(input_do)
+    keras::layer_activation_relu() |>
+    keras::layer_dropout(input_do) |>
+    keras::layer_batch_normalization() |>
+    keras::layer_activity_regularization(l1 = 1e-2, l2 = 1e-2)
 
 
 
@@ -51,7 +61,7 @@ define_keras_model <- function(
 
   merged_daily_trd <- keras::k_concatenate(c(input_daily, trd_l1)) |>
     keras::layer_batch_normalization() |>
-    keras::layer_activity_regularization(l1 = 1e-1, l2 = 1e-1)
+    keras::layer_activity_regularization(l1 = 1e-2, l2 = 1e-2)
 
 
   merged_l3 <- merged_daily_trd |>
@@ -65,7 +75,7 @@ define_keras_model <- function(
 
   merged_l4 <- keras::k_concatenate(c(merged_l3, input_baseline)) |>
     keras::layer_batch_normalization() |>
-    keras::layer_activity_regularization(l1 = 1e-1, l2 = 1e-1)
+    keras::layer_activity_regularization(l1 = 1e-2, l2 = 1e-2)
 
 
   dense_l6 <- merged_l4 |>
@@ -76,7 +86,7 @@ define_keras_model <- function(
     ) |>
     keras::layer_dropout(inner_do) |>
     keras::layer_batch_normalization() |>
-    keras::layer_activity_regularization(l1 = 1e-1, l2 = 1e-1) |>
+    keras::layer_activity_regularization(l1 = 1e-2, l2 = 1e-2) |>
     keras::layer_dense(
       name = "dense_l6",
       units = rec_units,
@@ -84,7 +94,7 @@ define_keras_model <- function(
     ) |>
     keras::layer_dropout(inner_do) |>
     keras::layer_batch_normalization() |>
-    keras::layer_activity_regularization(l1 = 1e-1, l2 = 1e-1)
+    keras::layer_activity_regularization(l1 = 1e-2, l2 = 1e-2)
 
 # Output ----------------------------------------------------------
 
@@ -107,8 +117,10 @@ define_keras_model <- function(
   model %>%
     compile(
       optimizer = keras::optimizer_adam(
-        clipnorm = 0.1,
-        clipvalue = 0.1,
+        learning_rate = lr,
+        weight_decay = 1e-2,
+        global_clipnorm = 1e-2,
+        clipvalue = 1e-2,
         amsgrad = TRUE
       ),
       loss = loss_categorical_crossentropy(),
