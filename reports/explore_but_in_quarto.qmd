@@ -220,24 +220,25 @@ dailydata <- daily |>
 
 model5 <- summon_familiar(
   data = filter(dailydata, test_set == FALSE),
-  experiment_dir = file.path(tempdir(), "familiar_1"),
+  experiment_dir = file.path(here::here(), "familiar_1"),
+  validation_batch_id = "test_set",
+  experimental_design = "cv(fs+mb,10,1)",
   sample_id_column = "id_univoco",
   outcome_type = "multinomial",
   outcome_column = "sbt",
-  experimental_design = "cv(fs+mb,10,1)",
   fs_method = "mrmr",
-  learner = "xgboost_lm",
-  optimisation_metric = "balanced_accuracy",
+  learner = c("glm", "xgboost_tree", "svm_nu"),
+  evaluation_metric = c("accuracy", "balanced_accuracy", "precision"),
   imputation_method = "simple"
   )
 
-plots <- familiar::plot_model_performance(
-  object = familiar_1,
-  data = filter(dailydata, test_set == TRUE),
-  metric = c("accuracy", "balanced_accuracy", "precision")
-  )
-
-plots[[1]]
+# plots <- familiar::plot_model_performance(
+#   object = familiar_1,
+#   data = filter(dailydata, test_set == TRUE),
+#   metric = c("accuracy", "balanced_accuracy", "precision")
+#   )
+# 
+# plots[[1]]
 ```
 
 Metric evaluation
