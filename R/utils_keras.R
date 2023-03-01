@@ -19,14 +19,14 @@
 
 
 create_batch_generator <- function(
-    data_listday,
+    db,
     batch_size = 16,
     seed = 1
 ) {
   # start iterator
-  max_n_batches <- data_listday |>
+  max_n_batches <- db |>
     purrr::map_int(~ceiling(length(.x[["ids"]]) / batch_size))
-  max_daily_records <- purrr::map(data_listday, ~length(.x[["ids"]]))
+  max_daily_records <- purrr::map(db, ~length(.x[["ids"]]))
   n_days <- length(max_n_batches)
   current_n_batches <- rep(1L, n_days)
 
@@ -47,14 +47,17 @@ create_batch_generator <- function(
       max_daily_records[[i]]
     )
 
+    out <- db[[i]][["out"]][first:last, drop = FALSE]
+    y <- as.array(out, size = c(length(out), 3L)) |>
+      keras::k_one_hot(num_classes = 3)
+
     res <- list(
       x = list(
-        input_baseline = data_listday[["baseline"]][first:last, ],
-        input_daily = data_listday[["daily"]][first:last, , ],
-        input_trd = data_listday[["trd"]][first:last, , , ]
+        input_baseline = db[[i]][["baseline"]][first:last, , drop = FALSE],
+        input_daily = db[[i]][["daily"]][first:last, , , drop = FALSE],
+        input_trd = db[[i]][["trd"]][first:last, , , , drop = FALSE]
       ),
-      y = data_listday[["out"]][first:last] |>
-        keras::k_one_hot(num_classes = 3)
+      y = y
     )
     # return current batch
 
@@ -71,10 +74,10 @@ filter_db_ids <- function(db, ids) {
       ids <- intersect(.x[[1]], ids)
       list(
         ids = ids,
-        baseline = .x[[2]][ids, ],
-        daily = .x[[3]][ids, , ],
-        trd = .x[[4]][ids, , , ],
-        out = .x[[5]][ids]
+        baseline = .x[[2]][ids, , drop = FALSE],
+        daily = .x[[3]][ids, , , drop = FALSE],
+        trd = .x[[4]][ids, , , , drop = FALSE],
+        out = .x[[5]][ids, drop = FALSE]
       )
     })
   daily_records <- db_res |>
@@ -85,5 +88,70 @@ filter_db_ids <- function(db, ids) {
 }
 
 
+get_means <- function(db, what) {
+  db_what <- purrr::map(db, what)
+  do.call(
+    rbind,
+    switch(what,
+           baseline = db_what,
+           daily = db_what |>
+             map(~keras::array_reshape(.x, dim = c(prod(dim(.x)[-3]), 5))),
+           trd = db_what |>
+             map(~keras::array_reshape(.x, dim = c(prod(dim(.x)[-4]), 21)))
+    )
+  ) |>
+    colMeans()
+}
+get_sd <- function(db, what) {
+  db_what <- purrr::map(db, what)
+  do.call(
+    rbind,
+    switch(what,
+           baseline = db_what,
+           daily = db_what |>
+             map(~keras::array_reshape(.x, dim = c(prod(dim(.x)[-3]), 5))),
+           trd = db_what |>
+             map(~keras::array_reshape(.x, dim = c(prod(dim(.x)[-4]), 21)))
+    )
+  ) |>
+    apply(2, sd)
+}
 
+normalize_baseline <- function(db, means, sds) {
+  purrr::map(db, ~{
+    for (i in seq_along(means)) {
+      .x[["baseline"]][, i] <- (
+        .x[["baseline"]][, i] - means[i]
+      ) /
+        sds[i]
+    }
+    .x
+  })
+}
+
+
+normalize_daily <- function(db, means, sds) {
+  purrr::map(db, ~{
+    for (i in seq_along(means)) {
+      .x[["daily"]][, , i] <- (
+        .x[["daily"]][, , i] - means[i]
+      ) /
+        sds[i]
+    }
+    .x
+  })
+}
+
+
+normalize_trd <- function(db, means, sds) {
+  purrr::map(db, ~{
+    for (i in seq_along(means)) {
+      .x[["trd"]][, , , i] <- (
+        .x[["trd"]][, , , i] - means[i]
+      ) /
+        sds[i]
+    }
+    .x
+  })
+}
 

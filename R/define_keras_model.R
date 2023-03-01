@@ -89,3 +89,5 @@ define_keras_model <- function(rec_units = 32, dense_unit = 16) {
 
   model
 }
+
+

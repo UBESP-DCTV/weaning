@@ -1,11 +1,19 @@
-# renv::use_python()
-is_develop <- FALSE
-on_cpu <- FALSE
-
+# Setup -----------------------------------------------------------
+options(tidyverse.quiet = TRUE)
 Sys.unsetenv("RETICULATE_PYTHON")
+seed <- 1234
+on_cpu <- FALSE
+is_develop <- as.integer(interactive())
+verbose <- as.integer(interactive())
+
+library(here)
+library(lubridate)
+library(targets)
+library(tidyverse)
+library(usethis)
+
 library(reticulate)
 reticulate::use_condaenv("tf", required = TRUE)
-
 if (on_cpu) {
   Sys.setenv("CUDA_VISIBLE_DEVICES" = -1)
   reticulate::py_run_string('
@@ -14,54 +22,26 @@ if (on_cpu) {
 # ')
 }
 
-library(usethis)
-library(tidyverse)
 library(tensorflow)
 library(keras)
 k <- reticulate::import("keras", convert = TRUE)
 
-
-library(targets)
-
-here::here("R") |>
-  list.files(
-    pattern = "keras",
-    full.names = TRUE
-  ) |>
+list.files(here("R"), pattern = "keras", full.names = TRUE) |>
   lapply(source) |>
   invisible()
 
+# Parameters ------------------------------------------------------
+run_id <- str_remove_all(now(), '\\W') |> paste0("_run")
 
-
-# setting data ----------------------------------------------------
-db_full <- targets::tar_read(trainArraysByDays)
-
-ids <- targets::tar_read(pt_ids)
-ids_test <- character()
-ids_trval <- setdiff(ids, ids_test)
-
-db_test <- db_full |>
-  filter_db_ids(ids_test)
-
-db_trval <- db_full |>
-  filter_db_ids(ids_trval)
-
-rm(ids, db_full)
-
-# parameters ------------------------------------------------------
-verbose <- as.integer(interactive())
 k_folds <- 5
-fold_id <- sample(rep(seq_len(k_folds), length.out = length(ids_trval)))
-
 epochs <- 10
-rec_units = 32
-dense_unit = 16
 batch_size <- 64
 
-run_id <- glue::glue(paste0(
-  "{stringr::str_remove_all(lubridate::now(), '\\\\W')}_run"
-))
+rec_units = 32
+dense_unit = 16
 
+
+# Global variables ------------------------------------------------
 k_scores <- tibble::tibble(
   fold = integer(),
   epochs = integer(),
@@ -73,34 +53,55 @@ k_histories <- vector("list", k_folds)
 k_time <- vector("list", k_folds)
 
 
-# ids <- data_used[[1]]
-# baseline <- data_used[[2]] / 500
-# daily <- data_used[[3]] / 500
-# trd <- data_used[[4]] / 1000
-# outcome <- data_used[[5]]
-#
+# Data ------------------------------------------------------------
+ids_trval <- tar_read(idsTrVal)
+db_trval <- tar_read(dbTrVal)
 
+set.seed(seed)
+fold_id <- sample(rep(seq_len(k_folds), length.out = length(ids_trval)))
+
+
+# CV-training -----------------------------------------------------
 for (i in seq_len(k_folds)) {
   ui_todo("Processing fold {ui_value(i)}/{k_folds}...")
+  ui_todo("Preparing train and validation generators")
   ids_in_val <- ids_trval[fold_id == i]
   ids_in_train <- ids_trval[fold_id != i]
 
-  db_tr <- db_trval |>
-    filter_db_ids(ids_in_train)
+  db_tr <- db_trval |> filter_db_ids(ids_in_train)
 
-  db_val <- db_trval |>
-    filter_db_ids(ids_in_val)
+  means_baseline <- get_means(db_tr, "baseline")
+  means_daily <- get_means(db_tr, "daily")
+  means_trd <- get_means(db_tr, "trd")
+  sd_baseline <- get_sd(db_tr, "baseline")
+  sd_daily <- get_sd(db_tr, "daily")
+  sd_trd <- get_sd(db_tr, "trd")
 
+  db_tr_scaled <- db_tr |>
+    normalize_baseline(means_baseline, sd_baseline) |>
+    normalize_daily(means_daily, sd_daily) |>
+    normalize_trd(means_trd, sd_trd)
+
+  tr_generator <- create_batch_generator(db_tr, batch_size)
   tr_n_batches <- db_tr |>
     purrr::map_int(~ceiling(length(.x[["ids"]]) / batch_size)) |>
     sum()
+  rm(db_tr)
+
+  db_val <- db_trval |>
+    filter_db_ids(ids_in_val) |>
+    normalize_baseline(means_baseline, sd_baseline) |>
+    normalize_daily(means_daily, sd_daily) |>
+    normalize_trd(means_trd, sd_trd)
+  val_generator <- create_batch_generator(db_val, batch_size)
   val_n_batches <- db_val |>
     purrr::map_int(~ceiling(length(.x[["ids"]]) / batch_size)) |>
     sum()
+  rm(db_val)
+  ui_done("Generators ready.")
 
-  tr_generator <- create_batch_generator(db_tr, batch_size)
-  val_generator <- create_batch_generator(db_val, batch_size)
 
+  ui_todo("Training in progress...")
   model <- define_keras_model(
     rec_units = rec_units,
     dense_unit = dense_unit
@@ -114,8 +115,9 @@ for (i in seq_len(k_folds)) {
       validation_data = val_generator,
       validation_steps = val_n_batches,
       epochs = epochs,
-      verbose = varbose
+      verbose = verbose
     )
+  ui_done("Training done.")
   (k_time[[i]] <- round(Sys.time() - tic, 2))
   k_scores <- k_scores |>
     dplyr::bind_rows(tibble::tibble(
@@ -132,6 +134,7 @@ for (i in seq_len(k_folds)) {
       loss = k_histories[[i]][["metrics"]][["val_loss"]],
       accuracy = k_histories[[i]][["metrics"]][["val_accuracy"]]
     ))
+  ui_done("Fold {ui_value(i)}/{k_folds} done.")
 }
 
 overall_time <- do.call(sum, k_time)
