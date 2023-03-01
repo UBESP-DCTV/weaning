@@ -4,7 +4,7 @@ Sys.unsetenv("RETICULATE_PYTHON")
 seed <- 1234
 on_cpu <- FALSE
 is_develop <- as.integer(interactive())
-verbose <- as.integer(interactive())
+verbose <- 1
 
 library(here)
 library(lubridate)
@@ -33,7 +33,7 @@ list.files(here("R"), pattern = "keras", full.names = TRUE) |>
 # Parameters ------------------------------------------------------
 run_id <- str_remove_all(now(), '\\W') |> paste0("_run")
 
-k_folds <- 2
+k_folds <- 3
 epochs <- 10
 batch_size <- 64
 
