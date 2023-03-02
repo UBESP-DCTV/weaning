@@ -1,0 +1,7 @@
+data_set;fs_method;learner;ensemble_model_name;feature;metric;similarity_threshold;value;ci_low;ci_up
+development;mrmr;glm;ensemble.1.1;susp_tot;accuracy;1;0.263497661588769;0.231251322209147;0.293035228754841
+development;mrmr;glm;ensemble.1.1;susp_tot;balanced_accuracy;1;0.333835883763972;0.311090474380328;0.35625363900296
+development;mrmr;glm;ensemble.1.1;susp_tot;precision;1;0.318318122280605;0.278302002743073;0.370840930837229
+validation;mrmr;glm;ensemble.1.1;susp_tot;accuracy;1;0.264400921658986;0.148468646864687;0.382983694571485
+validation;mrmr;glm;ensemble.1.1;susp_tot;balanced_accuracy;1;0.337365591397849;0.272024482109228;0.396398282340311
+validation;mrmr;glm;ensemble.1.1;susp_tot;precision;1;0.353316651791406;0.230904859767892;0.502028818953324

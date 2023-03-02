@@ -1,0 +1,7 @@
+data_set;fs_method;learner;ensemble_model_name;metric;value;ci_low;ci_up
+development;mrmr;xgboost_tree;ensemble.1.1;accuracy;0.895795161740593;0.857977491759165;0.937341530463567
+development;mrmr;xgboost_tree;ensemble.1.1;balanced_accuracy;0.666666666666667;0.666666666666667;0.666666666666667
+development;mrmr;xgboost_tree;ensemble.1.1;precision;0.766293356254424;0.713336164642977;0.830436159018352
+validation;mrmr;xgboost_tree;ensemble.1.1;accuracy;0.926272648835203;0.735750370096225;0.987953610850588
+validation;mrmr;xgboost_tree;ensemble.1.1;balanced_accuracy;0.666666666666667;0.666666666666667;0.666666666666667
+validation;mrmr;xgboost_tree;ensemble.1.1;precision;0.8125;0.633766570008285;0.952380952380952

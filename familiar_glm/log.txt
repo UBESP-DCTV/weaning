@@ -1,0 +1,372 @@
+2023-03-02 14:42:47	MESSAGE	Setup report: Validation is internal only.
+2023-03-02 14:42:47	MESSAGE	Setup report: Feature selection and model building on 1 repetitions of 10-fold cross validation of the training data.
+2023-03-02 14:42:48	MESSAGE	Creating iterations: Starting creation of iterations.
+2023-03-02 14:42:57	MESSAGE	Creating iterations: Finished creation of iterations.
+2023-03-02 14:42:57	MESSAGE	Creating iterations: New project id is: '20230302144257'.
+2023-03-02 14:43:06	MESSAGE	
+Pre-processing: Starting preprocessing for run 1 of 10.
+2023-03-02 14:43:07	MESSAGE	  Pre-processing: 170 samples were initially available.
+2023-03-02 14:43:07	MESSAGE	  Pre-processing: 0 samples were removed because of missing outcome data. 170 samples remain.
+2023-03-02 14:43:07	MESSAGE	  Pre-processing: 13 features were initially available.
+2023-03-02 14:43:07	MESSAGE	  Pre-processing: 0 features were removed because of a high fraction of missing values. 13 features remain.
+2023-03-02 14:43:07	MESSAGE	  Pre-processing: 11 samples were removed because of missing feature data. 159 samples remain.
+2023-03-02 14:43:07	MESSAGE	  Pre-processing: 0 features were removed due to invariance. 13 features remain.
+2023-03-02 14:43:08	MESSAGE	  Pre-processing: Adding value distribution statistics to features.
+2023-03-02 14:43:08	MESSAGE	  Pre-processing: Performing transformations to normalise feature value distributions.
+2023-03-02 14:43:14	MESSAGE	  Pre-processing: Feature distributions have been transformed for normalisation.
+2023-03-02 14:43:14	MESSAGE	  Pre-processing: Extracting normalisation parameters from feature data.
+2023-03-02 14:43:15	MESSAGE	  Pre-processing: Feature data were normalised.
+2023-03-02 14:43:15	MESSAGE	  Pre-processing: Adding imputation information to features.
+2023-03-02 14:43:16	MESSAGE	  Pre-processing: Starting clustering of redundant features
+2023-03-02 14:43:20	MESSAGE	    Computing similarity between 13 features using the mutual_information metric for clustering using the hclust method.
+2023-03-02 14:43:20	MESSAGE	    14 feature clusteres were created from 14 features. 0 clusters contain more than one feature. The remaining 14 clusters are singular.
+2023-03-02 14:43:20	MESSAGE	
+Pre-processing: Starting preprocessing for run 2 of 10.
+2023-03-02 14:43:21	MESSAGE	  Pre-processing: 169 samples were initially available.
+2023-03-02 14:43:21	MESSAGE	  Pre-processing: 0 samples were removed because of missing outcome data. 169 samples remain.
+2023-03-02 14:43:21	MESSAGE	  Pre-processing: 13 features were initially available.
+2023-03-02 14:43:21	MESSAGE	  Pre-processing: 0 features were removed because of a high fraction of missing values. 13 features remain.
+2023-03-02 14:43:21	MESSAGE	  Pre-processing: 11 samples were removed because of missing feature data. 158 samples remain.
+2023-03-02 14:43:21	MESSAGE	  Pre-processing: 0 features were removed due to invariance. 13 features remain.
+2023-03-02 14:43:21	MESSAGE	  Pre-processing: Adding value distribution statistics to features.
+2023-03-02 14:43:21	MESSAGE	  Pre-processing: Performing transformations to normalise feature value distributions.
+2023-03-02 14:43:25	MESSAGE	  Pre-processing: Feature distributions have been transformed for normalisation.
+2023-03-02 14:43:25	MESSAGE	  Pre-processing: Extracting normalisation parameters from feature data.
+2023-03-02 14:43:26	MESSAGE	  Pre-processing: Feature data were normalised.
+2023-03-02 14:43:26	MESSAGE	  Pre-processing: Adding imputation information to features.
+2023-03-02 14:43:27	MESSAGE	  Pre-processing: Starting clustering of redundant features
+2023-03-02 14:43:27	MESSAGE	    Computing similarity between 13 features using the mutual_information metric for clustering using the hclust method.
+2023-03-02 14:43:27	MESSAGE	    14 feature clusteres were created from 14 features. 0 clusters contain more than one feature. The remaining 14 clusters are singular.
+2023-03-02 14:43:27	MESSAGE	
+Pre-processing: Starting preprocessing for run 3 of 10.
+2023-03-02 14:43:28	MESSAGE	  Pre-processing: 171 samples were initially available.
+2023-03-02 14:43:28	MESSAGE	  Pre-processing: 0 samples were removed because of missing outcome data. 171 samples remain.
+2023-03-02 14:43:28	MESSAGE	  Pre-processing: 13 features were initially available.
+2023-03-02 14:43:28	MESSAGE	  Pre-processing: 0 features were removed because of a high fraction of missing values. 13 features remain.
+2023-03-02 14:43:28	MESSAGE	  Pre-processing: 12 samples were removed because of missing feature data. 159 samples remain.
+2023-03-02 14:43:28	MESSAGE	  Pre-processing: 0 features were removed due to invariance. 13 features remain.
+2023-03-02 14:43:28	MESSAGE	  Pre-processing: Adding value distribution statistics to features.
+2023-03-02 14:43:34	MESSAGE	  Pre-processing: Performing transformations to normalise feature value distributions.
+2023-03-02 14:43:35	MESSAGE	  Pre-processing: Feature distributions have been transformed for normalisation.
+2023-03-02 14:43:35	MESSAGE	  Pre-processing: Extracting normalisation parameters from feature data.
+2023-03-02 14:43:35	MESSAGE	  Pre-processing: Feature data were normalised.
+2023-03-02 14:43:38	MESSAGE	  Pre-processing: Adding imputation information to features.
+2023-03-02 14:43:39	MESSAGE	  Pre-processing: Starting clustering of redundant features
+2023-03-02 14:43:39	MESSAGE	    Computing similarity between 13 features using the mutual_information metric for clustering using the hclust method.
+2023-03-02 14:43:42	MESSAGE	    14 feature clusteres were created from 14 features. 0 clusters contain more than one feature. The remaining 14 clusters are singular.
+2023-03-02 14:43:42	MESSAGE	
+Pre-processing: Starting preprocessing for run 4 of 10.
+2023-03-02 14:43:42	MESSAGE	  Pre-processing: 167 samples were initially available.
+2023-03-02 14:43:42	MESSAGE	  Pre-processing: 0 samples were removed because of missing outcome data. 167 samples remain.
+2023-03-02 14:43:42	MESSAGE	  Pre-processing: 13 features were initially available.
+2023-03-02 14:43:42	MESSAGE	  Pre-processing: 0 features were removed because of a high fraction of missing values. 13 features remain.
+2023-03-02 14:43:42	MESSAGE	  Pre-processing: 10 samples were removed because of missing feature data. 157 samples remain.
+2023-03-02 14:43:42	MESSAGE	  Pre-processing: 0 features were removed due to invariance. 13 features remain.
+2023-03-02 14:43:42	MESSAGE	  Pre-processing: Adding value distribution statistics to features.
+2023-03-02 14:43:43	MESSAGE	  Pre-processing: Performing transformations to normalise feature value distributions.
+2023-03-02 14:43:43	MESSAGE	  Pre-processing: Feature distributions have been transformed for normalisation.
+2023-03-02 14:43:43	MESSAGE	  Pre-processing: Extracting normalisation parameters from feature data.
+2023-03-02 14:43:44	MESSAGE	  Pre-processing: Feature data were normalised.
+2023-03-02 14:43:46	MESSAGE	  Pre-processing: Adding imputation information to features.
+2023-03-02 14:43:47	MESSAGE	  Pre-processing: Starting clustering of redundant features
+2023-03-02 14:43:47	MESSAGE	    Computing similarity between 13 features using the mutual_information metric for clustering using the hclust method.
+2023-03-02 14:43:48	MESSAGE	    14 feature clusteres were created from 14 features. 0 clusters contain more than one feature. The remaining 14 clusters are singular.
+2023-03-02 14:43:48	MESSAGE	
+Pre-processing: Starting preprocessing for run 5 of 10.
+2023-03-02 14:43:48	MESSAGE	  Pre-processing: 171 samples were initially available.
+2023-03-02 14:43:48	MESSAGE	  Pre-processing: 0 samples were removed because of missing outcome data. 171 samples remain.
+2023-03-02 14:43:48	MESSAGE	  Pre-processing: 13 features were initially available.
+2023-03-02 14:43:48	MESSAGE	  Pre-processing: 0 features were removed because of a high fraction of missing values. 13 features remain.
+2023-03-02 14:43:48	MESSAGE	  Pre-processing: 11 samples were removed because of missing feature data. 160 samples remain.
+2023-03-02 14:43:48	MESSAGE	  Pre-processing: 0 features were removed due to invariance. 13 features remain.
+2023-03-02 14:43:48	MESSAGE	  Pre-processing: Adding value distribution statistics to features.
+2023-03-02 14:43:49	MESSAGE	  Pre-processing: Performing transformations to normalise feature value distributions.
+2023-03-02 14:43:54	MESSAGE	  Pre-processing: Feature distributions have been transformed for normalisation.
+2023-03-02 14:43:54	MESSAGE	  Pre-processing: Extracting normalisation parameters from feature data.
+2023-03-02 14:43:54	MESSAGE	  Pre-processing: Feature data were normalised.
+2023-03-02 14:43:55	MESSAGE	  Pre-processing: Adding imputation information to features.
+2023-03-02 14:43:55	MESSAGE	  Pre-processing: Starting clustering of redundant features
+2023-03-02 14:43:56	MESSAGE	    Computing similarity between 13 features using the mutual_information metric for clustering using the hclust method.
+2023-03-02 14:43:57	MESSAGE	    14 feature clusteres were created from 14 features. 0 clusters contain more than one feature. The remaining 14 clusters are singular.
+2023-03-02 14:43:57	MESSAGE	
+Pre-processing: Starting preprocessing for run 6 of 10.
+2023-03-02 14:43:57	MESSAGE	  Pre-processing: 170 samples were initially available.
+2023-03-02 14:43:57	MESSAGE	  Pre-processing: 0 samples were removed because of missing outcome data. 170 samples remain.
+2023-03-02 14:43:57	MESSAGE	  Pre-processing: 13 features were initially available.
+2023-03-02 14:43:57	MESSAGE	  Pre-processing: 0 features were removed because of a high fraction of missing values. 13 features remain.
+2023-03-02 14:43:57	MESSAGE	  Pre-processing: 12 samples were removed because of missing feature data. 158 samples remain.
+2023-03-02 14:43:57	MESSAGE	  Pre-processing: 0 features were removed due to invariance. 13 features remain.
+2023-03-02 14:43:57	MESSAGE	  Pre-processing: Adding value distribution statistics to features.
+2023-03-02 14:44:02	MESSAGE	  Pre-processing: Performing transformations to normalise feature value distributions.
+2023-03-02 14:44:02	MESSAGE	  Pre-processing: Feature distributions have been transformed for normalisation.
+2023-03-02 14:44:02	MESSAGE	  Pre-processing: Extracting normalisation parameters from feature data.
+2023-03-02 14:44:03	MESSAGE	  Pre-processing: Feature data were normalised.
+2023-03-02 14:44:03	MESSAGE	  Pre-processing: Adding imputation information to features.
+2023-03-02 14:44:07	MESSAGE	  Pre-processing: Starting clustering of redundant features
+2023-03-02 14:44:07	MESSAGE	    Computing similarity between 13 features using the mutual_information metric for clustering using the hclust method.
+2023-03-02 14:44:07	MESSAGE	    14 feature clusteres were created from 14 features. 0 clusters contain more than one feature. The remaining 14 clusters are singular.
+2023-03-02 14:44:08	MESSAGE	
+Pre-processing: Starting preprocessing for run 7 of 10.
+2023-03-02 14:44:08	MESSAGE	  Pre-processing: 171 samples were initially available.
+2023-03-02 14:44:08	MESSAGE	  Pre-processing: 0 samples were removed because of missing outcome data. 171 samples remain.
+2023-03-02 14:44:08	MESSAGE	  Pre-processing: 13 features were initially available.
+2023-03-02 14:44:08	MESSAGE	  Pre-processing: 0 features were removed because of a high fraction of missing values. 13 features remain.
+2023-03-02 14:44:08	MESSAGE	  Pre-processing: 10 samples were removed because of missing feature data. 161 samples remain.
+2023-03-02 14:44:08	MESSAGE	  Pre-processing: 0 features were removed due to invariance. 13 features remain.
+2023-03-02 14:44:08	MESSAGE	  Pre-processing: Adding value distribution statistics to features.
+2023-03-02 14:44:08	MESSAGE	  Pre-processing: Performing transformations to normalise feature value distributions.
+2023-03-02 14:44:13	MESSAGE	  Pre-processing: Feature distributions have been transformed for normalisation.
+2023-03-02 14:44:13	MESSAGE	  Pre-processing: Extracting normalisation parameters from feature data.
+2023-03-02 14:44:13	MESSAGE	  Pre-processing: Feature data were normalised.
+2023-03-02 14:44:14	MESSAGE	  Pre-processing: Adding imputation information to features.
+2023-03-02 14:44:14	MESSAGE	  Pre-processing: Starting clustering of redundant features
+2023-03-02 14:44:14	MESSAGE	    Computing similarity between 13 features using the mutual_information metric for clustering using the hclust method.
+2023-03-02 14:44:15	MESSAGE	    14 feature clusteres were created from 14 features. 0 clusters contain more than one feature. The remaining 14 clusters are singular.
+2023-03-02 14:44:15	MESSAGE	
+Pre-processing: Starting preprocessing for run 8 of 10.
+2023-03-02 14:44:15	MESSAGE	  Pre-processing: 171 samples were initially available.
+2023-03-02 14:44:15	MESSAGE	  Pre-processing: 0 samples were removed because of missing outcome data. 171 samples remain.
+2023-03-02 14:44:15	MESSAGE	  Pre-processing: 13 features were initially available.
+2023-03-02 14:44:15	MESSAGE	  Pre-processing: 0 features were removed because of a high fraction of missing values. 13 features remain.
+2023-03-02 14:44:15	MESSAGE	  Pre-processing: 10 samples were removed because of missing feature data. 161 samples remain.
+2023-03-02 14:44:15	MESSAGE	  Pre-processing: 0 features were removed due to invariance. 13 features remain.
+2023-03-02 14:44:15	MESSAGE	  Pre-processing: Adding value distribution statistics to features.
+2023-03-02 14:44:16	MESSAGE	  Pre-processing: Performing transformations to normalise feature value distributions.
+2023-03-02 14:44:22	MESSAGE	  Pre-processing: Feature distributions have been transformed for normalisation.
+2023-03-02 14:44:22	MESSAGE	  Pre-processing: Extracting normalisation parameters from feature data.
+2023-03-02 14:44:23	MESSAGE	  Pre-processing: Feature data were normalised.
+2023-03-02 14:44:23	MESSAGE	  Pre-processing: Adding imputation information to features.
+2023-03-02 14:44:24	MESSAGE	  Pre-processing: Starting clustering of redundant features
+2023-03-02 14:44:24	MESSAGE	    Computing similarity between 13 features using the mutual_information metric for clustering using the hclust method.
+2023-03-02 14:44:24	MESSAGE	    14 feature clusteres were created from 14 features. 0 clusters contain more than one feature. The remaining 14 clusters are singular.
+2023-03-02 14:44:24	MESSAGE	
+Pre-processing: Starting preprocessing for run 9 of 10.
+2023-03-02 14:44:25	MESSAGE	  Pre-processing: 172 samples were initially available.
+2023-03-02 14:44:25	MESSAGE	  Pre-processing: 0 samples were removed because of missing outcome data. 172 samples remain.
+2023-03-02 14:44:25	MESSAGE	  Pre-processing: 13 features were initially available.
+2023-03-02 14:44:25	MESSAGE	  Pre-processing: 0 features were removed because of a high fraction of missing values. 13 features remain.
+2023-03-02 14:44:25	MESSAGE	  Pre-processing: 12 samples were removed because of missing feature data. 160 samples remain.
+2023-03-02 14:44:31	MESSAGE	  Pre-processing: 0 features were removed due to invariance. 13 features remain.
+2023-03-02 14:44:31	MESSAGE	  Pre-processing: Adding value distribution statistics to features.
+2023-03-02 14:44:31	MESSAGE	  Pre-processing: Performing transformations to normalise feature value distributions.
+2023-03-02 14:44:32	MESSAGE	  Pre-processing: Feature distributions have been transformed for normalisation.
+2023-03-02 14:44:32	MESSAGE	  Pre-processing: Extracting normalisation parameters from feature data.
+2023-03-02 14:44:32	MESSAGE	  Pre-processing: Feature data were normalised.
+2023-03-02 14:44:32	MESSAGE	  Pre-processing: Adding imputation information to features.
+2023-03-02 14:44:34	MESSAGE	  Pre-processing: Starting clustering of redundant features
+2023-03-02 14:44:35	MESSAGE	    Computing similarity between 13 features using the mutual_information metric for clustering using the hclust method.
+2023-03-02 14:44:41	MESSAGE	    14 feature clusteres were created from 14 features. 0 clusters contain more than one feature. The remaining 14 clusters are singular.
+2023-03-02 14:44:41	MESSAGE	
+Pre-processing: Starting preprocessing for run 10 of 10.
+2023-03-02 14:44:41	MESSAGE	  Pre-processing: 178 samples were initially available.
+2023-03-02 14:44:41	MESSAGE	  Pre-processing: 0 samples were removed because of missing outcome data. 178 samples remain.
+2023-03-02 14:44:41	MESSAGE	  Pre-processing: 13 features were initially available.
+2023-03-02 14:44:42	MESSAGE	  Pre-processing: 0 features were removed because of a high fraction of missing values. 13 features remain.
+2023-03-02 14:44:42	MESSAGE	  Pre-processing: 9 samples were removed because of missing feature data. 169 samples remain.
+2023-03-02 14:44:42	MESSAGE	  Pre-processing: 0 features were removed due to invariance. 13 features remain.
+2023-03-02 14:44:42	MESSAGE	  Pre-processing: Adding value distribution statistics to features.
+2023-03-02 14:44:42	MESSAGE	  Pre-processing: Performing transformations to normalise feature value distributions.
+2023-03-02 14:44:43	MESSAGE	  Pre-processing: Feature distributions have been transformed for normalisation.
+2023-03-02 14:44:43	MESSAGE	  Pre-processing: Extracting normalisation parameters from feature data.
+2023-03-02 14:44:48	MESSAGE	  Pre-processing: Feature data were normalised.
+2023-03-02 14:44:49	MESSAGE	  Pre-processing: Adding imputation information to features.
+2023-03-02 14:44:49	MESSAGE	  Pre-processing: Starting clustering of redundant features
+2023-03-02 14:44:51	MESSAGE	    Computing similarity between 13 features using the mutual_information metric for clustering using the hclust method.
+2023-03-02 14:44:54	MESSAGE	    14 feature clusteres were created from 14 features. 0 clusters contain more than one feature. The remaining 14 clusters are singular.
+2023-03-02 14:44:54	MESSAGE	
+Feature selection: starting feature selection using "mrmr" method.
+2023-03-02 14:44:55	MESSAGE	  Hyperparameter optimisation: Starting parameter optimisation for the mrmr variable importance method.
+2023-03-02 14:45:10	MESSAGE	
+2023-03-02 14:45:10	MESSAGE	  Hyperparameter optimisation: Completed parameter optimisation for the mrmr variable importance method.
+2023-03-02 14:45:16	MESSAGE	Feature selection: feature selection using "mrmr" method has been completed.
+2023-03-02 14:45:16	MESSAGE	
+Model building: starting model building using "glm" learner, based on "mrmr" feature selection.
+2023-03-02 14:45:17	MESSAGE	  Hyperparameter optimisation: Starting parameter optimisation for the glm learner, based on variable importances from the mrmr variable importance method.
+2023-03-02 14:45:18	MESSAGE	
+2023-03-02 14:45:18	MESSAGE	    Starting hyperparameter optimisation for data subsample 1 of 10.
+2023-03-02 14:45:18	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-02 14:45:18	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-02 14:45:18	MESSAGE	      Utility is measured as expected improvement.
+2023-03-02 14:45:31	MESSAGE	      Computing variable importance for 20 bootstraps.
+2023-03-02 14:45:37	MESSAGE	      Compute initial model performance based on 2 hyperparameter sets.
+2023-03-02 14:45:40	MESSAGE	      Hyperparameter optimisation: Initialisation complete: summary score: 0.6667; validation optimisation score: 0.6667; auc_roc: 0.8333; sign_size: 2
+2023-03-02 14:45:41	MESSAGE	      Intensify step 1 using 1 challenger hyperparameter sets.
+2023-03-02 14:45:46	MESSAGE	      Hyperparameter optimisation: SMBO iteration 1: summary score: 0.6829; validation optimisation score: 0.6829; auc_roc: 0.8415; sign_size: 2
+2023-03-02 14:45:47	MESSAGE	      Intensify step 1 using 1 challenger hyperparameter sets.
+2023-03-02 14:45:50	MESSAGE	      Hyperparameter optimisation: SMBO iteration 2: summary score: 0.6775; validation optimisation score: 0.6775; auc_roc: 0.8388; sign_size: 2
+2023-03-02 14:45:50	MESSAGE	      Intensify step 1 using 1 challenger hyperparameter sets.
+2023-03-02 14:45:51	MESSAGE	      Hyperparameter optimisation: SMBO iteration 3: summary score: 0.6748; validation optimisation score: 0.6748; auc_roc: 0.8374; sign_size: 2
+2023-03-02 14:45:51	MESSAGE	    Hyperparameter optimisation: Optimisation stopped early as convergence was achieved.
+2023-03-02 14:45:55	MESSAGE	    Hyperparameter optimisation: A suitable set of hyperparameters was identified: summary score: 0.6748; validation optimisation score: 0.6748; auc_roc: 0.8374; sign_size: 2
+2023-03-02 14:45:58	MESSAGE	
+2023-03-02 14:45:58	MESSAGE	    Starting hyperparameter optimisation for data subsample 2 of 10.
+2023-03-02 14:45:58	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-02 14:45:58	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-02 14:45:58	MESSAGE	      Utility is measured as expected improvement.
+2023-03-02 14:46:05	MESSAGE	      Computing variable importance for 20 bootstraps.
+2023-03-02 14:46:09	MESSAGE	    Hyperparameter optimisation: All hyperparameters are fixed. No optimisation is required.
+2023-03-02 14:46:10	MESSAGE	
+2023-03-02 14:46:10	MESSAGE	    Starting hyperparameter optimisation for data subsample 3 of 10.
+2023-03-02 14:46:10	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-02 14:46:10	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-02 14:46:10	MESSAGE	      Utility is measured as expected improvement.
+2023-03-02 14:46:18	MESSAGE	      Computing variable importance for 20 bootstraps.
+2023-03-02 14:46:22	MESSAGE	      Compute initial model performance based on 2 hyperparameter sets.
+2023-03-02 14:46:23	MESSAGE	      Hyperparameter optimisation: Initialisation complete: summary score: 0.6667; validation optimisation score: 0.6667; auc_roc: 0.8333; sign_size: 2
+2023-03-02 14:46:25	MESSAGE	      Intensify step 1 using 1 challenger hyperparameter sets.
+2023-03-02 14:46:26	MESSAGE	      Hyperparameter optimisation: SMBO iteration 1: summary score: 0.6667; validation optimisation score: 0.6667; auc_roc: 0.8333; sign_size: 2
+2023-03-02 14:46:28	MESSAGE	      Intensify step 1 using 1 challenger hyperparameter sets.
+2023-03-02 14:46:31	MESSAGE	      Hyperparameter optimisation: SMBO iteration 2: summary score: 0.6667; validation optimisation score: 0.6667; auc_roc: 0.8333; sign_size: 2
+2023-03-02 14:46:32	MESSAGE	      Intensify step 1 using 1 challenger hyperparameter sets.
+2023-03-02 14:46:34	MESSAGE	      Hyperparameter optimisation: SMBO iteration 3: summary score: 0.6667; validation optimisation score: 0.6667; auc_roc: 0.8333; sign_size: 2
+2023-03-02 14:46:34	MESSAGE	    Hyperparameter optimisation: Optimisation stopped early as convergence was achieved.
+2023-03-02 14:46:34	MESSAGE	    Hyperparameter optimisation: A suitable set of hyperparameters was identified: summary score: 0.6667; validation optimisation score: 0.6667; auc_roc: 0.8333; sign_size: 2
+2023-03-02 14:46:35	MESSAGE	
+2023-03-02 14:46:35	MESSAGE	    Starting hyperparameter optimisation for data subsample 4 of 10.
+2023-03-02 14:46:35	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-02 14:46:35	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-02 14:46:35	MESSAGE	      Utility is measured as expected improvement.
+2023-03-02 14:46:44	MESSAGE	      Computing variable importance for 20 bootstraps.
+2023-03-02 14:46:48	MESSAGE	    Hyperparameter optimisation: All hyperparameters are fixed. No optimisation is required.
+2023-03-02 14:46:48	MESSAGE	
+2023-03-02 14:46:48	MESSAGE	    Starting hyperparameter optimisation for data subsample 5 of 10.
+2023-03-02 14:46:48	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-02 14:46:48	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-02 14:46:48	MESSAGE	      Utility is measured as expected improvement.
+2023-03-02 14:46:57	MESSAGE	      Computing variable importance for 20 bootstraps.
+2023-03-02 14:47:01	MESSAGE	      Compute initial model performance based on 2 hyperparameter sets.
+2023-03-02 14:47:01	MESSAGE	      Hyperparameter optimisation: Initialisation complete: summary score: 0.6667; validation optimisation score: 0.6667; auc_roc: 0.8333; sign_size: 2
+2023-03-02 14:47:03	MESSAGE	      Intensify step 1 using 1 challenger hyperparameter sets.
+2023-03-02 14:47:06	MESSAGE	      Hyperparameter optimisation: SMBO iteration 1: summary score: 0.6667; validation optimisation score: 0.6667; auc_roc: 0.8333; sign_size: 2
+2023-03-02 14:47:06	MESSAGE	      Intensify step 1 using 1 challenger hyperparameter sets.
+2023-03-02 14:47:08	MESSAGE	      Hyperparameter optimisation: SMBO iteration 2: summary score: 0.6667; validation optimisation score: 0.6667; auc_roc: 0.8333; sign_size: 2
+2023-03-02 14:47:11	MESSAGE	      Intensify step 1 using 1 challenger hyperparameter sets.
+2023-03-02 14:47:12	MESSAGE	      Hyperparameter optimisation: SMBO iteration 3: summary score: 0.6667; validation optimisation score: 0.6667; auc_roc: 0.8333; sign_size: 2
+2023-03-02 14:47:12	MESSAGE	    Hyperparameter optimisation: Optimisation stopped early as convergence was achieved.
+2023-03-02 14:47:12	MESSAGE	    Hyperparameter optimisation: A suitable set of hyperparameters was identified: summary score: 0.6667; validation optimisation score: 0.6667; auc_roc: 0.8333; sign_size: 2
+2023-03-02 14:47:14	MESSAGE	
+2023-03-02 14:47:14	MESSAGE	    Starting hyperparameter optimisation for data subsample 6 of 10.
+2023-03-02 14:47:14	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-02 14:47:14	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-02 14:47:14	MESSAGE	      Utility is measured as expected improvement.
+2023-03-02 14:47:22	MESSAGE	      Computing variable importance for 20 bootstraps.
+2023-03-02 14:47:26	MESSAGE	      Compute initial model performance based on 2 hyperparameter sets.
+2023-03-02 14:47:27	MESSAGE	      Hyperparameter optimisation: Initialisation complete: summary score: 0.6823; validation optimisation score: 0.6823; auc_roc: 0.8411; sign_size: 2
+2023-03-02 14:47:29	MESSAGE	      Intensify step 1 using 1 challenger hyperparameter sets.
+2023-03-02 14:47:32	MESSAGE	      Hyperparameter optimisation: SMBO iteration 1: summary score: 0.6745; validation optimisation score: 0.6745; auc_roc: 0.8372; sign_size: 2
+2023-03-02 14:47:32	MESSAGE	      Intensify step 1 using 1 challenger hyperparameter sets.
+2023-03-02 14:47:35	MESSAGE	      Hyperparameter optimisation: SMBO iteration 2: summary score: 0.6719; validation optimisation score: 0.6719; auc_roc: 0.8359; sign_size: 2
+2023-03-02 14:47:36	MESSAGE	      Intensify step 1 using 1 challenger hyperparameter sets.
+2023-03-02 14:47:38	MESSAGE	      Hyperparameter optimisation: SMBO iteration 3: summary score: 0.6706; validation optimisation score: 0.6706; auc_roc: 0.8353; sign_size: 2
+2023-03-02 14:47:38	MESSAGE	    Hyperparameter optimisation: Optimisation stopped early as convergence was achieved.
+2023-03-02 14:47:39	MESSAGE	    Hyperparameter optimisation: A suitable set of hyperparameters was identified: summary score: 0.6706; validation optimisation score: 0.6706; auc_roc: 0.8353; sign_size: 2
+2023-03-02 14:47:39	MESSAGE	
+2023-03-02 14:47:39	MESSAGE	    Starting hyperparameter optimisation for data subsample 7 of 10.
+2023-03-02 14:47:39	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-02 14:47:39	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-02 14:47:39	MESSAGE	      Utility is measured as expected improvement.
+2023-03-02 14:47:48	MESSAGE	      Computing variable importance for 20 bootstraps.
+2023-03-02 14:47:53	MESSAGE	    Hyperparameter optimisation: All hyperparameters are fixed. No optimisation is required.
+2023-03-02 14:47:54	MESSAGE	
+2023-03-02 14:47:54	MESSAGE	    Starting hyperparameter optimisation for data subsample 8 of 10.
+2023-03-02 14:47:54	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-02 14:47:54	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-02 14:47:54	MESSAGE	      Utility is measured as expected improvement.
+2023-03-02 14:48:02	MESSAGE	      Computing variable importance for 20 bootstraps.
+2023-03-02 14:48:06	MESSAGE	    Hyperparameter optimisation: All hyperparameters are fixed. No optimisation is required.
+2023-03-02 14:48:07	MESSAGE	
+2023-03-02 14:48:07	MESSAGE	    Starting hyperparameter optimisation for data subsample 9 of 10.
+2023-03-02 14:48:07	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-02 14:48:07	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-02 14:48:07	MESSAGE	      Utility is measured as expected improvement.
+2023-03-02 14:48:16	MESSAGE	      Computing variable importance for 20 bootstraps.
+2023-03-02 14:48:19	MESSAGE	    Hyperparameter optimisation: All hyperparameters are fixed. No optimisation is required.
+2023-03-02 14:48:20	MESSAGE	
+2023-03-02 14:48:20	MESSAGE	    Starting hyperparameter optimisation for data subsample 10 of 10.
+2023-03-02 14:48:20	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-02 14:48:20	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-02 14:48:20	MESSAGE	      Utility is measured as expected improvement.
+2023-03-02 14:48:28	MESSAGE	      Computing variable importance for 20 bootstraps.
+2023-03-02 14:48:33	MESSAGE	      Compute initial model performance based on 2 hyperparameter sets.
+2023-03-02 14:48:33	MESSAGE	      Hyperparameter optimisation: Initialisation complete: summary score: 0.6667; validation optimisation score: 0.6667; auc_roc: 0.8333; sign_size: 2
+2023-03-02 14:48:35	MESSAGE	      Intensify step 1 using 1 challenger hyperparameter sets.
+2023-03-02 14:48:37	MESSAGE	      Hyperparameter optimisation: SMBO iteration 1: summary score: 0.6756; validation optimisation score: 0.6756; auc_roc: 0.8378; sign_size: 2
+2023-03-02 14:48:39	MESSAGE	      Intensify step 1 using 1 challenger hyperparameter sets.
+2023-03-02 14:48:41	MESSAGE	      Hyperparameter optimisation: SMBO iteration 2: summary score: 0.6726; validation optimisation score: 0.6726; auc_roc: 0.8363; sign_size: 2
+2023-03-02 14:48:42	MESSAGE	      Intensify step 1 using 1 challenger hyperparameter sets.
+2023-03-02 14:48:45	MESSAGE	      Hyperparameter optimisation: SMBO iteration 3: summary score: 0.6749; validation optimisation score: 0.6749; auc_roc: 0.8374; sign_size: 2
+2023-03-02 14:48:45	MESSAGE	    Hyperparameter optimisation: Optimisation stopped early as convergence was achieved.
+2023-03-02 14:48:45	MESSAGE	    Hyperparameter optimisation: A suitable set of hyperparameters was identified: summary score: 0.6749; validation optimisation score: 0.6749; auc_roc: 0.8374; sign_size: 2
+2023-03-02 14:48:45	MESSAGE	
+2023-03-02 14:48:45	MESSAGE	  Hyperparameter optimisation: Completed parameter optimisation for the glm learner, based on variable importances from the mrmr variable importance method.
+2023-03-02 14:50:40	MESSAGE	Model building: model building using "glm" learner, based on "mrmr" feature selection, has been completed.
+2023-03-02 14:50:41	MESSAGE	
+Evaluation: Creating ensemble models from individual models.
+2023-03-02 14:50:45	MESSAGE	
+Evaluation: Processing data to create familiarData objects.
+2023-03-02 14:50:45	MESSAGE	  
+Evaluation: Processing dataset 1 of 2.
+2023-03-02 14:50:46	MESSAGE	    Computing pairwise similarity between features.
+2023-03-02 14:50:46	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model as a whole. Computation is parallelised over bootstraps.
+2023-03-02 14:50:46	MESSAGE	    Computing pairwise similarity between samples.
+2023-03-02 14:50:47	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model as a whole. Computation is parallelised over bootstraps.
+2023-03-02 14:51:49	MESSAGE	    Extracting variable importance obtained during feature selection.
+2023-03-02 14:51:50	MESSAGE	    Extracting variable importance obtained from the models.
+2023-03-02 14:51:50	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model from the 10 underlying models. 
+2023-03-02 14:51:52	MESSAGE	    Computing permutation variable importance for models in the dataset.
+2023-03-02 14:51:52	MESSAGE	      Computing the bias-corrected estimate with confidence interval of the value(s) of interest for the ensemble model from the 10 underlying models. 40 bootstrap samples are obtained for each model (total: 400). Computation is parallelised over models.
+2023-03-02 14:53:15	MESSAGE	    Compute feature expression.
+2023-03-02 14:53:16	MESSAGE	    Extracting univariate analysis information.
+2023-03-02 14:53:16	MESSAGE	    Extracting hyperparameters from the models in the ensemble.
+2023-03-02 14:53:16	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model from the 10 underlying models. 
+2023-03-02 14:53:22	MESSAGE	    Computing ensemble predictions for the dataset.
+2023-03-02 14:53:22	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model as a whole. Computation is parallelised over bootstraps.
+2023-03-02 14:53:28	MESSAGE	    Computing model performance metrics on the dataset.
+2023-03-02 14:53:28	MESSAGE	      Computing the bias-corrected estimate with confidence interval of the value(s) of interest for the ensemble model from the 10 underlying models. 40 bootstrap samples are obtained for each model (total: 400). Computation is parallelised over models.
+2023-03-02 14:53:59	MESSAGE	    Computing data for decision curve analysis.
+2023-03-02 14:53:59	MESSAGE	      Computing the bias-corrected estimate with confidence interval of the value(s) of interest for the ensemble model from the 10 underlying models. 40 bootstrap samples are obtained for each model (total: 400). Computation is parallelised over models.
+2023-03-02 14:54:55	MESSAGE	    Assessing model calibration.
+2023-03-02 14:54:55	MESSAGE	      Computing the bias-corrected estimate with confidence interval of the value(s) of interest for the ensemble model from the 10 underlying models. 40 bootstrap samples are obtained for each model (total: 400). Computation is parallelised over models.
+2023-03-02 14:58:02	MESSAGE	    Computing receiver-operating characteristic curves.
+2023-03-02 14:58:02	MESSAGE	      Computing the bias-corrected estimate with confidence interval of the value(s) of interest for the ensemble model from the 10 underlying models. 40 bootstrap samples are obtained for each model (total: 400). Computation is parallelised over models.
+2023-03-02 14:59:47	MESSAGE	    Computing confusion matrix.
+2023-03-02 14:59:47	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model as a whole. Computation is parallelised over bootstraps.
+2023-03-02 14:59:53	MESSAGE	    Computing individual conditional expectation and partial dependence data for features in the dataset.
+2023-03-02 14:59:53	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model as a whole. Computation is parallelised over bootstraps.
+2023-03-02 14:59:54	MESSAGE	      Computing ICE / PD curves for "susp_tot".
+2023-03-02 15:01:50	MESSAGE	  Evaluation: familiarData object 20230302144257_glm_mrmr_1_1_pool_1_1_development_data was created.
+2023-03-02 15:01:50	MESSAGE	  
+Evaluation: Processing dataset 2 of 2.
+2023-03-02 15:01:56	MESSAGE	    Computing pairwise similarity between features.
+2023-03-02 15:01:56	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model as a whole. Computation is parallelised over bootstraps.
+2023-03-02 15:01:57	MESSAGE	    Computing pairwise similarity between samples.
+2023-03-02 15:01:57	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model as a whole. Computation is parallelised over bootstraps.
+2023-03-02 15:03:09	MESSAGE	    Extracting variable importance obtained during feature selection.
+2023-03-02 15:03:10	MESSAGE	    Extracting variable importance obtained from the models.
+2023-03-02 15:03:10	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model from the 10 underlying models. 
+2023-03-02 15:03:12	MESSAGE	    Computing permutation variable importance for models in the dataset.
+2023-03-02 15:03:12	MESSAGE	      Computing the bias-corrected estimate with confidence interval of the value(s) of interest for the ensemble model from the 10 underlying models. 40 bootstrap samples are obtained for each model (total: 400). Computation is parallelised over models.
+2023-03-02 15:04:26	MESSAGE	    Compute feature expression.
+2023-03-02 15:04:26	MESSAGE	    Extracting univariate analysis information.
+2023-03-02 15:04:27	MESSAGE	    Extracting hyperparameters from the models in the ensemble.
+2023-03-02 15:04:27	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model from the 10 underlying models. 
+2023-03-02 15:04:29	MESSAGE	    Computing ensemble predictions for the dataset.
+2023-03-02 15:04:29	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model as a whole. Computation is parallelised over bootstraps.
+2023-03-02 15:04:35	MESSAGE	    Computing model performance metrics on the dataset.
+2023-03-02 15:04:35	MESSAGE	      Computing the bias-corrected estimate with confidence interval of the value(s) of interest for the ensemble model from the 10 underlying models. 40 bootstrap samples are obtained for each model (total: 400). Computation is parallelised over models.
+2023-03-02 15:05:04	MESSAGE	    Computing data for decision curve analysis.
+2023-03-02 15:05:04	MESSAGE	      Computing the bias-corrected estimate with confidence interval of the value(s) of interest for the ensemble model from the 10 underlying models. 40 bootstrap samples are obtained for each model (total: 400). Computation is parallelised over models.
+2023-03-02 15:05:51	MESSAGE	    Assessing model calibration.
+2023-03-02 15:05:51	MESSAGE	      Computing the bias-corrected estimate with confidence interval of the value(s) of interest for the ensemble model from the 10 underlying models. 40 bootstrap samples are obtained for each model (total: 400). Computation is parallelised over models.
+2023-03-02 15:07:55	MESSAGE	    Computing receiver-operating characteristic curves.
+2023-03-02 15:07:55	MESSAGE	      Computing the bias-corrected estimate with confidence interval of the value(s) of interest for the ensemble model from the 10 underlying models. 40 bootstrap samples are obtained for each model (total: 400). Computation is parallelised over models.
+2023-03-02 15:09:17	MESSAGE	    Computing confusion matrix.
+2023-03-02 15:09:17	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model as a whole. Computation is parallelised over bootstraps.
+2023-03-02 15:09:21	MESSAGE	    Computing individual conditional expectation and partial dependence data for features in the dataset.
+2023-03-02 15:09:21	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model as a whole. Computation is parallelised over bootstraps.
+2023-03-02 15:09:21	MESSAGE	      Computing ICE / PD curves for "susp_tot".
+2023-03-02 15:10:57	MESSAGE	  Evaluation: familiarData object 20230302144257_glm_mrmr_1_1_pool_1_1_validation_data was created.
+2023-03-02 15:10:58	MESSAGE	
+Evaluation: Creating collection pooled_data
+2023-03-02 15:11:03	MESSAGE	
+Evaluation: Exporting data from collection pooled_data

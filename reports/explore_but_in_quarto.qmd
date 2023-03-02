@@ -20,7 +20,7 @@ library(yardstick)
 # install.packages("familiar", dependencies = TRUE)
 library(familiar)
 
-test_ids <- tar_read(test_ids)
+test_ids <- tar_read(idsTest)
 
 baseline <- tar_read(pt_names) |>
   mutate( test_set = id_univoco %in% test_ids)
@@ -31,117 +31,20 @@ trd <- tar_read(weaningsTRD) |>
   mutate( test_set = id_univoco %in% test_ids)
 ```
 
-## Test set
+## Test set check
 
-Baseline differences
+-   Baseline differences
 
-```{r}
-table_baseline <- baseline |>
-  select(-id_univoco, 
-         -starts_with("vm"),
-         -starts_with("icu"),
-         -starts_with("osp")) |>
-  mutate(reason = reason |>
-           fct_recode(
-             "Sepsis" = "Sepsi",
-             "Pneumonia" = "Polmonite",
-             "Post-surgical complications" = "Complicanze Postoperatorie",
-             "Heart Failure" = "Scompenso Cardiaco",
-             "COPD exacerbation" = "BPCO Riacutizzata",
-             "Other" = "Altro (specificare)",
-             "Trauma - Polytrauma" = "Trauma - Politrauma"
-             # ARDS doesn't need recoding
-           )) |>
-  tbl_summary(
-    by = test_set,
-    label = list( type ~ "Ventilation mode",
-                  sesso ~ "Gender",
-                  anni_eta ~ "Age (years)",
-                  reason ~ "Reason for MV")
-  ) |>
-  add_p() |>
-  add_q()
-```
+-   Daily differences (all but study days)
 
-Daily differences (all but study days)
+-   Daily differences ( study days)
+
+-   TRD differences
 
 ```{r}
-table_daily <- daily |>
-  select(-id_registry,
-         -filter_deleted,
-         -id_univoco,
-         -id_medico,
-         -starts_with("susp_"),
-         -starts_with("stop_"),
-         -starts_with("fail_"),
-         -cpis,
-         -data_lettura,
-         -giorno_studio,
-         susp_tot) |>
-  mutate(sbt = sbt |>
-           as.character() |>
-           fct_recode(
-             # "Already extubated" = "-1",
-             "Readiness Testing failure" = "0",
-             "SBT success" = "1",
-             "SBT failure" = "2"
-           )
-  ) |>
-  tbl_summary(
-    by= test_set
-  ) |>
-  add_p() |>
-  add_q()
-  
-```
-
-Daily differences ( study days)
-
-```{r}
-table_days <- daily |>
-  group_by(id_univoco) |>
-  summarise(giorno_finale = max(giorno_studio),
-            test_set = unique(test_set)) |>
-  select(giorno_finale,
-         test_set) |>
-  tbl_summary(
-    by = test_set,
-    label = giorno_finale ~ "Day of study",
-    statistic = all_continuous() ~ "{median}  (range: {min}, {max})"
-    # digits = ~ 2
-  ) |>
-  add_p() |>
-  add_q()
-```
-
-TRD differences
-
-```{r, eval = FALSE}
-table_trd <- trd |>
-  select(-file,
-         -id_univoco,
-         -date,
-         -ora) |>
-  tbl_summary(
-    by = test_set
-  ) |>
-  add_p() |>
-  add_q()
-```
-
-```{r}
-complete_table <- tbl_stack(
-  list(
-    table_baseline,
-    table_daily,
-    table_days
-    ),
-  group_header = c(
-    "Baseline data",
-    "Daily registry",
-    "Days of MV"
-  )
-)
+# if tbl_test_check() or idTest are changed,
+# remember to re-run tar_make()
+tar_read(test_set_check)
 ```
 
 ## Dummy models
@@ -222,15 +125,15 @@ dailydata <- daily |>
   )
 
 model5 <- summon_familiar(
-  data = filter(dailydata, test_set == FALSE),
-  experiment_dir = file.path(here::here(), "familiar_1"),
+  data = dailydata,
+  experiment_dir = file.path(here::here(), "familiar_xgboost"),
   validation_batch_id = "test_set",
   experimental_design = "cv(fs+mb,10,1)",
   sample_id_column = "id_univoco",
   outcome_type = "multinomial",
   outcome_column = "sbt",
   fs_method = "mrmr",
-  learner = c("glm", "xgboost_tree"),
+  learner = c("xgboost_tree"),
   evaluation_metric = c("accuracy", "balanced_accuracy", "precision"),
   imputation_method = "simple"
   )
@@ -242,6 +145,18 @@ model5 <- summon_familiar(
 #   )
 # 
 # plots[[1]]
+```
+
+Custom score function
+
+```{r}
+
+mv_cost <- tribble(
+  ~truth,   ~estimate, ~cost,
+  "1", "0",  1,
+  "2", "0",  1,
+  "2", "1",  1
+)
 ```
 
 Metric evaluation
