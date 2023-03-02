@@ -87,12 +87,14 @@ tbl_test_check <- function(
     list(
       table_baseline,
       table_daily,
-      table_days
+      table_days,
+      table_trd
     ),
     group_header = c(
       "Baseline data",
       "Daily registry",
-      "Days of MV"
+      "Days of MV",
+      "MV Track"
     )
   )
 }
