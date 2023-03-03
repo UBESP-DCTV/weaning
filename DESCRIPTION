@@ -26,6 +26,7 @@ Imports:
     fs,
     furrr,
     ggplot2,
+    ggpubr,
     ggrepel,
     glue,
     gtsummary,
