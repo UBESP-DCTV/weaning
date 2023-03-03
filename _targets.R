@@ -377,7 +377,7 @@ list(
 
   tar_target(
     test_set_check,
-    tbl_test_check(
+    gg_test_check(
       idsTest,
       pt_names,
       pt_registry,

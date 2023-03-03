@@ -4,8 +4,8 @@
 {
   prj_pkgs <- c(
     "abind","networkD3","forcats", "familiar", "fs", "ggplot2",
-    "ggrepel", "glue", "gtsummary", "purrr", "readr", "readxl",
-    "scales", "stringr", "tidyquant", "tidyr", "yardstick"
+    "ggrepel", "ggpubr", "glue", "gtsummary", "purrr", "readr",
+    "readxl", "scales", "stringr", "tidyquant", "tidyr", "yardstick"
   )
   dev_pkg <- c(
     "av", "magick", "quarto", "targets", "tarchetypes", "withr",
