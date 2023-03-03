@@ -41,6 +41,47 @@ trd <- tar_read(weaningsTRD) |>
 
 -   TRD differences
 
+New version (density plot)
+
+```{r}
+
+baseline |>
+  dplyr::select(id_univoco, type, sesso, anni_eta, bmi, 
+                ibw, saps, reason, test_set) |>
+  tidyr::pivot_longer(
+    cols = 2:8,
+    names_to = "predictor",
+    values_to = "value",
+    values_transform = as.double
+  ) |> 
+  ggplot2::ggplot(aes(value, fill = test_set)) +
+  geom_density(alpha = 0.5) +
+  facet_wrap(~predictor, scales = "free")
+
+
+baseline_melt <- baseline |>
+  dplyr::select(type, sesso, anni_eta, bmi, ibw,
+                saps, reason, test_set) |>
+  pivot_longer(
+    cols = ,
+    names_to = "var",
+    values_to = "value",
+    values_drop_na = FALSE
+  )
+# Everything on the same plot
+ggplot(d, aes(Xax,value, col=variable)) + 
+  geom_point() + 
+  stat_smooth() 
+
+# Separate plots
+ggplot(d, aes(Xax,value)) + 
+  geom_point() + 
+  stat_smooth() +
+  facet_wrap(~variable)
+```
+
+Old version (table with p-values)
+
 ```{r}
 # if tbl_test_check() or idTest are changed,
 # remember to re-run tar_make()
