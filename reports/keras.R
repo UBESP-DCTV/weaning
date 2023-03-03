@@ -34,16 +34,19 @@ list.files(here("R"), pattern = "keras", full.names = TRUE) |>
 # Parameters ------------------------------------------------------
 run_id <- str_remove_all(now(), '\\W') |> paste0("_run")
 
-k_folds <- 3
-epochs <- 10
-batch_size <- 128
+k_folds <- 5
+epochs <- 50
+batch_size <- 32
+
+lr = 1e-3
 
 rec_units = 32
-dense_unit = 16
+dense_units = 16
+
 input_do = 0.1
 inner_do = 0.5
-rec_do = 0.5
-lr = 1e-5
+rec_do = 0
+
 
 
 # Global variables ------------------------------------------------
@@ -109,7 +112,7 @@ for (i in seq_len(k_folds)) {
   ui_todo("Training in progress...")
   model <- define_keras_model(
     rec_units = rec_units,
-    dense_unit = dense_unit,
+    dense_units = dense_units,
     input_do = input_do,
     inner_do = inner_do,
     rec_do = rec_do,
@@ -124,7 +127,15 @@ for (i in seq_len(k_folds)) {
       validation_data = val_generator,
       validation_steps = val_n_batches,
       epochs = epochs,
-      verbose = verbose
+      verbose = verbose,
+      callbacks = list(
+        callback_model_checkpoint(
+          filepath = "models_epoch-{epoch:02d}_acc_{val_accuracy:.2f}.hdf5",
+          monitor = "val_loss",
+          mode = "min",
+          save_best_only = TRUE
+        )
+      )
     )
   ui_done("Training done.")
   (k_time[[i]] <- round(Sys.time() - tic, 2))
@@ -160,9 +171,9 @@ gg <- k_scores |>
   labs(
     subtitle = paste0(
       "Recurrent units: ", rec_units, " - ",
-      "Dense units: ", dense_unit, " - ",
+      "Dense units: ", dense_units, " - ",
       "Batch size: ", batch_size, "\n",
-      "Recurrent depth: ", 1, " - ",
+      "Recurrent depth: ", 2, " - ",
       "Dense depth: ", 2, "\n",
       "Input drop-out: ", input_do, "% - ",
       "Internal drop-out: ", inner_do, "% - ",

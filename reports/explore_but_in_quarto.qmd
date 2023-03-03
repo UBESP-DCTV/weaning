@@ -1,7 +1,6 @@
 ---
 title: "Explore but in quarto"
 author: "AP"
-format: html
 format:
   html:
     embed-resources: true
