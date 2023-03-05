@@ -1,38 +1,24 @@
 library(tidyverse)
 library(targets)
 
-tar_read(pt_names) |> dplyr::glimpse()
-tar_read(pt_registry) |> dplyr::glimpse()
 
+a <- tr_generator()
+b <- tr_generator()
+c <- tr_generator()
+d <- tr_generator()
+e <- tr_generator()
 
-ids <- tar_read(pt_ids)
+tr_list <- list(a, b, c, d, e)
 
-baseline <- tar_read(baselineArrays)
-daily <- tar_read(dailyArrays)
-trd <- tar_read(trdArrays)
-outcome <- tar_read(outArrays)
+walk(tr_list, str, 1)
+walk(tr_list, ~str(.x[["x"]], 1))
 
-a <- create_subdata(ids, baseline, daily, trd, outcome, n_days = maxRelevantDays)
+f <- val_generator()
+g <- val_generator()
+h <- val_generator()
+i <- val_generator()
+l <- val_generator()
 
-baseline[1] |>
-  str(1)
-daily[[1]]
-
-
-
-daily[["BA001"]]
-outcome[["BA001"]]
-
-ba001_trd <- tar_read(weaningsTRD) |>
-  dplyr::filter(id_univoco == "BA001")
-
-ba001_trd |>
-  dplyr::select(date, ora) |>
-  group_by(date) |>
-  count()
-
-
-a <- tar_read(subdata_2_days)
-
-
-reg <- tar_read(pt_registry)
+val_list <- list(f, g, h, i, l)
+walk(val_list, str, 1)
+walk(val_list, ~str(.x[["x"]], 1))
