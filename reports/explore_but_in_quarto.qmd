@@ -189,5 +189,13 @@ map_reduce(model_list, function(.name, .model) {
   rename(.name = .estimate) |>
   bind_cols()
 })
+  
+pred_obs |>
+  multi_metric(
+    truth = observed, 
+    estimate = pred0,
+    estimator = "macro_weighted") |>
+  rename("All 0" = .estimate) |>
+  )
  
 ```
