@@ -147,7 +147,6 @@ model5 <- summon_familiar(
 Custom score function
 
 ```{r}
-
 mv_cost <- tribble(
   ~truth,   ~estimate, ~cost,
   "1", "0",  1,
@@ -159,18 +158,16 @@ mv_cost <- tribble(
 Metric evaluation
 
 ```{r}
-pred_obs <- pred_obs |>
-  mutate(across(everything(),
-    ~ factor(.x, levels = c(0,1,2)
-  )))
+pred_obs |>
+  select(pred4, observed) |>
+  rename(predicted = pred4) |>
+  metric_table()
+```
 
-multi_metric <- metric_set(
-  accuracy,
-  bal_accuracy,
-  precision,
-  #mcc,
-  recall)
+Metric evaluation all at once
 
+```{r, eval = FALSE}
+# WORK in progress
 model_list <- tribble(
   ~name,   ~model,
   "All 0", "pred0",
@@ -195,7 +192,6 @@ pred_obs |>
     truth = observed, 
     estimate = pred0,
     estimator = "macro_weighted") |>
-  rename("All 0" = .estimate) |>
-  )
+  rename("All 0" = .estimate)
  
 ```
