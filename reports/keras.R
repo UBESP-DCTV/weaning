@@ -35,7 +35,7 @@ list.files(here("R"), pattern = "keras", full.names = TRUE) |>
 run_id <- str_remove_all(now(), '\\W') |> paste0("_run")
 
 k_folds <- 5
-epochs <- 50
+epochs <- 40
 batch_size <- 32
 
 lr = 1e-3
