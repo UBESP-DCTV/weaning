@@ -195,3 +195,45 @@ pred_obs |>
   rename("All 0" = .estimate)
  
 ```
+
+## Load Keras models
+
+```{r}
+library(keras)
+
+# Load model
+e19a78 <- load_model_hdf5("C:/R/weaning/models/models_epoch-19_acc_0.78.hdf5", custom_objects = NULL, compile = TRUE)
+
+# Preparing test data
+batch_size <- 32
+ids_test <- tar_read(idsTest)
+db_test_raw <- tar_read(dbTest)
+
+means_baseline <- get_means(db_test_raw, "baseline")
+means_daily <- get_means(db_test_raw, "daily")
+means_trd <- get_means(db_test_raw, "trd")
+sd_baseline <- get_sd(db_test_raw, "baseline")
+sd_daily <- get_sd(db_test_raw, "daily")
+sd_trd <- get_sd(db_test_raw, "trd")
+
+db_test <- db_test_raw |>
+  normalize_baseline(means_baseline, sd_baseline) |>
+  normalize_daily(means_daily, sd_daily) |>
+  normalize_trd(means_trd, sd_trd)
+
+test_generator <- create_batch_generator(db_test, batch_size)
+test_n_batches <- db_test |>
+  purrr::map_int(~ceiling(length(.x[["ids"]]) / batch_size)) |>
+  sum()
+rm(db_test, db_test_raw)
+
+# Predict
+preds <- predict(
+  object = e19a78,
+  x = test_generator,
+  batch_size = batch_size,
+  steps = test_n_batches
+  )
+```
+
+\

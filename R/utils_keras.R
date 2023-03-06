@@ -95,9 +95,9 @@ get_means <- function(db, what) {
     switch(what,
            baseline = db_what,
            daily = db_what |>
-             map(~keras::array_reshape(.x, dim = c(prod(dim(.x)[-3]), 5))),
+             purrr::map(~keras::array_reshape(.x, dim = c(prod(dim(.x)[-3]), 5))),
            trd = db_what |>
-             map(~keras::array_reshape(.x, dim = c(prod(dim(.x)[-4]), 21)))
+             purrr::map(~keras::array_reshape(.x, dim = c(prod(dim(.x)[-4]), 21)))
     )
   ) |>
     colMeans()
@@ -109,9 +109,9 @@ get_sd <- function(db, what) {
     switch(what,
            baseline = db_what,
            daily = db_what |>
-             map(~keras::array_reshape(.x, dim = c(prod(dim(.x)[-3]), 5))),
+             purrr::map(~keras::array_reshape(.x, dim = c(prod(dim(.x)[-3]), 5))),
            trd = db_what |>
-             map(~keras::array_reshape(.x, dim = c(prod(dim(.x)[-4]), 21)))
+             purrr::map(~keras::array_reshape(.x, dim = c(prod(dim(.x)[-4]), 21)))
     )
   ) |>
     apply(2, sd)
