@@ -62,7 +62,7 @@ k_scores <- tibble::tibble(
 )
 k_histories <- vector("list", k_folds)
 k_time <- vector("list", k_folds)
-
+k_sets <- vector("list", k_folds)
 
 # Data ------------------------------------------------------------
 ids_trval <- tar_read(idsTrVal)
@@ -87,6 +87,18 @@ for (i in seq_len(k_folds)) {
   sd_baseline <- get_sd(db_tr, "baseline")
   sd_daily <- get_sd(db_tr, "daily")
   sd_trd <- get_sd(db_tr, "trd")
+
+  k_sets[[i]] <- list(
+    current_val_fold = i,
+    ids_in_train = ids_in_train,
+    ids_in_val = ids_in_val,
+    means_baseline = means_baseline,
+    means_daily = means_daily,
+    means_trd = means_trd,
+    sd_baseline = sd_baseline,
+    sd_daily = sd_daily,
+    sd_trd = sd_trd
+  )
 
   db_tr_scaled <- db_tr |>
     normalize_baseline(means_baseline, sd_baseline) |>
@@ -208,7 +220,8 @@ run <- list(
   k_final_scores = dplyr::filter(
     k_scores,
     set == "validation", epochs == max(.data[["epochs"]])
-  )[["accuracy"]]
+  )[["accuracy"]],
+  k_sets = k_sets
 )
 ui_info(paste0(
   "Mean k-fold validation last-epoch accuracy: ",
