@@ -8,3 +8,5 @@ inst/extdata
 _targets.yaml
 
 .Renviron
+
+*.hdf5

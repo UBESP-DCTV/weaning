@@ -34,16 +34,22 @@ list.files(here("R"), pattern = "keras", full.names = TRUE) |>
 # Parameters ------------------------------------------------------
 run_id <- str_remove_all(now(), '\\W') |> paste0("_run")
 
-k_folds <- 3
-epochs <- 10
-batch_size <- 128
+k_folds <- 5
+epochs <- 40
+batch_size <- 32
 
-rec_units = 32
-dense_unit = 16
+lr = 1e-3
+
+
+rec_units = 64
+crnn_kernel_size = 8
+dense_units = 32
+
+
 input_do = 0.1
 inner_do = 0.5
-rec_do = 0.5
-lr = 1e-5
+rec_do = 0
+
 
 
 # Global variables ------------------------------------------------
@@ -56,7 +62,7 @@ k_scores <- tibble::tibble(
 )
 k_histories <- vector("list", k_folds)
 k_time <- vector("list", k_folds)
-
+k_sets <- vector("list", k_folds)
 
 # Data ------------------------------------------------------------
 ids_trval <- tar_read(idsTrVal)
@@ -81,6 +87,18 @@ for (i in seq_len(k_folds)) {
   sd_baseline <- get_sd(db_tr, "baseline")
   sd_daily <- get_sd(db_tr, "daily")
   sd_trd <- get_sd(db_tr, "trd")
+
+  k_sets[[i]] <- list(
+    current_val_fold = i,
+    ids_in_train = ids_in_train,
+    ids_in_val = ids_in_val,
+    means_baseline = means_baseline,
+    means_daily = means_daily,
+    means_trd = means_trd,
+    sd_baseline = sd_baseline,
+    sd_daily = sd_daily,
+    sd_trd = sd_trd
+  )
 
   db_tr_scaled <- db_tr |>
     normalize_baseline(means_baseline, sd_baseline) |>
@@ -109,11 +127,12 @@ for (i in seq_len(k_folds)) {
   ui_todo("Training in progress...")
   model <- define_keras_model(
     rec_units = rec_units,
-    dense_unit = dense_unit,
+    dense_units = dense_units,
     input_do = input_do,
     inner_do = inner_do,
     rec_do = rec_do,
-    lr = lr
+    lr = lr,
+    crnn_kernel_size = crnn_kernel_size
   )
 
   tic <- Sys.time()
@@ -124,7 +143,15 @@ for (i in seq_len(k_folds)) {
       validation_data = val_generator,
       validation_steps = val_n_batches,
       epochs = epochs,
-      verbose = verbose
+      verbose = verbose,
+      callbacks = list(
+        callback_model_checkpoint(
+          filepath = "models_epoch-{epoch:02d}_acc_{val_accuracy:.2f}.hdf5",
+          monitor = "val_loss",
+          mode = "min",
+          save_best_only = TRUE
+        )
+      )
     )
   ui_done("Training done.")
   (k_time[[i]] <- round(Sys.time() - tic, 2))
@@ -160,16 +187,18 @@ gg <- k_scores |>
   labs(
     subtitle = paste0(
       "Recurrent units: ", rec_units, " - ",
-      "Dense units: ", dense_unit, " - ",
+      "Dense units: ", dense_units, " - ",
       "Batch size: ", batch_size, "\n",
-      "Recurrent depth: ", 1, " - ",
+      "Recurrent depth: ", 2, " - ",
+      "ConvLSTM kernel size: ", crnn_kernel_size, " - ",
       "Dense depth: ", 2, "\n",
       "Input drop-out: ", input_do, "% - ",
       "Internal drop-out: ", inner_do, "% - ",
       "Recurrent drop-out: ", rec_do, "%\n",
       "Batch norm, L1, L2 regularization.\n",
       "Internal activations: ReLU", " - ",
-      "Optimizer: Adam + AMSgrad (starting lr: 1e-4).\n",
+      "Output activations: softmax", "\n",
+      "Optimizer: Adam + AMSgrad (starting lr: 1e-4) - ",
       "CV folds: ", k_folds, "."
     ),
     x = "Epoch",
@@ -191,7 +220,8 @@ run <- list(
   k_final_scores = dplyr::filter(
     k_scores,
     set == "validation", epochs == max(.data[["epochs"]])
-  )[["accuracy"]]
+  )[["accuracy"]],
+  k_sets = k_sets
 )
 ui_info(paste0(
   "Mean k-fold validation last-epoch accuracy: ",
