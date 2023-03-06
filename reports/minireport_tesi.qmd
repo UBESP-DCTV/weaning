@@ -1,0 +1,195 @@
+---
+title: "Minireport tesi"
+author: "AP"
+format:
+  html:
+    embed-resources: true
+    code-fold: true
+    code-summary: "Show the code"
+editor: visual
+---
+
+## Obiettivo
+
+Questo report contiene alcune analisi e tabelle utili alla tesi, in particolare:
+
+1.  n pat (cohort size) and time span
+
+2.  tot days, min/max I/II/II quartile days/pat
+
+3.  tot SBT, min/max/ I/II/III quartile SBT/paz
+
+4.  min/max I/II/III quartile SBT riusciti / SBT provati per paziente (e overall)
+
+Ma anche, per la parte dei metodi "Describe the basic statistics of the dataset, particularly of the response variable. These include the ratio of positive to negative classes for a classification problem and the distribution of the response variable for regression problem".
+
+## Caricamento pacchetti
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+if (!interactive()) {
+  options(tidyverse.quiet = TRUE)
+}
+library(tidyverse)
+library(targets)
+library(gtsummary)
+library(networkD3)
+```
+
+e i targets
+
+```{r}
+tar_visnetwork(TRUE, exclude = starts_with("gg") | contains("Plot"))
+```
+
+```{r}
+baseline <- tar_read(pt_names) |>
+  select("id_univoco", "type", "sesso", "anni_eta", "reason",
+         "vm_inizio", "vm_fine") |>
+  mutate(reason = reason |>
+           fct_recode(
+             "Sepsis" = "Sepsi",
+             "Pneumonia" = "Polmonite",
+             "Post-surgical complications" = "Complicanze Postoperatorie",
+             "Heart Failure" = "Scompenso Cardiaco",
+             "COPD exacerbation" = "BPCO Riacutizzata",
+             "Other" = "Altro (specificare)",
+             "Trauma - Polytrauma" = "Trauma - Politrauma"
+             # ARDS doesn't need recoding
+           ))
+daily <- tar_read(pt_registry) |>
+  select("id_univoco", "type", "data_lettura", "giorno_studio", 
+         "sbt") |>
+    # sbt :=
+    #   - se stubato = `-1`,
+    #   - se sbt non provato =  `0`,
+    #   - se sbt riuscito =  `1`,
+    #   - se sbt fallito =  `2`
+  mutate(sbt = sbt |>
+           as.character() |>
+           fct_recode(
+             "Already extubated" = "-1",
+             "Readiness Testing failure" = "0",
+             "SBT success" = "1",
+             "SBT failure" = "2"
+           )
+  )
+```
+
+## Pazienti totali nello studio
+
+```{r}
+baseline |>
+  select(-id_univoco, -starts_with("vm")) |>
+  tbl_summary(
+    label = list( type ~ "Ventilation mode",
+                  sesso ~ "Gender",
+                  anni_eta ~ "Age (years)",
+                  reason ~ "Reason for MV")
+  )
+```
+
+```{r}
+baseline |>
+  select(starts_with("vm")) |>
+  tbl_summary(
+    label = list(
+      vm_inizio ~ "MV start",
+      vm_fine ~ "MV end"
+    ),
+    statistic = ~ "{min}, {max}"
+  )
+```
+
+## Giorni nello studio
+
+```{r}
+daily |>
+  group_by(id_univoco) |>
+  summarise(giorno_finale = max(giorno_studio)) |>
+  select(giorno_finale) |>
+  tbl_summary(
+    label = giorno_finale ~ "Day of study",
+    statistic = ~ "{median}  (range: {min}, {max})  (IQR: {p25}, {p75})",
+    # digits = ~ 2
+  )
+```
+
+## SBT nello studio
+
+```{r}
+daily |>
+  filter( sbt %in% c("SBT success", "SBT failure")) |>
+  mutate( sbt = fct_drop(sbt)) |>
+  group_by(id_univoco) |>
+  count(sbt) |>
+  # pivot_wider(names_from = sbt,
+  #             values_from = n,
+  #             values_fill = 0) |>
+  ungroup() |>
+  select(-id_univoco) |>
+  tbl_summary( 
+    by = sbt,
+    statistic =  ~ "{median}  (range: {min}, {max})  (IQR: {p25}, {p75})",
+    # digits =  ~ 2
+  ) |>
+  add_overall( col_label = "Totale")
+```
+
+## Analisi dell'outcome variable
+
+```{r}
+
+sbt_yes <- daily |> filter(sbt == "SBT success") |>
+  tally() |> as.integer()
+sbt_no <- daily |> filter(sbt == "SBT failure") |>
+  tally() |> as.integer()
+rt_yes <- sbt_yes + sbt_no
+rt_no <- daily |> filter(sbt == "Readiness Testing failure") |> 
+  tally()  |>   as.integer()
+all_attempts <- rt_yes + rt_no
+
+# collater input
+diagram_links <- tribble(
+  ~source,           ~target,           ~value,
+  "all attempts",    "RT success",      rt_yes,
+  "all attempts",    "RT failure",      rt_no,
+  "RT success",      "SBT success",     sbt_yes,
+  "RT success",      "SBT failure",     sbt_no
+)
+
+diagram_nodes <- tibble(
+  name = c(
+    as.character(diagram_links[["source"]]), 
+    as.character(diagram_links[["target"]])) |>
+    unique()
+)
+
+diagram_links[["IDsource"]] <- match(
+  diagram_links[["source"]], diagram_nodes[["name"]])-1 
+diagram_links[["IDtarget"]] <- match(
+  diagram_links[["target"]], diagram_nodes[["name"]])-1
+
+# prepare colour scale
+ColourScal ='d3.scaleOrdinal() .range(["#FDE725FF","#B4DE2CFF","#6DCD59FF","#35B779FF","#1F9E89FF","#26828EFF","#31688EFF","#3E4A89FF","#482878FF","#440154FF"])'
+
+sankeyNetwork(Links = diagram_links,
+              Nodes = diagram_nodes,
+              Source = "IDsource", 
+              Target = "IDtarget",
+              Value = "value",
+              NodeID = "name", 
+              sinksRight=FALSE,
+              colourScale = ColourScal,
+              nodeWidth=30, fontSize=15, nodePadding=20)
+
+```
+
+```{r}
+daily |>
+  select(sbt) |>
+  tbl_summary(
+    label = sbt ~ "Daily attempt"
+  )
+```

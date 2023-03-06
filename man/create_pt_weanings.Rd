@@ -15,7 +15,7 @@ create_pt_weanings(db, pt_id)
 array [pt, days, var] = [none, length(giorno_studio), 3]
 }
 \description{
-dialy: array [pt, days, var] = [none, length(giorno_studio), 3]
+daily: array [pt, days, var] = [none, length(giorno_studio), 3]
 }
 \examples{
 if (FALSE) create_pt_weanings(pt_registry, pt_ids[[1]])

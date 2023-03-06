@@ -3,8 +3,9 @@
 
 {
   prj_pkgs <- c(
-    "abind", "forcats", "fs", "ggplot2", "ggrepel", "glue", "purrr",
-    "readr", "readxl", "scales", "stringr", "tidyquant", "tidyr"
+    "abind","networkD3","forcats", "familiar", "fs", "ggplot2",
+    "ggrepel", "glue", "gtsummary", "purrr", "readr", "readxl",
+    "scales", "stringr", "tidyquant", "tidyr", "yardstick"
   )
   dev_pkg <- c(
     "av", "magick", "quarto", "targets", "tarchetypes", "withr",
@@ -43,7 +44,14 @@ renv::status()
 ## `R/functions.R`, you can create other couple of test/function-script
 ## by running the following lines of code as needed.
 
-"create_pt_arrays" |>
+"tbl_test_check" |>
+  usethis::use_test() |>
+  basename() |>
+  stringr::str_remove("test-") |>
+  usethis::use_r()
+
+
+"utils_keras" |>
   usethis::use_test() |>
   basename() |>
   stringr::str_remove("test-") |>

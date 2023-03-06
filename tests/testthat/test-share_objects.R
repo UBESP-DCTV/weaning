@@ -6,7 +6,6 @@ test_that("share_objects works", {
 
   test_output_data_path <- file.path(
     test_proj_shared_path,
-    "/../",
     Sys.getenv("OUTPUT_DATA_FOLDER")
     ) |>
     normalizePath(mustWork = FALSE)

@@ -51,64 +51,6 @@ list(
     )
   ),
 
-  # tar_target(fileToSkip, c(
-  #   "BG003_1119_LOG_2014-03-13_15-53-07",  # BG002
-  #   "BS006_459_LOG", "BS006_459_TRD",  # BS005
-  #   "BS007_520_TRD",  # BS006
-  #   "BS009_900_LOG", "BS009_900_TRD",  # BS012
-  #   "CM001_108_LOG", "CM001_108_TRD",  # CM002
-  #   "CM001_114_LOG", "CM001_114_TRD",  # CM002
-  #   "CM001_118_LOG", "CM001_118_TRD",  # CM002
-  #   "CM002_101_LOG", "CM002_101_TRD",  # CM001
-  #   "CM002_115_LOG", "CM002_115_TRD",  # CM001
-  #   "CM002_115_LOG_2013-08-15_11-01-11",  # CM001
-  #   "CM002_115_TRD_2013-08-15_11-01-10",  # CM001
-  #   "CM002_115_TRD_2013-08-15_11-02-48", # CM001
-  #   "CM002_115_TRD_2013-08-15_11-08-31",  # CM001
-  #   "CM002_115_TRD_2013-08-15_11-11-53",  # CM001
-  #   "CM002_115_TRD_2013-08-16_11-45-14", # CM001
-  #   "CM002_115_TRD_2013-08-16_11-47-02",   # CM001
-  #   "CM002_124_TRD_2013-08-17_06-36-41",  # CM001
-  #   "CM002_124_TRD_2013-08-17_06-46-39",  # CM001
-  #   "CM002_124_TRD_2013-08-17_06-47-52",
-  #   "CM002_141_TRD_2013-08-21_09-18-17",
-  #   "CM019_1587_TRD", "CM019_1588_TRD", "CM019_1592_TRD", # CM009
-  #   "FE002_16_TRD_2013-07-14_16-53-45", # FE001
-  #   "FE003_17_TRD",  # FE002
-  #   "CM002_124_TRD",  # CM001
-  #   "BS016_1084_LOG"  # BS017
-  # )),
-  #
-  # tar_target(PedotToSkip, c(
-  #   "BA011_1893_TRD",  # pt baoo10 ma non esiste BA010
-  #   "BA011_1894_TRD",  # tra quelli in studio
-  #   "BA011_1895_TRD",  # quindi si potrebbe includere
-  #   "BS006_459_TRD",  # BS005
-  #   "BS007_520_TRD",  # BS006
-  #   "BS009_900_TRD",  # BS012
-  #   "CM001_108_LOG", "CM001_108_TRD",  # CM002
-  #   "CM001_114_LOG", "CM001_114_TRD",  # CM002
-  #   "CM001_118_LOG", "CM001_118_TRD",  # CM002
-  #   "CM002_101_LOG", "CM002_101_TRD",  # CM001
-  #   "CM002_115_LOG", "CM002_115_TRD",  # CM001
-  #   "CM002_115_LOG_2013-08-15_11-01-11",  # CM001
-  #   "CM002_115_TRD_2013-08-15_11-01-10",  # CM001
-  #   "CM002_115_TRD_2013-08-15_11-02-48", # CM001
-  #   "CM002_115_TRD_2013-08-15_11-08-31",  # CM001
-  #   "CM002_115_TRD_2013-08-15_11-11-53",  # CM001
-  #   "CM002_115_TRD_2013-08-16_11-45-14", # CM001
-  #   "CM002_115_TRD_2013-08-16_11-47-02",   # CM001
-  #   "CM002_124_TRD_2013-08-17_06-36-41",  # CM001
-  #   "CM002_124_TRD_2013-08-17_06-46-39",  # CM001
-  #   "CM002_124_TRD_2013-08-17_06-47-52",
-  #   "CM002_141_TRD_2013-08-21_09-18-17",
-  #   "CM019_1587_TRD", "CM019_1588_TRD", "CM019_1592_TRD", # CM009
-  #   "FE002_16_TRD_2013-07-14_16-53-45", # FE001
-  #   "FE003_17_TRD",  # FE002
-  #   "CM002_124_TRD",  # CM001
-  #   "BS016_1084_LOG"  # BS017
-  # )),
-
   tar_target(centerFolder, get_center_folders(weaningFolder)),
   tar_target(
     weaningsCentersTRD, {
@@ -380,7 +322,7 @@ list(
 
   tar_target(
     baselineArrays,
-    # [pt, var] = [none, 2]
+    # [pt, var] = [none, 7]
     create_pt_ptnames(pt_names, pt_ids),
     pattern = map(pt_ids),
     iteration = "list"
@@ -394,22 +336,58 @@ list(
   ),
   tar_target(
     trdArrays,
-    # [pt, minutes, days, var] = [none, 1440, length(giorno_studio), ]
+    # [pt, minutes, days, var] = [none, 1440, length(giorno_studio), 30]
     create_pt_trd(weaningsTRD, pt_ids),
     pattern = map(pt_ids),
     iteration = "list"
   ),
   tar_target(
     outArrays,
-    # [pt, days, out] = [none, length(giorno_studio), 1]
+    # [pt, days, out] = [none, length(giorno_studio), 2]
     create_pt_output(pt_registry, pt_ids),
     pattern = map(pt_ids),
     iteration = "list"
-  )
+  ),
 
+  tar_target(
+    maxRelevantDays,
+    seq_len(get_max_day(dailyArrays, trdArrays, outArrays))
+  ),
 
+  tar_target(
+    trainArraysByDays,
+    create_subdata(
+      pt_ids, baselineArrays, dailyArrays, trdArrays, outArrays,
+      maxRelevantDays
+    ),
+    pattern = map(maxRelevantDays),
+    iteration = "list"
+  ),
 
+  tar_target(
+    idsTest,
+    {
+      set.seed(4242)
+      pt_names |>
+        dplyr::slice_sample(n = 36) |>
+        dplyr::select(id_univoco) |>
+        unlist(use.names = FALSE)
+    }
+  ),
 
+  tar_target(
+    test_set_check,
+    tbl_test_check(
+      idsTest,
+      pt_names,
+      pt_registry,
+      weaningsTRD
+    )
+  ),
+
+  tar_target(dbTest, filter_db_ids(trainArraysByDays, idsTest)),
+  tar_target(idsTrVal, setdiff(pt_ids, idsTest)),
+  tar_target(dbTrVal, filter_db_ids(trainArraysByDays, idsTrVal)),
 
 
 
@@ -425,6 +403,10 @@ list(
   # ),
   #
 
+  tar_quarto(
+    minireport_tesi,
+    here("reports/minireport_tesi.qmd")
+  )
 
 
 # objects to share -------------------------------------------------

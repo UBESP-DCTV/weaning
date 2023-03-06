@@ -15,8 +15,13 @@ create_pt_trd <- function(db, pt_id) {
 
   var_used <- names(db) |>
     setdiff(c(
-      "id_univoco", "folder", "id_pat", "file", "stress_index",
-      "et_co2_percent"
+      "id_univoco", "folder", "id_pat", "file",
+      # over 2/3 missing
+      "stress_index", "et_co2_percent", "eliminazione_co2_corrente_ml",
+      "eliminazione_co2_minuto_ml_min", "elastanza_cm_h2o_l",
+      "resistenza_esp_cm_h2o_l_s", "resistenza_inspiratoria_cm_h2o_l_s",
+      "press_di_pausa_vie_aeree_cm_h2o", "compliance_statica_ml_cm_h2o",
+      "perdita_percentuale_percent", "et_co2_mm_hg"
     ))
 
   res <- db[db[["id_univoco"]] == pt_id, var_used, drop = FALSE] |>
@@ -47,7 +52,7 @@ create_pt_trd <- function(db, pt_id) {
 
 
 
-  res[is.na(res)] <- -99
+  res[is.na(res)] <- -1
 
   purrr::map(
     c(0, seq_len(max(res[["day"]], na.rm = TRUE))),
@@ -101,7 +106,7 @@ create_pt_ptnames <- function(db, pt_id) {
     dplyr::filter(.data[["id_univoco"]] == pt_id) |>
     dplyr::select(
       dplyr::all_of(
-        c("type", "sesso", "anni_eta", "bmi", "reason")
+        c("type", "sesso", "anni_eta", "bmi", "ibw", "saps", "reason")
       )
     ) |>
     dplyr::mutate(
@@ -116,7 +121,7 @@ create_pt_ptnames <- function(db, pt_id) {
 
 #' weanings
 #'
-#' dialy: array \[pt, days, var\] = \[none, length(giorno_studio), 3\]
+#' daily: array \[pt, days, var\] = \[none, length(giorno_studio), 3\]
 #'
 #' @param db pt_registry dataset
 #' @param pt_id a single value from pt_ids identifiying a patient id
@@ -132,7 +137,10 @@ create_pt_weanings <- function(db, pt_id) {
   db |>
     dplyr::filter(.data[["id_univoco"]] == pt_id) |>
     dplyr::arrange(.data[["giorno_studio"]]) |>
-    dplyr::select(dplyr::all_of(c("sofa", "cpis", "susp_tot"))) |>
+    dplyr::select(
+      dplyr::all_of(c("sofa", "susp_tot")),
+      dplyr::starts_with("ega_")
+    ) |>
     as.matrix() |>
     unname() |>
     as.array()
