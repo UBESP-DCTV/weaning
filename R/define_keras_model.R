@@ -102,7 +102,7 @@ define_keras_model <- function(
 # Output ----------------------------------------------------------
 
   out <- dense_l6 %>%
-    keras::layer_dense(name = "out", units = 3, activation = "sigmoid")
+    keras::layer_dense(name = "out", units = 3, activation = "softmax")
 
 
 
