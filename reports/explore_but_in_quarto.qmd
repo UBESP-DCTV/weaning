@@ -97,7 +97,7 @@ pred_obs <- pred_obs |>
 
 Model 5 predicts with baseline and daily input
 
-```{r, message=FALSE}
+```{r, eval=FALSE}
 dailydata <- daily |>
   select(id_univoco,
          starts_with("ega"),
@@ -159,8 +159,8 @@ Metric evaluation
 
 ```{r}
 pred_obs |>
-  select(pred4, observed) |>
-  rename(predicted = pred4) |>
+  select(pred2, observed) |>
+  rename(predicted = pred2) |>
   metric_table()
 ```
 
@@ -196,9 +196,9 @@ pred_obs |>
  
 ```
 
-## Load Keras models
+## Keras models TEST (do not use)
 
-```{r}
+```{r, eval = FALSE}
 library(keras)
 
 # Load model
@@ -209,6 +209,7 @@ batch_size <- 32
 ids_test <- tar_read(idsTest)
 db_test_raw <- tar_read(dbTest)
 
+#this is a temporary approximatrion, appropriate validation coefficients from selected model should be used
 means_baseline <- get_means(db_test_raw, "baseline")
 means_daily <- get_means(db_test_raw, "daily")
 means_trd <- get_means(db_test_raw, "trd")
@@ -233,12 +234,118 @@ preds <- predict(
   x = test_generator,
   batch_size = batch_size,
   steps = test_n_batches
-  ) -1
+  )
 
 obs <- tar_read(dbTest) |> 
   purrr::map("out") |> 
-  unlist(use.names = FALSE)
-table(apply(preds, 1, which.max), obs)
+  unlist()#use.names = FALSE)
+table(apply(preds, 1, which.max)-1, obs)
 ```
 
-\
+Obtain prediction from validation instead
+
+```{r}
+library(keras)
+
+# Load model
+e19a78 <- load_model_hdf5("C:/R/weaning/models/models_epoch-19_acc_0.78.hdf5", custom_objects = NULL, compile = TRUE)
+
+# Preparing test data
+batch_size <- 32
+db_trval <- tar_read(dbTrVal)
+
+#this is a temporary approximatrion, appropriate validation coefficients from selected model should be used
+means_baseline <- get_means(db_trval, "baseline")
+means_daily <- get_means(db_trval, "daily")
+means_trd <- get_means(db_trval, "trd")
+sd_baseline <- get_sd(db_trval, "baseline")
+sd_daily <- get_sd(db_trval, "daily")
+sd_trd <- get_sd(db_trval, "trd")
+
+db_val <- db_trval |>
+  normalize_baseline(means_baseline, sd_baseline) |>
+  normalize_daily(means_daily, sd_daily) |>
+  normalize_trd(means_trd, sd_trd)
+
+val_generator <- create_batch_generator(db_val, batch_size)
+val_n_batches <- db_val |>
+  purrr::map_int(~ceiling(length(.x[["ids"]]) / batch_size)) |>
+  sum()
+
+# Predict
+preds <- predict(
+  object = e19a78,
+  x = val_generator,
+  batch_size = batch_size,
+  steps = val_n_batches
+  )
+
+```
+
+## Plot a patient (and predictions)
+
+Still gives "
+
+    Can't recycle `..1` (size 1180) to match `predicted` (size 1477).
+
+" error
+
+```{r}
+#pt_ids <- tar_read(idsTest)[1:6] # Use only if you want TEST
+pt_ids <- tar_read(idsTrVal)[1:9]
+
+#tar_read(dbTest) |> # Use only if you want TEST
+tar_read(dbTrVal) |>
+  purrr::map("out") |> 
+  unlist() |>
+  as_tibble(rownames = "patient") |>
+  rename("observed" = "value") |>
+  mutate(patient = stringr::str_sub(patient, -5)) |>
+  group_by(patient) |>
+  mutate(giorno_studio = row_number()) |>
+  ungroup() |>
+  bind_cols(
+    predicted = apply(preds, 1, which.max) -1
+    #predicted = sample(0:2, 1180, replace = TRUE)
+  ) |>
+  dplyr::filter(patient %in% pt_ids) |>
+  dplyr::mutate(
+    correct = observed == predicted,
+    across(c(observed, predicted),
+      ~ .x |> 
+        as.character() |>
+        forcats::fct_recode(
+          "MV (SBT non tried)" = "0",
+          "MV (SBT failed)" = "2",
+          "Stop MV (SBT passed)" = "1"
+        ) |>
+        forcats::fct_relevel(c("MV (SBT non tried)",
+                               "MV (SBT failed)",
+                               "Stop MV (SBT passed)"))
+      )
+    ) |>
+  ggplot(aes( x = giorno_studio)) +
+  geom_step(
+    aes( y = observed,
+         group = "observed"),
+    color = "grey70",
+    direction = "mid") +
+  geom_point(
+    aes(y = observed),
+    color = "grey70",
+    size = 5) +
+  geom_point(aes(
+    y = predicted,
+    color = correct),
+    size = 2) +
+  facet_wrap(~patient, scales = "free_x") +
+  scale_color_brewer(palette = "Dark2", direction=-1) +
+  labs(
+    title = "Predicted vs Observed clinical course",
+    x = "Days of study",
+    y = "",
+    color = "Correct prediction"
+  )
+```
+
+## 
