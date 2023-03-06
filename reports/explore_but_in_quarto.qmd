@@ -233,7 +233,12 @@ preds <- predict(
   x = test_generator,
   batch_size = batch_size,
   steps = test_n_batches
-  )
+  ) -1
+
+obs <- tar_read(dbTest) |> 
+  purrr::map("out") |> 
+  unlist(use.names = FALSE)
+table(apply(preds, 1, which.max), obs)
 ```
 
 \
