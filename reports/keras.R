@@ -40,8 +40,11 @@ batch_size <- 32
 
 lr = 1e-3
 
-rec_units = 32
-dense_units = 16
+
+rec_units = 64
+crnn_kernel_size = 8
+dense_units = 32
+
 
 input_do = 0.1
 inner_do = 0.5
@@ -116,7 +119,8 @@ for (i in seq_len(k_folds)) {
     input_do = input_do,
     inner_do = inner_do,
     rec_do = rec_do,
-    lr = lr
+    lr = lr,
+    crnn_kernel_size = crnn_kernel_size
   )
 
   tic <- Sys.time()
@@ -173,7 +177,8 @@ gg <- k_scores |>
       "Recurrent units: ", rec_units, " - ",
       "Dense units: ", dense_units, " - ",
       "Batch size: ", batch_size, "\n",
-      "Recurrent depth: ", 2, " - ",
+      "Recurrent depth: ", 3, " - ",
+      "ConvLSTM kernel size: ", crnn_kernel_size, " - ",
       "Dense depth: ", 2, "\n",
       "Input drop-out: ", input_do, "% - ",
       "Internal drop-out: ", inner_do, "% - ",
