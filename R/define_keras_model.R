@@ -58,15 +58,6 @@ define_keras_model <- function(
       padding = "same",
       dropout = inner_do,
       recurrent_dropout = rec_do,
-      name = "trd_l1.1",
-      return_sequences = TRUE
-    )) |>
-    keras::bidirectional(keras::layer_conv_lstm_1d(
-      filters = rec_units,
-      kernel_size = crnn_kernel_size,
-      padding = "same",
-      dropout = inner_do,
-      recurrent_dropout = rec_do,
       name = "trd_l1.2"
     ))
 
@@ -75,13 +66,6 @@ define_keras_model <- function(
     keras::layer_batch_normalization()
 
   merged_l3 <- merged_daily_trd |>
-    keras::bidirectional(keras::layer_gru(
-      units = rec_units,
-      dropout = inner_do,
-      recurrent_dropout = rec_do,
-      name = "merged_l3.1",
-      return_sequences = TRUE
-    )) |>
     keras::bidirectional(keras::layer_gru(
       units = rec_units,
       dropout = inner_do,

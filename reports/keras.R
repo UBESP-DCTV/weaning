@@ -177,7 +177,7 @@ gg <- k_scores |>
       "Recurrent units: ", rec_units, " - ",
       "Dense units: ", dense_units, " - ",
       "Batch size: ", batch_size, "\n",
-      "Recurrent depth: ", 3, " - ",
+      "Recurrent depth: ", 2, " - ",
       "ConvLSTM kernel size: ", crnn_kernel_size, " - ",
       "Dense depth: ", 2, "\n",
       "Input drop-out: ", input_do, "% - ",
