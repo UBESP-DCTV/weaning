@@ -185,7 +185,8 @@ gg <- k_scores |>
       "Recurrent drop-out: ", rec_do, "%\n",
       "Batch norm, L1, L2 regularization.\n",
       "Internal activations: ReLU", " - ",
-      "Optimizer: Adam + AMSgrad (starting lr: 1e-4).\n",
+      "Output activations: softmax", "\n",
+      "Optimizer: Adam + AMSgrad (starting lr: 1e-4) - ",
       "CV folds: ", k_folds, "."
     ),
     x = "Epoch",
