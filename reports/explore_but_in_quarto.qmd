@@ -291,11 +291,11 @@ Still gives "
 " error
 
 ```{r}
-#pt_ids <- tar_read(idsTest)[1:6] # Use only if you want TEST
-pt_ids <- tar_read(idsTrVal)[1:9]
+pt_ids <- tar_read(idsTest)[7:13] # Use only if you want TEST
+#pt_ids <- tar_read(idsTrVal)[1:9]
 
-#tar_read(dbTest) |> # Use only if you want TEST
-tar_read(dbTrVal) |>
+tar_read(dbTest) |> # Use only if you want TEST
+#tar_read(dbTrVal) |>
   purrr::map("out") |> 
   unlist() |>
   as_tibble(rownames = "patient") |>
@@ -315,13 +315,12 @@ tar_read(dbTrVal) |>
       ~ .x |> 
         as.character() |>
         forcats::fct_recode(
-          "MV (SBT non tried)" = "0",
-          "MV (SBT failed)" = "2",
-          "Stop MV (SBT passed)" = "1"
+          "invasive MV" = "0",
+          "invasive MV" = "2",
+          "Successful MV Stop" = "1"
         ) |>
-        forcats::fct_relevel(c("MV (SBT non tried)",
-                               "MV (SBT failed)",
-                               "Stop MV (SBT passed)"))
+        forcats::fct_relevel(c("invasive MV",
+                               "Successful MV Stop"))
       )
     ) |>
   ggplot(aes( x = giorno_studio)) +
@@ -336,7 +335,7 @@ tar_read(dbTrVal) |>
     size = 5) +
   geom_point(aes(
     y = predicted,
-    color = correct),
+    color = predicted),
     size = 2) +
   facet_wrap(~patient, scales = "free_x") +
   scale_color_brewer(palette = "Dark2", direction=-1) +
@@ -344,7 +343,7 @@ tar_read(dbTrVal) |>
     title = "Predicted vs Observed clinical course",
     x = "Days of study",
     y = "",
-    color = "Correct prediction"
+    color = "AI Model suggestion"
   )
 ```
 
