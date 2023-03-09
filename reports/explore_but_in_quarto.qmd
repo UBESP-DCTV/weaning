@@ -229,7 +229,12 @@ metric_table <- metric_table |>
 Metric display all at once
 
 ```{r}
-metric_table
+metric_table |>
+  gt::gt() |>
+  gt::fmt_number(
+    columns = 3:8,
+    decimals = 2
+  )
 ```
 
 ## Keras models TEST (do not use)
