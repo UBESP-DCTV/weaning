@@ -18,6 +18,7 @@ library(targets)
 library(yardstick)
 # install.packages("familiar", dependencies = TRUE)
 library(familiar)
+source("./R/evaluation.R")
 
 test_ids <- tar_read(idsTest)
 
@@ -53,7 +54,9 @@ tar_read(test_set_check)
 -   Model 2 always predict Class 2
 
 ```{r}
+metric_table <- tibble()
 observed <- daily |>
+  filter(test_set == TRUE) |>
   select(sbt) |>
   unlist()
 
@@ -62,11 +65,43 @@ pred_obs <- tibble(
   pred0 = rep_len(0, length.out = length(observed)),
   pred1 = rep_len(1, length.out = length(observed)),
   pred2 = rep_len(2, length.out = length(observed))
-  
-)
+  ) |>
+  dplyr::mutate(
+    dplyr::across(
+      dplyr::everything(),
+      ~ factor(.x, levels = c(0,1,2))
+  ))
 
 #example
 table(pred_obs$pred0, pred_obs$observed)
+
+metric_table <- pred_obs |>
+    multi_metric(
+      truth = observed,
+      estimate = pred0,
+      estimator = "macro_weighted"
+  ) |>
+  rename("All 0" = ".estimate")
+
+metric_table <- metric_table |>
+  left_join(
+      multi_metric(
+        data = pred_obs,
+        truth = observed,
+        estimate = pred1,
+        estimator = "macro_weighted"
+      ) |> rename("All 1" = ".estimate"),
+    by = NULL
+  ) |>
+  left_join(
+      multi_metric(
+        data = pred_obs,
+        truth = observed,
+        estimate = pred2,
+        estimator = "macro_weighted"
+      ) |> rename("All 2" = ".estimate"),
+    by = NULL
+  )
 ```
 
 -   Model 3 predicts with random classes
@@ -92,6 +127,31 @@ pred_obs <- pred_obs |>
       replace = TRUE,
       prob = c(78,12,10)
     )
+  ) |>
+  dplyr::mutate(
+    dplyr::across(
+      dplyr::everything(),
+      ~ factor(.x, levels = c(0,1,2))
+  ))
+
+metric_table <- metric_table |>
+  left_join(
+      multi_metric(
+        data = pred_obs,
+        truth = observed,
+        estimate = pred3,
+        estimator = "macro_weighted"
+      ) |> rename("Coin toss" = ".estimate"),
+    by = NULL
+  ) |>
+  left_join(
+      multi_metric(
+        data = pred_obs,
+        truth = observed,
+        estimate = pred4,
+        estimator = "macro_weighted"
+      ) |> rename("Stratified random" = ".estimate"),
+    by = NULL
   )
 ```
 
@@ -121,79 +181,53 @@ dailydata <- daily |>
     by = "id_univoco"
   )
 
-model5 <- summon_familiar(
-  data = dailydata,
-  experiment_dir = file.path(here::here(), "familiar_xgboost"),
-  validation_batch_id = "test_set",
+model5 <- train_familiar(
+  data = filter(dailydata, test_set == FALSE),
+  experiment_dir = file.path(here::here(), "train_xgboost"),
   experimental_design = "cv(fs+mb,10,1)",
   sample_id_column = "id_univoco",
   outcome_type = "multinomial",
   outcome_column = "sbt",
-  fs_method = "mrmr",
-  learner = c("xgboost_tree"),
-  evaluation_metric = c("accuracy", "balanced_accuracy", "precision"),
+  fs_method = "elastic_net",
+  learner = "xgboost_tree",
+  evaluation_metric = "balanced_accuracy",
   imputation_method = "simple"
   )
 
-# plots <- familiar::plot_model_performance(
-#   object = familiar_1,
-#   data = filter(dailydata, test_set == TRUE),
-#   metric = c("accuracy", "balanced_accuracy", "precision")
-#   )
-# 
-# plots[[1]]
+#Training time ~ 10h
+saveRDS(model5, file = "./models/xgboost_v2.RDS")
 ```
 
-Custom score function
+After being trained, model can be retrieved from memory to obtain predicitons
 
 ```{r}
-mv_cost <- tribble(
-  ~truth,   ~estimate, ~cost,
-  "1", "0",  1,
-  "2", "0",  1,
-  "2", "1",  1
+xgb_model <- readRDS("./models/xgboost_v2.RDS")
+
+xgb_preds <- familiar::predict(
+  xgb_model,
+  filter(dailydata, test_set == TRUE),
+  type = "default"
 )
+
+pred_obs <- pred_obs |> 
+  bind_cols("xgb_preds" = xgb_preds[["predicted_class"]])
+
+metric_table <- metric_table |>
+  left_join(
+      multi_metric(
+        data = pred_obs,
+        truth = observed,
+        estimate = xgb_preds,
+        estimator = "macro_weighted"
+      ) |> rename("XG Boosted trees" = ".estimate"),
+    by = NULL
+  )
 ```
 
-Metric evaluation
+Metric display all at once
 
 ```{r}
-pred_obs |>
-  select(pred2, observed) |>
-  rename(predicted = pred2) |>
-  metric_table()
-```
-
-Metric evaluation all at once
-
-```{r, eval = FALSE}
-# WORK in progress
-model_list <- tribble(
-  ~name,   ~model,
-  "All 0", "pred0",
-  "All 1", "pred1",
-  "All 2", "pred2",
-  "Random", "pred3",
-  "Balanced random", "pred4",
-)
-
-map_reduce(model_list, function(.name, .model) {
-  pred_obs |>
-  multi_metric(
-    truth = observed, 
-    estimate = .model,
-    estimator = "macro_weighted") |>
-  rename(.name = .estimate) |>
-  bind_cols()
-})
-  
-pred_obs |>
-  multi_metric(
-    truth = observed, 
-    estimate = pred0,
-    estimator = "macro_weighted") |>
-  rename("All 0" = .estimate)
- 
+metric_table |> filter(.metric != "mcc")
 ```
 
 ## Keras models TEST (do not use)
@@ -245,41 +279,57 @@ table(apply(preds, 1, which.max)-1, obs)
 Obtain prediction from validation instead
 
 ```{r}
+seed <- 1234
 library(keras)
+preds <- list()
 
 # Load model
 e19a78 <- load_model_hdf5("C:/R/weaning/models/models_epoch-19_acc_0.78.hdf5", custom_objects = NULL, compile = TRUE)
 
 # Preparing test data
+k_folds <- 5
 batch_size <- 32
+ids_trval <- tar_read(idsTrVal)
 db_trval <- tar_read(dbTrVal)
 
-#this is a temporary approximatrion, appropriate validation coefficients from selected model should be used
-means_baseline <- get_means(db_trval, "baseline")
-means_daily <- get_means(db_trval, "daily")
-means_trd <- get_means(db_trval, "trd")
-sd_baseline <- get_sd(db_trval, "baseline")
-sd_daily <- get_sd(db_trval, "daily")
-sd_trd <- get_sd(db_trval, "trd")
+set.seed(seed)
+fold_id <- sample(rep(seq_len(k_folds), length.out = length(ids_trval)))
 
-db_val <- db_trval |>
-  normalize_baseline(means_baseline, sd_baseline) |>
-  normalize_daily(means_daily, sd_daily) |>
-  normalize_trd(means_trd, sd_trd)
+for (i in seq_len(k_folds)) {
+  ids_in_val <- ids_trval[fold_id == i]
+  ids_in_train <- ids_trval[fold_id != i]
 
-val_generator <- create_batch_generator(db_val, batch_size)
-val_n_batches <- db_val |>
-  purrr::map_int(~ceiling(length(.x[["ids"]]) / batch_size)) |>
-  sum()
+  db_tr <- db_trval |> filter_db_ids(ids_in_train)
+  
+  #this is a temporary approximatrion, appropriate 
+  #validation coefficients from selected model should be used
 
-# Predict
-preds <- predict(
-  object = e19a78,
-  x = val_generator,
-  batch_size = batch_size,
-  steps = val_n_batches
-  )
+  means_baseline <- get_means(db_tr, "baseline")
+  means_daily <- get_means(db_tr, "daily")
+  means_trd <- get_means(db_tr, "trd")
+  sd_baseline <- get_sd(db_tr, "baseline")
+  sd_daily <- get_sd(db_tr, "daily")
+  sd_trd <- get_sd(db_tr, "trd")
+  ui_todo("Normalization coeff obtained")
 
+  db_val <- db_trval |>
+    filter_db_ids(ids_in_val) |>
+    normalize_baseline(means_baseline, sd_baseline) |>
+    normalize_daily(means_daily, sd_daily) |>
+    normalize_trd(means_trd, sd_trd)
+  val_generator <- create_batch_generator(db_val, batch_size)
+  val_n_batches <- db_val |>
+    purrr::map_int(~ceiling(length(.x[["ids"]]) / batch_size)) |>
+    sum()
+
+   preds[i] <- predict(
+      object = e19a78,
+      x = val_generator,
+      batch_size = batch_size,
+      steps = val_n_batches
+    )
+  ui_todo("Preds done")
+}
 ```
 
 ## Plot a patient (and predictions)
@@ -291,11 +341,11 @@ Still gives "
 " error
 
 ```{r}
-pt_ids <- tar_read(idsTest)[7:13] # Use only if you want TEST
-#pt_ids <- tar_read(idsTrVal)[1:9]
+#pt_ids <- tar_read(idsTest)[12] # Use only if you want TEST
+pt_ids <- tar_read(idsTrVal)[1:9]
 
-tar_read(dbTest) |> # Use only if you want TEST
-#tar_read(dbTrVal) |>
+#tar_read(dbTest) |> # Use only if you want TEST
+tar_read(dbTrVal) |>
   purrr::map("out") |> 
   unlist() |>
   as_tibble(rownames = "patient") |>
