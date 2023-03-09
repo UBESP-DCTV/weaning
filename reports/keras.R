@@ -36,14 +36,14 @@ run_id <- str_remove_all(now(), '\\W') |> paste0("_run")
 
 k_folds <- 5
 epochs <- 40
-batch_size <- 32
+batch_size <- 64
 
 lr = 1e-3
 
 
-rec_units = 64
-crnn_kernel_size = 8
-dense_units = 32
+rec_units = 128
+crnn_kernel_size = 2
+dense_units = 64
 
 
 input_do = 0.1
