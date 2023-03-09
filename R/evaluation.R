@@ -24,25 +24,40 @@ mv_cost <- tibble::tribble(
   "1", "1",  +1
 )
 
+cost_matrix <- matrix(
+  c(  1, NA, NA,
+     -1,  1, -1,
+      1, -1,  1),
+  nrow = 3, ncol = 3,
+  dimnames = list(
+    c("0", "1", "2"),
+    c("0", "1", "2"))
+)
+
 # metrics
 clap <- function(data, truth, estimate, na_rm = TRUE, ...) {
+  require(rlang)
+  estimate <- data |> select({{estimate}}) |> simplify()
+  truth <- data |> select({{truth}}) |> simplify()
 
-  yardstick::classification_cost(
-    data = data,
-    truth = !! rlang::enquo(truth),
-    estimate = !! rlang::enquo(estimate),
-    costs = mv_cost,
-    na_rm = na_rm,
-    case_weights = NULL
-  )
+  score <- sum(
+    table(estimate, truth) * cost_matrix,
+    na.rm = na_rm
+  ) / length(estimate)
+
+  return( tribble(
+    ~.metric,      ~.estimator,    ~.estimate,
+    "CLAP Score",  "element-wise", score
+  ))
 }
+
 clap <- yardstick::new_class_metric(clap, "maximize")
 
 multi_metric <- yardstick::metric_set(
   #accuracy,
   bal_accuracy,
   #mcc,
-  #clap,
+  clap,
   precision,
   recall
 )

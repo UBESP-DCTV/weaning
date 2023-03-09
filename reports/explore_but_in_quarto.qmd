@@ -18,7 +18,7 @@ library(targets)
 library(yardstick)
 # install.packages("familiar", dependencies = TRUE)
 library(familiar)
-source("./R/evaluation.R")
+#source("R/evaluation.R")
 
 test_ids <- tar_read(idsTest)
 
@@ -157,7 +157,7 @@ metric_table <- metric_table |>
 
 Model 5 predicts with baseline and daily input
 
-```{r, eval=FALSE}
+```{r}
 dailydata <- daily |>
   select(id_univoco,
          starts_with("ega"),
@@ -180,7 +180,9 @@ dailydata <- daily |>
       ),
     by = "id_univoco"
   )
+```
 
+```{r, eval=FALSE}
 model5 <- train_familiar(
   data = filter(dailydata, test_set == FALSE),
   experiment_dir = file.path(here::here(), "train_xgboost"),
@@ -227,7 +229,7 @@ metric_table <- metric_table |>
 Metric display all at once
 
 ```{r}
-metric_table |> filter(.metric != "mcc")
+metric_table
 ```
 
 ## Keras models TEST (do not use)
