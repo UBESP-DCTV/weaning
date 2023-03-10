@@ -226,6 +226,45 @@ metric_table <- metric_table |>
   )
 ```
 
+Interesting plots on xgboost
+
+```{r}
+roc_plot <- familiar::plot_auc_roc_curve(object=xgb_model,
+   data=filter(dailydata, test_set == TRUE))
+
+cm_plot <- familiar::plot_confusion_matrix(object=xgb_model,
+  data=filter(dailydata, test_set == TRUE))
+
+vip_plot <- familiar::plot_model_signature_variable_importance(
+  object=xgb_model,
+  data=filter(dailydata, test_set == TRUE)
+)
+
+ice_plot_susp <- familiar::plot_ice(
+  object=xgb_model,
+  draw = TRUE,
+  data=filter(dailydata, test_set == TRUE),
+  features="susp_tot",
+  anchor_values=list("susp_tot"= 12))
+
+ice_plot_reason <- familiar::plot_ice(
+  object=xgb_model,
+  draw = TRUE,
+  data=filter(dailydata, test_set == TRUE),
+  features="reason")
+
+library(familiar)
+map(xgb_model, ~ plot_model_signature_variable_importance(
+  object = .x,
+  data = filter(dailydata, test_set == TRUE)))
+
+
+#Plot trees
+library(DiagrammeR)
+xgb.plot.tree(model = xgb_model$`xgboost_tree/elastic_net/20230309110803_xgboost_tree_elastic_net_2_1_model.RDS`@model,
+              trees = 1:10)
+```
+
 Metric display all at once
 
 ```{r}
