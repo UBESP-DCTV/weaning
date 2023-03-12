@@ -43,9 +43,14 @@ here::here("runs") |>
         input_do = par |>
           stringr::str_extract("(?<=Input drop-out: )[\\d.]+"),
         internal_do = par |>
-          stringr::str_extract("(?<=Internal drop-out: )[\\d.]+")
+          stringr::str_extract("(?<=Internal drop-out: )[\\d.]+"),
+        time = mean(unlist(run$k_time)),
+        unit = unique(purrr::map_chr(run[["k_time"]], attr, "units")) |>
+          paste(collapse = "/")
       )
   },
   .id = "file") |>
-  dplyr::mutate(file = basename(file)) |>
+  dplyr::mutate(
+    file = basename(file)
+  ) |>
   tidyr::pivot_wider(names_from = set, values_from = c(loss, acc))
