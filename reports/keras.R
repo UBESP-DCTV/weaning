@@ -35,8 +35,8 @@ list.files(here("R"), pattern = "keras", full.names = TRUE) |>
 run_id <- str_remove_all(now(), '\\W') |> paste0("_run")
 
 k_folds <- 5
-epochs <- 50
-batch_size <- 64
+epochs <- 40
+batch_size <- 16
 
 lr = 1e-3
 
@@ -47,8 +47,8 @@ dense_units = 32
 
 
 input_do = 0
-inner_do = 0.5
-rec_do = 0
+inner_do = 0
+rec_do = 0.2
 
 
 
@@ -189,7 +189,7 @@ gg <- k_scores |>
       "Recurrent units: ", rec_units, " - ",
       "Dense units: ", dense_units, " - ",
       "Batch size: ", batch_size, "\n",
-      "Recurrent depth: ", 3, " - ",
+      "Recurrent depth: ", 1, " - ",
       "ConvLSTM kernel size: ", crnn_kernel_size, " - ",
       "Dense depth: ", 2, "\n",
       "Input drop-out: ", input_do, "% - ",
