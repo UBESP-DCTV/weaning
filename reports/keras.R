@@ -41,14 +41,14 @@ batch_size <- 16
 lr = 1e-3
 
 
-rec_units = 64
+rec_units = 32
 crnn_kernel_size = 1
 dense_units = 32
 
 
 input_do = 0
 inner_do = 0
-rec_do = 0.2
+rec_do = 0.3
 
 
 
@@ -189,7 +189,7 @@ gg <- k_scores |>
       "Recurrent units: ", rec_units, " - ",
       "Dense units: ", dense_units, " - ",
       "Batch size: ", batch_size, "\n",
-      "Recurrent depth: ", 1, " - ",
+      "Recurrent depth: ", 2, " - ",
       "ConvLSTM kernel size: ", crnn_kernel_size, " - ",
       "Dense depth: ", 2, "\n",
       "Input drop-out: ", input_do, "% - ",
