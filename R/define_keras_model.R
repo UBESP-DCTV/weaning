@@ -58,7 +58,16 @@ define_keras_model <- function(
       padding = "same",
       dropout = inner_do,
       recurrent_dropout = rec_do,
-      name = "trd_l1.2"
+      name = "trd_l1.2",
+      return_sequences = TRUE
+    )) |>
+    keras::bidirectional(keras::layer_conv_lstm_1d(
+      filters = rec_units,
+      kernel_size = crnn_kernel_size,
+      padding = "same",
+      dropout = inner_do,
+      recurrent_dropout = rec_do,
+      name = "trd_l1.3"
     ))
 
 
@@ -77,7 +86,14 @@ define_keras_model <- function(
       units = rec_units,
       dropout = inner_do,
       recurrent_dropout = rec_do,
-      name = "merged_l3.2"
+      name = "merged_l3.2",
+      return_sequences = TRUE
+    )) |>
+    keras::bidirectional(keras::layer_gru(
+      units = rec_units,
+      dropout = inner_do,
+      recurrent_dropout = rec_do,
+      name = "merged_l3.3"
     ))
 
   merged_l4 <- keras::k_concatenate(c(merged_l3, input_baseline)) |>
