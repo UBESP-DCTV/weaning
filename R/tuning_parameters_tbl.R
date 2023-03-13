@@ -40,9 +40,11 @@ here::here("runs") |>
           stringr::str_extract("(?<=Recurrent depth: )\\d+"),
         crnn_kernel = par |>
           stringr::str_extract("(?<=ConvLSTM kernel size: )\\d+"),
-        input_do = par |>
+        in_do = par |>
           stringr::str_extract("(?<=Input drop-out: )[\\d.]+"),
-        internal_do = par |>
+        rec_do = par |>
+          stringr::str_extract("(?<=Recurrent drop-out: )[\\d.]+"),
+        out_do = par |>
           stringr::str_extract("(?<=Internal drop-out: )[\\d.]+"),
         time = mean(unlist(run$k_time)),
         unit = unique(purrr::map_chr(run[["k_time"]], attr, "units")) |>

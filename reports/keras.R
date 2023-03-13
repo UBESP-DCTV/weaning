@@ -43,12 +43,12 @@ lr = 1e-3
 
 rec_units = 32
 crnn_kernel_size = 1
-dense_units = 32
+dense_units = 16
 
 
 input_do = 0
-inner_do = 0
-rec_do = 0.3
+inner_do = 0.4
+rec_do = 0.4
 
 
 
