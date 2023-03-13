@@ -1,7 +1,0 @@
-data_set;fs_method;learner;ensemble_model_name;feature;metric;similarity_threshold;value;ci_low;ci_up
-development;mrmr;xgboost_tree;ensemble.1.1;susp_tot;accuracy;1;0.262782173632524;0.235038377192983;0.295778240873814
-development;mrmr;xgboost_tree;ensemble.1.1;susp_tot;balanced_accuracy;1;0.334235296415348;0.310966756554992;0.356890044579306
-development;mrmr;xgboost_tree;ensemble.1.1;susp_tot;precision;1;0.319133374130809;0.278778329098995;0.365578248628847
-validation;mrmr;xgboost_tree;ensemble.1.1;susp_tot;accuracy;1;0.258959696654639;0.175130208333333;0.36894786829886
-validation;mrmr;xgboost_tree;ensemble.1.1;susp_tot;balanced_accuracy;1;0.332150776053215;0.253647134337671;0.394450483091787
-validation;mrmr;xgboost_tree;ensemble.1.1;susp_tot;precision;1;0.347476609638933;0.22814382394417;0.483614165439823

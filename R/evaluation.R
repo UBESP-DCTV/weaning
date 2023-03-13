@@ -1,33 +1,19 @@
-
-mv_cost <- tibble::tribble(
+cost_matrix <- matrix(
   # Thesis classes (0skip / 1fail / 2pass)
   #   Truth:        0     1     2
-  # Predicted: 0   +1    +1    -1
+  # Predicted: 0    0    +1    -1
   #            1   NA    +1    -1
-  #            2   NA    -1    +1
+  #            2   NA     0     0
   #
   # Code classes (0skip / 1pass / 2fail)
   #   Truth:        0     2     1
-  # Predicted: 0   +1    +1    -1
+  # Predicted: 0    0    +1    -1
   #            2   NA    +1    -1
-  #            1   NA    -1    +1
+  #            1   NA     0     0
   #
-  ~truth,   ~estimate, ~cost,
-  "0", "0",  +1,
-  "0", "2",  NA,
-  "0", "1",  NA,
-  "2", "0",  +1,
-  "2", "2",  +1,
-  "2", "1",  -1,
-  "1", "0",  -1,
-  "1", "2",  -1,
-  "1", "1",  +1
-)
-
-cost_matrix <- matrix(
-  c(  1, NA, NA,
-     -1,  1, -1,
-      1, -1,  1),
+  c(  0, NA, NA,
+     -1,  0, -1,
+      1,  0,  1),
   nrow = 3, ncol = 3,
   dimnames = list(
     c("0", "1", "2"),
@@ -53,11 +39,13 @@ clap <- function(data, truth, estimate, na_rm = TRUE, ...) {
 
 clap <- yardstick::new_class_metric(clap, "maximize")
 
+require(yardstick)
 multi_metric <- yardstick::metric_set(
   #accuracy,
   bal_accuracy,
-  #mcc,
-  clap,
+  mcc,
+  #clap,
   precision,
-  recall
+  recall,
+  npv
 )

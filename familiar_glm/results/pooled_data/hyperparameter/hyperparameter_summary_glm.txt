@@ -1,8 +1,0 @@
-learner	glm
-fs_method	mrmr
----------------------
-sign_size	1 [1, 2]
-family	multinomial (10)
-sample_weighting	inverse_number_of_samples (10)
-sample_weighting_beta	-2 [-2, -2]
- 

@@ -1,7 +1,0 @@
-data_set;fs_method;learner;ensemble_model_name;metric;value;ci_low;ci_up
-development;mrmr;glm;ensemble.1.1;accuracy;0.898450409681511;0.856789815048663;0.935300668898565
-development;mrmr;glm;ensemble.1.1;balanced_accuracy;0.666666666666667;0.666666666666667;0.666666666666667
-development;mrmr;glm;ensemble.1.1;precision;0.76813880126183;0.719190971843283;0.824942256098644
-validation;mrmr;glm;ensemble.1.1;accuracy;0.925350991460414;0.743680315640704;0.990572528994288
-validation;mrmr;glm;ensemble.1.1;balanced_accuracy;0.666666666666667;0.666666666666667;0.666666666666667
-validation;mrmr;glm;ensemble.1.1;precision;0.813657407407407;0.655366424116424;0.96671875

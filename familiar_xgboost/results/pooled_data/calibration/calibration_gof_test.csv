@@ -1,7 +1,0 @@
-data_set;fs_method;learner;ensemble_model_name;positive_class;type;p_value
-development;mrmr;xgboost_tree;ensemble.1.1;0;hosmer_lemeshow;3.33333322990019e-15
-development;mrmr;xgboost_tree;ensemble.1.1;1;hosmer_lemeshow;3.33333333333181e-15
-development;mrmr;xgboost_tree;ensemble.1.1;2;hosmer_lemeshow;4.3758205134038e-15
-validation;mrmr;xgboost_tree;ensemble.1.1;0;hosmer_lemeshow;1.48937112462642e-09
-validation;mrmr;xgboost_tree;ensemble.1.1;1;hosmer_lemeshow;1.25527763476298e-06
-validation;mrmr;xgboost_tree;ensemble.1.1;2;hosmer_lemeshow;0.00165799386565718

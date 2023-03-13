@@ -18,7 +18,7 @@ library(here)
 # Define custom functions and other global objects.
 # This is where you write source(\"R/functions.R\")
 # if you keep your functions in external scripts.
-list.files(here("R"), pattern = "\\.R$", full.names = TRUE) |>
+list.files(here::here("R"), pattern = "\\.R$", full.names = TRUE) |>
   lapply(source) |> invisible()
 
 # Set target-specific options such as packages.
@@ -389,7 +389,14 @@ list(
   tar_target(idsTrVal, setdiff(pt_ids, idsTest)),
   tar_target(dbTrVal, filter_db_ids(trainArraysByDays, idsTrVal)),
 
+  tar_target(dailydata,
+             build_dailydata(
+               baseline = pt_names |>
+                 mutate(test_set = id_univoco %in% idsTest),
+               daily = pt_registry |>
+                 mutate( test_set = id_univoco %in% idsTest))),
 
+  tar_target(xgb_model, build_xgb_model(dailydata))
 
 
 
@@ -403,10 +410,10 @@ list(
   # ),
   #
 
-  tar_quarto(
-    minireport_tesi,
-    here("reports/minireport_tesi.qmd")
-  )
+  # tar_quarto(
+  #   minireport_tesi,
+  #   here("reports/minireport_tesi.qmd")
+  # )
 
 
 # objects to share -------------------------------------------------
