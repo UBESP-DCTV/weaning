@@ -1,0 +1,810 @@
+2023-03-12 00:39:48	MESSAGE	Setup report: Validation is internal only.
+2023-03-12 00:39:48	MESSAGE	Setup report: Feature selection and model building on 1 repetitions of 10-fold cross validation of the training data.
+2023-03-12 00:39:51	MESSAGE	Creating iterations: Starting creation of iterations.
+2023-03-12 00:39:58	MESSAGE	Creating iterations: Finished creation of iterations.
+2023-03-12 00:39:58	MESSAGE	Creating iterations: New project id is: '20230312003958'.
+2023-03-12 00:40:08	MESSAGE	
+Pre-processing: Starting preprocessing for run 1 of 10.
+2023-03-12 00:40:08	MESSAGE	  Pre-processing: 138 samples were initially available.
+2023-03-12 00:40:08	MESSAGE	  Pre-processing: 0 samples were removed because of missing outcome data. 138 samples remain.
+2023-03-12 00:40:08	MESSAGE	  Pre-processing: 13 features were initially available.
+2023-03-12 00:40:08	MESSAGE	  Pre-processing: 0 features were removed because of a high fraction of missing values. 13 features remain.
+2023-03-12 00:40:08	MESSAGE	  Pre-processing: 12 samples were removed because of missing feature data. 126 samples remain.
+2023-03-12 00:40:08	MESSAGE	  Pre-processing: 1 features were removed due to invariance. 12 features remain.
+2023-03-12 00:40:08	MESSAGE	  Pre-processing: Adding value distribution statistics to features.
+2023-03-12 00:40:08	MESSAGE	  Pre-processing: Performing transformations to normalise feature value distributions.
+2023-03-12 00:40:09	MESSAGE	  Pre-processing: Feature distributions have been transformed for normalisation.
+2023-03-12 00:40:09	MESSAGE	  Pre-processing: Extracting normalisation parameters from feature data.
+2023-03-12 00:40:09	MESSAGE	  Pre-processing: Feature data were normalised.
+2023-03-12 00:40:10	MESSAGE	  Pre-processing: Adding imputation information to features.
+2023-03-12 00:40:10	MESSAGE	  Pre-processing: Starting clustering of redundant features
+2023-03-12 00:40:10	MESSAGE	    Computing similarity between 12 features using the mutual_information metric for clustering using the hclust method.
+2023-03-12 00:40:11	MESSAGE	    13 feature clusteres were created from 13 features. 0 clusters contain more than one feature. The remaining 13 clusters are singular.
+2023-03-12 00:40:11	MESSAGE	
+Pre-processing: Starting preprocessing for run 2 of 10.
+2023-03-12 00:40:11	MESSAGE	  Pre-processing: 138 samples were initially available.
+2023-03-12 00:40:11	MESSAGE	  Pre-processing: 0 samples were removed because of missing outcome data. 138 samples remain.
+2023-03-12 00:40:11	MESSAGE	  Pre-processing: 13 features were initially available.
+2023-03-12 00:40:11	MESSAGE	  Pre-processing: 0 features were removed because of a high fraction of missing values. 13 features remain.
+2023-03-12 00:40:11	MESSAGE	  Pre-processing: 13 samples were removed because of missing feature data. 125 samples remain.
+2023-03-12 00:40:11	MESSAGE	  Pre-processing: 1 features were removed due to invariance. 12 features remain.
+2023-03-12 00:40:11	MESSAGE	  Pre-processing: Adding value distribution statistics to features.
+2023-03-12 00:40:11	MESSAGE	  Pre-processing: Performing transformations to normalise feature value distributions.
+2023-03-12 00:40:12	MESSAGE	  Pre-processing: Feature distributions have been transformed for normalisation.
+2023-03-12 00:40:12	MESSAGE	  Pre-processing: Extracting normalisation parameters from feature data.
+2023-03-12 00:40:12	MESSAGE	  Pre-processing: Feature data were normalised.
+2023-03-12 00:40:13	MESSAGE	  Pre-processing: Adding imputation information to features.
+2023-03-12 00:40:13	MESSAGE	  Pre-processing: Starting clustering of redundant features
+2023-03-12 00:40:13	MESSAGE	    Computing similarity between 12 features using the mutual_information metric for clustering using the hclust method.
+2023-03-12 00:40:14	MESSAGE	    13 feature clusteres were created from 13 features. 0 clusters contain more than one feature. The remaining 13 clusters are singular.
+2023-03-12 00:40:14	MESSAGE	
+Pre-processing: Starting preprocessing for run 3 of 10.
+2023-03-12 00:40:14	MESSAGE	  Pre-processing: 137 samples were initially available.
+2023-03-12 00:40:14	MESSAGE	  Pre-processing: 0 samples were removed because of missing outcome data. 137 samples remain.
+2023-03-12 00:40:14	MESSAGE	  Pre-processing: 13 features were initially available.
+2023-03-12 00:40:14	MESSAGE	  Pre-processing: 0 features were removed because of a high fraction of missing values. 13 features remain.
+2023-03-12 00:40:14	MESSAGE	  Pre-processing: 12 samples were removed because of missing feature data. 125 samples remain.
+2023-03-12 00:40:14	MESSAGE	  Pre-processing: 1 features were removed due to invariance. 12 features remain.
+2023-03-12 00:40:14	MESSAGE	  Pre-processing: Adding value distribution statistics to features.
+2023-03-12 00:40:14	MESSAGE	  Pre-processing: Performing transformations to normalise feature value distributions.
+2023-03-12 00:40:15	MESSAGE	  Pre-processing: Feature distributions have been transformed for normalisation.
+2023-03-12 00:40:15	MESSAGE	  Pre-processing: Extracting normalisation parameters from feature data.
+2023-03-12 00:40:15	MESSAGE	  Pre-processing: Feature data were normalised.
+2023-03-12 00:40:15	MESSAGE	  Pre-processing: Adding imputation information to features.
+2023-03-12 00:40:16	MESSAGE	  Pre-processing: Starting clustering of redundant features
+2023-03-12 00:40:16	MESSAGE	    Computing similarity between 12 features using the mutual_information metric for clustering using the hclust method.
+2023-03-12 00:40:17	MESSAGE	    13 feature clusteres were created from 13 features. 0 clusters contain more than one feature. The remaining 13 clusters are singular.
+2023-03-12 00:40:17	MESSAGE	
+Pre-processing: Starting preprocessing for run 4 of 10.
+2023-03-12 00:40:17	MESSAGE	  Pre-processing: 137 samples were initially available.
+2023-03-12 00:40:17	MESSAGE	  Pre-processing: 0 samples were removed because of missing outcome data. 137 samples remain.
+2023-03-12 00:40:17	MESSAGE	  Pre-processing: 13 features were initially available.
+2023-03-12 00:40:17	MESSAGE	  Pre-processing: 0 features were removed because of a high fraction of missing values. 13 features remain.
+2023-03-12 00:40:17	MESSAGE	  Pre-processing: 11 samples were removed because of missing feature data. 126 samples remain.
+2023-03-12 00:40:17	MESSAGE	  Pre-processing: 1 features were removed due to invariance. 12 features remain.
+2023-03-12 00:40:17	MESSAGE	  Pre-processing: Adding value distribution statistics to features.
+2023-03-12 00:40:17	MESSAGE	  Pre-processing: Performing transformations to normalise feature value distributions.
+2023-03-12 00:40:18	MESSAGE	  Pre-processing: Feature distributions have been transformed for normalisation.
+2023-03-12 00:40:18	MESSAGE	  Pre-processing: Extracting normalisation parameters from feature data.
+2023-03-12 00:40:18	MESSAGE	  Pre-processing: Feature data were normalised.
+2023-03-12 00:40:18	MESSAGE	  Pre-processing: Adding imputation information to features.
+2023-03-12 00:40:18	MESSAGE	  Pre-processing: Starting clustering of redundant features
+2023-03-12 00:40:19	MESSAGE	    Computing similarity between 12 features using the mutual_information metric for clustering using the hclust method.
+2023-03-12 00:40:19	MESSAGE	    13 feature clusteres were created from 13 features. 0 clusters contain more than one feature. The remaining 13 clusters are singular.
+2023-03-12 00:40:19	MESSAGE	
+Pre-processing: Starting preprocessing for run 5 of 10.
+2023-03-12 00:40:19	MESSAGE	  Pre-processing: 138 samples were initially available.
+2023-03-12 00:40:19	MESSAGE	  Pre-processing: 0 samples were removed because of missing outcome data. 138 samples remain.
+2023-03-12 00:40:19	MESSAGE	  Pre-processing: 13 features were initially available.
+2023-03-12 00:40:19	MESSAGE	  Pre-processing: 0 features were removed because of a high fraction of missing values. 13 features remain.
+2023-03-12 00:40:19	MESSAGE	  Pre-processing: 13 samples were removed because of missing feature data. 125 samples remain.
+2023-03-12 00:40:19	MESSAGE	  Pre-processing: 1 features were removed due to invariance. 12 features remain.
+2023-03-12 00:40:19	MESSAGE	  Pre-processing: Adding value distribution statistics to features.
+2023-03-12 00:40:19	MESSAGE	  Pre-processing: Performing transformations to normalise feature value distributions.
+2023-03-12 00:40:20	MESSAGE	  Pre-processing: Feature distributions have been transformed for normalisation.
+2023-03-12 00:40:20	MESSAGE	  Pre-processing: Extracting normalisation parameters from feature data.
+2023-03-12 00:40:20	MESSAGE	  Pre-processing: Feature data were normalised.
+2023-03-12 00:40:20	MESSAGE	  Pre-processing: Adding imputation information to features.
+2023-03-12 00:40:21	MESSAGE	  Pre-processing: Starting clustering of redundant features
+2023-03-12 00:40:21	MESSAGE	    Computing similarity between 12 features using the mutual_information metric for clustering using the hclust method.
+2023-03-12 00:40:21	MESSAGE	    13 feature clusteres were created from 13 features. 0 clusters contain more than one feature. The remaining 13 clusters are singular.
+2023-03-12 00:40:21	MESSAGE	
+Pre-processing: Starting preprocessing for run 6 of 10.
+2023-03-12 00:40:21	MESSAGE	  Pre-processing: 139 samples were initially available.
+2023-03-12 00:40:21	MESSAGE	  Pre-processing: 0 samples were removed because of missing outcome data. 139 samples remain.
+2023-03-12 00:40:21	MESSAGE	  Pre-processing: 13 features were initially available.
+2023-03-12 00:40:21	MESSAGE	  Pre-processing: 0 features were removed because of a high fraction of missing values. 13 features remain.
+2023-03-12 00:40:21	MESSAGE	  Pre-processing: 14 samples were removed because of missing feature data. 125 samples remain.
+2023-03-12 00:40:21	MESSAGE	  Pre-processing: 1 features were removed due to invariance. 12 features remain.
+2023-03-12 00:40:21	MESSAGE	  Pre-processing: Adding value distribution statistics to features.
+2023-03-12 00:40:21	MESSAGE	  Pre-processing: Performing transformations to normalise feature value distributions.
+2023-03-12 00:40:22	MESSAGE	  Pre-processing: Feature distributions have been transformed for normalisation.
+2023-03-12 00:40:22	MESSAGE	  Pre-processing: Extracting normalisation parameters from feature data.
+2023-03-12 00:40:22	MESSAGE	  Pre-processing: Feature data were normalised.
+2023-03-12 00:40:22	MESSAGE	  Pre-processing: Adding imputation information to features.
+2023-03-12 00:40:22	MESSAGE	  Pre-processing: Starting clustering of redundant features
+2023-03-12 00:40:22	MESSAGE	    Computing similarity between 12 features using the mutual_information metric for clustering using the hclust method.
+2023-03-12 00:40:23	MESSAGE	    13 feature clusteres were created from 13 features. 0 clusters contain more than one feature. The remaining 13 clusters are singular.
+2023-03-12 00:40:23	MESSAGE	
+Pre-processing: Starting preprocessing for run 7 of 10.
+2023-03-12 00:40:23	MESSAGE	  Pre-processing: 139 samples were initially available.
+2023-03-12 00:40:23	MESSAGE	  Pre-processing: 0 samples were removed because of missing outcome data. 139 samples remain.
+2023-03-12 00:40:23	MESSAGE	  Pre-processing: 13 features were initially available.
+2023-03-12 00:40:23	MESSAGE	  Pre-processing: 0 features were removed because of a high fraction of missing values. 13 features remain.
+2023-03-12 00:40:23	MESSAGE	  Pre-processing: 13 samples were removed because of missing feature data. 126 samples remain.
+2023-03-12 00:40:23	MESSAGE	  Pre-processing: 1 features were removed due to invariance. 12 features remain.
+2023-03-12 00:40:23	MESSAGE	  Pre-processing: Adding value distribution statistics to features.
+2023-03-12 00:40:23	MESSAGE	  Pre-processing: Performing transformations to normalise feature value distributions.
+2023-03-12 00:40:24	MESSAGE	  Pre-processing: Feature distributions have been transformed for normalisation.
+2023-03-12 00:40:24	MESSAGE	  Pre-processing: Extracting normalisation parameters from feature data.
+2023-03-12 00:40:24	MESSAGE	  Pre-processing: Feature data were normalised.
+2023-03-12 00:40:24	MESSAGE	  Pre-processing: Adding imputation information to features.
+2023-03-12 00:40:24	MESSAGE	  Pre-processing: Starting clustering of redundant features
+2023-03-12 00:40:25	MESSAGE	    Computing similarity between 12 features using the mutual_information metric for clustering using the hclust method.
+2023-03-12 00:40:25	MESSAGE	    13 feature clusteres were created from 13 features. 0 clusters contain more than one feature. The remaining 13 clusters are singular.
+2023-03-12 00:40:25	MESSAGE	
+Pre-processing: Starting preprocessing for run 8 of 10.
+2023-03-12 00:40:25	MESSAGE	  Pre-processing: 139 samples were initially available.
+2023-03-12 00:40:25	MESSAGE	  Pre-processing: 0 samples were removed because of missing outcome data. 139 samples remain.
+2023-03-12 00:40:25	MESSAGE	  Pre-processing: 13 features were initially available.
+2023-03-12 00:40:25	MESSAGE	  Pre-processing: 0 features were removed because of a high fraction of missing values. 13 features remain.
+2023-03-12 00:40:25	MESSAGE	  Pre-processing: 13 samples were removed because of missing feature data. 126 samples remain.
+2023-03-12 00:40:25	MESSAGE	  Pre-processing: 1 features were removed due to invariance. 12 features remain.
+2023-03-12 00:40:25	MESSAGE	  Pre-processing: Adding value distribution statistics to features.
+2023-03-12 00:40:25	MESSAGE	  Pre-processing: Performing transformations to normalise feature value distributions.
+2023-03-12 00:40:26	MESSAGE	  Pre-processing: Feature distributions have been transformed for normalisation.
+2023-03-12 00:40:26	MESSAGE	  Pre-processing: Extracting normalisation parameters from feature data.
+2023-03-12 00:40:26	MESSAGE	  Pre-processing: Feature data were normalised.
+2023-03-12 00:40:26	MESSAGE	  Pre-processing: Adding imputation information to features.
+2023-03-12 00:40:26	MESSAGE	  Pre-processing: Starting clustering of redundant features
+2023-03-12 00:40:26	MESSAGE	    Computing similarity between 12 features using the mutual_information metric for clustering using the hclust method.
+2023-03-12 00:40:27	MESSAGE	    13 feature clusteres were created from 13 features. 0 clusters contain more than one feature. The remaining 13 clusters are singular.
+2023-03-12 00:40:27	MESSAGE	
+Pre-processing: Starting preprocessing for run 9 of 10.
+2023-03-12 00:40:27	MESSAGE	  Pre-processing: 140 samples were initially available.
+2023-03-12 00:40:27	MESSAGE	  Pre-processing: 0 samples were removed because of missing outcome data. 140 samples remain.
+2023-03-12 00:40:27	MESSAGE	  Pre-processing: 13 features were initially available.
+2023-03-12 00:40:27	MESSAGE	  Pre-processing: 0 features were removed because of a high fraction of missing values. 13 features remain.
+2023-03-12 00:40:27	MESSAGE	  Pre-processing: 12 samples were removed because of missing feature data. 128 samples remain.
+2023-03-12 00:40:27	MESSAGE	  Pre-processing: 1 features were removed due to invariance. 12 features remain.
+2023-03-12 00:40:27	MESSAGE	  Pre-processing: Adding value distribution statistics to features.
+2023-03-12 00:40:27	MESSAGE	  Pre-processing: Performing transformations to normalise feature value distributions.
+2023-03-12 00:40:27	MESSAGE	  Pre-processing: Feature distributions have been transformed for normalisation.
+2023-03-12 00:40:27	MESSAGE	  Pre-processing: Extracting normalisation parameters from feature data.
+2023-03-12 00:40:28	MESSAGE	  Pre-processing: Feature data were normalised.
+2023-03-12 00:40:28	MESSAGE	  Pre-processing: Adding imputation information to features.
+2023-03-12 00:40:28	MESSAGE	  Pre-processing: Starting clustering of redundant features
+2023-03-12 00:40:28	MESSAGE	    Computing similarity between 12 features using the mutual_information metric for clustering using the hclust method.
+2023-03-12 00:40:28	MESSAGE	    13 feature clusteres were created from 13 features. 0 clusters contain more than one feature. The remaining 13 clusters are singular.
+2023-03-12 00:40:28	MESSAGE	
+Pre-processing: Starting preprocessing for run 10 of 10.
+2023-03-12 00:40:29	MESSAGE	  Pre-processing: 141 samples were initially available.
+2023-03-12 00:40:29	MESSAGE	  Pre-processing: 0 samples were removed because of missing outcome data. 141 samples remain.
+2023-03-12 00:40:29	MESSAGE	  Pre-processing: 13 features were initially available.
+2023-03-12 00:40:29	MESSAGE	  Pre-processing: 0 features were removed because of a high fraction of missing values. 13 features remain.
+2023-03-12 00:40:29	MESSAGE	  Pre-processing: 13 samples were removed because of missing feature data. 128 samples remain.
+2023-03-12 00:40:29	MESSAGE	  Pre-processing: 1 features were removed due to invariance. 12 features remain.
+2023-03-12 00:40:29	MESSAGE	  Pre-processing: Adding value distribution statistics to features.
+2023-03-12 00:40:29	MESSAGE	  Pre-processing: Performing transformations to normalise feature value distributions.
+2023-03-12 00:40:29	MESSAGE	  Pre-processing: Feature distributions have been transformed for normalisation.
+2023-03-12 00:40:29	MESSAGE	  Pre-processing: Extracting normalisation parameters from feature data.
+2023-03-12 00:40:30	MESSAGE	  Pre-processing: Feature data were normalised.
+2023-03-12 00:40:30	MESSAGE	  Pre-processing: Adding imputation information to features.
+2023-03-12 00:40:30	MESSAGE	  Pre-processing: Starting clustering of redundant features
+2023-03-12 00:40:30	MESSAGE	    Computing similarity between 12 features using the mutual_information metric for clustering using the hclust method.
+2023-03-12 00:40:31	MESSAGE	    13 feature clusteres were created from 13 features. 0 clusters contain more than one feature. The remaining 13 clusters are singular.
+2023-03-12 00:40:31	MESSAGE	
+Feature selection: starting feature selection using "elastic_net" method.
+2023-03-12 00:40:31	MESSAGE	  Hyperparameter optimisation: Starting parameter optimisation for the elastic_net variable importance method.
+2023-03-12 00:40:32	MESSAGE	
+2023-03-12 00:40:32	MESSAGE	    Starting hyperparameter optimisation for data subsample 1 of 10.
+2023-03-12 00:40:32	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-12 00:40:32	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-12 00:40:32	MESSAGE	      Utility is measured as expected improvement.
+2023-03-12 00:40:37	MESSAGE	      Compute initial model performance based on 4 hyperparameter sets.
+2023-03-12 00:40:53	MESSAGE	      Hyperparameter optimisation: Initialisation complete: summary score: 0.2432; validation optimisation score: 0.2432; auc_roc: 0.6216; alpha: 0.333333333333333
+2023-03-12 00:40:55	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 00:42:18	MESSAGE	      Hyperparameter optimisation: SMBO iteration 1: summary score: 0.2589; validation optimisation score: 0.2589; auc_roc: 0.6295; alpha: 0.333333333333333
+2023-03-12 00:42:21	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 00:43:35	MESSAGE	      Hyperparameter optimisation: SMBO iteration 2: summary score: 0.2887; validation optimisation score: 0.2887; auc_roc: 0.6444; alpha: 0.333333333333333
+2023-03-12 00:43:40	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 00:44:55	MESSAGE	      Hyperparameter optimisation: SMBO iteration 3: summary score: 0.2684; validation optimisation score: 0.2684; auc_roc: 0.6342; alpha: 0.333333333333333
+2023-03-12 00:44:55	MESSAGE	    Hyperparameter optimisation: Optimisation stopped early as convergence was achieved.
+2023-03-12 00:44:55	MESSAGE	    Hyperparameter optimisation: A suitable set of hyperparameters was identified: summary score: 0.2684; validation optimisation score: 0.2684; auc_roc: 0.6342; alpha: 0.333333333333333
+2023-03-12 00:44:56	MESSAGE	
+2023-03-12 00:44:56	MESSAGE	    Starting hyperparameter optimisation for data subsample 2 of 10.
+2023-03-12 00:44:56	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-12 00:44:56	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-12 00:44:56	MESSAGE	      Utility is measured as expected improvement.
+2023-03-12 00:45:03	MESSAGE	      Compute initial model performance based on 4 hyperparameter sets.
+2023-03-12 00:45:16	MESSAGE	      Hyperparameter optimisation: Initialisation complete: summary score: 0.1106; validation optimisation score: 0.1106; auc_roc: 0.5553; alpha: 0.666666666666667
+2023-03-12 00:45:17	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 00:46:29	MESSAGE	      Hyperparameter optimisation: SMBO iteration 1: summary score: 0.2257; validation optimisation score: 0.2257; auc_roc: 0.6129; alpha: 0.666666666666667
+2023-03-12 00:46:31	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 00:47:40	MESSAGE	      Hyperparameter optimisation: SMBO iteration 2: summary score: 0.2162; validation optimisation score: 0.2162; auc_roc: 0.6081; alpha: 0.666666666666667
+2023-03-12 00:47:46	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 00:48:57	MESSAGE	      Hyperparameter optimisation: SMBO iteration 3: summary score: 0.2232; validation optimisation score: 0.2232; auc_roc: 0.6116; alpha: 0.666666666666667
+2023-03-12 00:48:57	MESSAGE	    Hyperparameter optimisation: Optimisation stopped early as convergence was achieved.
+2023-03-12 00:48:57	MESSAGE	    Hyperparameter optimisation: A suitable set of hyperparameters was identified: summary score: 0.2232; validation optimisation score: 0.2232; auc_roc: 0.6116; alpha: 0.666666666666667
+2023-03-12 00:48:58	MESSAGE	
+2023-03-12 00:48:58	MESSAGE	    Starting hyperparameter optimisation for data subsample 3 of 10.
+2023-03-12 00:48:58	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-12 00:48:58	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-12 00:48:58	MESSAGE	      Utility is measured as expected improvement.
+2023-03-12 00:49:03	MESSAGE	      Compute initial model performance based on 4 hyperparameter sets.
+2023-03-12 00:49:17	MESSAGE	      Hyperparameter optimisation: Initialisation complete: summary score: 0.2241; validation optimisation score: 0.2241; auc_roc: 0.6120; alpha: 0.333333333333333
+2023-03-12 00:49:18	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 00:50:32	MESSAGE	      Hyperparameter optimisation: SMBO iteration 1: summary score: 0.2874; validation optimisation score: 0.2874; auc_roc: 0.6437; alpha: 0.333333333333333
+2023-03-12 00:50:34	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 00:51:45	MESSAGE	      Hyperparameter optimisation: SMBO iteration 2: summary score: 0.2928; validation optimisation score: 0.2928; auc_roc: 0.6464; alpha: 0.333333333333333
+2023-03-12 00:51:49	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 00:53:01	MESSAGE	      Hyperparameter optimisation: SMBO iteration 3: summary score: 0.2841; validation optimisation score: 0.2841; auc_roc: 0.6421; alpha: 0.333333333333333
+2023-03-12 00:53:01	MESSAGE	    Hyperparameter optimisation: Optimisation stopped early as convergence was achieved.
+2023-03-12 00:53:02	MESSAGE	    Hyperparameter optimisation: A suitable set of hyperparameters was identified: summary score: 0.2841; validation optimisation score: 0.2841; auc_roc: 0.6421; alpha: 0.333333333333333
+2023-03-12 00:53:02	MESSAGE	
+2023-03-12 00:53:02	MESSAGE	    Starting hyperparameter optimisation for data subsample 4 of 10.
+2023-03-12 00:53:02	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-12 00:53:02	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-12 00:53:02	MESSAGE	      Utility is measured as expected improvement.
+2023-03-12 00:53:07	MESSAGE	      Compute initial model performance based on 4 hyperparameter sets.
+2023-03-12 00:53:24	MESSAGE	      Hyperparameter optimisation: Initialisation complete: summary score: 0.2537; validation optimisation score: 0.2537; auc_roc: 0.6269; alpha: 0.333333333333333
+2023-03-12 00:53:25	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 00:54:59	MESSAGE	      Hyperparameter optimisation: SMBO iteration 1: summary score: 0.2712; validation optimisation score: 0.2712; auc_roc: 0.6356; alpha: 0.0700202875304967
+2023-03-12 00:55:01	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 00:56:25	MESSAGE	      Hyperparameter optimisation: SMBO iteration 2: summary score: 0.2826; validation optimisation score: 0.2826; auc_roc: 0.6413; alpha: 0.0700202875304967
+2023-03-12 00:56:29	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 00:57:50	MESSAGE	      Hyperparameter optimisation: SMBO iteration 3: summary score: 0.2833; validation optimisation score: 0.2833; auc_roc: 0.6416; alpha: 0.0700202875304967
+2023-03-12 00:57:57	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 00:59:18	MESSAGE	      Hyperparameter optimisation: SMBO iteration 4: summary score: 0.2749; validation optimisation score: 0.2749; auc_roc: 0.6375; alpha: 0.0706831559256311
+2023-03-12 00:59:26	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:00:48	MESSAGE	      Hyperparameter optimisation: SMBO iteration 5: summary score: 0.2862; validation optimisation score: 0.2862; auc_roc: 0.6431; alpha: 0.0706831559256311
+2023-03-12 01:00:56	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:02:16	MESSAGE	      Hyperparameter optimisation: SMBO iteration 6: summary score: 0.2856; validation optimisation score: 0.2856; auc_roc: 0.6428; alpha: 0.0706831559256311
+2023-03-12 01:02:25	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:03:44	MESSAGE	      Hyperparameter optimisation: SMBO iteration 7: summary score: 0.2750; validation optimisation score: 0.2750; auc_roc: 0.6375; alpha: 0.0706831559256311
+2023-03-12 01:03:53	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:05:17	MESSAGE	      Hyperparameter optimisation: SMBO iteration 8: summary score: 0.2850; validation optimisation score: 0.2850; auc_roc: 0.6425; alpha: 0.0706831559256311
+2023-03-12 01:05:17	MESSAGE	    Hyperparameter optimisation: Optimisation stopped early as convergence was achieved.
+2023-03-12 01:05:17	MESSAGE	    Hyperparameter optimisation: A suitable set of hyperparameters was identified: summary score: 0.2850; validation optimisation score: 0.2850; auc_roc: 0.6425; alpha: 0.0706831559256311
+2023-03-12 01:05:18	MESSAGE	
+2023-03-12 01:05:18	MESSAGE	    Starting hyperparameter optimisation for data subsample 5 of 10.
+2023-03-12 01:05:18	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-12 01:05:18	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-12 01:05:18	MESSAGE	      Utility is measured as expected improvement.
+2023-03-12 01:05:23	MESSAGE	      Compute initial model performance based on 4 hyperparameter sets.
+2023-03-12 01:05:36	MESSAGE	      Hyperparameter optimisation: Initialisation complete: summary score: 0.3786; validation optimisation score: 0.3786; auc_roc: 0.6893; alpha: 0
+2023-03-12 01:05:37	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:06:47	MESSAGE	      Hyperparameter optimisation: SMBO iteration 1: summary score: 0.3754; validation optimisation score: 0.3754; auc_roc: 0.6877; alpha: 0.0342459038365632
+2023-03-12 01:06:49	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:08:02	MESSAGE	      Hyperparameter optimisation: SMBO iteration 2: summary score: 0.3743; validation optimisation score: 0.3743; auc_roc: 0.6871; alpha: 0.24169320304051
+2023-03-12 01:08:07	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:09:20	MESSAGE	      Hyperparameter optimisation: SMBO iteration 3: summary score: 0.3752; validation optimisation score: 0.3752; auc_roc: 0.6876; alpha: 0.291506420157033
+2023-03-12 01:09:20	MESSAGE	    Hyperparameter optimisation: Optimisation stopped early as convergence was achieved.
+2023-03-12 01:09:21	MESSAGE	    Hyperparameter optimisation: A suitable set of hyperparameters was identified: summary score: 0.3752; validation optimisation score: 0.3752; auc_roc: 0.6876; alpha: 0.291506420157033
+2023-03-12 01:09:21	MESSAGE	
+2023-03-12 01:09:21	MESSAGE	    Starting hyperparameter optimisation for data subsample 6 of 10.
+2023-03-12 01:09:21	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-12 01:09:21	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-12 01:09:21	MESSAGE	      Utility is measured as expected improvement.
+2023-03-12 01:09:26	MESSAGE	      Compute initial model performance based on 4 hyperparameter sets.
+2023-03-12 01:09:39	MESSAGE	      Hyperparameter optimisation: Initialisation complete: summary score: 0.2309; validation optimisation score: 0.2309; auc_roc: 0.6155; alpha: 0.666666666666667
+2023-03-12 01:09:40	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:10:54	MESSAGE	      Hyperparameter optimisation: SMBO iteration 1: summary score: 0.2427; validation optimisation score: 0.2427; auc_roc: 0.6214; alpha: 0.666666666666667
+2023-03-12 01:10:56	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:12:06	MESSAGE	      Hyperparameter optimisation: SMBO iteration 2: summary score: 0.2622; validation optimisation score: 0.2622; auc_roc: 0.6311; alpha: 0.666666666666667
+2023-03-12 01:12:11	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:13:25	MESSAGE	      Hyperparameter optimisation: SMBO iteration 3: summary score: 0.2414; validation optimisation score: 0.2414; auc_roc: 0.6207; alpha: 0.168105209479108
+2023-03-12 01:13:31	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:14:43	MESSAGE	      Hyperparameter optimisation: SMBO iteration 4: summary score: 0.2499; validation optimisation score: 0.2499; auc_roc: 0.6250; alpha: 0.168105209479108
+2023-03-12 01:14:51	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:16:04	MESSAGE	      Hyperparameter optimisation: SMBO iteration 5: summary score: 0.2691; validation optimisation score: 0.2691; auc_roc: 0.6345; alpha: 0.168105209479108
+2023-03-12 01:16:11	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:17:23	MESSAGE	      Hyperparameter optimisation: SMBO iteration 6: summary score: 0.2479; validation optimisation score: 0.2479; auc_roc: 0.6240; alpha: 0.168105209479108
+2023-03-12 01:17:32	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:18:41	MESSAGE	      Hyperparameter optimisation: SMBO iteration 7: summary score: 0.2516; validation optimisation score: 0.2516; auc_roc: 0.6258; alpha: 0.168105209479108
+2023-03-12 01:18:41	MESSAGE	    Hyperparameter optimisation: Optimisation stopped early as convergence was achieved.
+2023-03-12 01:18:41	MESSAGE	    Hyperparameter optimisation: A suitable set of hyperparameters was identified: summary score: 0.2516; validation optimisation score: 0.2516; auc_roc: 0.6258; alpha: 0.168105209479108
+2023-03-12 01:18:41	MESSAGE	
+2023-03-12 01:18:41	MESSAGE	    Starting hyperparameter optimisation for data subsample 7 of 10.
+2023-03-12 01:18:41	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-12 01:18:41	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-12 01:18:41	MESSAGE	      Utility is measured as expected improvement.
+2023-03-12 01:18:46	MESSAGE	      Compute initial model performance based on 4 hyperparameter sets.
+2023-03-12 01:19:00	MESSAGE	      Hyperparameter optimisation: Initialisation complete: summary score: 0.2522; validation optimisation score: 0.2522; auc_roc: 0.6261; alpha: 0
+2023-03-12 01:19:00	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:20:10	MESSAGE	      Hyperparameter optimisation: SMBO iteration 1: summary score: 0.2792; validation optimisation score: 0.2792; auc_roc: 0.6396; alpha: 0
+2023-03-12 01:20:12	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:21:18	MESSAGE	      Hyperparameter optimisation: SMBO iteration 2: summary score: 0.2860; validation optimisation score: 0.2860; auc_roc: 0.6430; alpha: 0
+2023-03-12 01:21:22	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:22:28	MESSAGE	      Hyperparameter optimisation: SMBO iteration 3: summary score: 0.2548; validation optimisation score: 0.2548; auc_roc: 0.6274; alpha: 0.000375637955050447
+2023-03-12 01:22:34	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:23:43	MESSAGE	      Hyperparameter optimisation: SMBO iteration 4: summary score: 0.2804; validation optimisation score: 0.2804; auc_roc: 0.6402; alpha: 0.000375637955050447
+2023-03-12 01:23:50	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:24:54	MESSAGE	      Hyperparameter optimisation: SMBO iteration 5: summary score: 0.2893; validation optimisation score: 0.2893; auc_roc: 0.6446; alpha: 0.000375637955050447
+2023-03-12 01:25:01	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:26:09	MESSAGE	      Hyperparameter optimisation: SMBO iteration 6: summary score: 0.2540; validation optimisation score: 0.2540; auc_roc: 0.6270; alpha: 0.096198390237987
+2023-03-12 01:26:17	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:27:23	MESSAGE	      Hyperparameter optimisation: SMBO iteration 7: summary score: 0.2812; validation optimisation score: 0.2812; auc_roc: 0.6406; alpha: 0.096198390237987
+2023-03-12 01:27:31	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:28:40	MESSAGE	      Hyperparameter optimisation: SMBO iteration 8: summary score: 0.2851; validation optimisation score: 0.2851; auc_roc: 0.6426; alpha: 0.096198390237987
+2023-03-12 01:28:48	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:29:55	MESSAGE	      Hyperparameter optimisation: SMBO iteration 9: summary score: 0.2533; validation optimisation score: 0.2533; auc_roc: 0.6266; alpha: 0.0129965889562135
+2023-03-12 01:30:06	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:31:14	MESSAGE	      Hyperparameter optimisation: SMBO iteration 10: summary score: 0.2798; validation optimisation score: 0.2798; auc_roc: 0.6399; alpha: 0.0129965889562135
+2023-03-12 01:31:23	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:32:30	MESSAGE	      Hyperparameter optimisation: SMBO iteration 11: summary score: 0.2851; validation optimisation score: 0.2851; auc_roc: 0.6425; alpha: 0.0129965889562135
+2023-03-12 01:32:41	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:33:47	MESSAGE	      Hyperparameter optimisation: SMBO iteration 12: summary score: 0.2530; validation optimisation score: 0.2530; auc_roc: 0.6265; alpha: 0.00387628028600179
+2023-03-12 01:34:00	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:35:06	MESSAGE	      Hyperparameter optimisation: SMBO iteration 13: summary score: 0.2805; validation optimisation score: 0.2805; auc_roc: 0.6402; alpha: 0.00387628028600179
+2023-03-12 01:35:17	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:36:21	MESSAGE	      Hyperparameter optimisation: SMBO iteration 14: summary score: 0.2863; validation optimisation score: 0.2863; auc_roc: 0.6432; alpha: 0.00387628028600179
+2023-03-12 01:36:33	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:37:41	MESSAGE	      Hyperparameter optimisation: SMBO iteration 15: summary score: 0.2531; validation optimisation score: 0.2531; auc_roc: 0.6265; alpha: 0.0129489137325436
+2023-03-12 01:37:52	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:38:59	MESSAGE	      Hyperparameter optimisation: SMBO iteration 16: summary score: 0.2796; validation optimisation score: 0.2796; auc_roc: 0.6398; alpha: 0.0129489137325436
+2023-03-12 01:39:11	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:40:17	MESSAGE	      Hyperparameter optimisation: SMBO iteration 17: summary score: 0.2851; validation optimisation score: 0.2851; auc_roc: 0.6426; alpha: 0.0129489137325436
+2023-03-12 01:40:30	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:41:37	MESSAGE	      Hyperparameter optimisation: SMBO iteration 18: summary score: 0.2580; validation optimisation score: 0.2580; auc_roc: 0.6290; alpha: 0.100053435657173
+2023-03-12 01:41:45	MESSAGE	      Intensify step 1 using 10 challenger hyperparameter sets.
+2023-03-12 01:42:23	MESSAGE	      Hyperparameter optimisation: SMBO iteration 19: summary score: 0.2838; validation optimisation score: 0.2838; auc_roc: 0.6419; alpha: 0.100053435657173
+2023-03-12 01:42:36	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:43:43	MESSAGE	      Hyperparameter optimisation: SMBO iteration 20: summary score: 0.2870; validation optimisation score: 0.2870; auc_roc: 0.6435; alpha: 0.100053435657173
+2023-03-12 01:43:44	MESSAGE	    Hyperparameter optimisation: A suitable set of hyperparameters was identified: summary score: 0.2870; validation optimisation score: 0.2870; auc_roc: 0.6435; alpha: 0.100053435657173
+2023-03-12 01:43:44	MESSAGE	
+2023-03-12 01:43:44	MESSAGE	    Starting hyperparameter optimisation for data subsample 8 of 10.
+2023-03-12 01:43:44	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-12 01:43:44	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-12 01:43:44	MESSAGE	      Utility is measured as expected improvement.
+2023-03-12 01:43:49	MESSAGE	      Compute initial model performance based on 4 hyperparameter sets.
+2023-03-12 01:44:03	MESSAGE	      Hyperparameter optimisation: Initialisation complete: summary score: 0.3072; validation optimisation score: 0.3072; auc_roc: 0.6536; alpha: 0.666666666666667
+2023-03-12 01:44:04	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:45:18	MESSAGE	      Hyperparameter optimisation: SMBO iteration 1: summary score: 0.3191; validation optimisation score: 0.3191; auc_roc: 0.6595; alpha: 0.116892364108935
+2023-03-12 01:45:21	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:46:35	MESSAGE	      Hyperparameter optimisation: SMBO iteration 2: summary score: 0.3220; validation optimisation score: 0.3220; auc_roc: 0.6610; alpha: 0.259281891919882
+2023-03-12 01:46:42	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:47:57	MESSAGE	      Hyperparameter optimisation: SMBO iteration 3: summary score: 0.3229; validation optimisation score: 0.3229; auc_roc: 0.6615; alpha: 0.329644911224023
+2023-03-12 01:48:04	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:49:18	MESSAGE	      Hyperparameter optimisation: SMBO iteration 4: summary score: 0.3244; validation optimisation score: 0.3244; auc_roc: 0.6622; alpha: 0.345972765606833
+2023-03-12 01:49:26	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:50:40	MESSAGE	      Hyperparameter optimisation: SMBO iteration 5: summary score: 0.3229; validation optimisation score: 0.3229; auc_roc: 0.6614; alpha: 0.342287124449863
+2023-03-12 01:50:40	MESSAGE	    Hyperparameter optimisation: Optimisation stopped early as convergence was achieved.
+2023-03-12 01:50:40	MESSAGE	    Hyperparameter optimisation: A suitable set of hyperparameters was identified: summary score: 0.3229; validation optimisation score: 0.3229; auc_roc: 0.6614; alpha: 0.342287124449863
+2023-03-12 01:50:40	MESSAGE	
+2023-03-12 01:50:40	MESSAGE	    Starting hyperparameter optimisation for data subsample 9 of 10.
+2023-03-12 01:50:40	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-12 01:50:40	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-12 01:50:40	MESSAGE	      Utility is measured as expected improvement.
+2023-03-12 01:50:46	MESSAGE	      Compute initial model performance based on 4 hyperparameter sets.
+2023-03-12 01:50:57	MESSAGE	      Hyperparameter optimisation: Initialisation complete: summary score: 0.4036; validation optimisation score: 0.4036; auc_roc: 0.7018; alpha: 0.333333333333333
+2023-03-12 01:50:58	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:52:04	MESSAGE	      Hyperparameter optimisation: SMBO iteration 1: summary score: 0.4026; validation optimisation score: 0.4026; auc_roc: 0.7013; alpha: 0.289884436875582
+2023-03-12 01:52:06	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:53:11	MESSAGE	      Hyperparameter optimisation: SMBO iteration 2: summary score: 0.4024; validation optimisation score: 0.4024; auc_roc: 0.7012; alpha: 0.309020141139627
+2023-03-12 01:53:15	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:54:21	MESSAGE	      Hyperparameter optimisation: SMBO iteration 3: summary score: 0.4018; validation optimisation score: 0.4018; auc_roc: 0.7009; alpha: 0.989211151133963
+2023-03-12 01:54:21	MESSAGE	    Hyperparameter optimisation: Optimisation stopped early as convergence was achieved.
+2023-03-12 01:54:21	MESSAGE	    Hyperparameter optimisation: A suitable set of hyperparameters was identified: summary score: 0.4018; validation optimisation score: 0.4018; auc_roc: 0.7009; alpha: 0.989211151133963
+2023-03-12 01:54:21	MESSAGE	
+2023-03-12 01:54:21	MESSAGE	    Starting hyperparameter optimisation for data subsample 10 of 10.
+2023-03-12 01:54:21	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-12 01:54:21	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-12 01:54:21	MESSAGE	      Utility is measured as expected improvement.
+2023-03-12 01:54:27	MESSAGE	      Compute initial model performance based on 4 hyperparameter sets.
+2023-03-12 01:54:39	MESSAGE	      Hyperparameter optimisation: Initialisation complete: summary score: 0.2321; validation optimisation score: 0.2321; auc_roc: 0.6161; alpha: 0
+2023-03-12 01:54:40	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:55:47	MESSAGE	      Hyperparameter optimisation: SMBO iteration 1: summary score: 0.2933; validation optimisation score: 0.2933; auc_roc: 0.6466; alpha: 0
+2023-03-12 01:55:49	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:56:53	MESSAGE	      Hyperparameter optimisation: SMBO iteration 2: summary score: 0.3026; validation optimisation score: 0.3026; auc_roc: 0.6513; alpha: 0
+2023-03-12 01:56:58	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 01:58:01	MESSAGE	      Hyperparameter optimisation: SMBO iteration 3: summary score: 0.3172; validation optimisation score: 0.3172; auc_roc: 0.6586; alpha: 0
+2023-03-12 01:58:01	MESSAGE	    Hyperparameter optimisation: Optimisation stopped early as convergence was achieved.
+2023-03-12 01:58:01	MESSAGE	    Hyperparameter optimisation: A suitable set of hyperparameters was identified: summary score: 0.3172; validation optimisation score: 0.3172; auc_roc: 0.6586; alpha: 0
+2023-03-12 01:58:02	MESSAGE	
+2023-03-12 01:58:02	MESSAGE	  Hyperparameter optimisation: Completed parameter optimisation for the elastic_net variable importance method.
+2023-03-12 01:58:36	MESSAGE	Feature selection: feature selection using "elastic_net" method has been completed.
+2023-03-12 01:58:36	MESSAGE	
+Model building: starting model building using "xgboost_tree" learner, based on "elastic_net" feature selection.
+2023-03-12 01:58:37	MESSAGE	  Hyperparameter optimisation: Starting parameter optimisation for the xgboost_tree learner, based on variable importances from the elastic_net variable importance method.
+2023-03-12 01:58:37	MESSAGE	
+2023-03-12 01:58:37	MESSAGE	    Starting hyperparameter optimisation for data subsample 1 of 10.
+2023-03-12 01:58:37	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-12 01:58:37	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-12 01:58:37	MESSAGE	      Utility is measured as expected improvement.
+2023-03-12 01:58:43	MESSAGE	      Computing variable importance for 20 bootstraps.
+2023-03-12 01:59:54	MESSAGE	      Compute initial model performance based on 100 hyperparameter sets.
+2023-03-12 02:00:59	MESSAGE	      Hyperparameter optimisation: Initialisation complete: summary score: 0.4670; validation optimisation score: 0.4670; auc_roc: 0.7335; sign_size: 2; n_boost: 0; learning_rate: -1; lambda: 1; alpha: -6; tree_depth: 1; sample_size: 0.7; min_child_weight: 0; gamma: -3
+2023-03-12 02:01:39	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:01:45	MESSAGE	      Hyperparameter optimisation: SMBO iteration 1: summary score: 0.4415; validation optimisation score: 0.4415; auc_roc: 0.7208; sign_size: 2; n_boost: 0; learning_rate: -1; lambda: 1; alpha: -6; tree_depth: 1; sample_size: 0.7; min_child_weight: 0; gamma: -3
+2023-03-12 02:02:38	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:02:51	MESSAGE	      Hyperparameter optimisation: SMBO iteration 2: summary score: 0.4313; validation optimisation score: 0.4313; auc_roc: 0.7156; sign_size: 2; n_boost: 0; learning_rate: -1; lambda: 1; alpha: -6; tree_depth: 1; sample_size: 0.7; min_child_weight: 0; gamma: -3
+2023-03-12 02:03:52	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:04:01	MESSAGE	      Hyperparameter optimisation: SMBO iteration 3: summary score: 0.4296; validation optimisation score: 0.4296; auc_roc: 0.7148; sign_size: 12; n_boost: 0.839885896936558; learning_rate: -0.501318195083944; lambda: 1; alpha: 1; tree_depth: 3; sample_size: 1; min_child_weight: 1; gamma: -1
+2023-03-12 02:05:01	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:05:13	MESSAGE	      Hyperparameter optimisation: SMBO iteration 4: summary score: 0.4893; validation optimisation score: 0.4893; auc_roc: 0.7447; sign_size: 2; n_boost: 0.157339722175042; learning_rate: -0.175573691218714; lambda: 1; alpha: -5.64667839329382; tree_depth: 2; sample_size: 0.502538344026944; min_child_weight: 0.0571872747882234; gamma: -3
+2023-03-12 02:06:24	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:06:34	MESSAGE	      Hyperparameter optimisation: SMBO iteration 5: summary score: 0.5504; validation optimisation score: 0.5504; auc_roc: 0.7752; sign_size: 2; n_boost: 0.294240378620498; learning_rate: -0.0566969522985143; lambda: 2.66078330899284; alpha: -4.83524217033124; tree_depth: 2; sample_size: 0.592220765153866; min_child_weight: 0.285850142925712; gamma: -4.51641101562694
+2023-03-12 02:07:48	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:07:58	MESSAGE	      Hyperparameter optimisation: SMBO iteration 6: summary score: 0.5244; validation optimisation score: 0.5244; auc_roc: 0.7622; sign_size: 2; n_boost: 0.294240378620498; learning_rate: -0.067850195304823; lambda: 2.66078330899284; alpha: -4.83524217033124; tree_depth: 2; sample_size: 0.592220765153866; min_child_weight: 0.285850142925712; gamma: -4.51641101562694
+2023-03-12 02:09:13	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:09:22	MESSAGE	      Hyperparameter optimisation: SMBO iteration 7: summary score: 0.4741; validation optimisation score: 0.4741; auc_roc: 0.7370; sign_size: 2; n_boost: 0.134645176572002; learning_rate: -1; lambda: -1.29961780411699; alpha: -6; tree_depth: 1; sample_size: 0.7; min_child_weight: 0.322089647607311; gamma: -3
+2023-03-12 02:10:39	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:10:50	MESSAGE	      Hyperparameter optimisation: SMBO iteration 8: summary score: 0.4712; validation optimisation score: 0.4712; auc_roc: 0.7356; sign_size: 2; n_boost: 0; learning_rate: -0.316233919847944; lambda: 1.65411069495157; alpha: -5.71730839506955; tree_depth: 2; sample_size: 0.633525267273959; min_child_weight: 0.131035531186719; gamma: -2.40395836139117
+2023-03-12 02:12:19	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:12:28	MESSAGE	      Hyperparameter optimisation: SMBO iteration 9: summary score: 0.4637; validation optimisation score: 0.4637; auc_roc: 0.7319; sign_size: 3; n_boost: 1.64498048588762; learning_rate: -4.32512138582087; lambda: -0.297038451313623; alpha: -5.96826277700644; tree_depth: 2; sample_size: 0.99974046274435; min_child_weight: 0.715136627658731; gamma: -5.08997749540328
+2023-03-12 02:13:42	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:13:50	MESSAGE	      Hyperparameter optimisation: SMBO iteration 10: summary score: 0.4616; validation optimisation score: 0.4616; auc_roc: 0.7308; sign_size: 2; n_boost: 0.294240378620498; learning_rate: -0.0566969522985143; lambda: 2.66078330899284; alpha: -4.83524217033124; tree_depth: 2; sample_size: 0.592220765153866; min_child_weight: 0.285850142925712; gamma: -4.51641101562694
+2023-03-12 02:15:05	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:15:17	MESSAGE	      Hyperparameter optimisation: SMBO iteration 11: summary score: 0.4527; validation optimisation score: 0.4527; auc_roc: 0.7264; sign_size: 12; n_boost: 0.839885896936558; learning_rate: -0.501318195083944; lambda: 1; alpha: 1; tree_depth: 3; sample_size: 1; min_child_weight: 1; gamma: -1
+2023-03-12 02:16:36	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:16:43	MESSAGE	      Hyperparameter optimisation: SMBO iteration 12: summary score: 0.4370; validation optimisation score: 0.4370; auc_roc: 0.7185; sign_size: 2; n_boost: 0.134645176572002; learning_rate: -1; lambda: -1.29961780411699; alpha: -6; tree_depth: 1; sample_size: 0.7; min_child_weight: 0.322089647607311; gamma: -3
+2023-03-12 02:18:02	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:18:08	MESSAGE	      Hyperparameter optimisation: SMBO iteration 13: summary score: 0.4436; validation optimisation score: 0.4436; auc_roc: 0.7218; sign_size: 3; n_boost: 1.64498048588762; learning_rate: -3.45516650185556; lambda: -1.12731063167329; alpha: -5.96826277700644; tree_depth: 2; sample_size: 0.99974046274435; min_child_weight: 0.541331107309725; gamma: -2.43900434145817
+2023-03-12 02:19:27	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:19:34	MESSAGE	      Hyperparameter optimisation: SMBO iteration 14: summary score: 0.4967; validation optimisation score: 0.4967; auc_roc: 0.7483; sign_size: 2; n_boost: 0.187211413125725; learning_rate: -0.178774144102865; lambda: 1.65411069495157; alpha: -5.99091206545055; tree_depth: 2; sample_size: 0.716523757088484; min_child_weight: 0.245459251131597; gamma: -2.40395836139117
+2023-03-12 02:20:34	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:20:45	MESSAGE	      Hyperparameter optimisation: SMBO iteration 15: summary score: 0.4355; validation optimisation score: 0.4355; auc_roc: 0.7178; sign_size: 3; n_boost: 1.64498048588762; learning_rate: -4.2060470126225; lambda: -1.67332750576379; alpha: -5.84114474992008; tree_depth: 2; sample_size: 0.99974046274435; min_child_weight: 0.28559807458071; gamma: -5.19339856592139
+2023-03-12 02:21:32	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:21:39	MESSAGE	      Hyperparameter optimisation: SMBO iteration 16: summary score: 0.4322; validation optimisation score: 0.4322; auc_roc: 0.7161; sign_size: 3; n_boost: 1.64498048588762; learning_rate: -3.45516650185556; lambda: -1.80456877591297; alpha: -5.66652455164456; tree_depth: 2; sample_size: 0.99974046274435; min_child_weight: 0.28559807458071; gamma: -3.02277629728328
+2023-03-12 02:21:51	MESSAGE	      Intensify step 1 using 4 challenger hyperparameter sets.
+2023-03-12 02:21:55	MESSAGE	      Hyperparameter optimisation: SMBO iteration 17: summary score: 0.4915; validation optimisation score: 0.4915; auc_roc: 0.7458; sign_size: 2; n_boost: 0.452410246012732; learning_rate: -1.23118707211688; lambda: 2.81321984482929; alpha: -4.45517294202; tree_depth: 3; sample_size: 0.851850496491483; min_child_weight: 0.768796536140144; gamma: -3.9653793470934
+2023-03-12 02:22:13	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:22:19	MESSAGE	      Hyperparameter optimisation: SMBO iteration 18: summary score: 0.4489; validation optimisation score: 0.4489; auc_roc: 0.7244; sign_size: 2; n_boost: 0.452410246012732; learning_rate: -1.23118707211688; lambda: 2.81321984482929; alpha: -4.45517294202; tree_depth: 3; sample_size: 0.851850496491483; min_child_weight: 0.768796536140144; gamma: -3.9653793470934
+2023-03-12 02:22:37	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:22:43	MESSAGE	      Hyperparameter optimisation: SMBO iteration 19: summary score: 0.4622; validation optimisation score: 0.4622; auc_roc: 0.7311; sign_size: 2; n_boost: 0.452410246012732; learning_rate: -1.74338396793655; lambda: 2.81321984482929; alpha: -3.89717019404668; tree_depth: 3; sample_size: 0.851850496491483; min_child_weight: 0.768796536140144; gamma: -3.9653793470934
+2023-03-12 02:23:01	MESSAGE	      Intensify step 1 using 18 challenger hyperparameter sets.
+2023-03-12 02:23:09	MESSAGE	      Hyperparameter optimisation: SMBO iteration 20: summary score: 0.4942; validation optimisation score: 0.4942; auc_roc: 0.7471; sign_size: 2; n_boost: 0.700040060770051; learning_rate: -1.74338396793655; lambda: 2.81321984482929; alpha: -3.89717019404668; tree_depth: 3; sample_size: 0.851850496491483; min_child_weight: 0.768796536140144; gamma: -1.33882957932109
+2023-03-12 02:23:09	MESSAGE	    Hyperparameter optimisation: A suitable set of hyperparameters was identified: summary score: 0.4942; validation optimisation score: 0.4942; auc_roc: 0.7471; sign_size: 2; n_boost: 0.700040060770051; learning_rate: -1.74338396793655; lambda: 2.81321984482929; alpha: -3.89717019404668; tree_depth: 3; sample_size: 0.851850496491483; min_child_weight: 0.768796536140144; gamma: -1.33882957932109
+2023-03-12 02:23:09	MESSAGE	
+2023-03-12 02:23:09	MESSAGE	    Starting hyperparameter optimisation for data subsample 2 of 10.
+2023-03-12 02:23:09	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-12 02:23:09	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-12 02:23:09	MESSAGE	      Utility is measured as expected improvement.
+2023-03-12 02:23:16	MESSAGE	      Computing variable importance for 20 bootstraps.
+2023-03-12 02:24:26	MESSAGE	      Compute initial model performance based on 100 hyperparameter sets.
+2023-03-12 02:25:29	MESSAGE	      Hyperparameter optimisation: Initialisation complete: summary score: 0.4452; validation optimisation score: 0.4452; auc_roc: 0.7226; sign_size: 1; n_boost: 2; learning_rate: -2; lambda: -6; alpha: 1; tree_depth: 7; sample_size: 0.3; min_child_weight: 0; gamma: -1
+2023-03-12 02:26:05	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:26:18	MESSAGE	      Hyperparameter optimisation: SMBO iteration 1: summary score: 0.4199; validation optimisation score: 0.4199; auc_roc: 0.7100; sign_size: 1; n_boost: 1.4395698263654; learning_rate: -2; lambda: -5.1278659409841; alpha: 1; tree_depth: 7; sample_size: 0.3; min_child_weight: 0.103924507622796; gamma: -2.30396062894593
+2023-03-12 02:27:09	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:27:17	MESSAGE	      Hyperparameter optimisation: SMBO iteration 2: summary score: 0.4932; validation optimisation score: 0.4932; auc_roc: 0.7466; sign_size: 1; n_boost: 1.4395698263654; learning_rate: -2; lambda: -5.1278659409841; alpha: 1; tree_depth: 7; sample_size: 0.3; min_child_weight: 0.103924507622796; gamma: -2.30396062894593
+2023-03-12 02:28:08	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:28:25	MESSAGE	      Hyperparameter optimisation: SMBO iteration 3: summary score: 0.4992; validation optimisation score: 0.4992; auc_roc: 0.7496; sign_size: 1; n_boost: 1.4395698263654; learning_rate: -2; lambda: -5.1278659409841; alpha: 1; tree_depth: 7; sample_size: 0.3; min_child_weight: 0.103924507622796; gamma: -2.30396062894593
+2023-03-12 02:29:30	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:29:43	MESSAGE	      Hyperparameter optimisation: SMBO iteration 4: summary score: 0.4741; validation optimisation score: 0.4741; auc_roc: 0.7371; sign_size: 1; n_boost: 2.24587810278552; learning_rate: -2.22874859542419; lambda: -5.28173237261818; alpha: 0.925757752463558; tree_depth: 9; sample_size: 0.29054491448932; min_child_weight: 0.197146996167761; gamma: -5.1036520402152
+2023-03-12 02:30:45	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:30:59	MESSAGE	      Hyperparameter optimisation: SMBO iteration 5: summary score: 0.4738; validation optimisation score: 0.4738; auc_roc: 0.7369; sign_size: 1; n_boost: 2.51914075491051; learning_rate: -2.23941008026434; lambda: -5.28173237261818; alpha: 0.925757752463558; tree_depth: 7; sample_size: 0.29054491448932; min_child_weight: 0.197146996167761; gamma: -2.36618023488783
+2023-03-12 02:32:02	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:32:20	MESSAGE	      Hyperparameter optimisation: SMBO iteration 6: summary score: 0.4933; validation optimisation score: 0.4933; auc_roc: 0.7467; sign_size: 1; n_boost: 2.51914075491051; learning_rate: -2.23941008026434; lambda: -5.28173237261818; alpha: 0.925757752463558; tree_depth: 7; sample_size: 0.29054491448932; min_child_weight: 0.197146996167761; gamma: -2.36618023488783
+2023-03-12 02:33:32	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:33:45	MESSAGE	      Hyperparameter optimisation: SMBO iteration 7: summary score: 0.5033; validation optimisation score: 0.5033; auc_roc: 0.7517; sign_size: 1; n_boost: 2.51914075491051; learning_rate: -2.23941008026434; lambda: -5.28173237261818; alpha: 0.925757752463558; tree_depth: 7; sample_size: 0.29054491448932; min_child_weight: 0.197146996167761; gamma: -2.36618023488783
+2023-03-12 02:35:06	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:35:14	MESSAGE	      Hyperparameter optimisation: SMBO iteration 8: summary score: 0.4822; validation optimisation score: 0.4822; auc_roc: 0.7411; sign_size: 2; n_boost: 1.28040153701675; learning_rate: -1.55601824483056; lambda: -2.90458593825846; alpha: 1; tree_depth: 9; sample_size: 0.337516785020171; min_child_weight: 0.3069529942126; gamma: -4.19124801152746
+2023-03-12 02:36:40	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:36:48	MESSAGE	      Hyperparameter optimisation: SMBO iteration 9: summary score: 0.4729; validation optimisation score: 0.4729; auc_roc: 0.7364; sign_size: 3; n_boost: 2.24587810278552; learning_rate: -2.22874859542419; lambda: -2.59592195708418; alpha: 1.12644548376165; tree_depth: 9; sample_size: 0.381888110669233; min_child_weight: 0.197146996167761; gamma: -5.87911308303311
+2023-03-12 02:38:17	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:38:24	MESSAGE	      Hyperparameter optimisation: SMBO iteration 10: summary score: 0.4893; validation optimisation score: 0.4893; auc_roc: 0.7447; sign_size: 2; n_boost: 1.83918270504092; learning_rate: -1.55601824483056; lambda: -3.52728367904499; alpha: 1.15896717687841; tree_depth: 7; sample_size: 0.58141068999523; min_child_weight: 0.204655400797947; gamma: -2.88169595345148
+2023-03-12 02:39:42	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:39:51	MESSAGE	      Hyperparameter optimisation: SMBO iteration 11: summary score: 0.5253; validation optimisation score: 0.5253; auc_roc: 0.7627; sign_size: 2; n_boost: 1.83918270504092; learning_rate: -1.55601824483056; lambda: -3.52728367904499; alpha: 1.15896717687841; tree_depth: 7; sample_size: 0.58141068999523; min_child_weight: 0.204655400797947; gamma: -2.88169595345148
+2023-03-12 02:41:08	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:41:27	MESSAGE	      Hyperparameter optimisation: SMBO iteration 12: summary score: 0.5267; validation optimisation score: 0.5267; auc_roc: 0.7633; sign_size: 2; n_boost: 1.83918270504092; learning_rate: -1.55601824483056; lambda: -3.52728367904499; alpha: 1.15896717687841; tree_depth: 7; sample_size: 0.58141068999523; min_child_weight: 0.204655400797947; gamma: -2.88169595345148
+2023-03-12 02:42:49	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:42:58	MESSAGE	      Hyperparameter optimisation: SMBO iteration 13: summary score: 0.5005; validation optimisation score: 0.5005; auc_roc: 0.7503; sign_size: 2; n_boost: 1.83918270504092; learning_rate: -1.55601824483056; lambda: -3.52728367904499; alpha: 1.15896717687841; tree_depth: 7; sample_size: 0.58141068999523; min_child_weight: 0.204655400797947; gamma: -2.88169595345148
+2023-03-12 02:44:27	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:44:37	MESSAGE	      Hyperparameter optimisation: SMBO iteration 14: summary score: 0.4827; validation optimisation score: 0.4827; auc_roc: 0.7414; sign_size: 4; n_boost: 0.89593697944656; learning_rate: -3.43322713160887; lambda: 1.04484218847938; alpha: 1.15415401593782; tree_depth: 8; sample_size: 0.55402220275194; min_child_weight: 0.041654814966023; gamma: -2.82033614418469
+2023-03-12 02:45:37	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:45:56	MESSAGE	      Hyperparameter optimisation: SMBO iteration 15: summary score: 0.4837; validation optimisation score: 0.4837; auc_roc: 0.7419; sign_size: 3; n_boost: 2.47334481644686; learning_rate: -2.85593988048306; lambda: -2.12339520275892; alpha: 1.12644548376165; tree_depth: 9; sample_size: 0.34068733750664; min_child_weight: 0.50177104484689; gamma: -5.01996103878882
+2023-03-12 02:47:06	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:47:21	MESSAGE	      Hyperparameter optimisation: SMBO iteration 16: summary score: 0.4770; validation optimisation score: 0.4770; auc_roc: 0.7385; sign_size: 3; n_boost: 2.66178205194768; learning_rate: -2.22874859542419; lambda: -2.59592195708418; alpha: 1.12644548376165; tree_depth: 8; sample_size: 0.368744492644281; min_child_weight: 0.408937680460923; gamma: -5.63929858150216
+2023-03-12 02:48:24	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:48:36	MESSAGE	      Hyperparameter optimisation: SMBO iteration 17: summary score: 0.4803; validation optimisation score: 0.4803; auc_roc: 0.7402; sign_size: 3; n_boost: 2.43310606567278; learning_rate: -2.95064835859219; lambda: -2.12339520275892; alpha: 1.12644548376165; tree_depth: 9; sample_size: 0.485059126037123; min_child_weight: 0.294725965176627; gamma: -5.01996103878882
+2023-03-12 02:49:39	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:49:53	MESSAGE	      Hyperparameter optimisation: SMBO iteration 18: summary score: 0.4731; validation optimisation score: 0.4731; auc_roc: 0.7366; sign_size: 3; n_boost: 2.24587810278552; learning_rate: -2.22874859542419; lambda: -2.59592195708418; alpha: 1.12644548376165; tree_depth: 8; sample_size: 0.381888110669233; min_child_weight: 0.197146996167761; gamma: -5.87911308303311
+2023-03-12 02:49:53	MESSAGE	    Hyperparameter optimisation: Optimisation stopped early as convergence was achieved.
+2023-03-12 02:49:53	MESSAGE	    Hyperparameter optimisation: A suitable set of hyperparameters was identified: summary score: 0.4731; validation optimisation score: 0.4731; auc_roc: 0.7366; sign_size: 3; n_boost: 2.24587810278552; learning_rate: -2.22874859542419; lambda: -2.59592195708418; alpha: 1.12644548376165; tree_depth: 8; sample_size: 0.381888110669233; min_child_weight: 0.197146996167761; gamma: -5.87911308303311
+2023-03-12 02:49:54	MESSAGE	
+2023-03-12 02:49:54	MESSAGE	    Starting hyperparameter optimisation for data subsample 3 of 10.
+2023-03-12 02:49:54	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-12 02:49:54	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-12 02:49:54	MESSAGE	      Utility is measured as expected improvement.
+2023-03-12 02:50:00	MESSAGE	      Computing variable importance for 20 bootstraps.
+2023-03-12 02:51:08	MESSAGE	      Compute initial model performance based on 100 hyperparameter sets.
+2023-03-12 02:52:26	MESSAGE	      Hyperparameter optimisation: Initialisation complete: summary score: 0.2912; validation optimisation score: 0.2912; auc_roc: 0.6456; sign_size: 10; n_boost: 1; learning_rate: -3; lambda: -3; alpha: 1; tree_depth: 3; sample_size: 0.7; min_child_weight: 1; gamma: -3
+2023-03-12 02:53:07	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:53:19	MESSAGE	      Hyperparameter optimisation: SMBO iteration 1: summary score: 0.3013; validation optimisation score: 0.3013; auc_roc: 0.6506; sign_size: 10; n_boost: 1; learning_rate: -3; lambda: -3; alpha: 1; tree_depth: 3; sample_size: 0.7; min_child_weight: 1; gamma: -3
+2023-03-12 02:54:01	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:54:10	MESSAGE	      Hyperparameter optimisation: SMBO iteration 2: summary score: 0.3007; validation optimisation score: 0.3007; auc_roc: 0.6503; sign_size: 10; n_boost: 1; learning_rate: -3; lambda: -3; alpha: 1; tree_depth: 3; sample_size: 0.7; min_child_weight: 1; gamma: -3
+2023-03-12 02:55:06	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:55:14	MESSAGE	      Hyperparameter optimisation: SMBO iteration 3: summary score: 0.2864; validation optimisation score: 0.2864; auc_roc: 0.6432; sign_size: 10; n_boost: 1; learning_rate: -2.87956098600566; lambda: -3; alpha: 1; tree_depth: 3; sample_size: 0.7; min_child_weight: 0.829073454489921; gamma: -3
+2023-03-12 02:56:29	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:56:42	MESSAGE	      Hyperparameter optimisation: SMBO iteration 4: summary score: 0.3401; validation optimisation score: 0.3401; auc_roc: 0.6701; sign_size: 10; n_boost: 1; learning_rate: -2.87956098600566; lambda: -3; alpha: 1; tree_depth: 3; sample_size: 0.7; min_child_weight: 0.829073454489921; gamma: -3
+2023-03-12 02:57:49	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:58:03	MESSAGE	      Hyperparameter optimisation: SMBO iteration 5: summary score: 0.3399; validation optimisation score: 0.3399; auc_roc: 0.6700; sign_size: 10; n_boost: 1; learning_rate: -2.87956098600566; lambda: -3; alpha: 1; tree_depth: 3; sample_size: 0.7; min_child_weight: 0.829073454489921; gamma: -3
+2023-03-12 02:59:08	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 02:59:21	MESSAGE	      Hyperparameter optimisation: SMBO iteration 6: summary score: 0.3215; validation optimisation score: 0.3215; auc_roc: 0.6607; sign_size: 10; n_boost: 1; learning_rate: -2.87956098600566; lambda: -3; alpha: 1; tree_depth: 3; sample_size: 0.7; min_child_weight: 0.829073454489921; gamma: -3
+2023-03-12 03:00:18	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:00:36	MESSAGE	      Hyperparameter optimisation: SMBO iteration 7: summary score: 0.3273; validation optimisation score: 0.3273; auc_roc: 0.6636; sign_size: 10; n_boost: 1; learning_rate: -2.87956098600566; lambda: -3; alpha: 1; tree_depth: 3; sample_size: 0.7; min_child_weight: 0.829073454489921; gamma: -3
+2023-03-12 03:00:37	MESSAGE	    Hyperparameter optimisation: Optimisation stopped early as convergence was achieved.
+2023-03-12 03:00:37	MESSAGE	    Hyperparameter optimisation: A suitable set of hyperparameters was identified: summary score: 0.3273; validation optimisation score: 0.3273; auc_roc: 0.6636; sign_size: 10; n_boost: 1; learning_rate: -2.87956098600566; lambda: -3; alpha: 1; tree_depth: 3; sample_size: 0.7; min_child_weight: 0.829073454489921; gamma: -3
+2023-03-12 03:00:37	MESSAGE	
+2023-03-12 03:00:37	MESSAGE	    Starting hyperparameter optimisation for data subsample 4 of 10.
+2023-03-12 03:00:37	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-12 03:00:37	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-12 03:00:37	MESSAGE	      Utility is measured as expected improvement.
+2023-03-12 03:00:43	MESSAGE	      Computing variable importance for 20 bootstraps.
+2023-03-12 03:01:55	MESSAGE	      Compute initial model performance based on 100 hyperparameter sets.
+2023-03-12 03:02:57	MESSAGE	      Hyperparameter optimisation: Initialisation complete: summary score: 0.4831; validation optimisation score: 0.4831; auc_roc: 0.7416; sign_size: 5; n_boost: 1; learning_rate: -3; lambda: 3; alpha: 1; tree_depth: 1; sample_size: 0.7; min_child_weight: 0; gamma: -3
+2023-03-12 03:03:32	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:03:38	MESSAGE	      Hyperparameter optimisation: SMBO iteration 1: summary score: 0.5420; validation optimisation score: 0.5420; auc_roc: 0.7710; sign_size: 6; n_boost: 0.6898036152126; learning_rate: -2.74927535480291; lambda: 3; alpha: 1; tree_depth: 1; sample_size: 0.581001449204065; min_child_weight: 0; gamma: -3
+2023-03-12 03:04:33	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:04:42	MESSAGE	      Hyperparameter optimisation: SMBO iteration 2: summary score: 0.5256; validation optimisation score: 0.5256; auc_roc: 0.7628; sign_size: 6; n_boost: 0.6898036152126; learning_rate: -2.74927535480291; lambda: 3; alpha: 1; tree_depth: 1; sample_size: 0.581001449204065; min_child_weight: 0; gamma: -3
+2023-03-12 03:05:41	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:05:49	MESSAGE	      Hyperparameter optimisation: SMBO iteration 3: summary score: 0.5159; validation optimisation score: 0.5159; auc_roc: 0.7580; sign_size: 4; n_boost: 1; learning_rate: -3; lambda: 3; alpha: 1.17968240363605; tree_depth: 1; sample_size: 0.7; min_child_weight: 0.00536133736532; gamma: -3
+2023-03-12 03:07:08	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:07:15	MESSAGE	      Hyperparameter optimisation: SMBO iteration 4: summary score: 0.5127; validation optimisation score: 0.5127; auc_roc: 0.7563; sign_size: 4; n_boost: 1; learning_rate: -3; lambda: 3; alpha: 1.17968240363605; tree_depth: 1; sample_size: 0.7; min_child_weight: 0.00536133736532; gamma: -3
+2023-03-12 03:08:38	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:08:44	MESSAGE	      Hyperparameter optimisation: SMBO iteration 5: summary score: 0.5117; validation optimisation score: 0.5117; auc_roc: 0.7559; sign_size: 7; n_boost: 0.775300932143447; learning_rate: -2.85923580238028; lambda: 2.68369692191703; alpha: 0.339761755123447; tree_depth: 1; sample_size: 0.773092684761219; min_child_weight: 0; gamma: -3.47765462815008
+2023-03-12 03:10:10	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:10:18	MESSAGE	      Hyperparameter optimisation: SMBO iteration 6: summary score: 0.5089; validation optimisation score: 0.5089; auc_roc: 0.7544; sign_size: 4; n_boost: 0.875897120544393; learning_rate: -1.67180358845311; lambda: 2.22074155432798; alpha: 1.17968240363605; tree_depth: 1; sample_size: 0.7; min_child_weight: 0.00536133736532; gamma: -4.6936515323518
+2023-03-12 03:11:42	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:11:49	MESSAGE	      Hyperparameter optimisation: SMBO iteration 7: summary score: 0.5045; validation optimisation score: 0.5045; auc_roc: 0.7522; sign_size: 7; n_boost: 0.626869769802434; learning_rate: -4.8548124744417; lambda: -1.53696300831749; alpha: 1.13720373770639; tree_depth: 1; sample_size: 0.769986697216872; min_child_weight: 0.0739206990963847; gamma: -4.337385864314
+2023-03-12 03:11:49	MESSAGE	    Hyperparameter optimisation: Optimisation stopped early as convergence was achieved.
+2023-03-12 03:11:49	MESSAGE	    Hyperparameter optimisation: A suitable set of hyperparameters was identified: summary score: 0.5045; validation optimisation score: 0.5045; auc_roc: 0.7522; sign_size: 7; n_boost: 0.626869769802434; learning_rate: -4.8548124744417; lambda: -1.53696300831749; alpha: 1.13720373770639; tree_depth: 1; sample_size: 0.769986697216872; min_child_weight: 0.0739206990963847; gamma: -4.337385864314
+2023-03-12 03:11:50	MESSAGE	
+2023-03-12 03:11:50	MESSAGE	    Starting hyperparameter optimisation for data subsample 5 of 10.
+2023-03-12 03:11:50	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-12 03:11:50	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-12 03:11:50	MESSAGE	      Utility is measured as expected improvement.
+2023-03-12 03:11:56	MESSAGE	      Computing variable importance for 20 bootstraps.
+2023-03-12 03:13:16	MESSAGE	      Compute initial model performance based on 100 hyperparameter sets.
+2023-03-12 03:14:25	MESSAGE	      Hyperparameter optimisation: Initialisation complete: summary score: 0.4974; validation optimisation score: 0.4974; auc_roc: 0.7487; sign_size: 5; n_boost: 0; learning_rate: -3; lambda: -3; alpha: 1; tree_depth: 1; sample_size: 0.7; min_child_weight: 0; gamma: -3
+2023-03-12 03:15:03	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:15:10	MESSAGE	      Hyperparameter optimisation: SMBO iteration 1: summary score: 0.4300; validation optimisation score: 0.4300; auc_roc: 0.7150; sign_size: 10; n_boost: 2; learning_rate: -3; lambda: -1; alpha: 1; tree_depth: 1; sample_size: 1; min_child_weight: 1; gamma: -3
+2023-03-12 03:16:03	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:16:10	MESSAGE	      Hyperparameter optimisation: SMBO iteration 2: summary score: 0.4643; validation optimisation score: 0.4643; auc_roc: 0.7321; sign_size: 7; n_boost: 0.0502324205361588; learning_rate: -3.21633567654887; lambda: -3.36491674970877; alpha: 1; tree_depth: 1; sample_size: 0.808399136686555; min_child_weight: 0.198047348211645; gamma: -3.02652117800947
+2023-03-12 03:17:10	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:17:16	MESSAGE	      Hyperparameter optimisation: SMBO iteration 3: summary score: 0.4830; validation optimisation score: 0.4830; auc_roc: 0.7415; sign_size: 3; n_boost: 2.30718996981159; learning_rate: -4.85440358752385; lambda: -5.64439438213594; alpha: 1.34240531665273; tree_depth: 2; sample_size: 0.428858701736522; min_child_weight: 0.611549274530262; gamma: -1.90031625889242
+2023-03-12 03:18:19	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:18:26	MESSAGE	      Hyperparameter optimisation: SMBO iteration 4: summary score: 0.5180; validation optimisation score: 0.5180; auc_roc: 0.7590; sign_size: 4; n_boost: 2.12562934529217; learning_rate: -4.85440358752385; lambda: -5.64439438213594; alpha: 1.34240531665273; tree_depth: 2; sample_size: 0.54375789709336; min_child_weight: 0.611549274530262; gamma: -1.90031625889242
+2023-03-12 03:19:37	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:19:44	MESSAGE	      Hyperparameter optimisation: SMBO iteration 5: summary score: 0.5533; validation optimisation score: 0.5533; auc_roc: 0.7767; sign_size: 3; n_boost: 1.97260193760805; learning_rate: -4.57796837850238; lambda: -4.77228335142543; alpha: 1.14603886515012; tree_depth: 1; sample_size: 0.48710945798621; min_child_weight: 0.43171981637276; gamma: -1.90031625889242
+2023-03-12 03:21:11	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:21:19	MESSAGE	      Hyperparameter optimisation: SMBO iteration 6: summary score: 0.5560; validation optimisation score: 0.5560; auc_roc: 0.7780; sign_size: 4; n_boost: 2.12562934529217; learning_rate: -4.97757315708194; lambda: -1.23275671791069; alpha: 1.14736740902775; tree_depth: 2; sample_size: 0.54375789709336; min_child_weight: 0.611549274530262; gamma: -1.90031625889242
+2023-03-12 03:23:02	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:23:10	MESSAGE	      Hyperparameter optimisation: SMBO iteration 7: summary score: 0.5558; validation optimisation score: 0.5558; auc_roc: 0.7779; sign_size: 3; n_boost: 1.61025467375952; learning_rate: -4.97757315708194; lambda: -0.601849035521275; alpha: 1.14736740902775; tree_depth: 4; sample_size: 0.594277840709775; min_child_weight: 0.354734494659867; gamma: -3.67338489602397
+2023-03-12 03:24:25	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:24:39	MESSAGE	      Hyperparameter optimisation: SMBO iteration 8: summary score: 0.5523; validation optimisation score: 0.5523; auc_roc: 0.7762; sign_size: 2; n_boost: 1.90779693274161; learning_rate: -4.81078509218969; lambda: -1.40584719868118; alpha: 1.31749211661248; tree_depth: 4; sample_size: 0.600032109591356; min_child_weight: 0.199992276955296; gamma: -3.67338489602397
+2023-03-12 03:26:04	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:26:19	MESSAGE	      Hyperparameter optimisation: SMBO iteration 9: summary score: 0.5556; validation optimisation score: 0.5556; auc_roc: 0.7778; sign_size: 2; n_boost: 1.90779693274161; learning_rate: -4.89797021045986; lambda: -1.40584719868118; alpha: 1.31749211661248; tree_depth: 5; sample_size: 0.600032109591356; min_child_weight: 0.186176026027473; gamma: -5.23710401124686
+2023-03-12 03:26:19	MESSAGE	    Hyperparameter optimisation: Optimisation stopped early as convergence was achieved.
+2023-03-12 03:26:20	MESSAGE	    Hyperparameter optimisation: A suitable set of hyperparameters was identified: summary score: 0.5556; validation optimisation score: 0.5556; auc_roc: 0.7778; sign_size: 2; n_boost: 1.90779693274161; learning_rate: -4.89797021045986; lambda: -1.40584719868118; alpha: 1.31749211661248; tree_depth: 5; sample_size: 0.600032109591356; min_child_weight: 0.186176026027473; gamma: -5.23710401124686
+2023-03-12 03:26:20	MESSAGE	
+2023-03-12 03:26:20	MESSAGE	    Starting hyperparameter optimisation for data subsample 6 of 10.
+2023-03-12 03:26:20	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-12 03:26:20	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-12 03:26:20	MESSAGE	      Utility is measured as expected improvement.
+2023-03-12 03:26:26	MESSAGE	      Computing variable importance for 20 bootstraps.
+2023-03-12 03:27:39	MESSAGE	      Compute initial model performance based on 100 hyperparameter sets.
+2023-03-12 03:28:38	MESSAGE	      Hyperparameter optimisation: Initialisation complete: summary score: 0.4568; validation optimisation score: 0.4568; auc_roc: 0.7284; sign_size: 5; n_boost: 1; learning_rate: -1; lambda: 3; alpha: -1; tree_depth: 7; sample_size: 0.5; min_child_weight: 0; gamma: -6
+2023-03-12 03:29:08	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:29:18	MESSAGE	      Hyperparameter optimisation: SMBO iteration 1: summary score: 0.4318; validation optimisation score: 0.4318; auc_roc: 0.7159; sign_size: 5; n_boost: 1; learning_rate: -1; lambda: 3; alpha: -1; tree_depth: 7; sample_size: 0.5; min_child_weight: 0; gamma: -6
+2023-03-12 03:30:04	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:30:12	MESSAGE	      Hyperparameter optimisation: SMBO iteration 2: summary score: 0.4361; validation optimisation score: 0.4361; auc_roc: 0.7180; sign_size: 2; n_boost: 1; learning_rate: -1; lambda: 3; alpha: -1; tree_depth: 7; sample_size: 0.5; min_child_weight: 0; gamma: -6
+2023-03-12 03:31:00	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:31:14	MESSAGE	      Hyperparameter optimisation: SMBO iteration 3: summary score: 0.4304; validation optimisation score: 0.4304; auc_roc: 0.7152; sign_size: 2; n_boost: 1; learning_rate: -1; lambda: 3; alpha: -1; tree_depth: 8; sample_size: 0.5; min_child_weight: 0; gamma: -6
+2023-03-12 03:32:10	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:32:19	MESSAGE	      Hyperparameter optimisation: SMBO iteration 4: summary score: 0.5259; validation optimisation score: 0.5259; auc_roc: 0.7629; sign_size: 4; n_boost: 1.6884374658211; learning_rate: -1.79740422579207; lambda: 3; alpha: 1.06068818003686; tree_depth: 6; sample_size: 0.463975912886019; min_child_weight: 0; gamma: -6
+2023-03-12 03:33:29	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:33:43	MESSAGE	      Hyperparameter optimisation: SMBO iteration 5: summary score: 0.5370; validation optimisation score: 0.5370; auc_roc: 0.7685; sign_size: 2; n_boost: 1.6884374658211; learning_rate: -2.19289397670501; lambda: 3; alpha: 1.30929638230686; tree_depth: 5; sample_size: 0.671485402166035; min_child_weight: 0; gamma: -5.46169418722622
+2023-03-12 03:34:47	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:34:57	MESSAGE	      Hyperparameter optimisation: SMBO iteration 6: summary score: 0.5371; validation optimisation score: 0.5371; auc_roc: 0.7685; sign_size: 2; n_boost: 1.6884374658211; learning_rate: -2.19289397670501; lambda: 3; alpha: 1.30929638230686; tree_depth: 5; sample_size: 0.671485402166035; min_child_weight: 0; gamma: -5.46169418722622
+2023-03-12 03:35:46	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:35:55	MESSAGE	      Hyperparameter optimisation: SMBO iteration 7: summary score: 0.5292; validation optimisation score: 0.5292; auc_roc: 0.7646; sign_size: 2; n_boost: 1.6884374658211; learning_rate: -2.19289397670501; lambda: 3; alpha: 1.30929638230686; tree_depth: 5; sample_size: 0.671485402166035; min_child_weight: 0; gamma: -5.46169418722622
+2023-03-12 03:36:46	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:36:56	MESSAGE	      Hyperparameter optimisation: SMBO iteration 8: summary score: 0.5433; validation optimisation score: 0.5433; auc_roc: 0.7717; sign_size: 2; n_boost: 1.3252690735276; learning_rate: -1.79740422579207; lambda: 2.41851883048767; alpha: 1.30929638230686; tree_depth: 7; sample_size: 0.722845627292356; min_child_weight: 0.012383134097254; gamma: -6
+2023-03-12 03:37:47	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:37:54	MESSAGE	      Hyperparameter optimisation: SMBO iteration 9: summary score: 0.5454; validation optimisation score: 0.5454; auc_roc: 0.7727; sign_size: 2; n_boost: 1.3252690735276; learning_rate: -1.79740422579207; lambda: 2.41851883048767; alpha: 1.30929638230686; tree_depth: 7; sample_size: 0.722845627292356; min_child_weight: 0.012383134097254; gamma: -6
+2023-03-12 03:38:57	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:39:05	MESSAGE	      Hyperparameter optimisation: SMBO iteration 10: summary score: 0.5373; validation optimisation score: 0.5373; auc_roc: 0.7686; sign_size: 2; n_boost: 1.3252690735276; learning_rate: -1.79740422579207; lambda: 2.41851883048767; alpha: 1.30929638230686; tree_depth: 7; sample_size: 0.722845627292356; min_child_weight: 0.012383134097254; gamma: -6
+2023-03-12 03:40:07	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:40:16	MESSAGE	      Hyperparameter optimisation: SMBO iteration 11: summary score: 0.5400; validation optimisation score: 0.5400; auc_roc: 0.7700; sign_size: 2; n_boost: 1.3252690735276; learning_rate: -1.28113141920503; lambda: 2.41851883048767; alpha: 1.30929638230686; tree_depth: 7; sample_size: 0.722845627292356; min_child_weight: 0.012383134097254; gamma: -4.77662795694058
+2023-03-12 03:41:35	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:41:44	MESSAGE	      Hyperparameter optimisation: SMBO iteration 12: summary score: 0.5367; validation optimisation score: 0.5367; auc_roc: 0.7683; sign_size: 2; n_boost: 1.3252690735276; learning_rate: -1.79740422579207; lambda: 2.41851883048767; alpha: 1.30929638230686; tree_depth: 7; sample_size: 0.722845627292356; min_child_weight: 0.012383134097254; gamma: -6
+2023-03-12 03:41:44	MESSAGE	    Hyperparameter optimisation: Optimisation stopped early as convergence was achieved.
+2023-03-12 03:41:45	MESSAGE	    Hyperparameter optimisation: A suitable set of hyperparameters was identified: summary score: 0.5367; validation optimisation score: 0.5367; auc_roc: 0.7683; sign_size: 2; n_boost: 1.3252690735276; learning_rate: -1.79740422579207; lambda: 2.41851883048767; alpha: 1.30929638230686; tree_depth: 7; sample_size: 0.722845627292356; min_child_weight: 0.012383134097254; gamma: -6
+2023-03-12 03:41:45	MESSAGE	
+2023-03-12 03:41:45	MESSAGE	    Starting hyperparameter optimisation for data subsample 7 of 10.
+2023-03-12 03:41:45	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-12 03:41:45	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-12 03:41:45	MESSAGE	      Utility is measured as expected improvement.
+2023-03-12 03:41:51	MESSAGE	      Computing variable importance for 20 bootstraps.
+2023-03-12 03:43:05	MESSAGE	      Compute initial model performance based on 100 hyperparameter sets.
+2023-03-12 03:44:07	MESSAGE	      Hyperparameter optimisation: Initialisation complete: summary score: 0.3860; validation optimisation score: 0.3860; auc_roc: 0.6930; sign_size: 10; n_boost: 2; learning_rate: -3; lambda: -6; alpha: 1; tree_depth: 7; sample_size: 0.3; min_child_weight: 1; gamma: -3
+2023-03-12 03:44:45	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:44:57	MESSAGE	      Hyperparameter optimisation: SMBO iteration 1: summary score: 0.4027; validation optimisation score: 0.4027; auc_roc: 0.7014; sign_size: 11; n_boost: 2; learning_rate: -1.56981212707923; lambda: -3.57924957973293; alpha: 0.0829913264556836; tree_depth: 7; sample_size: 0.43293248726817; min_child_weight: 1.12638885412143; gamma: -3
+2023-03-12 03:45:52	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:46:04	MESSAGE	      Hyperparameter optimisation: SMBO iteration 2: summary score: 0.4023; validation optimisation score: 0.4023; auc_roc: 0.7012; sign_size: 10; n_boost: 2; learning_rate: -1.56981212707923; lambda: -3.57924957973293; alpha: 0.879339217374354; tree_depth: 7; sample_size: 0.3; min_child_weight: 1; gamma: -3
+2023-03-12 03:47:14	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:47:26	MESSAGE	      Hyperparameter optimisation: SMBO iteration 3: summary score: 0.4664; validation optimisation score: 0.4664; auc_roc: 0.7332; sign_size: 4; n_boost: 1.10630881693214; learning_rate: -4.23009497113526; lambda: -5.6886892975308; alpha: 0.845517609966919; tree_depth: 7; sample_size: 0.332854899609658; min_child_weight: 0.577412378974259; gamma: -5.32401213445701
+2023-03-12 03:48:42	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:48:52	MESSAGE	      Hyperparameter optimisation: SMBO iteration 4: summary score: 0.4150; validation optimisation score: 0.4150; auc_roc: 0.7075; sign_size: 4; n_boost: 1.10630881693214; learning_rate: -4.23009497113526; lambda: -5.6886892975308; alpha: 0.845517609966919; tree_depth: 7; sample_size: 0.332854899609658; min_child_weight: 0.577412378974259; gamma: -5.32401213445701
+2023-03-12 03:49:42	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:49:54	MESSAGE	      Hyperparameter optimisation: SMBO iteration 5: summary score: 0.3983; validation optimisation score: 0.3983; auc_roc: 0.6991; sign_size: 3; n_boost: 0.00539942714385688; learning_rate: -0.654697035206482; lambda: -5.91744208848104; alpha: -0.864159818273038; tree_depth: 1; sample_size: 0.702066991727374; min_child_weight: 0.373327223584056; gamma: -1.7823574966751
+2023-03-12 03:51:03	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:51:17	MESSAGE	      Hyperparameter optimisation: SMBO iteration 6: summary score: 0.3972; validation optimisation score: 0.3972; auc_roc: 0.6986; sign_size: 10; n_boost: 2; learning_rate: -1.56981212707923; lambda: -3.57924957973293; alpha: 1; tree_depth: 7; sample_size: 0.3; min_child_weight: 1; gamma: -3
+2023-03-12 03:52:14	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:52:34	MESSAGE	      Hyperparameter optimisation: SMBO iteration 7: summary score: 0.3947; validation optimisation score: 0.3947; auc_roc: 0.6974; sign_size: 10; n_boost: 2; learning_rate: -1.75607364616151; lambda: -4.56270894343751; alpha: -0.199564122123538; tree_depth: 5; sample_size: 0.409456059854782; min_child_weight: 1.11699245763808; gamma: -3
+2023-03-12 03:53:33	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:53:59	MESSAGE	      Hyperparameter optimisation: SMBO iteration 8: summary score: 0.4245; validation optimisation score: 0.4245; auc_roc: 0.7123; sign_size: 6; n_boost: 2.96510318594899; learning_rate: -4.09777689521861; lambda: -5.52385288807514; alpha: -2.78810226570831; tree_depth: 4; sample_size: 0.947462247342909; min_child_weight: 1.53321537892443; gamma: -4.1941534950105
+2023-03-12 03:55:09	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:55:28	MESSAGE	      Hyperparameter optimisation: SMBO iteration 9: summary score: 0.4160; validation optimisation score: 0.4160; auc_roc: 0.7080; sign_size: 4; n_boost: 2.96510318594899; learning_rate: -4.09777689521861; lambda: -5.52385288807514; alpha: -2.78810226570831; tree_depth: 4; sample_size: 0.947462247342909; min_child_weight: 1.53321537892443; gamma: -3.96439568561784
+2023-03-12 03:56:43	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:57:01	MESSAGE	      Hyperparameter optimisation: SMBO iteration 10: summary score: 0.4156; validation optimisation score: 0.4156; auc_roc: 0.7078; sign_size: 4; n_boost: 2.8868810246156; learning_rate: -4.05734823318198; lambda: -5.93876630603336; alpha: -2.56583187118312; tree_depth: 4; sample_size: 0.91624320585; min_child_weight: 1.53321537892443; gamma: -5.67163188437149
+2023-03-12 03:58:17	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 03:58:39	MESSAGE	      Hyperparameter optimisation: SMBO iteration 11: summary score: 0.4158; validation optimisation score: 0.4158; auc_roc: 0.7079; sign_size: 4; n_boost: 2.8868810246156; learning_rate: -4.05734823318198; lambda: -5.93876630603336; alpha: -2.5745927040084; tree_depth: 6; sample_size: 0.91624320585; min_child_weight: 1.53321537892443; gamma: -5.49024882330442
+2023-03-12 03:59:39	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:00:00	MESSAGE	      Hyperparameter optimisation: SMBO iteration 12: summary score: 0.4158; validation optimisation score: 0.4158; auc_roc: 0.7079; sign_size: 4; n_boost: 2.8868810246156; learning_rate: -4.05734823318198; lambda: -5.93876630603336; alpha: -2.56583187118312; tree_depth: 6; sample_size: 0.91624320585; min_child_weight: 1.53321537892443; gamma: -5.49024882330442
+2023-03-12 04:00:00	MESSAGE	    Hyperparameter optimisation: Optimisation stopped early as convergence was achieved.
+2023-03-12 04:00:00	MESSAGE	    Hyperparameter optimisation: A suitable set of hyperparameters was identified: summary score: 0.4158; validation optimisation score: 0.4158; auc_roc: 0.7079; sign_size: 4; n_boost: 2.8868810246156; learning_rate: -4.05734823318198; lambda: -5.93876630603336; alpha: -2.56583187118312; tree_depth: 6; sample_size: 0.91624320585; min_child_weight: 1.53321537892443; gamma: -5.49024882330442
+2023-03-12 04:00:01	MESSAGE	
+2023-03-12 04:00:01	MESSAGE	    Starting hyperparameter optimisation for data subsample 8 of 10.
+2023-03-12 04:00:01	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-12 04:00:01	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-12 04:00:01	MESSAGE	      Utility is measured as expected improvement.
+2023-03-12 04:00:07	MESSAGE	      Computing variable importance for 20 bootstraps.
+2023-03-12 04:01:26	MESSAGE	      Compute initial model performance based on 100 hyperparameter sets.
+2023-03-12 04:02:33	MESSAGE	      Hyperparameter optimisation: Initialisation complete: summary score: 0.3910; validation optimisation score: 0.3910; auc_roc: 0.6955; sign_size: 5; n_boost: 0; learning_rate: -1; lambda: -3; alpha: -6; tree_depth: 1; sample_size: 0.5; min_child_weight: 0; gamma: -3
+2023-03-12 04:03:02	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:03:12	MESSAGE	      Hyperparameter optimisation: SMBO iteration 1: summary score: 0.3744; validation optimisation score: 0.3744; auc_roc: 0.6872; sign_size: 10; n_boost: 0.499095339670893; learning_rate: -2; lambda: -2.81798606296431; alpha: -2.42383375604633; tree_depth: 2; sample_size: 0.702008239781134; min_child_weight: 0.3486247901688; gamma: -3.14240589324132
+2023-03-12 04:04:14	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:04:27	MESSAGE	      Hyperparameter optimisation: SMBO iteration 2: summary score: 0.3623; validation optimisation score: 0.3623; auc_roc: 0.6811; sign_size: 12; n_boost: 2.2913090516547; learning_rate: -0.387104384322756; lambda: -1; alpha: -3.37172726634179; tree_depth: 1; sample_size: 0.502575764739552; min_child_weight: 0.900166186628227; gamma: -5.27271774782362
+2023-03-12 04:05:20	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:05:40	MESSAGE	      Hyperparameter optimisation: SMBO iteration 3: summary score: 0.3779; validation optimisation score: 0.3779; auc_roc: 0.6890; sign_size: 6; n_boost: 2.88908793940209; learning_rate: -1.09911610605195; lambda: 0.862371804658324; alpha: -0.858953304821625; tree_depth: 5; sample_size: 0.255663634535306; min_child_weight: 1.05755217047408; gamma: -2.6660993064288
+2023-03-12 04:06:34	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:06:49	MESSAGE	      Hyperparameter optimisation: SMBO iteration 4: summary score: 0.3986; validation optimisation score: 0.3986; auc_roc: 0.6993; sign_size: 8; n_boost: 1.32678792587085; learning_rate: -1.62571696379118; lambda: -5.07511898057687; alpha: -5.4240310380701; tree_depth: 10; sample_size: 0.734085774504459; min_child_weight: 1.41748821455985; gamma: -3.9551978243793
+2023-03-12 04:07:51	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:07:58	MESSAGE	      Hyperparameter optimisation: SMBO iteration 5: summary score: 0.4100; validation optimisation score: 0.4100; auc_roc: 0.7050; sign_size: 8; n_boost: 1.32678792587085; learning_rate: -1.62571696379118; lambda: -5.35779750741016; alpha: -3.78785612283514; tree_depth: 9; sample_size: 0.746205091555537; min_child_weight: 1.41748821455985; gamma: -3.9551978243793
+2023-03-12 04:09:08	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:09:19	MESSAGE	      Hyperparameter optimisation: SMBO iteration 6: summary score: 0.4041; validation optimisation score: 0.4041; auc_roc: 0.7020; sign_size: 8; n_boost: 1.32678792587085; learning_rate: -3.41121444532259; lambda: -5.35779750741016; alpha: -3.14440022159646; tree_depth: 10; sample_size: 0.589268774356808; min_child_weight: 1.32419914598009; gamma: -3.94826037294016
+2023-03-12 04:10:28	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:10:38	MESSAGE	      Hyperparameter optimisation: SMBO iteration 7: summary score: 0.4143; validation optimisation score: 0.4143; auc_roc: 0.7072; sign_size: 8; n_boost: 1.32678792587085; learning_rate: -3.72202547356922; lambda: -5.85142954872202; alpha: -3.14440022159646; tree_depth: 8; sample_size: 0.589268774356808; min_child_weight: 1.32419914598009; gamma: -3.94826037294016
+2023-03-12 04:11:56	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:12:19	MESSAGE	      Hyperparameter optimisation: SMBO iteration 8: summary score: 0.4156; validation optimisation score: 0.4156; auc_roc: 0.7078; sign_size: 9; n_boost: 1.3066697754596; learning_rate: -4.90029326544352; lambda: -5.2141231410484; alpha: -2.71170109845283; tree_depth: 6; sample_size: 0.537606580946213; min_child_weight: 1.33233714544414; gamma: -5.42959550820433
+2023-03-12 04:13:42	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:13:51	MESSAGE	      Hyperparameter optimisation: SMBO iteration 9: summary score: 0.4008; validation optimisation score: 0.4008; auc_roc: 0.7004; sign_size: 8; n_boost: 1.42927017376664; learning_rate: -3.68089238311283; lambda: -5.85142954872202; alpha: -2.04843148015352; tree_depth: 7; sample_size: 0.589268774356808; min_child_weight: 1.32419914598009; gamma: -4.69478995456571
+2023-03-12 04:15:26	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:15:34	MESSAGE	      Hyperparameter optimisation: SMBO iteration 10: summary score: 0.4191; validation optimisation score: 0.4191; auc_roc: 0.7096; sign_size: 9; n_boost: 1.52520703754981; learning_rate: -3.6209697750538; lambda: -5.85142954872202; alpha: -2.04843148015352; tree_depth: 8; sample_size: 0.514103651254519; min_child_weight: 1.32419914598009; gamma: -5.7460994180838
+2023-03-12 04:17:15	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:17:24	MESSAGE	      Hyperparameter optimisation: SMBO iteration 11: summary score: 0.4023; validation optimisation score: 0.4023; auc_roc: 0.7012; sign_size: 11; n_boost: 1.37929184469975; learning_rate: -4.72854432386603; lambda: -4.95644678061424; alpha: -0.87444820363787; tree_depth: 7; sample_size: 0.535219129872771; min_child_weight: 1.32419914598009; gamma: -4.49035321899972
+2023-03-12 04:18:45	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:18:55	MESSAGE	      Hyperparameter optimisation: SMBO iteration 12: summary score: 0.3972; validation optimisation score: 0.3972; auc_roc: 0.6986; sign_size: 12; n_boost: 1.37929184469975; learning_rate: -3.58921429541053; lambda: -4.95644678061424; alpha: 0.328878287449755; tree_depth: 7; sample_size: 0.535219129872771; min_child_weight: 1.32419914598009; gamma: -4.49035321899972
+2023-03-12 04:20:02	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:20:15	MESSAGE	      Hyperparameter optimisation: SMBO iteration 13: summary score: 0.3956; validation optimisation score: 0.3956; auc_roc: 0.6978; sign_size: 8; n_boost: 1.32678792587085; learning_rate: -3.68089238311283; lambda: -5.85142954872202; alpha: -2.04843148015352; tree_depth: 7; sample_size: 0.589268774356808; min_child_weight: 1.32419914598009; gamma: -4.69478995456571
+2023-03-12 04:21:03	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:21:11	MESSAGE	      Hyperparameter optimisation: SMBO iteration 14: summary score: 0.4042; validation optimisation score: 0.4042; auc_roc: 0.7021; sign_size: 9; n_boost: 1.67821437756787; learning_rate: -3.65883199602581; lambda: -5.85142954872202; alpha: -2.04843148015352; tree_depth: 7; sample_size: 0.627295104121219; min_child_weight: 1.37202181904459; gamma: -4.13698717867608
+2023-03-12 04:21:27	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:21:39	MESSAGE	      Hyperparameter optimisation: SMBO iteration 15: summary score: 0.4103; validation optimisation score: 0.4103; auc_roc: 0.7051; sign_size: 9; n_boost: 2.16419129581789; learning_rate: -3.76010125135853; lambda: -5.85142954872202; alpha: -2.04843148015352; tree_depth: 7; sample_size: 0.627295104121219; min_child_weight: 1.37202181904459; gamma: -4.13698717867608
+2023-03-12 04:22:00	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:22:17	MESSAGE	      Hyperparameter optimisation: SMBO iteration 16: summary score: 0.4017; validation optimisation score: 0.4017; auc_roc: 0.7009; sign_size: 9; n_boost: 2.54045720507462; learning_rate: -3.76010125135853; lambda: -5.85142954872202; alpha: -2.04843148015352; tree_depth: 7; sample_size: 0.579760558789094; min_child_weight: 1.34975593651349; gamma: -4.13698717867608
+2023-03-12 04:22:29	MESSAGE	      Intensify step 1 using 4 challenger hyperparameter sets.
+2023-03-12 04:22:34	MESSAGE	      Hyperparameter optimisation: SMBO iteration 17: summary score: 0.4011; validation optimisation score: 0.4011; auc_roc: 0.7006; sign_size: 9; n_boost: 2.54045720507462; learning_rate: -3.76010125135853; lambda: -5.85142954872202; alpha: -2.04843148015352; tree_depth: 7; sample_size: 0.627295104121219; min_child_weight: 1.37202181904459; gamma: -4.13698717867608
+2023-03-12 04:22:45	MESSAGE	      Intensify step 1 using 4 challenger hyperparameter sets.
+2023-03-12 04:22:51	MESSAGE	      Hyperparameter optimisation: SMBO iteration 18: summary score: 0.3987; validation optimisation score: 0.3987; auc_roc: 0.6993; sign_size: 9; n_boost: 2.54045720507462; learning_rate: -3.76010125135853; lambda: -5.85142954872202; alpha: -2.04843148015352; tree_depth: 7; sample_size: 0.579760558789094; min_child_weight: 1.37202181904459; gamma: -4.13698717867608
+2023-03-12 04:22:51	MESSAGE	    Hyperparameter optimisation: Optimisation stopped early as convergence was achieved.
+2023-03-12 04:22:51	MESSAGE	    Hyperparameter optimisation: A suitable set of hyperparameters was identified: summary score: 0.3987; validation optimisation score: 0.3987; auc_roc: 0.6993; sign_size: 9; n_boost: 2.54045720507462; learning_rate: -3.76010125135853; lambda: -5.85142954872202; alpha: -2.04843148015352; tree_depth: 7; sample_size: 0.579760558789094; min_child_weight: 1.37202181904459; gamma: -4.13698717867608
+2023-03-12 04:22:51	MESSAGE	
+2023-03-12 04:22:51	MESSAGE	    Starting hyperparameter optimisation for data subsample 9 of 10.
+2023-03-12 04:22:51	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-12 04:22:51	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-12 04:22:51	MESSAGE	      Utility is measured as expected improvement.
+2023-03-12 04:22:57	MESSAGE	      Computing variable importance for 20 bootstraps.
+2023-03-12 04:24:06	MESSAGE	      Compute initial model performance based on 100 hyperparameter sets.
+2023-03-12 04:25:15	MESSAGE	      Hyperparameter optimisation: Initialisation complete: summary score: 0.3967; validation optimisation score: 0.3967; auc_roc: 0.6984; sign_size: 10; n_boost: 3; learning_rate: -3; lambda: -6; alpha: 1; tree_depth: 1; sample_size: 0.5; min_child_weight: 0; gamma: -1
+2023-03-12 04:25:49	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:26:22	MESSAGE	      Hyperparameter optimisation: SMBO iteration 1: summary score: 0.4236; validation optimisation score: 0.4236; auc_roc: 0.7118; sign_size: 10; n_boost: 3; learning_rate: -3; lambda: -6; alpha: 1; tree_depth: 1; sample_size: 0.5; min_child_weight: 0; gamma: -1
+2023-03-12 04:27:06	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:27:34	MESSAGE	      Hyperparameter optimisation: SMBO iteration 2: summary score: 0.4648; validation optimisation score: 0.4648; auc_roc: 0.7324; sign_size: 10; n_boost: 3; learning_rate: -3; lambda: -6; alpha: 1; tree_depth: 1; sample_size: 0.5; min_child_weight: 0; gamma: -1
+2023-03-12 04:28:27	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:28:57	MESSAGE	      Hyperparameter optimisation: SMBO iteration 3: summary score: 0.4639; validation optimisation score: 0.4639; auc_roc: 0.7319; sign_size: 10; n_boost: 3; learning_rate: -3; lambda: -6; alpha: 1; tree_depth: 1; sample_size: 0.5; min_child_weight: 0; gamma: -1
+2023-03-12 04:28:57	MESSAGE	    Hyperparameter optimisation: Optimisation stopped early as convergence was achieved.
+2023-03-12 04:28:57	MESSAGE	    Hyperparameter optimisation: A suitable set of hyperparameters was identified: summary score: 0.4639; validation optimisation score: 0.4639; auc_roc: 0.7319; sign_size: 10; n_boost: 3; learning_rate: -3; lambda: -6; alpha: 1; tree_depth: 1; sample_size: 0.5; min_child_weight: 0; gamma: -1
+2023-03-12 04:28:58	MESSAGE	
+2023-03-12 04:28:58	MESSAGE	    Starting hyperparameter optimisation for data subsample 10 of 10.
+2023-03-12 04:28:58	MESSAGE	      Hyperparameter optimisation is conducted using the auc_roc metric by maximising out-of-bag performance.
+2023-03-12 04:28:58	MESSAGE	      Candidate hyperparameter sets after the initial run are selected after inferring utility using a localised approximate Gaussian Process.
+2023-03-12 04:28:58	MESSAGE	      Utility is measured as expected improvement.
+2023-03-12 04:29:04	MESSAGE	      Computing variable importance for 20 bootstraps.
+2023-03-12 04:30:11	MESSAGE	      Compute initial model performance based on 100 hyperparameter sets.
+2023-03-12 04:31:11	MESSAGE	      Hyperparameter optimisation: Initialisation complete: summary score: 0.3543; validation optimisation score: 0.3543; auc_roc: 0.6771; sign_size: 5; n_boost: 0; learning_rate: -1; lambda: -3; alpha: 1; tree_depth: 1; sample_size: 1; min_child_weight: 0; gamma: -3
+2023-03-12 04:31:43	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:31:50	MESSAGE	      Hyperparameter optimisation: SMBO iteration 1: summary score: 0.4063; validation optimisation score: 0.4063; auc_roc: 0.7031; sign_size: 4; n_boost: 0; learning_rate: -2; lambda: 3; alpha: -1.83315861750027; tree_depth: 7; sample_size: 0.7; min_child_weight: 0; gamma: -6
+2023-03-12 04:32:50	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:33:31	MESSAGE	      Hyperparameter optimisation: SMBO iteration 2: summary score: 0.4477; validation optimisation score: 0.4477; auc_roc: 0.7239; sign_size: 4; n_boost: 0; learning_rate: -2; lambda: 3; alpha: -1.83315861750027; tree_depth: 7; sample_size: 0.7; min_child_weight: 0; gamma: -6
+2023-03-12 04:34:15	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:34:24	MESSAGE	      Hyperparameter optimisation: SMBO iteration 3: summary score: 0.3862; validation optimisation score: 0.3862; auc_roc: 0.6931; sign_size: 4; n_boost: 0; learning_rate: -2; lambda: 3; alpha: -1.83315861750027; tree_depth: 7; sample_size: 0.7; min_child_weight: 0; gamma: -6
+2023-03-12 04:35:10	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:35:20	MESSAGE	      Hyperparameter optimisation: SMBO iteration 4: summary score: 0.4009; validation optimisation score: 0.4009; auc_roc: 0.7005; sign_size: 2; n_boost: 0.302376919713447; learning_rate: -1.23452724370526; lambda: 3; alpha: -1.91475747333643; tree_depth: 9; sample_size: 0.533766238475164; min_child_weight: 0.120356750685117; gamma: -5.61578179477567
+2023-03-12 04:36:17	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:36:25	MESSAGE	      Hyperparameter optimisation: SMBO iteration 5: summary score: 0.4093; validation optimisation score: 0.4093; auc_roc: 0.7046; sign_size: 2; n_boost: 0.302376919713447; learning_rate: -1.23452724370526; lambda: 3; alpha: -1.91475747333643; tree_depth: 9; sample_size: 0.533766238475164; min_child_weight: 0.120356750685117; gamma: -5.61578179477567
+2023-03-12 04:37:41	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:37:55	MESSAGE	      Hyperparameter optimisation: SMBO iteration 6: summary score: 0.4063; validation optimisation score: 0.4063; auc_roc: 0.7032; sign_size: 7; n_boost: 0.527676596073434; learning_rate: -4.72338373889215; lambda: 1.96017121410394; alpha: 0.232326486842197; tree_depth: 2; sample_size: 0.65707527659418; min_child_weight: 0.157139194203199; gamma: -4.29929140893132
+2023-03-12 04:39:13	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:39:25	MESSAGE	      Hyperparameter optimisation: SMBO iteration 7: summary score: 0.4673; validation optimisation score: 0.4673; auc_roc: 0.7336; sign_size: 7; n_boost: 0.527676596073434; learning_rate: -4.72338373889215; lambda: 1.96017121410394; alpha: 0.232326486842197; tree_depth: 2; sample_size: 0.65707527659418; min_child_weight: 0.157139194203199; gamma: -4.29929140893132
+2023-03-12 04:40:36	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:40:48	MESSAGE	      Hyperparameter optimisation: SMBO iteration 8: summary score: 0.4266; validation optimisation score: 0.4266; auc_roc: 0.7133; sign_size: 2; n_boost: 0.889728032321719; learning_rate: -2.60705095470518; lambda: 2.80296802734943; alpha: 0.442285898982811; tree_depth: 7; sample_size: 0.74060623488985; min_child_weight: 0.0489374429486503; gamma: -5.10105560486875
+2023-03-12 04:42:00	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:42:07	MESSAGE	      Hyperparameter optimisation: SMBO iteration 9: summary score: 0.4335; validation optimisation score: 0.4335; auc_roc: 0.7168; sign_size: 2; n_boost: 0.889728032321719; learning_rate: -2.60705095470518; lambda: 2.80296802734943; alpha: 0.442285898982811; tree_depth: 7; sample_size: 0.74060623488985; min_child_weight: 0.0489374429486503; gamma: -5.10105560486875
+2023-03-12 04:43:18	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:43:26	MESSAGE	      Hyperparameter optimisation: SMBO iteration 10: summary score: 0.4167; validation optimisation score: 0.4167; auc_roc: 0.7084; sign_size: 8; n_boost: 0.108723017345081; learning_rate: -4.68221317168377; lambda: 2.132398059469; alpha: 0.232326486842197; tree_depth: 5; sample_size: 0.630833145264963; min_child_weight: 0.456095208226537; gamma: -3.03611790197315
+2023-03-12 04:44:38	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:44:46	MESSAGE	      Hyperparameter optimisation: SMBO iteration 11: summary score: 0.4043; validation optimisation score: 0.4043; auc_roc: 0.7021; sign_size: 7; n_boost: 0.527676596073434; learning_rate: -4.72338373889215; lambda: 1.96017121410394; alpha: 0.232326486842197; tree_depth: 2; sample_size: 0.65707527659418; min_child_weight: 0.157139194203199; gamma: -4.29929140893132
+2023-03-12 04:46:00	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:46:10	MESSAGE	      Hyperparameter optimisation: SMBO iteration 12: summary score: 0.3997; validation optimisation score: 0.3997; auc_roc: 0.6999; sign_size: 7; n_boost: 0.877846857333651; learning_rate: -2; lambda: 2.82811663371688; alpha: 1.1964886482308; tree_depth: 5; sample_size: 0.588393171691378; min_child_weight: 0; gamma: -5.74499868435628
+2023-03-12 04:47:22	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:47:29	MESSAGE	      Hyperparameter optimisation: SMBO iteration 13: summary score: 0.3978; validation optimisation score: 0.3978; auc_roc: 0.6989; sign_size: 2; n_boost: 0.82994286149033; learning_rate: -2.60705095470518; lambda: 2.80296802734943; alpha: 1.12857559066396; tree_depth: 7; sample_size: 0.945025569706409; min_child_weight: 0.413519309857328; gamma: -5.10105560486875
+2023-03-12 04:48:30	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:48:36	MESSAGE	      Hyperparameter optimisation: SMBO iteration 14: summary score: 0.4813; validation optimisation score: 0.4813; auc_roc: 0.7407; sign_size: 2; n_boost: 0.82994286149033; learning_rate: -2.60705095470518; lambda: 2.80296802734943; alpha: 1.12857559066396; tree_depth: 7; sample_size: 0.945025569706409; min_child_weight: 0.413519309857328; gamma: -5.10105560486875
+2023-03-12 04:49:37	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:49:45	MESSAGE	      Hyperparameter optimisation: SMBO iteration 15: summary score: 0.3978; validation optimisation score: 0.3978; auc_roc: 0.6989; sign_size: 3; n_boost: 0.625374983138705; learning_rate: -3.985370223807; lambda: 2.33223462430178; alpha: 1.12857559066396; tree_depth: 7; sample_size: 0.940719486294955; min_child_weight: 0.413519309857328; gamma: -4.89124659650452
+2023-03-12 04:50:44	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:50:53	MESSAGE	      Hyperparameter optimisation: SMBO iteration 16: summary score: 0.4784; validation optimisation score: 0.4784; auc_roc: 0.7392; sign_size: 3; n_boost: 0.625374983138705; learning_rate: -3.985370223807; lambda: 2.33223462430178; alpha: 1.12857559066396; tree_depth: 7; sample_size: 0.940719486294955; min_child_weight: 0.413519309857328; gamma: -4.89124659650452
+2023-03-12 04:51:59	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:52:10	MESSAGE	      Hyperparameter optimisation: SMBO iteration 17: summary score: 0.4284; validation optimisation score: 0.4284; auc_roc: 0.7142; sign_size: 5; n_boost: 0.625374983138705; learning_rate: -3.42168617161993; lambda: 1.90391096678288; alpha: 0.901444411681008; tree_depth: 7; sample_size: 0.940719486294955; min_child_weight: 0.413519309857328; gamma: -4.89124659650452
+2023-03-12 04:53:09	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:53:18	MESSAGE	      Hyperparameter optimisation: SMBO iteration 18: summary score: 0.4250; validation optimisation score: 0.4250; auc_roc: 0.7125; sign_size: 5; n_boost: 0.625374983138705; learning_rate: -3.42168617161993; lambda: 1.90391096678288; alpha: 0.901444411681008; tree_depth: 7; sample_size: 0.940719486294955; min_child_weight: 0.413519309857328; gamma: -4.89124659650452
+2023-03-12 04:54:18	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:54:25	MESSAGE	      Hyperparameter optimisation: SMBO iteration 19: summary score: 0.4202; validation optimisation score: 0.4202; auc_roc: 0.7101; sign_size: 4; n_boost: 0.448832979760771; learning_rate: -4.22144418443709; lambda: 2.33223462430178; alpha: 0.849911552858802; tree_depth: 6; sample_size: 0.942240855565298; min_child_weight: 0.369230141474257; gamma: -4.89124659650452
+2023-03-12 04:55:26	MESSAGE	      Intensify step 1 using 20 challenger hyperparameter sets.
+2023-03-12 04:55:39	MESSAGE	      Hyperparameter optimisation: SMBO iteration 20: summary score: 0.4600; validation optimisation score: 0.4600; auc_roc: 0.7300; sign_size: 4; n_boost: 0.448832979760771; learning_rate: -4.22144418443709; lambda: 2.33223462430178; alpha: 0.849911552858802; tree_depth: 6; sample_size: 0.942240855565298; min_child_weight: 0.369230141474257; gamma: -4.89124659650452
+2023-03-12 04:55:39	MESSAGE	    Hyperparameter optimisation: A suitable set of hyperparameters was identified: summary score: 0.4600; validation optimisation score: 0.4600; auc_roc: 0.7300; sign_size: 4; n_boost: 0.448832979760771; learning_rate: -4.22144418443709; lambda: 2.33223462430178; alpha: 0.849911552858802; tree_depth: 6; sample_size: 0.942240855565298; min_child_weight: 0.369230141474257; gamma: -4.89124659650452
+2023-03-12 04:55:39	MESSAGE	
+2023-03-12 04:55:39	MESSAGE	  Hyperparameter optimisation: Completed parameter optimisation for the xgboost_tree learner, based on variable importances from the elastic_net variable importance method.
+2023-03-12 04:56:45	MESSAGE	Model building: model building using "xgboost_tree" learner, based on "elastic_net" feature selection, has been completed.
+2023-03-12 04:56:46	MESSAGE	
+Evaluation: Creating ensemble models from individual models.
+2023-03-12 04:56:49	MESSAGE	
+Evaluation: Processing data to create familiarData objects.
+2023-03-12 04:56:49	MESSAGE	  
+Evaluation: Processing dataset 1 of 2.
+2023-03-12 04:56:51	MESSAGE	    Computing pairwise similarity between features.
+2023-03-12 04:56:51	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model as a whole. Computation is parallelised over bootstraps.
+2023-03-12 04:56:52	MESSAGE	    Computing pairwise similarity between samples.
+2023-03-12 04:56:52	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model as a whole. Computation is parallelised over bootstraps.
+2023-03-12 04:57:55	MESSAGE	    Extracting variable importance obtained during feature selection.
+2023-03-12 04:57:56	MESSAGE	    Extracting variable importance obtained from the models.
+2023-03-12 04:57:56	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model from the 10 underlying models. 
+2023-03-12 04:57:58	MESSAGE	    Computing permutation variable importance for models in the dataset.
+2023-03-12 04:57:58	MESSAGE	      Computing the bias-corrected estimate with confidence interval of the value(s) of interest for the ensemble model from the 10 underlying models. 40 bootstrap samples are obtained for each model (total: 400). Computation is parallelised over models.
+2023-03-12 05:03:55	MESSAGE	    Compute feature expression.
+2023-03-12 05:03:56	MESSAGE	    Extracting univariate analysis information.
+2023-03-12 05:03:57	MESSAGE	    Extracting hyperparameters from the models in the ensemble.
+2023-03-12 05:03:57	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model from the 10 underlying models. 
+2023-03-12 05:03:59	MESSAGE	    Computing ensemble predictions for the dataset.
+2023-03-12 05:03:59	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model as a whole. Computation is parallelised over bootstraps.
+2023-03-12 05:04:05	MESSAGE	    Computing model performance metrics on the dataset.
+2023-03-12 05:04:05	MESSAGE	      Computing the bias-corrected estimate with confidence interval of the value(s) of interest for the ensemble model from the 10 underlying models. 40 bootstrap samples are obtained for each model (total: 400). Computation is parallelised over models.
+2023-03-12 05:04:18	MESSAGE	    Computing data for decision curve analysis.
+2023-03-12 05:04:18	MESSAGE	      Computing the bias-corrected estimate with confidence interval of the value(s) of interest for the ensemble model from the 10 underlying models. 40 bootstrap samples are obtained for each model (total: 400). Computation is parallelised over models.
+2023-03-12 05:05:03	MESSAGE	    Assessing model calibration.
+2023-03-12 05:05:03	MESSAGE	      Computing the bias-corrected estimate with confidence interval of the value(s) of interest for the ensemble model from the 10 underlying models. 40 bootstrap samples are obtained for each model (total: 400). Computation is parallelised over models.
+2023-03-12 05:07:50	MESSAGE	    Computing receiver-operating characteristic curves.
+2023-03-12 05:07:50	MESSAGE	      Computing the bias-corrected estimate with confidence interval of the value(s) of interest for the ensemble model from the 10 underlying models. 40 bootstrap samples are obtained for each model (total: 400). Computation is parallelised over models.
+2023-03-12 05:09:22	MESSAGE	    Computing confusion matrix.
+2023-03-12 05:09:22	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model as a whole. Computation is parallelised over bootstraps.
+2023-03-12 05:09:26	MESSAGE	    Computing individual conditional expectation and partial dependence data for features in the dataset.
+2023-03-12 05:09:26	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model as a whole. Computation is parallelised over bootstraps.
+2023-03-12 05:24:22	MESSAGE	  Evaluation: familiarData object 20230312003958_xgboost_tree_elastic_net_1_1_pool_1_1_development_data was created.
+2023-03-12 05:24:22	MESSAGE	  
+Evaluation: Processing dataset 2 of 2.
+2023-03-12 05:24:24	MESSAGE	    Computing pairwise similarity between features.
+2023-03-12 05:24:24	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model as a whole. Computation is parallelised over bootstraps.
+2023-03-12 05:24:25	MESSAGE	    Computing pairwise similarity between samples.
+2023-03-12 05:24:25	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model as a whole. Computation is parallelised over bootstraps.
+2023-03-12 05:25:29	MESSAGE	    Extracting variable importance obtained during feature selection.
+2023-03-12 05:25:30	MESSAGE	    Extracting variable importance obtained from the models.
+2023-03-12 05:25:30	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model from the 10 underlying models. 
+2023-03-12 05:25:32	MESSAGE	    Computing permutation variable importance for models in the dataset.
+2023-03-12 05:25:32	MESSAGE	      Computing the bias-corrected estimate with confidence interval of the value(s) of interest for the ensemble model from the 10 underlying models. 40 bootstrap samples are obtained for each model (total: 400). Computation is parallelised over models.
+2023-03-12 05:31:05	MESSAGE	    Compute feature expression.
+2023-03-12 05:31:06	MESSAGE	    Extracting univariate analysis information.
+2023-03-12 05:31:07	MESSAGE	    Extracting hyperparameters from the models in the ensemble.
+2023-03-12 05:31:07	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model from the 10 underlying models. 
+2023-03-12 05:31:08	MESSAGE	    Computing ensemble predictions for the dataset.
+2023-03-12 05:31:08	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model as a whole. Computation is parallelised over bootstraps.
+2023-03-12 05:31:13	MESSAGE	    Computing model performance metrics on the dataset.
+2023-03-12 05:31:13	MESSAGE	      Computing the bias-corrected estimate with confidence interval of the value(s) of interest for the ensemble model from the 10 underlying models. 40 bootstrap samples are obtained for each model (total: 400). Computation is parallelised over models.
+2023-03-12 05:31:25	MESSAGE	    Computing data for decision curve analysis.
+2023-03-12 05:31:25	MESSAGE	      Computing the bias-corrected estimate with confidence interval of the value(s) of interest for the ensemble model from the 10 underlying models. 40 bootstrap samples are obtained for each model (total: 400). Computation is parallelised over models.
+2023-03-12 05:32:09	MESSAGE	    Assessing model calibration.
+2023-03-12 05:32:10	MESSAGE	      Computing the bias-corrected estimate with confidence interval of the value(s) of interest for the ensemble model from the 10 underlying models. 40 bootstrap samples are obtained for each model (total: 400). Computation is parallelised over models.
+2023-03-12 05:34:13	MESSAGE	    Computing receiver-operating characteristic curves.
+2023-03-12 05:34:13	MESSAGE	      Computing the bias-corrected estimate with confidence interval of the value(s) of interest for the ensemble model from the 10 underlying models. 40 bootstrap samples are obtained for each model (total: 400). Computation is parallelised over models.
+2023-03-12 05:35:33	MESSAGE	    Computing confusion matrix.
+2023-03-12 05:35:33	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model as a whole. Computation is parallelised over bootstraps.
+2023-03-12 05:35:36	MESSAGE	    Computing individual conditional expectation and partial dependence data for features in the dataset.
+2023-03-12 05:35:36	MESSAGE	      Computing the point estimate of the value(s) of interest for the ensemble model as a whole. Computation is parallelised over bootstraps.
+2023-03-12 05:50:34	MESSAGE	  Evaluation: familiarData object 20230312003958_xgboost_tree_elastic_net_1_1_pool_1_1_validation_data was created.
+2023-03-12 05:50:34	MESSAGE	
+Evaluation: Creating collection pooled_data
+2023-03-12 05:50:48	MESSAGE	
+Evaluation: Exporting data from collection pooled_data

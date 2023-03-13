@@ -12,3 +12,15 @@ _targets.yaml
 *.hdf5
 
 weaning.Rproj
+
+train_xgboost/familiar_collections/
+
+train_xgboost/familiar_data/
+
+train_xgboost/variable_importance/
+
+train_xgboost/results/
+
+train_xgboost/20230312003958_feature_info.RDS
+
+train_xgboost/20230312003958_iterations.RDS

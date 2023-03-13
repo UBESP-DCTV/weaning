@@ -22,7 +22,7 @@ cost_matrix <- matrix(
 
 # metrics
 clap <- function(data, truth, estimate, na_rm = TRUE, ...) {
-  require(rlang)
+
   estimate <- data |> select({{estimate}}) |> simplify()
   truth <- data |> select({{truth}}) |> simplify()
 
@@ -31,21 +31,21 @@ clap <- function(data, truth, estimate, na_rm = TRUE, ...) {
     na.rm = na_rm
   ) / length(estimate)
 
-  return( tribble(
+  tibble::tribble(
     ~.metric,      ~.estimator,    ~.estimate,
     "CLAP Score",  "element-wise", score
-  ))
+  )
 }
 
 clap <- yardstick::new_class_metric(clap, "maximize")
 
-require(yardstick)
+
 multi_metric <- yardstick::metric_set(
   #accuracy,
-  bal_accuracy,
-  mcc,
-  #clap,
-  precision,
-  recall,
-  npv
+  yardstick::bal_accuracy,
+  yardstick::mcc,
+  clap,
+  yardstick::precision,
+  yardstick::recall,
+  yardstick::npv
 )
