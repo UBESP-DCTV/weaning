@@ -45,8 +45,7 @@ tar_visnetwork(TRUE, exclude = starts_with("gg") | contains("Plot"))
 
 ```{r}
 baseline <- tar_read(pt_names) |>
-  select("id_univoco", "type", "sesso", "anni_eta", "reason",
-         "vm_inizio", "vm_fine") |>
+  select("id_univoco", "type", "sesso", "anni_eta", "bmi", "ibw", "saps", "reason", "vm_inizio", "vm_fine") |>
   mutate(reason = reason |>
            fct_recode(
              "Sepsis" = "Sepsi",
@@ -58,6 +57,7 @@ baseline <- tar_read(pt_names) |>
              "Trauma - Polytrauma" = "Trauma - Politrauma"
              # ARDS doesn't need recoding
            ))
+
 daily <- tar_read(pt_registry) |>
   select("id_univoco", "type", "data_lettura", "giorno_studio", 
          "sbt") |>
@@ -70,7 +70,7 @@ daily <- tar_read(pt_registry) |>
            as.character() |>
            fct_recode(
              "Already extubated" = "-1",
-             "Readiness Testing failure" = "0",
+             "SBT not attempted" = "0",
              "SBT success" = "1",
              "SBT failure" = "2"
            )
@@ -86,7 +86,10 @@ baseline |>
     label = list( type ~ "Ventilation mode",
                   sesso ~ "Gender",
                   anni_eta ~ "Age (years)",
-                  reason ~ "Reason for MV")
+                  reason ~ "Reason for MV",
+                  bmi ~ "BMI",
+                  ibw ~ "Ideal Body Weight",
+                  saps ~ "SAPS score")
   )
 ```
 
@@ -105,7 +108,22 @@ baseline |>
 ## Giorni nello studio
 
 ```{r}
-daily |>
+daily_first <- tar_read(pt_registry) |>
+    dplyr::select(
+      sofa, susp_tot, dplyr::starts_with("ega_")
+    )  |>
+  tbl_summary(
+    label = list(
+      ega_ph ~ "EGA pH",
+      ega_pao2 ~ "EGA PaO2",
+      ega_paco2 ~ "EGA PaCO2",
+      sofa ~ "SOFA score",
+      susp_tot ~ "Readiness Testing score"
+    ),
+    digits =  ega_ph ~ 2
+  )
+
+daily_second <- daily |>
   group_by(id_univoco) |>
   summarise(giorno_finale = max(giorno_studio)) |>
   select(giorno_finale) |>
@@ -113,6 +131,50 @@ daily |>
     label = giorno_finale ~ "Day of study",
     statistic = ~ "{median}  (range: {min}, {max})  (IQR: {p25}, {p75})",
     # digits = ~ 2
+  )
+
+tbl_stack(list(daily_first, daily_second))
+```
+
+TRD MV data
+
+```{r}
+trd <- tar_read(weaningsTRD)
+
+trd |>
+  select(-c("id_univoco", "file", "date", "ora",
+      "stress_index", "et_co2_percent", "eliminazione_co2_corrente_ml",
+      "eliminazione_co2_minuto_ml_min", "elastanza_cm_h2o_l",
+      "resistenza_esp_cm_h2o_l_s", "resistenza_inspiratoria_cm_h2o_l_s",
+      "press_di_pausa_vie_aeree_cm_h2o", "compliance_statica_ml_cm_h2o",
+      "perdita_percentuale_percent", "et_co2_mm_hg")) |>
+  rename(
+    "dynamic characteristics" = "caratteristiche_dinamiche_ml_cm_h2o",
+    "end-expiratory flow" = "flusso_di_fine_esp_l_min",
+    "positive end-expiratory flow" = "pressione_di_fine_esp_cm_h2o",
+    "minute expired volume" = "vol_minuto_espirato_l_min",
+    "current expired volume" = "vol_corrente_espirato_ml",                   
+    "O2 saturation %" = "concentraz_o2_percent",
+    "minute inspired volume" = "vol_minuto_inspirato_l_min",                 
+    "current inspired volume" = "vol_corrente_inspirato_ml",
+    "mean airway pressure" = "press_media_vie_aeree_cm_h2o",               
+    "measured respiratory rate" = "frequenza_respiraz_misurata_resp_min",
+    "sponteneous respiratory rate" = "freq_spontanea_resp_min",      
+    "Edi peak" = "picco_edi_m_v",
+    "Edi min" = "edi_min_m_v",                             
+    "plateau pressure" = "press_di_picco_delle_vie_aeree_cm_h2o",
+    "backup switches" = "passa_a_backup_min",                         
+    "backup percent" = "backup_percent_min",
+    "P 0.1" = "p_0_1_cm_h2o",                               
+    "mechanical ventilator respiratory work" =
+      "lavoro_respiratorio_del_ventilatore_joule_l",
+    "patient ventilator respiratory work" = "lavoro_respiratorio_del_paziente_joule_l",   
+    "spontaneous breathing index" = "sbi",
+    "spontaneous minute expired volume" = "volume_minuto_espirato_spontaneo_l_min"     
+  ) |>
+  tbl_summary(
+    digits = ~ 2,
+    missing = "no"
   )
 ```
 
