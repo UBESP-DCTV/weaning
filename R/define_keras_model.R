@@ -52,15 +52,15 @@ define_keras_model <- function(
       name = "trd_l1.1",
       return_sequences = TRUE
     )) |>
-    # keras::bidirectional(keras::layer_conv_lstm_1d(
-    #   filters = rec_units,
-    #   kernel_size = crnn_kernel_size,
-    #   padding = "same",
-    #   dropout = rec_do,
-    #   recurrent_dropout = rec_do,
-    #   name = "trd_l1.2",
-    #   return_sequences = TRUE
-    # )) |>
+    keras::bidirectional(keras::layer_conv_lstm_1d(
+      filters = floor(rec_units/2),
+      kernel_size = crnn_kernel_size,
+      padding = "same",
+      dropout = rec_do,
+      recurrent_dropout = rec_do,
+      name = "trd_l1.2",
+      return_sequences = TRUE
+    )) |>
     keras::bidirectional(keras::layer_conv_lstm_1d(
       filters = rec_units,
       kernel_size = crnn_kernel_size,
@@ -82,13 +82,13 @@ define_keras_model <- function(
       name = "merged_l3.1",
       return_sequences = TRUE
     )) |>
-    # keras::bidirectional(keras::layer_gru(
-    #   units = rec_units,
-    #   dropout = rec_do,
-    #   recurrent_dropout = rec_do,
-    #   name = "merged_l3.2",
-    #   return_sequences = TRUE
-    # )) |>
+    keras::bidirectional(keras::layer_gru(
+      units = rec_units,
+      dropout = rec_do,
+      recurrent_dropout = rec_do,
+      name = "merged_l3.2",
+      return_sequences = TRUE
+    )) |>
     keras::bidirectional(keras::layer_gru(
       units = rec_units,
       dropout = rec_do,
