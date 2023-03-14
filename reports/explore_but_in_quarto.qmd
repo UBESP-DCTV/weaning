@@ -12,13 +12,17 @@ editor: visual
 ## Preliminary preprocessing
 
 ```{r}
+
+library(keras)
 library(tidyverse)
 library(gtsummary)
 library(targets)
 library(yardstick)
 # install.packages("familiar", dependencies = TRUE)
 library(familiar)
-#source("R/evaluation.R")
+list.files(here("R"), pattern = "\\.R", full.names = TRUE) |>
+  lapply(source) |>
+  invisible()
 
 test_ids <- tar_read(idsTest)
 
@@ -29,6 +33,11 @@ daily <- tar_read(pt_registry) |>
   filter(sbt != -1)
 trd <- tar_read(weaningsTRD) |>
   mutate( test_set = id_univoco %in% test_ids)
+
+a <- trd |> filter(test_set) |> select(date, id_univoco)|> distinct() 
+b <- daily |> filter(test_set) |> mutate(date = data_lettura) |> select(date, id_univoco)|> distinct() 
+
+inner_join(a, b)
 ```
 
 ## Test set check
@@ -59,9 +68,19 @@ observed <- daily |>
   filter(test_set == TRUE) |>
   select(sbt) |>
   unlist()
+giorno_studio <- daily |>
+  filter(test_set == TRUE) |>
+  select(giorno_studio) |>
+  unlist()
+patient <- daily |>
+  filter(test_set == TRUE) |>
+  select(id_univoco) |>
+  unlist()
 
 pred_obs <- tibble(
   observed,
+  giorno_studio,
+  patient,
   pred0 = rep_len(0, length.out = length(observed)),
   pred1 = rep_len(1, length.out = length(observed)),
   pred2 = rep_len(2, length.out = length(observed))
@@ -181,7 +200,7 @@ model5 <- train_familiar(
 After being trained, model can be retrieved from memory to obtain predicitons
 
 ```{r}
-xgb_model <- readRDS("C:/R/weaning/train_xgboost/trained_models/xgboost_tree/elastic_net/20230312003958_xgboost_tree_elastic_net_1_1_ensemble.RDS")
+xgb_model <- readRDS(here::here("train_xgboost/trained_models/xgboost_tree/elastic_net/20230312003958_xgboost_tree_elastic_net_1_1_ensemble.RDS"))
 
 xgb_preds <- familiar::predict(
   xgb_model,
@@ -254,26 +273,25 @@ metric_table |>
   )
 ```
 
-## Keras models TEST (do not use)
+## Keras models TEST
 
-```{r, eval = FALSE}
-library(keras)
-
+```{r}
 # Load model
-e19a78 <- load_model_hdf5("C:/R/weaning/models/models_epoch-19_acc_0.78.hdf5", custom_objects = NULL, compile = TRUE)
+e15a79 <- load_model_hdf5(here::here("models/models_epoch-15_acc_0.79.hdf5"), custom_objects = NULL, compile = TRUE)
 
 # Preparing test data
 batch_size <- 32
 ids_test <- tar_read(idsTest)
 db_test_raw <- tar_read(dbTest)
+db_trval <- tar_read(dbTrVal)
 
 #this is a temporary approximatrion, appropriate validation coefficients from selected model should be used
-means_baseline <- get_means(db_test_raw, "baseline")
-means_daily <- get_means(db_test_raw, "daily")
-means_trd <- get_means(db_test_raw, "trd")
-sd_baseline <- get_sd(db_test_raw, "baseline")
-sd_daily <- get_sd(db_test_raw, "daily")
-sd_trd <- get_sd(db_test_raw, "trd")
+means_baseline <- get_means(db_trval, "baseline")
+means_daily <- get_means(db_trval, "daily")
+means_trd <- get_means(db_trval, "trd")
+sd_baseline <- get_sd(db_trval, "baseline")
+sd_daily <- get_sd(db_trval, "daily")
+sd_trd <- get_sd(db_trval, "trd")
 
 db_test <- db_test_raw |>
   normalize_baseline(means_baseline, sd_baseline) |>
@@ -287,7 +305,7 @@ test_n_batches <- db_test |>
 
 # Predict
 preds <- predict(
-  object = e19a78,
+  object = e15a79,
   x = test_generator,
   batch_size = batch_size,
   steps = test_n_batches
@@ -296,7 +314,31 @@ preds <- predict(
 obs <- tar_read(dbTest) |> 
   purrr::map("out") |> 
   unlist()#use.names = FALSE)
-table(apply(preds, 1, which.max)-1, obs)
+
+t <- table(apply(preds, 1, which.max)-1, obs) #[c(1,3,2),c(1,3,2)]
+
+sum(t*cost_matrix, na.rm = TRUE) / sum((!is.na(cost_matrix) & cost_matrix != 0 ) *t)
+```
+
+```{r}
+pred_obs <- pred_obs |>
+  mutate(pred_test = apply(preds, 1, which.max)-1, obs) |>
+  dplyr::mutate(
+    dplyr::across(
+      dplyr::everything(),
+      ~ factor(.x, levels = c(0,1,2))
+  ))
+
+metric_table <- metric_table |>
+  left_join(
+      multi_metric(
+        data = pred_obs,
+        truth = observed,
+        estimate = pred_test,
+        estimator = "macro_weighted"
+      ) |> rename("AI model" = ".estimate"),
+    by = NULL
+  )
 ```
 
 Obtain prediction from validation instead
@@ -383,19 +425,38 @@ obs_pred <- tar_read(dbTest) |>
   ) |>
   dplyr::filter(patient %in% pt_ids) 
 
-obs_pred |>
+pred_obs |>
   dplyr::mutate(
-    correct = observed == predicted,
+    #correct = observed == predicted,
+    predicted = xgb_preds,
+    suggested  = predicted,
     across(c(observed, predicted),
       ~ .x |> 
         as.character() |>
         forcats::fct_recode(
-          "invasive MV" = "0",
-          "invasive MV" = "2",
-          "Successful MV Stop" = "1"
+          # "invasive MV" = "0",
+          # "invasive MV" = "2",
+          # "Successful MV Stop" = "1"
+          "SBT n.a" = "0",
+          "SBT ok" = "1",
+          "SBT fail" = "2"
         ) |>
-        forcats::fct_relevel(c("invasive MV",
-                               "Successful MV Stop"))
+        forcats::fct_relevel(
+          #c("invasive MV", "Successful MV Stop")
+          c("SBT n.a","SBT fail", "SBT ok")
+        )
+      ),
+    across(c(suggested),
+      ~ .x |> 
+        as.character() |>
+        forcats::fct_recode(
+          "continue MV" = "0",
+          "continue MV" = "2",
+          "SBT" = "1"
+        ) |>
+        forcats::fct_relevel(
+          c("continue MV", "SBT")
+        )
       )
     ) |>
   ggplot(aes( x = giorno_studio)) +
@@ -410,7 +471,7 @@ obs_pred |>
     size = 5) +
   geom_point(aes(
     y = predicted,
-    color = predicted),
+    color = suggested),
     size = 2) +
   facet_wrap(~patient, scales = "free_x") +
   scale_color_brewer(palette = "Dark2", direction=-1) +
@@ -419,7 +480,8 @@ obs_pred |>
     x = "Days of study",
     y = "",
     color = "AI Model suggestion"
-  )
+  ) +
+  theme(legend.position = "top")
 ```
 
 ## 
