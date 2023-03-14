@@ -215,8 +215,9 @@ list(
                  y = susp_tot)) +
       geom_point(alpha = 0) +
       geom_smooth() +
-      labs( title = "Trend di readiness allo SBT",
-            subtitle = "all'aumentare dei giorni di ventilazione")
+      labs( title = "Spontaneous Breathing Trial Readiness Test",
+            y = "Readiness Testing sum of parameters",
+            x = "Consecutive days of Mechanical Ventilation")
     ggExtra::ggMarginal(p, fill = "light blue")
   }),
 

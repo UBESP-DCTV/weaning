@@ -34,7 +34,10 @@ gg_test_check <- function(
 
   # continuous variables melt
   baseline_cont <- baseline |>
-    dplyr::select(anni_eta, bmi, ibw, saps, test_set) |>
+    dplyr::select(anni_eta, bmi, ibw, saps, test_set)|>
+    dplyr::rename(
+      "age" = "anni_eta"
+    ) |>
     tidyr::pivot_longer(
       cols = 1:4,
       names_to = "predictor",
@@ -43,7 +46,10 @@ gg_test_check <- function(
     )
 
   daily_cont <- daily |>
-    dplyr::select(sofa, starts_with("ega_"), susp_tot, test_set) |>
+    dplyr::select(sofa, starts_with("ega_"), susp_tot, test_set)|>
+    dplyr::rename(
+      "Readiness Test" = "susp_tot"
+    ) |>
     tidyr::pivot_longer(
       cols = 1:5,
       names_to = "predictor",
@@ -59,6 +65,9 @@ gg_test_check <- function(
     dplyr::select(
       giorno_finale,
       test_set) |>
+    dplyr::rename(
+      "max days" = "giorno_finale"
+    ) |>
     tidyr::pivot_longer(
       cols = 1,
       names_to = "predictor",
@@ -76,8 +85,32 @@ gg_test_check <- function(
       -starts_with("compliance"),
       -starts_with("perdita"),
       -stress_index,
+      pressione_di_fine_esp_cm_h2o,
       test_set
     ) |>
+    dplyr::rename(
+      "dynamic characteristics" = "caratteristiche_dinamiche_ml_cm_h2o",
+      "end-expiratory flow" = "flusso_di_fine_esp_l_min",
+      "positive end-expiratory flow" = "pressione_di_fine_esp_cm_h2o",
+      "minute expired volume" = "vol_minuto_espirato_l_min",
+      "current expired volume" = "vol_corrente_espirato_ml",
+      "O2 saturation %" = "concentraz_o2_percent",
+      "minute inspired volume" = "vol_minuto_inspirato_l_min",
+      "current inspired volume" = "vol_corrente_inspirato_ml",
+      "mean airway pressure" = "press_media_vie_aeree_cm_h2o",
+      "measured respiratory rate" = "frequenza_respiraz_misurata_resp_min",
+      "sponteneous respiratory rate" = "freq_spontanea_resp_min",
+      "Edi peak" = "picco_edi_m_v",
+      "Edi min" = "edi_min_m_v",
+      "plateau pressure" = "press_di_picco_delle_vie_aeree_cm_h2o",
+      "backup switches" = "passa_a_backup_min",
+      "backup percent" = "backup_percent_min",
+      "P 0.1" = "p_0_1_cm_h2o",
+      "mechanical ventilator respiratory work" = "lavoro_respiratorio_del_ventilatore_joule_l",
+      "patient ventilator respiratory work" = "lavoro_respiratorio_del_paziente_joule_l",
+      "spontaneous breathing index" = "sbi",
+      "spontaneous minute expired volume" = "volume_minuto_espirato_spontaneo_l_min"
+      ) |>
     tidyr::pivot_longer(
       cols = 1:20,
       names_to = "predictor",
@@ -94,7 +127,10 @@ gg_test_check <- function(
 
   # categorical variables melt
   baseline_cat <- baseline |>
-    dplyr::select(type, sesso, reason, test_set) |>
+    dplyr::select(type, sesso, reason, test_set)|>
+    dplyr::rename(
+      "sex" = "sesso"
+    ) |>
     dplyr::mutate(
       reason = reason |>
         forcats::fct_recode(
@@ -150,7 +186,7 @@ cont_plot <- function(db) {
   db |>
     ggplot2::ggplot(
       ggplot2::aes(value, fill = test_set)) +
-    ggplot2::geom_density(alpha = 0.5) +
+    ggplot2::geom_density(alpha = 0.33) +
     ggplot2::facet_wrap(
       ~predictor,
       scales = "free",

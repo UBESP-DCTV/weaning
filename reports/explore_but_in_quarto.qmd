@@ -20,7 +20,7 @@ library(targets)
 library(yardstick)
 # install.packages("familiar", dependencies = TRUE)
 library(familiar)
-list.files(here("R"), pattern = "\\.R", full.names = TRUE) |>
+list.files(here::here("R"), pattern = "\\.R", full.names = TRUE) |>
   lapply(source) |>
   invisible()
 
@@ -53,7 +53,7 @@ inner_join(a, b)
 New version (density plot)
 
 ```{r}
-tar_read(test_set_check)
+tar_make(test_set_check)
 ```
 
 ## Dummy models
