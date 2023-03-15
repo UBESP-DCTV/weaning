@@ -26,10 +26,12 @@ clap <- function(data, truth, estimate, na_rm = TRUE, ...) {
   estimate <- data |> select({{estimate}}) |> simplify()
   truth <- data |> select({{truth}}) |> simplify()
 
+  table <- table(estimate, truth)
+
   score <- sum(
-    table(estimate, truth) * cost_matrix,
+    table * cost_matrix,
     na.rm = na_rm
-  ) / length(estimate)
+  ) / sum(table * !is.na(cost_matrix))
 
   tibble::tribble(
     ~.metric,      ~.estimator,    ~.estimate,

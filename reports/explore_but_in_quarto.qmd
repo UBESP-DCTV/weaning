@@ -266,9 +266,10 @@ Metric display all at once
 
 ```{r}
 metric_table |>
+  select(-.estimator) |>
   gt::gt() |>
   gt::fmt_number(
-    columns = 3:8,
+    columns = 2:8,
     decimals = 2
   )
 ```
@@ -317,7 +318,18 @@ obs <- tar_read(dbTest) |>
 
 t <- table(apply(preds, 1, which.max)-1, obs) #[c(1,3,2),c(1,3,2)]
 
-sum(t*cost_matrix, na.rm = TRUE) / sum((!is.na(cost_matrix) & cost_matrix != 0 ) *t)
+ai_score <- sum(
+    t * cost_matrix,
+    na.rm = TRUE
+  ) / sum(t * !is.na(cost_matrix))
+
+metric_table <- metric_table |>
+  left_join(
+      tibble::tribble(
+        ~.metric,      ~.estimator,    ~.estimate,
+        "CLAP Score",  "element-wise", ai_score
+      ) |> rename("AI model" = ".estimate")
+  )
 ```
 
 ```{r}
