@@ -53,7 +53,7 @@ inner_join(a, b)
 New version (density plot)
 
 ```{r}
-tar_make(test_set_check)
+tar_read(testSetCheck)
 ```
 
 ## Dummy models

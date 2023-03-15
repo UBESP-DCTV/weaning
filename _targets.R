@@ -377,13 +377,14 @@ list(
   ),
 
   tar_target(
-    test_set_check,
+    testSetCheck,
     gg_test_check(
       idsTest,
       pt_names,
       pt_registry,
       weaningsTRD
-    )
+    ),
+    format = "qs"
   ),
 
   tar_target(dbTest, filter_db_ids(trainArraysByDays, idsTest)),
@@ -399,7 +400,7 @@ list(
                daily = pt_registry |>
                  mutate( test_set = id_univoco %in% idsTest))),
 
-  tar_target(xgb_model, build_xgb_model(dailydata)),
+  tar_target(xgb_model, build_xgb_model(dailydata))
 
 
 # report ----------------------------------------------------------
@@ -416,11 +417,6 @@ list(
 #     minireport_tesi,
 #     here("reports/minireport_tesi.qmd")
 #   )
-
-  tar_quarto(
-    minireport_tesi,
-    here("reports/minireport_tesi.qmd")
-  )
 
 # objects to share -------------------------------------------------
   # tar_target(

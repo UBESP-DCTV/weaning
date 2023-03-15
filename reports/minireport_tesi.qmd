@@ -43,7 +43,11 @@ library(networkD3)
 e i targets
 
 ```{r}
-tar_visnetwork(TRUE, exclude = starts_with("gg") | contains("Plot"))
+tar_visnetwork(
+  TRUE,
+  exclude = starts_with("gg") | contains("Plot"),
+  outdated = FALSE
+)
 ```
 
 ```{r}
