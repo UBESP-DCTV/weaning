@@ -391,7 +391,7 @@ list(
   tar_target(dbTrVal, filter_db_ids(trainArraysByDays, idsTrVal)),
 
   tar_target(tuningParTbl, tuning_parameters_tbl()),
-  
+
   tar_target(dailydata,
              build_dailydata(
                baseline = pt_names |>
@@ -399,7 +399,7 @@ list(
                daily = pt_registry |>
                  mutate( test_set = id_univoco %in% idsTest))),
 
-  tar_target(xgb_model, build_xgb_model(dailydata))
+  tar_target(xgb_model, build_xgb_model(dailydata)),
 
 
 # report ----------------------------------------------------------
