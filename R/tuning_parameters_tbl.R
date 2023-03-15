@@ -55,4 +55,29 @@ here::here("runs") |>
   dplyr::mutate(
     file = basename(file)
   ) |>
-  tidyr::pivot_wider(names_from = set, values_from = c(loss, acc))
+  tidyr::pivot_wider(names_from = set, values_from = c(loss, acc)) |>
+  dplyr::mutate(file = dplyr::row_number()) |>
+  gt::gt() |>
+  gt::fmt_number(
+    columns = c(loss_validation, loss_train, acc_validation, acc_train),
+    decimals = 2
+  ) |>
+  gt::cols_label(
+    file = "Candidate model",
+    epochs = "Epochs",
+    rec_units = "Recurrent units",
+    dense_units = "Dense units",
+    batch_size = "Batch size",
+    rec_depth = "Recurrent depth",
+    crnn_kernel = "Convolutional RNN Kernel",
+    in_do = "Dropout rate input layer",
+    rec_do = "Dropout rate recurrent layer",
+    out_do = "Dropout rate output layer",
+    time = "Time",
+    unit = "(unit)",
+    loss_validation = "Validation loss",
+    loss_train = "Train loss",
+    acc_validation = "Validation accuracy (%)",
+    acc_train = "Train accuracy (%)"
+  )
+
