@@ -2,8 +2,8 @@ define_keras_model <- function(
     rec_units = 32,
     dense_units = 16,
     input_do = 0.1,
-    inner_do = 0.5,
-    rec_do = 0,
+    inner_do = 0,
+    rec_do = 0.2,
     lr = 0.001,
     crnn_kernel_size = 8
 ) {
@@ -19,7 +19,7 @@ define_keras_model <- function(
     shape = c(7)
   ) |>
     keras::layer_activation_relu() |>
-    keras::layer_dropout(input_do) |>
+    # keras::layer_dropout(input_do) |>
     keras::layer_batch_normalization()
 
   input_daily <- keras::layer_input(
@@ -27,7 +27,7 @@ define_keras_model <- function(
     shape = c(NA, 5)
   ) |>
     keras::layer_activation_relu() |>
-    keras::layer_dropout(input_do) |>
+    # keras::layer_dropout(input_do) |>
     keras::layer_batch_normalization()
 
   input_trd <- keras::layer_input(
@@ -35,7 +35,7 @@ define_keras_model <- function(
     shape = c(1440, NA, 21)
   ) |>
     keras::layer_activation_relu() |>
-    keras::layer_dropout(input_do) |>
+    # keras::layer_dropout(input_do) |>
     keras::layer_batch_normalization()
 
 
@@ -47,18 +47,27 @@ define_keras_model <- function(
       filters = rec_units,
       kernel_size = crnn_kernel_size,
       padding = "same",
-      dropout = inner_do,
+      dropout = rec_do,
       recurrent_dropout = rec_do,
       name = "trd_l1.1",
       return_sequences = TRUE
     )) |>
+    # keras::bidirectional(keras::layer_conv_lstm_1d(
+    #   filters = rec_units,
+    #   kernel_size = crnn_kernel_size,
+    #   padding = "same",
+    #   dropout = rec_do,
+    #   recurrent_dropout = rec_do,
+    #   name = "trd_l1.2",
+    #   return_sequences = TRUE
+    # )) |>
     keras::bidirectional(keras::layer_conv_lstm_1d(
       filters = rec_units,
       kernel_size = crnn_kernel_size,
       padding = "same",
-      dropout = inner_do,
+      dropout = rec_do,
       recurrent_dropout = rec_do,
-      name = "trd_l1.2"
+      name = "trd_l1.3"
     ))
 
 
@@ -68,16 +77,23 @@ define_keras_model <- function(
   merged_l3 <- merged_daily_trd |>
     keras::bidirectional(keras::layer_gru(
       units = rec_units,
-      dropout = inner_do,
+      dropout = rec_do,
       recurrent_dropout = rec_do,
       name = "merged_l3.1",
       return_sequences = TRUE
     )) |>
+    # keras::bidirectional(keras::layer_gru(
+    #   units = rec_units,
+    #   dropout = rec_do,
+    #   recurrent_dropout = rec_do,
+    #   name = "merged_l3.2",
+    #   return_sequences = TRUE
+    # )) |>
     keras::bidirectional(keras::layer_gru(
       units = rec_units,
-      dropout = inner_do,
+      dropout = rec_do,
       recurrent_dropout = rec_do,
-      name = "merged_l3.2"
+      name = "merged_l3.3"
     ))
 
   merged_l4 <- keras::k_concatenate(c(merged_l3, input_baseline)) |>

@@ -6,6 +6,9 @@ format:
     embed-resources: true
     code-fold: true
     code-summary: "Show the code"
+  docx:
+    prefer-html: true
+    embed-resources: true
 editor: visual
 ---
 

@@ -3,7 +3,7 @@ options(tidyverse.quiet = TRUE)
 Sys.unsetenv("RETICULATE_PYTHON")
 seed <- 1234
 on_cpu <- TRUE
-is_develop <- as.integer(interactive())
+is_develop <- FALSE
 verbose <- 1
 
 library(here)
@@ -34,8 +34,8 @@ list.files(here("R"), pattern = "keras", full.names = TRUE) |>
 # Parameters ------------------------------------------------------
 run_id <- str_remove_all(now(), '\\W') |> paste0("_run")
 
-k_folds <- 5
-epochs <- 30
+k_folds <- 1
+epochs <- 50
 batch_size <- 16
 
 lr = 1e-3
@@ -68,18 +68,21 @@ k_sets <- vector("list", k_folds)
 ids_trval <- tar_read(idsTrVal)
 db_trval <- tar_read(dbTrVal)
 
+ids_test <- tar_read(idsTest)
+db_test <- tar_read(dbTest)
+
 set.seed(seed)
-fold_id <- sample(rep(seq_len(k_folds), length.out = length(ids_trval)))
+fold_id <- ids_trval
 
 
 # CV-training -----------------------------------------------------
 for (i in seq_len(k_folds)) {
   ui_todo("Processing fold {ui_value(i)}/{k_folds}...")
-  ui_todo("Preparing train and validation generators")
-  ids_in_val <- ids_trval[fold_id == i]
-  ids_in_train <- ids_trval[fold_id != i]
+  ui_todo("Preparing train and test generators")
+  ids_in_val <- ids_test
+  ids_in_train <- ids_trval
 
-  db_tr <- db_trval |> filter_db_ids(ids_in_train)
+  db_tr <- db_trval
 
   means_baseline <- get_means(db_tr, "baseline")
   means_daily <- get_means(db_tr, "daily")
@@ -111,7 +114,7 @@ for (i in seq_len(k_folds)) {
     sum()
   rm(db_tr)
 
-  db_val <- db_trval |>
+  db_val <- db_test |>
     filter_db_ids(ids_in_val) |>
     normalize_baseline(means_baseline, sd_baseline) |>
     normalize_daily(means_daily, sd_daily) |>
@@ -146,10 +149,7 @@ for (i in seq_len(k_folds)) {
       verbose = verbose,
       callbacks = list(
         callback_model_checkpoint(
-          filepath = "models_epoch-{epoch:02d}_acc_{val_accuracy:.2f}.hdf5",
-          monitor = "val_loss",
-          mode = "min",
-          save_best_only = TRUE
+          filepath = "models_epoch-{epoch:02d}_acc_{val_accuracy:.2f}.hdf5"
         )
       )
     )
@@ -165,7 +165,7 @@ for (i in seq_len(k_folds)) {
     )) |>
     dplyr::bind_rows(tibble::tibble(
       fold = i,
-      set = "validation", # train, validation
+      set = "test", # train, validation
       epochs = seq_len(k_histories[[i]][["params"]][["epochs"]]),
       loss = k_histories[[i]][["metrics"]][["val_loss"]],
       accuracy = k_histories[[i]][["metrics"]][["val_accuracy"]]
@@ -219,7 +219,7 @@ run <- list(
   k_time = k_time,
   k_final_scores = dplyr::filter(
     k_scores,
-    set == "validation", epochs == max(.data[["epochs"]])
+    set == "test", epochs == max(.data[["epochs"]])
   )[["accuracy"]],
   k_sets = k_sets
 )
@@ -232,24 +232,16 @@ ui_info(
 )
 print(do.call(sum, k_time))
 
-readr::write_rds(run, here::here("runs", paste0(run_id, ".rds")))
+readr::write_rds(run, here::here("runs", paste0(run_id, "-final.rds")))
 
 if (interactive()) print(gg)
 
-if (is_develop) {
-  model |>
-    # keras:::plot.keras.engine.training.Model(
-    plot(
-      show_shapes = TRUE,
-      show_dtype = TRUE,
-      expand_nested = TRUE,
-      show_layer_activations = TRUE,
-      to_file = "topology-full.png"
-    )
-}
-
-{
-  # tb_path <- here::here("logs", run_id)
-  # tensorboard(tb_path)
-
-}
+model |>
+  # keras:::plot.keras.engine.training.Model(
+  plot(
+    show_shapes = TRUE,
+    show_dtype = TRUE,
+    expand_nested = TRUE,
+    show_layer_activations = TRUE,
+    to_file = "topology-full-final.png"
+  )

@@ -10,3 +10,5 @@ _targets.yaml
 .Renviron
 
 *.hdf5
+
+weaning.Rproj
