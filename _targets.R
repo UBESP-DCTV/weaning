@@ -389,15 +389,9 @@ list(
   tar_target(dbTest, filter_db_ids(trainArraysByDays, idsTest)),
   tar_target(idsTrVal, setdiff(pt_ids, idsTest)),
   tar_target(dbTrVal, filter_db_ids(trainArraysByDays, idsTrVal)),
+  tar_target(dbTestNorm, happy_normalize(dbTrVal, dbTest)),
 
   tar_target(tuningParTbl, tuning_parameters_tbl()),
-  
-  tar_target(dailydata,
-             build_dailydata(
-               baseline = pt_names |>
-                 mutate(test_set = id_univoco %in% idsTest),
-               daily = pt_registry |>
-                 mutate( test_set = id_univoco %in% idsTest))),
 
   tar_target(xgb_model, build_xgb_model(dailydata))
 
@@ -410,17 +404,11 @@ list(
   #   trd_log_csv_exploration,
   #   here("reports/trd_log_csv_exploration.qmd")
   # ),
-  #
-#
-#   tar_quarto(
-#     minireport_tesi,
-#     here("reports/minireport_tesi.qmd")
-#   )
 
-  tar_quarto(
-    minireport_tesi,
-    here("reports/minireport_tesi.qmd")
-  )
+  # tar_quarto(
+  #   minireport_tesi,
+  #   here("reports/minireport_tesi.qmd")
+  # )
 
 # objects to share -------------------------------------------------
   # tar_target(

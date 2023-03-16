@@ -11,7 +11,7 @@ cost_matrix <- matrix(
   #            2   NA    +1    -1
   #            1   NA     0     0
   #
-  c(  0, NA, NA,
+  c(  0, (35-65)/100, 0,
      -1,  0, -1,
       1,  0,  1),
   nrow = 3, ncol = 3,
@@ -44,10 +44,19 @@ clap <- yardstick::new_class_metric(clap, "maximize")
 
 multi_metric <- yardstick::metric_set(
   #accuracy,
-  yardstick::bal_accuracy,
+  yardstick::accuracy,
   yardstick::mcc,
   clap,
   yardstick::precision,
-  yardstick::recall,
-  yardstick::npv
+  yardstick::recall
 )
+
+bs <- function(model, data, indices) {
+  multi_metric(
+    data = data[indices,],
+    truth = value,
+    estimate = {{model}},
+    estimator = "macro_weighted"
+  ) |>
+  dplyr::pull(.estimate)
+}

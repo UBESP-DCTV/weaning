@@ -155,3 +155,16 @@ normalize_trd <- function(db, means, sds) {
   })
 }
 
+happy_normalize <- function(dbTV, dbT) {
+  means_baseline <- get_means(dbTV, "baseline")
+  means_daily <- get_means(dbTV, "daily")
+  means_trd <- get_means(dbTV, "trd")
+  sd_baseline <- get_sd(dbTV, "baseline")
+  sd_daily <- get_sd(dbTV, "daily")
+  sd_trd <- get_sd(dbTV, "trd")
+
+  dbT |>
+    normalize_baseline(means_baseline, sd_baseline) |>
+    normalize_daily(means_daily, sd_daily) |>
+    normalize_trd(means_trd, sd_trd)
+}
