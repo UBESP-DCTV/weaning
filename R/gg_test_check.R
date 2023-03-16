@@ -125,12 +125,9 @@ gg_test_check <- function(
     trd_cont
   )
 
-  # categorical variables melt
+  # categorical variables summary
   baseline_cat <- baseline |>
-    dplyr::select(type, sesso, reason, test_set)|>
-    dplyr::rename(
-      "sex" = "sesso"
-    ) |>
+    dplyr::select(type, sesso, reason, test_set) |>
     dplyr::mutate(
       reason = reason |>
         forcats::fct_recode(
@@ -142,17 +139,20 @@ gg_test_check <- function(
           "Other" = "Altro (specificare)",
           "Trauma - Polytrauma" = "Trauma - Politrauma"
           # ARDS doesn't need recoding
-        )) |>
-    tidyr::pivot_longer(
-      cols = 1:3,
-      names_to = "predictor",
-      values_to = "value",
-      values_transform = as.character
-    )
+        ),
+      test_set = factor(test_set, labels = c("Training/validation set", "Test set"))
+      ) |>
+    tbl_summary(
+      by = test_set,
+      label = list( type ~ "Ventilation mode",
+                    sesso ~ "Gender",
+                    reason ~ "Reason for MV")
+    ) |> add_p()
 
   daily_cat <- daily |>
     dplyr::select(sbt, test_set) |>
     dplyr::mutate(
+      test_set = factor(test_set, labels = c("Training/validation set", "Test set")),
       sbt = sbt |>
         as.character() |>
         forcats::fct_recode(
@@ -160,26 +160,18 @@ gg_test_check <- function(
           "Readiness Testing failure" = "0",
           "SBT success" = "1",
           "SBT failure" = "2"
-        )) |>
-    tidyr::pivot_longer(
-      cols = 1,
-      names_to = "predictor",
-      values_to = "value",
-      values_transform = as.character
-    )
+        ))  |>
+    tbl_summary(
+      by = test_set,
+      label = list(
+        sbt ~ "SBT oucome"
+      )
+    ) |> add_p()
 
-  full_cat <- dplyr::bind_rows(
-    baseline_cat,
-    daily_cat
-  )
+  full_cat <- gtsummary::tbl_stack(tbls = list(baseline_cat, daily_cat))
 
   #final plot
-  ggpubr::ggarrange(
-    cont_plot(full_cont),
-    cat_plot(full_cat),
-    nrow = 1,
-    common.legend = TRUE
-  )
+  list(full_cont, full_cat)
 }
 
 cont_plot <- function(db) {
@@ -193,14 +185,9 @@ cont_plot <- function(db) {
       nrow = 6)
 }
 
-cat_plot <- function(db) {
-  db |>
-    ggplot2::ggplot(
-      ggplot2::aes(value, fill = test_set)) +
-    ggplot2::geom_bar(alpha = 0.5,
-             position = "dodge") +
-    ggplot2::facet_wrap(~predictor,
-               scales = "free",
-               ncol = 2) +
-    ggplot2::coord_flip()
-}
+
+  test_ids <- tar_read(idsTest)
+  baseline_input <- tar_read(pt_names)
+  daily_input <- tar_read(pt_registry)
+  trd_input <- tar_read(weaningsTRD)
+  db <- full_cat
