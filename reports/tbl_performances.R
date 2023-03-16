@@ -62,7 +62,7 @@ pred_obs <- purrr::map(1:28, ~dd[[.x]]$out |>
         pred0 = 0,
         pred1 = 1,
         pred2 = 2,
-        predRT = as.numeric(dd[[.x]]$daily[, .x, 2] == 12),
+        #predRT = as.numeric(dd[[.x]]$daily[, .x, 2] == 12),
         predCoin = sample(0:2, size = length(pred0), replace = TRUE),
         predStrat = sample(0:2, size = length(pred0),
                            replace = TRUE, prob = c(78,12,10)
@@ -222,9 +222,42 @@ bs_df |>
   tbl_summary(
     by = model,
     type = all_continuous() ~ "continuous2",
-    statistic = all_continuous() ~ c("{median}", "({p5}, {p95})", "({p2}, {p98})"),
+    statistic = all_continuous() ~ c("{median}", "({p5}, {p95})"),
     digits = all_continuous() ~ 2,
-    missing = "no",
-    missing_text = "n.a."
+    missing = "no"
   )
 
+### CONFRONTO pred_obs con suggerimento binario
+
+pred_obs_binary <- pred_obs |>
+  mutate(
+    across(where(is.factor),
+           ~ forcats::fct_collapse(.x, "0" = c("0","2"))
+    ))
+
+purrr::map(colnames(pred_obs[4:10]),  ~ multi_metric_bin(
+  data = pred_obs_binary,
+  truth = value,
+  estimate = {{.x}},
+  estimator = "binary"
+) |> dplyr::mutate(model = .x)) |>
+  dplyr::bind_rows(.id = NULL) |>
+  tidyr::pivot_wider(names_from = model, values_from = .estimate) |>
+  dplyr::rename(
+    "Metric" = .metric,
+    "All 0" = pred0,
+    "All 1" = pred1,
+    "All 2" = pred2,
+    "Coint toss" = predCoin,
+    "Stratified random" = predStrat,
+    # "Readiness Test" = predRT
+    "XG Boost" = predXbg,
+    "AI model" = predRNN
+  ) |>
+  dplyr::mutate( Metric = metric_list) |>
+  dplyr::select(-.estimator) |>
+  gt::gt() |>
+  gt::fmt_number(
+    columns = 2:8,
+    decimals = 2
+  )
