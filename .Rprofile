@@ -13,8 +13,6 @@ stopifnot(
   `env var "PROJ_URL" must be set` = Sys.getenv("PROJ_URL") != ""
 )
 
-
-
 if (interactive()) {#
   suppressPackageStartupMessages(suppressWarnings({
     library(devtools)
@@ -64,5 +62,3 @@ tar_config_set(
   store = file.path(.get_prj_shared_path(), "_targets"),
   config = "reports/_targets.yaml"
 )
-
-

@@ -24,4 +24,3 @@ extract_id_from_header <- function(headr) {
     stringr::str_extract("[a-zA-Z]{2}\\d{3}$") |>
     stringr::str_to_upper()
 }
-

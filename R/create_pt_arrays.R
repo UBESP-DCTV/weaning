@@ -8,6 +8,8 @@
 #'   \[pt, minutes, days, var\] = \[none, 1440, length(giorno_studio), \]
 #' @export
 #'
+#' @importFrom rlang .data
+#'
 #' @examples
 #' if (FALSE) create_pt_trd(weaningsTRD, pt_ids)[[1]]
 create_pt_trd <- function(db, pt_id) {
